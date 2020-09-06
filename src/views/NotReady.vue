@@ -29,11 +29,13 @@ export default {
   methods: {
     submit() {
       axios
-        .post("api/email-signup", { email: this.email })
-        .then(() => console.log("Email added"))
+        .post(`${process.env.VUE_APP_API_BASE_URL}api/email-signup`, {
+          email: this.email,
+        })
+        .then(() => {
+          this.email = "";
+        })
         .catch((err) => console.log(err));
-
-      this.email = "";
     },
   },
 };
