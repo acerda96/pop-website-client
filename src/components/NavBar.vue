@@ -5,10 +5,10 @@
       <router-link class="logo" to="/">POP</router-link>
       <ul class="desktop-nav-ul">
         <li>
-          <router-link to="/get-app" class="link">Shop</router-link>
+          <router-link to="/app" class="link">Shop</router-link>
         </li>
         <li>
-          <router-link to="/get-app" class="link">Host</router-link>
+          <router-link to="/app" class="link">Host</router-link>
         </li>
         <li @click="scrollMeTo">
           <router-link to="/#about" class="link">About</router-link>
@@ -20,11 +20,11 @@
     </nav>
     <ul class="mobile-nav-ul" ref="nav">
       <li @click="hideNav">
-        <router-link to="/get-app" class="link">Shop</router-link>
+        <router-link to="/app" class="link">Shop</router-link>
       </li>
       <hr />
       <li @click="hideNav">
-        <router-link to="/get-app" class="link">Host</router-link>
+        <router-link to="/app" class="link">Host</router-link>
       </li>
       <hr />
       <li

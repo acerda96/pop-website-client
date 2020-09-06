@@ -15,7 +15,7 @@ export default new Router({
       component: Home,
     },
     {
-      path: "/get-app",
+      path: "/app",
       name: "not-ready",
       component: NotReady,
     },

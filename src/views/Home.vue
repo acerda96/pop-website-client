@@ -3,7 +3,9 @@
     <div class="page-container">
       <div class="title-container">
         <Title />
-        <BrowseButton />
+        <router-link to="/app">
+          <GetAppButton />
+        </router-link>
       </div>
     </div>
     <div id="about">
@@ -42,13 +44,13 @@
 
 <script>
 import Title from "../components/Title";
-import BrowseButton from "../components/BrowseButton";
+import GetAppButton from "../components/GetAppButton";
 
 export default {
   name: "Home",
   components: {
     Title,
-    BrowseButton,
+    GetAppButton,
   },
 };
 </script>
