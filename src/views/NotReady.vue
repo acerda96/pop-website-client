@@ -28,6 +28,7 @@ export default {
   },
   methods: {
     submit() {
+      console.log(process.env.VUE_APP_API_BASE_URL);
       axios
         .post(`${process.env.VUE_APP_API_BASE_URL}api/email-signup`, {
           email: this.email,
