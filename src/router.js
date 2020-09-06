@@ -11,6 +11,9 @@ export default new Router({
   routes: [
     {
       path: "/",
+      meta: {
+        title: "Pop Marketplace",
+      },
       name: "home",
       component: Home,
     },
