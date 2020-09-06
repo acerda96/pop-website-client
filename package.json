@@ -10,7 +10,7 @@
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
     "start": "node server.js",
-    "deploy": "git push heroku master"
+    "deploy": "git push --force heroku master"
   },
   "dependencies": {
     "@material-ui/core": "^4.11.0",
