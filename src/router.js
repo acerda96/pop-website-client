@@ -3,6 +3,7 @@ import Router from "vue-router";
 import Home from "./views/Home.vue";
 import ContactUs from "./views/ContactUs.vue";
 import NotReady from "./views/NotReady.vue";
+import PrivacyPolicy from "./views/PrivacyPolicy.vue";
 
 Vue.use(Router);
 
@@ -23,6 +24,11 @@ export default new Router({
       path: "/contact",
       name: "contact-us",
       component: ContactUs,
+    },
+    {
+      path: "/privacy",
+      name: "privacy",
+      component: PrivacyPolicy,
     },
   ],
   scrollBehavior(to) {

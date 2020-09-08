@@ -18,9 +18,9 @@
         ></router-link>
       </li>
       <li>
-        <router-link to="/">
+        <router-link to="/privacy">
           <div class="footer-link">
-            <div class="link-text">Privacy Statement</div>
+            <div class="link-text">Privacy Policy</div>
             <Information class="icon" /></div
         ></router-link>
       </li>
