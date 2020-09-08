@@ -16,11 +16,6 @@ export default {
     NavBar,
     Footer,
   },
-  metaInfo() {
-    return {
-      title: "Pop Marketplace",
-    };
-  },
 };
 </script>
 
