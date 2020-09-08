@@ -3,6 +3,9 @@ import App from "./App.vue";
 import router from "./router";
 import VueScrollTo from "vue-scrollto";
 import axios from "axios";
+import VueMeta from "vue-meta";
+
+Vue.use(VueMeta);
 
 Vue.config.productionTip = false;
 
