@@ -29,7 +29,7 @@ export default {
   methods: {
     submit() {
       axios
-        .post(`${process.env.VUE_APP_API_BASE_URL}api/email-signup`, {
+        .post("api/email-signup", {
           email: this.email,
         })
         .then(() => {
