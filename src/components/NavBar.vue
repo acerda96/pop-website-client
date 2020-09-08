@@ -122,7 +122,7 @@ hr {
   flex-direction: column;
   justify-content: center;
   align-items: flex-end;
-  background: rgb(76, 73, 73);
+  background: $sub-accent-color;
   position: fixed;
   transition: 300ms ease all;
   left: -300px;
