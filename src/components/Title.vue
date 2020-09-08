@@ -16,10 +16,9 @@ export default {
   align-items: center;
   text-align: center;
   font-size: 100px;
-  font-family: $title-font;
   color: $main-font-color;
-  background-color: rgb(250, 188, 53);
-  width: 700px;
+  background-color: white;
+  width: 750px;
   height: 350px;
 }
 

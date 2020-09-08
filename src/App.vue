@@ -26,7 +26,7 @@ export default {
 
 body {
   margin: 0;
-  background-image: url("./images/map.jpeg");
+  background-image: url("./images/background.jpg");
   background-attachment: fixed;
   font-family: $main-font;
   background-size: 100%;

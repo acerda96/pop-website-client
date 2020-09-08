@@ -50,7 +50,7 @@ export default {
 }
 
 .container {
-  background-color: rgb(193, 224, 189);
+  background-color: white;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -70,7 +70,7 @@ export default {
     width: 60%;
   }
   input {
-    background-color: rgb(193, 224, 189);
+    background-color: white;
     border: none;
     border-bottom: 2px solid black;
     padding: 10px;
