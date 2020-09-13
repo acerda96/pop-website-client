@@ -4,42 +4,50 @@
       <MenuIcon class="menu-icon" @click="toggleNav" />
       <router-link class="logo" to="/">POP</router-link>
       <ul class="desktop-nav-ul">
-        <li>
-          <router-link to="/app" class="link">Shop</router-link>
-        </li>
-        <li>
-          <router-link to="/app" class="link">Host</router-link>
-        </li>
         <li @click="scrollMeTo">
           <router-link to="/#about" class="link">About</router-link>
         </li>
         <li>
-          <router-link to="/contact" class="link">Contact Us</router-link>
+          <router-link to="/app" class="link">Browse stores</router-link>
+        </li>
+        <li>
+          <router-link to="/app" class="link">Host</router-link>
+        </li>
+        <li>
+          <router-link to="/app" class="link">Login</router-link>
+        </li>
+        <li>
+          <router-link to="/app" class="link">Sign up</router-link>
         </li>
       </ul>
     </nav>
     <ul class="mobile-nav-ul" ref="nav">
-      <li @click="hideNav">
-        <router-link to="/app" class="link">Shop</router-link>
+      <li @click="
+          scrollMeTo();
+          hideNav();
+        ">
+        <router-link to="/#about" class="link">About</router-link>
       </li>
       <hr />
+
+      <li @click="hideNav">
+        <router-link to="/app" class="link">Browse stores</router-link>
+      </li>
+      <hr />
+
       <li @click="hideNav">
         <router-link to="/app" class="link">Host</router-link>
       </li>
       <hr />
-      <li
-        @click="
-          scrollMeTo();
-          hideNav();
-        "
-      >
-        <router-link to="/#about" class="link">About</router-link>
-      </li>
-      <hr />
+
       <li @click="hideNav">
-        <router-link to="/contact" class="link">Contact Us</router-link>
+        <router-link to="/app" class="link">Login</router-link>
       </li>
       <hr />
+
+      <li @click="hideNav">
+        <router-link to="/app" class="link">Sign up</router-link>
+      </li>
     </ul>
   </div>
 </template>
@@ -127,7 +135,7 @@ hr {
   transition: 300ms ease all;
   left: -300px;
   top: 90px;
-  height: 270px;
+  height: 300px;
   width: 200px;
   a {
     color: white;

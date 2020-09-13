@@ -4,7 +4,7 @@
       <div class="title-container">
         <Title />
         <router-link to="/app">
-          <GetAppButton />
+          <BrowseButton />
         </router-link>
       </div>
     </div>
@@ -15,9 +15,7 @@
       <img src="../images/image1.jpg" />
       <div class="text-container">
         <div class="main-text">See what's on sale</div>
-        <div class="sub-text">
-          Find your next favourite shirt or shoes from nearby stores
-        </div>
+        <div class="sub-text">Find your next favourite shirt or shoes from nearby stores</div>
       </div>
     </div>
     <div class="sec">
@@ -34,9 +32,7 @@
       <img src="../images/image3.jpg" />
       <div class="text-container">
         <div class="main-text">Support local businesses</div>
-        <div class="sub-text">
-          All items are sold by independent sellers
-        </div>
+        <div class="sub-text">All items are sold by independent sellers</div>
       </div>
     </div>
   </div>
@@ -44,13 +40,13 @@
 
 <script>
 import Title from "../components/Title";
-import GetAppButton from "../components/GetAppButton";
+import BrowseButton from "../components/BrowseButton";
 
 export default {
   name: "Home",
   components: {
     Title,
-    GetAppButton,
+    BrowseButton,
   },
 };
 </script>

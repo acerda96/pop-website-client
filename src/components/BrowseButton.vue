@@ -1,21 +1,21 @@
 <template>
-  <div class="getapp-btn-container">
-    <div class="getapp-btn-inner">
-      <div class="getapp-btn">Get The App</div>
+  <div class="browse-btn-container">
+    <div class="browse-btn-inner">
+      <div class="browse-btn">Browse now</div>
     </div>
   </div>
 </template>
 
 <script>
 export default {
-  name: "GetAppButton",
+  name: "BrowseButton",
 };
 </script>
 
 <style lang="scss">
 @import "../styles/_variables.scss";
 
-.getapp-btn-container {
+.browse-btn-container {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -23,7 +23,7 @@ export default {
   cursor: pointer;
 }
 
-.getapp-btn-inner {
+.browse-btn-inner {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -35,7 +35,7 @@ export default {
   border-radius: 15px;
 }
 
-.getapp-btn {
+.browse-btn {
   display: flex;
   align-items: center;
   justify-content: center;
