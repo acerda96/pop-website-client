@@ -4,6 +4,9 @@ import Home from "./views/Home.vue";
 import Browse from "./views/Browse.vue";
 import ContactUs from "./views/ContactUs.vue";
 import NotReady from "./views/NotReady.vue";
+import Login from "./views/Login.vue";
+import RegisterFirst from "./views/RegisterFirst.vue";
+import RegisterSecond from "./views/RegisterSecond.vue";
 import PrivacyPolicy from "./views/PrivacyPolicy.vue";
 
 Vue.use(Router);
@@ -25,6 +28,21 @@ export default new Router({
       path: "/app",
       name: "not-ready",
       component: NotReady,
+    },
+    {
+      path: "/login",
+      name: "login",
+      component: Login,
+    },
+    {
+      path: "/sign-up-1",
+      name: "sign-up-1",
+      component: RegisterFirst,
+    },
+    {
+      path: "/sign-up-2",
+      name: "sign-up-2",
+      component: RegisterSecond,
     },
     {
       path: "/contact",

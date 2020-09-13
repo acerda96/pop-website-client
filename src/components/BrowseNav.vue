@@ -46,7 +46,6 @@ $input-height: 30px;
 
 .browse-nav {
   button {
-    font-family: $main-font;
     border-radius: 5px;
     border: none;
     margin: 5px;
@@ -66,7 +65,6 @@ $input-height: 30px;
   margin: 10px;
   width: 150px;
   border-radius: 5px;
-  font-family: $main-font;
   border: none;
 }
 
@@ -77,7 +75,7 @@ $input-height: 30px;
 }
 
 .browse-nav {
-  background-color: $sub-accent-color;
+  background-color: rgb(190, 190, 190);
   width: 100%;
   padding: 10px;
   display: flex;

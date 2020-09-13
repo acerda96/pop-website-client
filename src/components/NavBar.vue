@@ -14,10 +14,10 @@
           <router-link to="/app" class="link">Host</router-link>
         </li>
         <li>
-          <router-link to="/app" class="link">Login</router-link>
+          <router-link to="/login" class="link">Login</router-link>
         </li>
         <li>
-          <router-link to="/app" class="link">Sign up</router-link>
+          <router-link to="/sign-up-1" class="link">Sign up</router-link>
         </li>
       </ul>
     </nav>
@@ -33,7 +33,7 @@
       <hr />
 
       <li @click="hideNav">
-        <router-link to="/app" class="link">Browse stores</router-link>
+        <router-link to="/browse" class="link">Browse stores</router-link>
       </li>
       <hr />
 
@@ -43,12 +43,12 @@
       <hr />
 
       <li @click="hideNav">
-        <router-link to="/app" class="link">Login</router-link>
+        <router-link to="/login" class="link">Login</router-link>
       </li>
       <hr />
 
       <li @click="hideNav">
-        <router-link to="/app" class="link">Sign up</router-link>
+        <router-link to="/sign-up-1" class="link">Sign up</router-link>
       </li>
     </ul>
   </div>

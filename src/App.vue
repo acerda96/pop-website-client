@@ -37,6 +37,14 @@ html {
   height: 100%;
 }
 
+button {
+  font-family: $main-font;
+}
+
+input {
+  font-family: $main-font;
+}
+
 #app {
   min-height: 100%;
   display: grid;
