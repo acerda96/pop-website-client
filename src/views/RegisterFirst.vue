@@ -2,6 +2,9 @@
   <div class="register">
     <div class="register-outer">
       <div class="register-inner">
+        <div class="register-heading">
+          Sign up now to get the most of Pop!
+        </div>
         <div class="input-container">
           <label for="email"> Email </label>
           <input type="email" name="email" />
@@ -35,6 +38,12 @@ export default {
   display: flex;
   flex-direction: column;
   margin: 10px;
+}
+
+.register-heading {
+  font-weight: bold;
+  font-size: 25px;
+  text-align: center;
 }
 
 .register {

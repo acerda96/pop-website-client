@@ -1,32 +1,44 @@
 <template>
   <div class="register">
     <div class="register-outer">
-      <div class="register-inner">
-        <div style="font-weight: bold">
+      <form class="register-inner" @submit.prevent="register">
+        <div class="register-heading">
           We'd like a few more details about you...
         </div>
         <div class="input-container">
           <label for="name"> Name </label>
-          <input type="text" name="name" />
+          <input type="text" name="name" v-model="name" />
         </div>
         <div class="input-container">
           <label for="surname"> Surname </label>
-          <input type="text" name="surname" />
+          <input type="text" name="surname" v-model="surname" />
         </div>
         <div class="input-container">
-          <label for="brandName"> Brandname </label>
-          <input type="text" name="brandName" />
+          <label for="company"> Company (optional) </label>
+          <input type="text" name="company" v-model="company" />
         </div>
         <div class="input-container">
-          <label for="phoneNumber"> Mobile number </label>
-          <input type="text" name="phoneNumber" />
+          <label for="mobileNumber"> Mobile number </label>
+          <input type="text" name="mobileNumber" v-model="mobileNumber" />
         </div>
         <div class="input-container">
-          <label for="email"> Password </label>
-          <input type="password" name="password" />
+          <label for="email"> Email </label>
+          <input type="email" name="email" v-model="email" />
+        </div>
+        <div class="input-container">
+          <label for="password"> Password </label>
+          <input type="password" name="password" v-model="password" />
+        </div>
+        <div class="input-container">
+          <label for="confirmPassword"> Confirm password </label>
+          <input
+            type="password"
+            name="confirmPassword"
+            v-model="confirmPassword"
+          />
         </div>
         <button type="submit">Sign up</button>
-      </div>
+      </form>
     </div>
   </div>
 </template>
@@ -34,6 +46,34 @@
 <script>
 export default {
   name: "RegisterFirst",
+  data() {
+    return {
+      email: "",
+      name: "",
+      surname: "",
+      password: "",
+      confirmPassword: "",
+      mobileNumber: "",
+      company: "",
+    };
+  },
+  methods: {
+    register: function() {
+      let data = {
+        email: this.email,
+        name: this.name,
+        surname: this.surname,
+        password: this.password,
+        confirmPassword: this.confirmPassword,
+        mobileNumber: this.mobileNumber,
+        company: this.company,
+      };
+      this.$store
+        .dispatch("register", data)
+        .then(() => this.$router.push("/"))
+        .catch((err) => console.log(err));
+    },
+  },
 };
 </script>
 

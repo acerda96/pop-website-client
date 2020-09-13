@@ -4,51 +4,82 @@
       <MenuIcon class="menu-icon" @click="toggleNav" />
       <router-link class="logo" to="/">POP</router-link>
       <ul class="desktop-nav-ul">
-        <li @click="scrollMeTo">
+        <!-- <li @click="scrollMeTo">
           <router-link to="/#about" class="link">About</router-link>
-        </li>
+        </li> -->
         <li>
           <router-link to="/browse" class="link">Browse stores</router-link>
         </li>
-        <li>
+        <li v-if="!isLoggedIn">
           <router-link to="/app" class="link">Host</router-link>
         </li>
-        <li>
+        <li v-if="!isLoggedIn">
           <router-link to="/login" class="link">Login</router-link>
         </li>
+        <li v-if="!isLoggedIn">
+          <router-link to="/sign-up-2" class="link">Sign up</router-link>
+        </li>
+        <li v-if="isLoggedIn">
+          <router-link to="/app" class="link">Saved items</router-link>
+        </li>
+        <li v-if="isLoggedIn">
+          <router-link to="/app" class="link">My Stores</router-link>
+        </li>
+        <li v-if="isLoggedIn">
+          <router-link to="/app" class="link">Account</router-link>
+        </li>
         <li>
-          <router-link to="/sign-up-1" class="link">Sign up</router-link>
+          <span v-if="isLoggedIn">
+            <a class="link" @click="logout">Log out</a>
+          </span>
         </li>
       </ul>
     </nav>
     <ul class="mobile-nav-ul" ref="nav">
-      <li
+      <!-- <li
         @click="
           scrollMeTo();
           hideNav();
         "
       >
         <router-link to="/#about" class="link">About</router-link>
-      </li>
-      <hr />
+      </li> -->
 
       <li @click="hideNav">
         <router-link to="/browse" class="link">Browse stores</router-link>
       </li>
-      <hr />
 
-      <li @click="hideNav">
+      <li @click="hideNav" v-if="!isLoggedIn">
         <router-link to="/app" class="link">Host</router-link>
       </li>
-      <hr />
 
-      <li @click="hideNav">
+      <li @click="hideNav" v-if="!isLoggedIn">
         <router-link to="/login" class="link">Login</router-link>
       </li>
-      <hr />
 
-      <li @click="hideNav">
-        <router-link to="/sign-up-1" class="link">Sign up</router-link>
+      <li @click="hideNav" v-if="!isLoggedIn">
+        <router-link to="/sign-up-2" class="link">Sign up</router-link>
+      </li>
+
+      <li @click="hideNav" v-if="isLoggedIn">
+        <router-link to="/app" class="link">Saved items</router-link>
+      </li>
+
+      <li @click="hideNav" v-if="isLoggedIn">
+        <router-link to="/app" class="link">My Stores</router-link>
+      </li>
+
+      <li @click="hideNav" v-if="isLoggedIn">
+        <router-link to="/app" class="link">Account</router-link>
+      </li>
+      <li
+        @click="
+          hideNav();
+          logout();
+        "
+        v-if="isLoggedIn"
+      >
+        <router-link to="/sign-up-1" class="link">Log out</router-link>
       </li>
     </ul>
   </div>
@@ -62,10 +93,20 @@ export default {
   components: {
     MenuIcon,
   },
+  computed: {
+    isLoggedIn: function() {
+      return this.$store.getters.isLoggedIn;
+    },
+  },
   methods: {
     hideNav() {
       const nav = this.$refs.nav.classList;
       nav.remove("active");
+    },
+    logout: function() {
+      this.$store.dispatch("logout").then(() => {
+        this.$router.push("/login");
+      });
     },
     toggleNav() {
       const nav = this.$refs.nav.classList;
@@ -126,6 +167,10 @@ hr {
   align-items: center;
   justify-content: flex-end;
   padding: 10px;
+  .link {
+    font-size: 14px;
+    padding: 0px;
+  }
 }
 .mobile-nav-ul {
   display: flex;
@@ -145,6 +190,10 @@ hr {
   .link {
     color: white;
     font-size: 14px;
+  }
+  li {
+    width: 150px;
+    border-bottom: 1px solid white;
   }
 }
 

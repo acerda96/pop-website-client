@@ -5,13 +5,15 @@ import Browse from "./views/Browse.vue";
 import ContactUs from "./views/ContactUs.vue";
 import NotReady from "./views/NotReady.vue";
 import Login from "./views/Login.vue";
+import MyStores from "./views/MyStores.vue";
 import RegisterFirst from "./views/RegisterFirst.vue";
 import RegisterSecond from "./views/RegisterSecond.vue";
 import PrivacyPolicy from "./views/PrivacyPolicy.vue";
+import store from "./store.js";
 
 Vue.use(Router);
 
-export default new Router({
+let router = new Router({
   mode: "history",
   routes: [
     {
@@ -54,6 +56,14 @@ export default new Router({
       name: "privacy",
       component: PrivacyPolicy,
     },
+    {
+      path: "/my-stores",
+      name: "my-stores",
+      component: MyStores,
+      meta: {
+        requiresAuth: true,
+      },
+    },
   ],
   scrollBehavior(to) {
     if (to.hash) {
@@ -65,3 +75,17 @@ export default new Router({
     }
   },
 });
+
+router.beforeEach((to, from, next) => {
+  if (to.matched.some((record) => record.meta.requiresAuth)) {
+    if (store.getters.isLoggedIn) {
+      next();
+      return;
+    }
+    next("/login");
+  } else {
+    next();
+  }
+});
+
+export default router;

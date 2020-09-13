@@ -1,19 +1,19 @@
 <template>
   <div class="login">
     <div class="login-outer">
-      <div class="login-inner">
+      <form class="login-inner" @submit.prevent="login">
         <div class="input-container">
           <label for="email"> Email </label>
-          <input type="email" name="email" />
+          <input type="email" name="email" v-model="email" />
         </div>
         <div class="input-container">
           <label for="password"> Password </label>
-          <input type="password" name="password" />
+          <input type="password" name="password" v-model="password" />
         </div>
         <button type="submit">Login</button>
         <a>Forgotten your password?</a>
         <a>Don't have an account? Sign up now!</a>
-      </div>
+      </form>
     </div>
   </div>
 </template>
@@ -21,6 +21,22 @@
 <script>
 export default {
   name: "Login",
+  data() {
+    return {
+      email: "",
+      password: "",
+    };
+  },
+  methods: {
+    login() {
+      let email = this.email;
+      let password = this.password;
+      this.$store
+        .dispatch("login", { email, password })
+        .then(() => this.$router.push("/"))
+        .catch((err) => console.log(err));
+    },
+  },
 };
 </script>
 
