@@ -8,7 +8,7 @@
           <router-link to="/#about" class="link">About</router-link>
         </li>
         <li>
-          <router-link to="/app" class="link">Browse stores</router-link>
+          <router-link to="/browse" class="link">Browse stores</router-link>
         </li>
         <li>
           <router-link to="/app" class="link">Host</router-link>
@@ -22,10 +22,12 @@
       </ul>
     </nav>
     <ul class="mobile-nav-ul" ref="nav">
-      <li @click="
+      <li
+        @click="
           scrollMeTo();
           hideNav();
-        ">
+        "
+      >
         <router-link to="/#about" class="link">About</router-link>
       </li>
       <hr />
@@ -104,7 +106,7 @@ export default {
 }
 .link {
   color: $main-font-color;
-  font-size: 20px;
+  font-size: 17px;
   cursor: pointer;
   text-decoration: underline;
 }

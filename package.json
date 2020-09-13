@@ -25,7 +25,8 @@
     "vue-material-design-icons": "^4.9.0",
     "vue-meta": "^2.4.0",
     "vue-router": "^3.4.3",
-    "vue-scrollto": "^2.18.2"
+    "vue-scrollto": "^2.18.2",
+    "vue-select": "^3.10.8"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "~4.5.0",
