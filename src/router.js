@@ -6,6 +6,7 @@ import ContactUs from "./views/ContactUs.vue";
 import NotReady from "./views/NotReady.vue";
 import Login from "./views/Login.vue";
 import MyStores from "./views/MyStores.vue";
+import MyStore from "./views/MyStore.vue";
 import RegisterFirst from "./views/RegisterFirst.vue";
 import RegisterSecond from "./views/RegisterSecond.vue";
 import PrivacyPolicy from "./views/PrivacyPolicy.vue";
@@ -60,6 +61,14 @@ let router = new Router({
       path: "/my-stores",
       name: "my-stores",
       component: MyStores,
+      meta: {
+        requiresAuth: true,
+      },
+    },
+    {
+      path: "/my-stores/:id",
+      name: "my-store",
+      component: MyStore,
       meta: {
         requiresAuth: true,
       },

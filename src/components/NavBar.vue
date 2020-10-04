@@ -23,7 +23,7 @@
           <router-link to="/app" class="link">Saved items</router-link>
         </li>
         <li v-if="isLoggedIn">
-          <router-link to="/app" class="link">My Stores</router-link>
+          <router-link to="/my-stores" class="link">My Stores</router-link>
         </li>
         <li v-if="isLoggedIn">
           <router-link to="/app" class="link">Account</router-link>
@@ -66,7 +66,7 @@
       </li>
 
       <li @click="hideNav" v-if="isLoggedIn">
-        <router-link to="/app" class="link">My Stores</router-link>
+        <router-link to="/my-stores" class="link">My Stores</router-link>
       </li>
 
       <li @click="hideNav" v-if="isLoggedIn">

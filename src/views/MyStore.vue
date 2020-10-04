@@ -1,11 +1,8 @@
 <template>
-  <div class="my-stores">
-    <div class="store" v-for="store in stores" :key="store.id">
-      <router-link :to="'/my-stores/' + store._id">
-        {{ store.name }}
-      </router-link>
-    </div>
-    <button>Add store</button>
+  <div class="my-store">
+    <h2>{{ store.name }}</h2>
+    <p>{{ store.description }}</p>
+    <button>Add item</button>
   </div>
 </template>
 
@@ -13,16 +10,16 @@
 import axios from "axios";
 
 export default {
-  name: "MyStores",
+  name: "MyStoreItems",
   data() {
     return {
       individual: {},
-      stores: [],
+      store: [],
     };
   },
   async mounted() {
     await this.setIndividual();
-    this.getStores();
+    this.getStore();
   },
   methods: {
     async setIndividual() {
@@ -33,11 +30,21 @@ export default {
         })
         .catch((err) => console.log(err));
     },
-    getStores() {
+    getStore() {
       axios
-        .get(`api/stores?userId=${this.individual._id}`)
+        .get(`api/stores/${this.$route.params.id}`)
         .then((res) => {
-          this.stores = res.data;
+          console.log(res.data);
+          this.store = res.data;
+        })
+        .catch((err) => console.log(err));
+    },
+    getItems() {
+      axios
+        .get(`api/stores/${this.$route.params.id}`)
+        .then((res) => {
+          console.log(res.data);
+          this.store = res.data;
         })
         .catch((err) => console.log(err));
     },
@@ -48,17 +55,8 @@ export default {
 <style lang="scss">
 @import "../styles/_variables.scss";
 
-.store {
+.my-store {
   background: white;
-  padding: 30px;
-  margin: 10px;
-  border-radius: 10px;
-  width: 200px;
-  text-align: center;
-  cursor: pointer;
-}
-
-.my-stores {
   display: flex;
   flex-direction: column;
   align-items: center;
