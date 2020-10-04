@@ -82,7 +82,7 @@ $input-height: 30px;
 }
 
 .browse-nav {
-  background-color: rgb(190, 190, 190);
+  background-color: $sub-accent-color;
   width: 100%;
   padding: 10px;
   display: flex;

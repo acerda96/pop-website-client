@@ -15,7 +15,9 @@
       <img src="../images/image1.jpg" />
       <div class="text-container">
         <div class="main-text">See what's on sale</div>
-        <div class="sub-text">Find your next favourite shirt or shoes from nearby stores</div>
+        <div class="sub-text">
+          Find your next favourite shirt or shoes from nearby stores
+        </div>
       </div>
     </div>
     <div class="sec">
@@ -82,6 +84,7 @@ export default {
 }
 
 .sub-heading-text {
+  color: white;
   text-align: center;
   font-size: 50px;
 }

@@ -2,6 +2,10 @@
   <div class="login">
     <div class="login-outer">
       <form class="login-inner" @submit.prevent="login">
+        <div class="register-heading">
+          Login
+        </div>
+        <hr />
         <div class="input-container">
           <label for="email"> Email </label>
           <input type="email" name="email" v-model="email" />
@@ -60,7 +64,6 @@ export default {
 }
 
 .login-inner {
-  background: rgb(202, 201, 201);
   padding: 20px;
   display: flex;
   flex-direction: column;

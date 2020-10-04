@@ -34,7 +34,8 @@ export default {
 
 body {
   margin: 0;
-  background-image: url("./images/background.jpg");
+  // background-image: url("./images/background.jpg");
+  background-color: rgb(219, 184, 204);
   background-attachment: fixed;
   font-family: $main-font;
   background-size: 100%;

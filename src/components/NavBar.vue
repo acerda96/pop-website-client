@@ -8,7 +8,7 @@
           <router-link to="/#about" class="link">About</router-link>
         </li> -->
         <li>
-          <router-link to="/browse" class="link">Browse stores</router-link>
+          <router-link to="/browse" class="link">Browse</router-link>
         </li>
         <li v-if="!isLoggedIn">
           <router-link to="/app" class="link">Host</router-link>
@@ -46,7 +46,7 @@
       </li> -->
 
       <li @click="hideNav">
-        <router-link to="/browse" class="link">Browse stores</router-link>
+        <router-link to="/browse" class="link">Browse</router-link>
       </li>
 
       <li @click="hideNav" v-if="!isLoggedIn">

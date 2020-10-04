@@ -57,7 +57,6 @@ export default {
 }
 
 .register-inner {
-  background: rgb(202, 201, 201);
   padding: 20px;
   display: flex;
   flex-direction: column;

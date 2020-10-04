@@ -56,7 +56,8 @@ export default {
     padding: 0px;
   }
   a {
-    color: $main-font-color;
+    color: white;
+    font-size: 14px;
     text-decoration: underline;
   }
 }
@@ -80,6 +81,7 @@ export default {
 }
 
 .copyright {
+  color: white;
   display: flex;
   justify-content: center;
   align-items: center;

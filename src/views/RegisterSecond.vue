@@ -3,8 +3,9 @@
     <div class="register-outer">
       <form class="register-inner" @submit.prevent="register">
         <div class="register-heading">
-          We'd like a few more details about you...
+          Register
         </div>
+        <hr />
         <div class="input-container">
           <label for="name"> Name </label>
           <input type="text" name="name" v-model="name" />
@@ -97,7 +98,6 @@ export default {
 }
 
 .register-inner {
-  background: rgb(202, 201, 201);
   padding: 20px;
   display: flex;
   flex-direction: column;
