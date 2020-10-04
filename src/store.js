@@ -11,7 +11,6 @@ export default new Vuex.Store({
     status: "",
     token: localStorage.getItem("token") || "",
     user: {},
-    // isLoggedIn: false,
   },
   mutations: {
     auth_request(state) {
@@ -21,7 +20,6 @@ export default new Vuex.Store({
       state.status = "success";
       state.token = token;
       state.user = user;
-      //   state.isLoggedIn = true;
     },
     auth_error(state) {
       state.status = "error";
@@ -29,7 +27,6 @@ export default new Vuex.Store({
     logout(state) {
       state.status = "";
       state.token = "";
-      //   state.isLoggedIn = false;
     },
   },
   actions: {

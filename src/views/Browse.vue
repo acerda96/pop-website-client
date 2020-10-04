@@ -10,6 +10,12 @@ import BrowseNav from "../components/BrowseNav";
 export default {
   name: "Browse",
   components: { BrowseNav },
+  mounted() {
+    console.log("created");
+  },
+  methods: {
+    getItems() {},
+  },
 };
 </script>
 
