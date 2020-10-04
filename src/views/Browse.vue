@@ -5,9 +5,11 @@
     <div v-if="!isItemsLoading" class="items-container">
       <div class="item" v-for="item in items" :key="item._id">
         <router-link :to="'/browse/' + item._id">
-          <div>
+          <div class="item-details">
             {{ item.name }}
             {{ "£" + item.unitPrice }}
+            <HeartOutline />
+            <HeartFilled />
           </div>
           <img
             class="item-thumbnail"
@@ -21,11 +23,13 @@
 
 <script>
 import BrowseNav from "../components/BrowseNav";
+import HeartOutline from "vue-material-design-icons/HeartOutline.vue";
+import HeartFilled from "vue-material-design-icons/Heart.vue";
 import axios from "axios";
 
 export default {
   name: "Browse",
-  components: { BrowseNav },
+  components: { BrowseNav, HeartOutline, HeartFilled },
   data() {
     return {
       isItemsLoading: true,
@@ -79,5 +83,12 @@ export default {
   p {
     text-align: center;
   }
+}
+
+.item-details {
+  display: flex;
+  align-items: center;
+  color: black;
+  justify-content: space-evenly;
 }
 </style>
