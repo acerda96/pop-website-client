@@ -1,11 +1,15 @@
 <template>
   <div class="my-stores">
-    <div class="store" v-for="store in stores" :key="store.id">
-      <router-link :to="'/my-stores/' + store._id">
-        {{ store.name }}
-      </router-link>
+    <div class="stores">
+      <div class="store" v-for="store in stores" :key="store.id">
+        <router-link :to="'/my-stores/' + store._id">
+          {{ store.name }}
+        </router-link>
+      </div>
     </div>
-    <button>Add store</button>
+    <router-link to="/add-store">
+      <button>Add store</button>
+    </router-link>
   </div>
 </template>
 
@@ -50,12 +54,15 @@ export default {
 
 .store {
   background: white;
-  padding: 30px;
+  padding: 20px;
   margin: 10px;
   border-radius: 10px;
   width: 200px;
   text-align: center;
   cursor: pointer;
+  a {
+    color: black;
+  }
 }
 
 .my-stores {
@@ -63,9 +70,16 @@ export default {
   flex-direction: column;
   align-items: center;
   margin-top: 20px;
+  button {
+    padding: 5px;
+    cursor: pointer;
+  }
 }
 
-button {
-  cursor: pointer;
+.stores {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  max-width: 600px;
 }
 </style>

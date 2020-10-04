@@ -2,7 +2,9 @@
   <div class="my-store">
     <h2>{{ store.name }}</h2>
     <p>{{ store.description }}</p>
-    <button>Add item</button>
+    <router-link :to="'/my-stores/' + this.$route.params.storeId + '/add'">
+      <button>Add item</button>
+    </router-link>
     <p v-if="isItemsLoading">Loading items...</p>
     <div class="items-container">
       <div class="item" v-for="item in items" :key="item.id">
@@ -63,6 +65,7 @@ export default {
         .then((res) => {
           this.items = res.data;
           this.isItemsLoading = false;
+          console.log("ITEMS", this.items[0].images);
         })
         .catch((err) => console.log(err));
     },

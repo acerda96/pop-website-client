@@ -7,6 +7,8 @@ import NotReady from "./views/NotReady.vue";
 import Login from "./views/Login.vue";
 import MyStores from "./views/MyStores.vue";
 import MyStore from "./views/MyStore.vue";
+import AddStore from "./views/AddStore.vue";
+import AddItem from "./views/AddItem.vue";
 import MyItem from "./views/MyItem.vue";
 import RegisterFirst from "./views/RegisterFirst.vue";
 import RegisterSecond from "./views/RegisterSecond.vue";
@@ -75,9 +77,25 @@ let router = new Router({
       },
     },
     {
+      path: "/my-stores/:storeId/add",
+      name: "add",
+      component: AddItem,
+      meta: {
+        requiresAuth: true,
+      },
+    },
+    {
       path: "/my-stores/:storeId/:itemId",
       name: "my-item",
       component: MyItem,
+      meta: {
+        requiresAuth: true,
+      },
+    },
+    {
+      path: "/add-store",
+      name: "add-store",
+      component: AddStore,
       meta: {
         requiresAuth: true,
       },
