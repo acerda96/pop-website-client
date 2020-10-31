@@ -20,7 +20,8 @@ html {
 
 input:focus,
 textarea:focus,
-button:focus {
+button:focus,
+select:focus {
   outline: none;
 }
 
@@ -35,8 +36,17 @@ li {
   padding: 10px 20px;
 }
 
+button {
+  cursor: pointer;
+}
+
 a {
   color: black;
+  cursor: pointer;
+}
+
+.chevron-left {
+  cursor: pointer;
 }
 
 .fl {

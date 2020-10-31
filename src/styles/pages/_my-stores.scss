@@ -1,0 +1,30 @@
+.my-stores {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.my-stores__stores {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  max-width: 600px;
+}
+
+.my-stores__store {
+  background: white;
+  padding: 20px;
+  margin: 10px;
+  border-radius: 10px;
+  width: 200px;
+  height: 150px;
+  text-align: center;
+  cursor: pointer;
+  a {
+    color: black;
+  }
+  box-shadow: 0 8px 6px -6px black;
+  display: flex;
+  align-items: flex-end;
+}

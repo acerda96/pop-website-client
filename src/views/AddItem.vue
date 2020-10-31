@@ -1,80 +1,76 @@
 <template>
-  <div class="add-store">
-    <div class="register-outer">
+  <div class="fl-cn">
+    <div>
       <form
-        class="register-inner"
+        class="basic-form"
         @submit.prevent="addItem"
         enctype="multipart/form-data"
       >
-        <div class="header">
-          <ChevronLeft class="chevron-left" @click="navigateToItems" />
-          <input
-            class="store-heading"
+        <input
+          class="add__heading-input"
+          type="text"
+          name="name"
+          v-model="name"
+          placeholder="Item name"
+        />
+        <div class="basic-form__input-ctn">
+          <label for="description"> Description </label>
+          <textarea
+            class="description"
             type="text"
-            name="name"
-            v-model="name"
-            placeholder="Item name"
+            name="description"
+            v-model="description"
           />
         </div>
-        <hr style="width:50%" />
-        <div class="col-group">
-          <div>
-            <div class="input-container">
-              <label for="description"> Description </label>
-              <textarea
-                class="description"
-                type="text"
-                name="description"
-                v-model="description"
-              />
-            </div>
-            <div class="fl">
-              <div class="input-container">
-                <label for="initialQuantity"> Quantity </label>
-                <input
-                  style="width: 80px;"
-                  type="text"
-                  name="initialQuantity"
-                  v-model="initialQuantity"
-                />
-              </div>
-              <div class="input-container">
-                <label for="unitPrice"> Price </label>
-                <input
-                  style="width: 80px;"
-                  type="unitPrice"
-                  name="unitPrice"
-                  v-model="unitPrice"
-                />
-              </div>
-            </div>
-            <div class="input-container">
-              <label for="type"> Type </label>
-              <select
-                style="padding: 8px; border: none; border-radius: 5px;"
-                v-model="type"
-                @change="onChange"
-              >
-                <option value disabled>Select a type</option>
-                <option value="1">Bottoms</option>
-                <option value="2">Dresses</option>
-                <option value="3">Jewellery</option>
-                <option value="4">Shoes</option>
-                <option value="5">Tops</option>
-              </select>
-            </div>
+        <div class="fl-cn">
+          <div class="basic-form__input-ctn">
+            <label for="initialQuantity"> Quantity </label>
+            <input
+              class="basic-form__input--small"
+              style="width: 100px;"
+              type="text"
+              name="initialQuantity"
+              v-model="initialQuantity"
+            />
           </div>
-          <div class="fl-cl">
-            <input ref="fileInput" type="file" @input="pickFile" />
-            <img
-              v-if="previewImage"
-              class="item-thumbnail"
-              v-bind:src="this.previewImage"
+          <div class="basic-form__input-ctn">
+            <label for="unitPrice"> Price </label>
+            <input
+              class="basic-form__input--small"
+              style="width: 100px;"
+              type="unitPrice"
+              name="unitPrice"
+              v-model="unitPrice"
             />
           </div>
         </div>
-
-        <button class="rounded-btn" type="submit">Add item</button>
+        <div class="basic-form__input-ctn">
+          <label for="type"> Type </label>
+          <select
+            style="padding: 8px; border: none; border-radius: 5px;"
+            v-model="type"
+            @change="onChange"
+          >
+            <option value disabled>Select a type</option>
+            <option value="1">Bottoms</option>
+            <option value="2">Dresses</option>
+            <option value="3">Jewellery</option>
+            <option value="4">Shoes</option>
+            <option value="5">Tops</option>
+          </select>
+        </div>
+        <div class="add__image-preview">
+          <input ref="fileInput" type="file" @input="pickFile" />
+          <img
+            v-if="previewImage"
+            class="item-thumbnail"
+            v-bind:src="this.previewImage"
+          />
+        </div>
+        <div class="add__buttons-ctn">
+          <button class="rounded-btn" @click="navigateToItems">Back</button>
+          <button class="rounded-btn" type="submit">Add item</button>
+        </div>
       </form>
     </div>
   </div>
@@ -83,13 +79,9 @@
 
 <script>
 import axios from "axios";
-import ChevronLeft from "vue-material-design-icons/ChevronLeft.vue";
 
 export default {
   name: "AddStore",
-  components: {
-    ChevronLeft,
-  },
   data() {
     return {
       individual: {},
@@ -158,23 +150,3 @@ export default {
   },
 };
 </script>
-
-<style lang="scss">
-@import "../styles/abstracts/_variables.scss";
-
-.imagePreviewWrapper {
-  width: 150px;
-  height: 150px;
-  display: block;
-  cursor: pointer;
-  margin: 0 auto 30px;
-  background-size: cover;
-  background-position: center center;
-}
-
-@media (max-width: 800px) {
-  select {
-    width: 200px;
-  }
-}
-</style>
