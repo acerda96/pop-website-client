@@ -1,7 +1,7 @@
 <template>
   <div class="fl-cn">
     <div>
-      <form class="sign-in__form" @submit.prevent="register">
+      <form class="sign-in" @submit.prevent="register">
         <div class="sign-in__heading">
           Create your account
         </div>
@@ -34,7 +34,7 @@
             v-model="confirmPassword"
           />
         </div>
-        <button type="submit">Sign up</button>
+        <button class="rounded-btn" type="submit">Sign up</button>
       </form>
     </div>
   </div>

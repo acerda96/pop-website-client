@@ -211,16 +211,3 @@ export default {
   name: "PrivacyPolicy",
 };
 </script>
-
-<style lang="scss">
-@import "../styles/abstracts/_variables.scss";
-
-.privacy-policy {
-  background: $accent-color;
-  padding: 30px;
-  li {
-    list-style: circle;
-  }
-  text-align: center;
-}
-</style>

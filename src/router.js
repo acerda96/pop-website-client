@@ -3,7 +3,6 @@ import Router from "vue-router";
 import Home from "./views/Home.vue";
 import Browse from "./views/Browse.vue";
 import ContactUs from "./views/ContactUs.vue";
-import NotReady from "./views/NotReady.vue";
 import Login from "./views/Login.vue";
 import MyStores from "./views/MyStores.vue";
 import MyStore from "./views/MyStore.vue";
@@ -28,11 +27,6 @@ let router = new Router({
       path: "/browse",
       name: "browse",
       component: Browse,
-    },
-    {
-      path: "/app",
-      name: "not-ready",
-      component: NotReady,
     },
     {
       path: "/login",

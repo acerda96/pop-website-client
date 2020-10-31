@@ -1,7 +1,7 @@
 <template>
   <div class="fl-cn">
     <div>
-      <form class="sign-in__form" @submit.prevent="login">
+      <form class="sign-in" @submit.prevent="login">
         <div class="sign-in__heading">
           Login
         </div>
