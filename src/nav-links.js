@@ -1,4 +1,4 @@
-const links = [
+export const links = [
   {
     title: "About",
     name: "about",
@@ -58,7 +58,7 @@ const links = [
   {
     title: "Log out",
     name: "logout",
-    to: "/login",
+    to: "/",
     requiresLogin: true,
     alwaysShow: false,
   },

@@ -1,120 +1,52 @@
 <template>
   <div>
-    <div class="upper-navbar">
+    <nav class="upper-navbar">
       <MenuIcon class="upper-navbar__menu-icon" @click="toggleNav" />
       <router-link class="upper-navbar__logo" to="/">POP</router-link>
       <ul class="upper-navbar__items">
-        <li @click="scrollMeTo" v-if="!isLoggedIn">
-          <router-link to="/#about" class="upper-navbar__link"
-            >About</router-link
+        <div v-for="link in links" :key="link.name">
+          <li
+            v-if="isLoggedIn == link.requiresLogin || link.alwaysShow"
+            @click="executeClick(link.name)"
           >
-        </li>
-        <li>
-          <router-link to="/browse" class="upper-navbar__link"
-            >Browse</router-link
-          >
-        </li>
-        <li v-if="!isLoggedIn">
-          <router-link to="/app" class="upper-navbar__link">Host</router-link>
-        </li>
-        <li v-if="!isLoggedIn">
-          <router-link to="/login" class="upper-navbar__link"
-            >Login</router-link
-          >
-        </li>
-        <li v-if="!isLoggedIn">
-          <router-link to="/sign-up" class="upper-navbar__link"
-            >Sign up</router-link
-          >
-        </li>
-        <li v-if="isLoggedIn">
-          <router-link to="/app" class="upper-navbar__link"
-            >Saved items</router-link
-          >
-        </li>
-        <li v-if="isLoggedIn">
-          <router-link to="/my-stores" class="upper-navbar__link"
-            >My Stores</router-link
-          >
-        </li>
-        <li v-if="isLoggedIn">
-          <router-link to="/app" class="upper-navbar__link"
-            >Account</router-link
-          >
-        </li>
-        <li>
-          <span v-if="isLoggedIn">
-            <a class="upper-navbar__link" @click="logout">Log out</a>
-          </span>
-        </li>
+            <router-link :to="link.to" class="upper-navbar__link">{{
+              link.title
+            }}</router-link>
+          </li>
+        </div>
       </ul>
-    </div>
-    <ul class="side-nav" ref="nav">
-      <li
-        @click="
-          scrollMeTo();
-          hideNav();
-        "
-        v-if="!isLoggedIn"
-      >
-        <router-link to="/#about" class="upper-navbar__link">About</router-link>
-      </li>
-
-      <li @click="hideNav">
-        <router-link to="/browse" class="upper-navbar__link"
-          >Browse</router-link
-        >
-      </li>
-
-      <li @click="hideNav" v-if="!isLoggedIn">
-        <router-link to="/app" class="upper-navbar__link">Host</router-link>
-      </li>
-
-      <li @click="hideNav" v-if="!isLoggedIn">
-        <router-link to="/login" class="upper-navbar__link">Login</router-link>
-      </li>
-
-      <li @click="hideNav" v-if="!isLoggedIn">
-        <router-link to="/sign-up" class="upper-navbar__link"
-          >Sign up</router-link
-        >
-      </li>
-
-      <li @click="hideNav" v-if="isLoggedIn">
-        <router-link to="/app" class="upper-navbar__link"
-          >Saved items</router-link
-        >
-      </li>
-
-      <li @click="hideNav" v-if="isLoggedIn">
-        <router-link to="/my-stores" class="upper-navbar__link"
-          >My Stores</router-link
-        >
-      </li>
-
-      <li @click="hideNav" v-if="isLoggedIn">
-        <router-link to="/app" class="upper-navbar__link">Account</router-link>
-      </li>
-      <li
-        @click="
-          hideNav();
-          logout();
-        "
-        v-if="isLoggedIn"
-      >
-        <router-link to="/sign-up" class="upper-navbar__link"
-          >Log out</router-link
-        >
-      </li>
-    </ul>
+    </nav>
+    <nav class="side-navbar" ref="nav">
+      <ul>
+        <div v-for="link in links" :key="link.name">
+          <li
+            v-if="isLoggedIn == link.requiresLogin || link.alwaysShow"
+            @click="
+              hideNav();
+              executeClick(link.name);
+            "
+          >
+            <router-link :to="link.to" class="upper-navbar__link">{{
+              link.title
+            }}</router-link>
+          </li>
+        </div>
+      </ul>
+    </nav>
   </div>
 </template>
 
 <script>
 import MenuIcon from "vue-material-design-icons/Menu.vue";
+import { links } from "../nav-links";
 
 export default {
   name: "NavBar",
+  data() {
+    return {
+      links: links,
+    };
+  },
   components: {
     MenuIcon,
   },
@@ -143,6 +75,18 @@ export default {
         let top = el.offsetTop;
 
         window.scrollTo(0, top - 100);
+      }
+    },
+    executeClick(name) {
+      switch (name) {
+        case "logout":
+          this.logout();
+          break;
+        case "about":
+          this.scrollMeTo();
+          break;
+        default:
+          return;
       }
     },
   },
