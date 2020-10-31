@@ -1,5 +1,4 @@
 body {
-  margin: 0;
   // background-image: url("./images/background.jpg");
   background-color: rgb(219, 184, 204);
   //   background-attachment: fixed;
@@ -8,11 +7,15 @@ body {
   scroll-padding-top: 50px;
   width: 100%;
   height: 100%;
+  margin: 0;
+  padding: 0;
 }
 
 html {
   width: 100%;
   height: 100%;
+  padding: 0;
+  margin: 0;
 }
 
 input:focus {

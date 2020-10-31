@@ -1,6 +1,6 @@
 <template>
   <div id="home">
-    <div class="page-container">
+    <div>
       <div class="title-container">
         <Title />
         <router-link to="/app">
