@@ -13,15 +13,6 @@
           v-model="name"
           placeholder="Item name"
         />
-        <div class="basic-form__input-ctn">
-          <label for="description"> Description </label>
-          <textarea
-            class="description"
-            type="text"
-            name="description"
-            v-model="description"
-          />
-        </div>
         <div class="fl-cn">
           <div class="basic-form__input-ctn">
             <label for="initialQuantity"> Quantity </label>
@@ -58,6 +49,15 @@
             <option value="4">Shoes</option>
             <option value="5">Tops</option>
           </select>
+        </div>
+        <div class="basic-form__input-ctn">
+          <label for="description"> Description </label>
+          <textarea
+            class="description"
+            type="text"
+            name="description"
+            v-model="description"
+          />
         </div>
         <div class="add__image-preview">
           <input ref="fileInput" type="file" @input="pickFile" />

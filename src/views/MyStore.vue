@@ -1,24 +1,26 @@
 <template>
   <div class="fl-cn">
-    <div class="my-store">
-      <h2>{{ store.name }}</h2>
-      <hr style="width:50%" />
-      <p>{{ store.description }}</p>
-      <router-link :to="'/my-stores/' + this.$route.params.storeId + '/add'">
-        <button class="rounded-btn">Add item</button>
-      </router-link>
-      <Loader v-if="isItemsLoading" />
-      <div class="items-container" v-if="!isItemsLoading">
-        <div class="item" v-for="item in items" :key="item.id">
-          <router-link :to="'/my-stores/' + store._id + '/' + item._id">
-            <div class="item-heading">
-              {{ item.name }}
-            </div>
-            <img
-              class="item-thumbnail"
-              v-bind:src="'data:image/jpeg;base64,' + item.images[0].buffer"
-            />
-          </router-link>
+    <div class="my-store-ctn">
+      <Loader v-if="isLoading" />
+      <div class="my-store__details" v-if="!isLoading">
+        <h2>{{ store.name }}</h2>
+        <hr style="width:50%" />
+        <p>{{ store.description }}</p>
+        <router-link :to="'/my-stores/' + this.$route.params.storeId + '/add'">
+          <button class="rounded-btn">Add item</button>
+        </router-link>
+        <div class="my-store__items" v-if="!isLoading">
+          <div class="my-store__item" v-for="item in items" :key="item.id">
+            <router-link :to="'/my-stores/' + store._id + '/' + item._id">
+              <div class="my-store__item-name">
+                {{ item.name }}
+              </div>
+              <img
+                class="my-store__item-thumbnail"
+                v-bind:src="'data:image/jpeg;base64,' + item.images[0].buffer"
+              />
+            </router-link>
+          </div>
         </div>
       </div>
     </div>
@@ -36,7 +38,7 @@ export default {
   },
   data() {
     return {
-      isItemsLoading: true,
+      isLoading: true,
       individual: {},
       store: [],
       items: [],
@@ -71,7 +73,7 @@ export default {
         )
         .then((res) => {
           this.items = res.data;
-          this.isItemsLoading = false;
+          this.isLoading = false;
         })
         .catch((err) => console.log(err));
     },

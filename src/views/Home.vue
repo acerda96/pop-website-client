@@ -1,7 +1,7 @@
 <template>
   <div id="home">
     <div class="home__title">
-      <Title />
+      <div class="home__title-txt">Your Local Marketplace</div>
       <router-link to="/app">
         <BrowseButton />
       </router-link>
@@ -41,13 +41,11 @@
 </template>
 
 <script>
-import Title from "../components/Title";
 import BrowseButton from "../components/BrowseButton";
 
 export default {
   name: "Home",
   components: {
-    Title,
     BrowseButton,
   },
 };

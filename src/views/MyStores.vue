@@ -1,5 +1,6 @@
 <template>
   <div class="my-stores">
+    <Loader v-if="isLoading" />
     <div class="my-stores__stores" v-if="!isLoading">
       <div class="my-stores__store" v-for="store in stores" :key="store.id">
         <router-link :to="'/my-stores/' + store._id">
@@ -10,7 +11,6 @@
     <router-link to="/add-store" v-if="!isLoading">
       <button class="rounded-btn">Add store</button>
     </router-link>
-    <Loader v-if="isLoading" />
   </div>
 </template>
 

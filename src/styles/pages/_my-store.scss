@@ -1,14 +1,21 @@
-.my-store {
+.my-store-ctn {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-top: 20px;
+  justify-content: center;
+  margin: 20px;
   background: white;
   width: 80%;
   border-radius: 10px;
 }
 
-.item {
+.my-store__details {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+  border-radius: 10px;
+}
+
+.my-store__item {
   padding: 30px;
   margin: 10px;
   border-radius: 10px;
@@ -17,17 +24,17 @@
   cursor: pointer;
 }
 
-.item-thumbnail {
+.my-store__item-thumbnail {
   width: 200px;
   height: 200px;
 }
 
-.item-heading {
+.my-store__item-name {
   text-align: left;
   padding: 7px;
 }
 
-.items-container {
+.my-store__items {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;

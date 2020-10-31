@@ -1,25 +1,32 @@
 <template>
-  <div class="my-item">
-    <h2>{{ item.name }}</h2>
-    <p>{{ item.description }}</p>
-    <p v-if="isItemLoading">Loading...</p>
-    <img
-      v-if="!isItemLoading"
-      class="item-thumbnail"
-      v-bind:src="'data:image/jpeg;base64,' + item.images[0].buffer"
-    />
-    <button>Edit item</button>
+  <div class="fl-cn">
+    <div class="my-item-ctn">
+      <Loader v-if="isLoading" />
+      <div class="my-store__details" v-if="!isLoading">
+        <h2>{{ item.name }}</h2>
+        <hr style="width:50%" />
+        <p>{{ item.description }}</p>
+        <img
+          class="my-store__item-thumbnail"
+          v-bind:src="'data:image/jpeg;base64,' + item.images[0].buffer"
+        />
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
 import axios from "axios";
+import Loader from "../components/Loader.vue";
 
 export default {
   name: "MyItem",
+  components: {
+    Loader,
+  },
   data() {
     return {
-      isItemLoading: true,
+      isLoading: true,
       individual: {},
       item: {},
     };
@@ -42,46 +49,10 @@ export default {
         .get(`api/items/${this.$route.params.itemId}`)
         .then((res) => {
           this.item = res.data;
-          this.isItemLoading = false;
+          this.isLoading = false;
         })
         .catch((err) => console.log(err));
     },
   },
 };
 </script>
-
-<style lang="scss">
-@import "../styles/abstracts/_variables.scss";
-
-.my-item {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-top: 20px;
-  height: 500px;
-}
-
-button {
-  cursor: pointer;
-}
-
-.item {
-  padding: 30px;
-  margin: 10px;
-  border-radius: 10px;
-  width: 200px;
-  text-align: center;
-  cursor: pointer;
-}
-
-.item-thumbnail {
-  width: 200px;
-  height: 200px;
-}
-
-.items-container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-}
-</style>
