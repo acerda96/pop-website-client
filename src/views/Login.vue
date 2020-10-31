@@ -1,21 +1,21 @@
 <template>
   <div class="fl-cn">
     <div>
-      <form class="sign-in" @submit.prevent="login">
-        <div class="sign-in__heading">
+      <form class="basic-form" @submit.prevent="login">
+        <div class="basic-form__heading">
           Login
         </div>
         <hr />
-        <div class="sign-in__input-ctn">
+        <div class="basic-form__input-ctn">
           <label for="email"> Email </label>
           <input type="email" name="email" v-model="email" />
         </div>
-        <div class="sign-in__input-ctn">
+        <div class="basic-form__input-ctn">
           <label for="password"> Password </label>
           <input type="password" name="password" v-model="password" />
         </div>
         <button type="submit" class="rounded-btn">Login</button>
-        <div class="sign-in__links">
+        <div class="basic-form__links">
           <a>Forgotten your password?</a>
           <router-link to="/sign-up"
             >Don't have an account? Sign up now!</router-link

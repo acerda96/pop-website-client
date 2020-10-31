@@ -1,41 +1,55 @@
 <template>
-  <div class="navbar">
-    <nav class="upper-nav">
-      <MenuIcon class="menu-icon" @click="toggleNav" />
-      <router-link class="logo" to="/">POP</router-link>
-      <ul class="desktop-nav-ul">
+  <div>
+    <div class="upper-navbar">
+      <MenuIcon class="upper-navbar__menu-icon" @click="toggleNav" />
+      <router-link class="upper-navbar__logo" to="/">POP</router-link>
+      <ul class="upper-navbar__items">
         <li @click="scrollMeTo" v-if="!isLoggedIn">
-          <router-link to="/#about" class="link">About</router-link>
+          <router-link to="/#about" class="upper-navbar__link"
+            >About</router-link
+          >
         </li>
         <li>
-          <router-link to="/browse" class="link">Browse</router-link>
+          <router-link to="/browse" class="upper-navbar__link"
+            >Browse</router-link
+          >
         </li>
         <li v-if="!isLoggedIn">
-          <router-link to="/app" class="link">Host</router-link>
+          <router-link to="/app" class="upper-navbar__link">Host</router-link>
         </li>
         <li v-if="!isLoggedIn">
-          <router-link to="/login" class="link">Login</router-link>
+          <router-link to="/login" class="upper-navbar__link"
+            >Login</router-link
+          >
         </li>
         <li v-if="!isLoggedIn">
-          <router-link to="/sign-up" class="link">Sign up</router-link>
+          <router-link to="/sign-up" class="upper-navbar__link"
+            >Sign up</router-link
+          >
         </li>
         <li v-if="isLoggedIn">
-          <router-link to="/app" class="link">Saved items</router-link>
+          <router-link to="/app" class="upper-navbar__link"
+            >Saved items</router-link
+          >
         </li>
         <li v-if="isLoggedIn">
-          <router-link to="/my-stores" class="link">My Stores</router-link>
+          <router-link to="/my-stores" class="upper-navbar__link"
+            >My Stores</router-link
+          >
         </li>
         <li v-if="isLoggedIn">
-          <router-link to="/app" class="link">Account</router-link>
+          <router-link to="/app" class="upper-navbar__link"
+            >Account</router-link
+          >
         </li>
         <li>
           <span v-if="isLoggedIn">
-            <a class="link" @click="logout">Log out</a>
+            <a class="upper-navbar__link" @click="logout">Log out</a>
           </span>
         </li>
       </ul>
-    </nav>
-    <ul class="mobile-nav-ul" ref="nav">
+    </div>
+    <ul class="side-nav" ref="nav">
       <li
         @click="
           scrollMeTo();
@@ -43,35 +57,43 @@
         "
         v-if="!isLoggedIn"
       >
-        <router-link to="/#about" class="link">About</router-link>
+        <router-link to="/#about" class="upper-navbar__link">About</router-link>
       </li>
 
       <li @click="hideNav">
-        <router-link to="/browse" class="link">Browse</router-link>
+        <router-link to="/browse" class="upper-navbar__link"
+          >Browse</router-link
+        >
       </li>
 
       <li @click="hideNav" v-if="!isLoggedIn">
-        <router-link to="/app" class="link">Host</router-link>
+        <router-link to="/app" class="upper-navbar__link">Host</router-link>
       </li>
 
       <li @click="hideNav" v-if="!isLoggedIn">
-        <router-link to="/login" class="link">Login</router-link>
+        <router-link to="/login" class="upper-navbar__link">Login</router-link>
       </li>
 
       <li @click="hideNav" v-if="!isLoggedIn">
-        <router-link to="/sign-up" class="link">Sign up</router-link>
+        <router-link to="/sign-up" class="upper-navbar__link"
+          >Sign up</router-link
+        >
       </li>
 
       <li @click="hideNav" v-if="isLoggedIn">
-        <router-link to="/app" class="link">Saved items</router-link>
+        <router-link to="/app" class="upper-navbar__link"
+          >Saved items</router-link
+        >
       </li>
 
       <li @click="hideNav" v-if="isLoggedIn">
-        <router-link to="/my-stores" class="link">My Stores</router-link>
+        <router-link to="/my-stores" class="upper-navbar__link"
+          >My Stores</router-link
+        >
       </li>
 
       <li @click="hideNav" v-if="isLoggedIn">
-        <router-link to="/app" class="link">Account</router-link>
+        <router-link to="/app" class="upper-navbar__link">Account</router-link>
       </li>
       <li
         @click="
@@ -80,7 +102,9 @@
         "
         v-if="isLoggedIn"
       >
-        <router-link to="/sign-up" class="link">Log out</router-link>
+        <router-link to="/sign-up" class="upper-navbar__link"
+          >Log out</router-link
+        >
       </li>
     </ul>
   </div>
@@ -124,107 +148,3 @@ export default {
   },
 };
 </script>
-
-<style lang="scss">
-@import "../styles/abstracts/_variables.scss";
-
-.upper-nav {
-  background-color: white;
-  position: fixed;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%;
-  height: $nav-bar-height;
-}
-.menu-icon {
-  display: none;
-  cursor: pointer;
-}
-.logo {
-  color: $main-font-color;
-  font-size: 40px;
-  padding: 30px 30px 20px 70px;
-}
-.link {
-  color: $main-font-color;
-  font-size: 17px;
-  cursor: pointer;
-  text-decoration: underline;
-}
-a {
-  text-decoration: none;
-  padding: 5px;
-}
-li {
-  list-style-type: none;
-  padding: 10px 20px;
-}
-hr {
-  width: 150px;
-}
-.desktop-nav-ul {
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  padding: 10px;
-  .link {
-    font-size: 14px;
-    padding: 0px;
-  }
-}
-.mobile-nav-ul {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: flex-end;
-  background: $sub-accent-color;
-  position: fixed;
-  transition: 300ms ease all;
-  left: -300px;
-  top: 90px;
-  height: 300px;
-  width: 200px;
-  a {
-    color: white;
-  }
-  .link {
-    color: white;
-    font-size: 14px;
-  }
-  li {
-    width: 150px;
-    border-bottom: 1px solid white;
-  }
-}
-
-@media (max-width: 800px) {
-  .menu-icon {
-    display: block;
-    padding: 15px 0px 10px 40px;
-  }
-  .active {
-    left: -30px;
-  }
-  .upper-nav {
-    height: $nav-bar-height-mobile;
-  }
-  .desktop-nav-ul {
-    display: none;
-  }
-  .logo {
-    padding: 10px 25px 0px 0px;
-    text-decoration: none;
-  }
-}
-@media (max-width: 550px) {
-  .menu-icon {
-    display: block;
-    padding: 15px 0px 10px 30px;
-  }
-  .logo {
-    font-size: 30px;
-    padding: 10px 35px 0px 0px;
-  }
-}
-</style>
