@@ -1,40 +1,40 @@
 <template>
   <div id="home">
-    <div>
-      <div class="title-container">
-        <Title />
-        <router-link to="/app">
-          <BrowseButton />
-        </router-link>
-      </div>
+    <div class="home__title">
+      <Title />
+      <router-link to="/app">
+        <BrowseButton />
+      </router-link>
     </div>
     <div id="about">
-      <div class="sub-heading-text">Discover new styles</div>
+      <div class="home__sub-title">Discover new styles</div>
     </div>
-    <div class="sec">
+    <div class="home__row">
       <img src="../images/image1.jpg" />
-      <div class="text-container">
-        <div class="main-text">See what's on sale</div>
-        <div class="sub-text">
+      <div class="home__row-txt-ctn">
+        <div class="home__row-txt-title">See what's on sale</div>
+        <div class="home__row-txt-desc">
           Find your next favourite shirt or shoes from nearby stores
         </div>
       </div>
     </div>
-    <div class="sec">
-      <div class="text-container">
-        <div class="main-text">Get directions</div>
-        <div class="sub-text">
+    <div class="home__row">
+      <div class="home__row-txt-ctn">
+        <div class="home__row-txt-title">Get directions</div>
+        <div class="home__row-txt-desc">
           When you've found your new fit Pop will show you how to get to the
           store
         </div>
       </div>
       <img src="../images/image2.jpg" />
     </div>
-    <div class="sec">
+    <div class="home__row">
       <img src="../images/image3.jpg" />
-      <div class="text-container">
-        <div class="main-text">Support local businesses</div>
-        <div class="sub-text">All items are sold by independent sellers</div>
+      <div class="home__row-txt">
+        <div class="home__row-txt-title">Support local businesses</div>
+        <div class="home__row-txt-desc">
+          All items are sold by independent sellers
+        </div>
       </div>
     </div>
   </div>

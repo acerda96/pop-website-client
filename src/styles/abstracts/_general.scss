@@ -18,7 +18,8 @@ html {
   margin: 0;
 }
 
-input:focus {
+input:focus,
+button:focus {
   outline: none;
 }
 
@@ -39,4 +40,10 @@ a {
 .fl-cl {
   display: flex;
   flex-direction: column;
+}
+
+.fl-cn {
+  display: flex;
+  justify-content: center;
+  width: 100%;
 }

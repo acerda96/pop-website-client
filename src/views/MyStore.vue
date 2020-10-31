@@ -4,10 +4,10 @@
     <hr />
     <p>{{ store.description }}</p>
     <router-link :to="'/my-stores/' + this.$route.params.storeId + '/add'">
-      <RoundedButton title="Add item" />
+      <button class="rounded-btn">Add item</button>
     </router-link>
     <Loader v-if="isItemsLoading" />
-    <div class="items-container" v-if="!isItemsLoading" >
+    <div class="items-container" v-if="!isItemsLoading">
       <div class="item" v-for="item in items" :key="item.id">
         <router-link :to="'/my-stores/' + store._id + '/' + item._id">
           <div class="item-heading">
@@ -25,14 +25,12 @@
 
 <script>
 import axios from "axios";
-import Loader from '../components/Loader.vue'
-import RoundedButton from '../components/RoundedButton.vue'
+import Loader from "../components/Loader.vue";
 
 export default {
   name: "MyStore",
   components: {
     Loader,
-    RoundedButton
   },
   data() {
     return {

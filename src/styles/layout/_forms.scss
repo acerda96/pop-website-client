@@ -1,0 +1,50 @@
+.sign-in__form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 50px;
+  margin-bottom: 50px;
+  padding: 30px;
+  width: 500px;
+  background-color: white;
+  border-radius: 15px;
+
+  .sign-in__input-ctn {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 15px;
+  }
+
+  .sign-in__heading {
+    font-weight: bold;
+    font-size: 30px;
+  }
+
+  input {
+    border: none;
+    border-bottom: 1px solid black;
+    height: 30px;
+  }
+  a {
+    text-decoration: underline;
+  }
+
+  .sign-in__links {
+    padding-top: 30px;
+    font-size: 15px;
+  }
+}
+
+@media (max-width: 800px) {
+  .sign-in__form {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    width: 280px;
+
+    .sign-in__heading {
+      font-weight: bold;
+      font-size: 23px;
+    }
+  }
+}

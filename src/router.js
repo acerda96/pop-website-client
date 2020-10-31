@@ -10,8 +10,7 @@ import MyStore from "./views/MyStore.vue";
 import AddStore from "./views/AddStore.vue";
 import AddItem from "./views/AddItem.vue";
 import MyItem from "./views/MyItem.vue";
-import RegisterFirst from "./views/RegisterFirst.vue";
-import RegisterSecond from "./views/RegisterSecond.vue";
+import Register from "./views/Register.vue";
 import PrivacyPolicy from "./views/PrivacyPolicy.vue";
 import store from "./store.js";
 
@@ -41,14 +40,9 @@ let router = new Router({
       component: Login,
     },
     {
-      path: "/sign-up-1",
-      name: "sign-up-1",
-      component: RegisterFirst,
-    },
-    {
-      path: "/sign-up-2",
-      name: "sign-up-2",
-      component: RegisterSecond,
+      path: "/sign-up",
+      name: "sign-up",
+      component: Register,
     },
     {
       path: "/contact",

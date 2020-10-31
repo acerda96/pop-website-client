@@ -1,22 +1,26 @@
 <template>
-  <div class="login">
-    <div class="login-outer">
-      <form class="login-inner" @submit.prevent="login">
-        <div class="register-heading">
+  <div class="fl-cn">
+    <div>
+      <form class="sign-in__form" @submit.prevent="login">
+        <div class="sign-in__heading">
           Login
         </div>
         <hr />
-        <div class="input-container">
+        <div class="sign-in__input-ctn">
           <label for="email"> Email </label>
           <input type="email" name="email" v-model="email" />
         </div>
-        <div class="input-container">
+        <div class="sign-in__input-ctn">
           <label for="password"> Password </label>
           <input type="password" name="password" v-model="password" />
         </div>
-        <button type="submit">Login</button>
-        <a>Forgotten your password?</a>
-        <a>Don't have an account? Sign up now!</a>
+        <button type="submit" class="rounded-btn">Login</button>
+        <div class="sign-in__links">
+          <a>Forgotten your password?</a>
+          <router-link to="/sign-up"
+            >Don't have an account? Sign up now!</router-link
+          >
+        </div>
       </form>
     </div>
   </div>
@@ -43,46 +47,3 @@ export default {
   },
 };
 </script>
-
-<style lang="scss">
-@import "../styles/abstracts/_variables.scss";
-
-.input-container {
-  display: flex;
-  flex-direction: column;
-  margin: 10px;
-}
-
-.login {
-  display: flex;
-  justify-content: center;
-  width: 100%;
-}
-
-.login-outer {
-  width: 100%;
-}
-
-.login-inner {
-  padding: 20px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-
-  input {
-    border-radius: 5px;
-    border: none;
-    padding: 5px;
-  }
-
-  button {
-    border-radius: 5px;
-    border: none;
-    padding: 5px;
-  }
-
-  a {
-    text-decoration: underline;
-  }
-}
-</style>

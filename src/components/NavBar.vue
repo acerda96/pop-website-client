@@ -4,9 +4,9 @@
       <MenuIcon class="menu-icon" @click="toggleNav" />
       <router-link class="logo" to="/">POP</router-link>
       <ul class="desktop-nav-ul">
-        <!-- <li @click="scrollMeTo">
+        <li @click="scrollMeTo" v-if="!isLoggedIn">
           <router-link to="/#about" class="link">About</router-link>
-        </li> -->
+        </li>
         <li>
           <router-link to="/browse" class="link">Browse</router-link>
         </li>
@@ -17,7 +17,7 @@
           <router-link to="/login" class="link">Login</router-link>
         </li>
         <li v-if="!isLoggedIn">
-          <router-link to="/sign-up-2" class="link">Sign up</router-link>
+          <router-link to="/sign-up" class="link">Sign up</router-link>
         </li>
         <li v-if="isLoggedIn">
           <router-link to="/app" class="link">Saved items</router-link>
@@ -36,14 +36,15 @@
       </ul>
     </nav>
     <ul class="mobile-nav-ul" ref="nav">
-      <!-- <li
+      <li
         @click="
           scrollMeTo();
           hideNav();
         "
+        v-if="!isLoggedIn"
       >
         <router-link to="/#about" class="link">About</router-link>
-      </li> -->
+      </li>
 
       <li @click="hideNav">
         <router-link to="/browse" class="link">Browse</router-link>
@@ -58,7 +59,7 @@
       </li>
 
       <li @click="hideNav" v-if="!isLoggedIn">
-        <router-link to="/sign-up-2" class="link">Sign up</router-link>
+        <router-link to="/sign-up" class="link">Sign up</router-link>
       </li>
 
       <li @click="hideNav" v-if="isLoggedIn">
@@ -79,7 +80,7 @@
         "
         v-if="isLoggedIn"
       >
-        <router-link to="/sign-up-1" class="link">Log out</router-link>
+        <router-link to="/sign-up" class="link">Log out</router-link>
       </li>
     </ul>
   </div>

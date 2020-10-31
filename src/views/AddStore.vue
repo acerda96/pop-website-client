@@ -3,37 +3,48 @@
     <div class="register-outer">
       <form class="register-inner">
         <div class="header">
-          <ChevronLeft class="chevron-left" @click='navigateToStores'/>
-          <input class="store-heading" type="text" name="name" v-model="name" placeholder="Store name"/>
+          <ChevronLeft class="chevron-left" @click="navigateToStores" />
+          <input
+            class="store-heading"
+            type="text"
+            name="name"
+            v-model="name"
+            placeholder="Store name"
+          />
         </div>
         <hr style="width:50%" />
         <div class="col-group">
-        <div>
-        <div class="input-container">
-          <label for="description"> Description </label>
-          <textarea class="description" type="text" name="description" v-model="description" />
+          <div>
+            <div class="input-container">
+              <label for="description"> Description </label>
+              <textarea
+                class="description"
+                type="text"
+                name="description"
+                v-model="description"
+              />
+            </div>
+            <div class="input-container">
+              <label for="website"> Website </label>
+              <input type="website" name="website" v-model="website" />
+            </div>
+          </div>
+          <div>
+            <div class="input-container">
+              <label for="street"> Street </label>
+              <input type="text" name="street" v-model="street" />
+            </div>
+            <div class="input-container">
+              <label for="postcode"> Postcode </label>
+              <input type="text" name="postcode" v-model="postcode" />
+            </div>
+            <div class="input-container">
+              <label for="city"> City </label>
+              <input type="city" name="city" v-model="city" />
+            </div>
+          </div>
         </div>
-        <div class="input-container">
-          <label for="website"> Website </label>
-          <input type="website" name="website" v-model="website" />
-        </div>
-        </div>
-        <div>
-           <div class="input-container">
-          <label for="street"> Street </label>
-          <input type="text" name="street" v-model="street" />
-        </div>
-        <div class="input-container">
-          <label for="postcode"> Postcode </label>
-          <input type="text" name="postcode" v-model="postcode" />
-        </div>
-        <div class="input-container">
-          <label for="city"> City </label>
-          <input type="city" name="city" v-model="city" />
-        </div>
-        </div>
-        </div>
-        <RoundedButton title="Add store" @click.native="addStore" />
+        <button class="rounded-btn" type="submit">Add store</button>
       </form>
     </div>
   </div>
@@ -41,15 +52,12 @@
 
 <script>
 import axios from "axios";
-import RoundedButton from '../components/RoundedButton.vue'
 import ChevronLeft from "vue-material-design-icons/ChevronLeft.vue";
-
 
 export default {
   name: "AddStore",
   components: {
-    RoundedButton,
-    ChevronLeft
+    ChevronLeft,
   },
   data() {
     return {
@@ -89,7 +97,7 @@ export default {
       axios
         .post("api/stores", data)
         .then(() => {
-          this.navigateToStores()
+          this.navigateToStores();
         })
         .catch((err) => console.log(err));
     },
@@ -133,5 +141,4 @@ textarea {
     flex-direction: column;
   }
 }
-
 </style>

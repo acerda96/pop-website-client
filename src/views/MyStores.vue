@@ -8,7 +8,7 @@
       </div>
     </div>
     <router-link to="/add-store" v-if="!isLoading">
-      <RoundedButton title="Add store" />
+      <button class="rounded-btn">Add store</button>
     </router-link>
     <Loader v-if="isLoading" />
   </div>
@@ -16,8 +16,7 @@
 
 <script>
 import axios from "axios";
-import RoundedButton from '../components/RoundedButton.vue'
-import Loader from '../components/Loader.vue'
+import Loader from "../components/Loader.vue";
 
 export default {
   name: "MyStores",
@@ -25,12 +24,11 @@ export default {
     return {
       individual: {},
       stores: [],
-      isLoading: null
+      isLoading: null,
     };
   },
-    components: {
-    RoundedButton,
-    Loader
+  components: {
+    Loader,
   },
   async mounted() {
     this.isLoading = true;

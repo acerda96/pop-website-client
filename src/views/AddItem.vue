@@ -6,50 +6,75 @@
         @submit.prevent="addItem"
         enctype="multipart/form-data"
       >
-       <div class="header">
-          <ChevronLeft class="chevron-left" @click='navigateToItems'/>
-          <input class="store-heading" type="text" name="name" v-model="name" placeholder="Item name"/>
+        <div class="header">
+          <ChevronLeft class="chevron-left" @click="navigateToItems" />
+          <input
+            class="store-heading"
+            type="text"
+            name="name"
+            v-model="name"
+            placeholder="Item name"
+          />
         </div>
         <hr style="width:50%" />
         <div class="col-group">
           <div>
             <div class="input-container">
               <label for="description"> Description </label>
-              <textarea class="description" type="text" name="description" v-model="description" />
+              <textarea
+                class="description"
+                type="text"
+                name="description"
+                v-model="description"
+              />
             </div>
             <div class="fl">
-            <div class="input-container">
-              <label for="initialQuantity"> Quantity </label>
-              <input style="width: 80px;" type="text" name="initialQuantity" v-model="initialQuantity" />
+              <div class="input-container">
+                <label for="initialQuantity"> Quantity </label>
+                <input
+                  style="width: 80px;"
+                  type="text"
+                  name="initialQuantity"
+                  v-model="initialQuantity"
+                />
+              </div>
+              <div class="input-container">
+                <label for="unitPrice"> Price </label>
+                <input
+                  style="width: 80px;"
+                  type="unitPrice"
+                  name="unitPrice"
+                  v-model="unitPrice"
+                />
+              </div>
             </div>
             <div class="input-container">
-              <label for="unitPrice"> Price </label>
-              <input style="width: 80px;" type="unitPrice" name="unitPrice" v-model="unitPrice" />
+              <label for="type"> Type </label>
+              <select
+                style="padding: 8px; border: none; border-radius: 5px;"
+                v-model="type"
+                @change="onChange"
+              >
+                <option value disabled>Select a type</option>
+                <option value="1">Bottoms</option>
+                <option value="2">Dresses</option>
+                <option value="3">Jewellery</option>
+                <option value="4">Shoes</option>
+                <option value="5">Tops</option>
+              </select>
             </div>
           </div>
-          <div class="input-container">
-            <label for="type"> Type </label>
-            <select style="padding: 8px; border: none; border-radius: 5px;" v-model="type" @change="onChange">
-              <option value disabled>Select a type</option>
-              <option value="1">Bottoms</option>
-              <option value="2">Dresses</option>
-              <option value="3">Jewellery</option>
-              <option value="4">Shoes</option>
-              <option value="5">Tops</option>
-            </select>
-          </div>
-        </div>
           <div class="fl-cl">
             <input ref="fileInput" type="file" @input="pickFile" />
-              <img
-                v-if="previewImage"
-                class="item-thumbnail"
-                v-bind:src="this.previewImage"
-              />
+            <img
+              v-if="previewImage"
+              class="item-thumbnail"
+              v-bind:src="this.previewImage"
+            />
           </div>
         </div>
 
-        <RoundedButton title="Add item" @click.native="addItem" />
+        <button class="rounded-btn" type="submit">Add item</button>
       </form>
     </div>
   </div>
@@ -58,14 +83,12 @@
 
 <script>
 import axios from "axios";
-import RoundedButton from '../components/RoundedButton.vue'
 import ChevronLeft from "vue-material-design-icons/ChevronLeft.vue";
 
 export default {
   name: "AddStore",
   components: {
-    RoundedButton,
-    ChevronLeft
+    ChevronLeft,
   },
   data() {
     return {
@@ -154,5 +177,4 @@ export default {
     width: 200px;
   }
 }
-
 </style>
