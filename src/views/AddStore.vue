@@ -1,20 +1,25 @@
 <template>
   <div class="add-store">
     <div class="register-outer">
-      <form class="register-inner" @submit.prevent="addStore">
-        <div class="register-heading">
-          Add store
+      <form class="register-inner">
+        <div class="header">
+          <ChevronLeft class="chevron-left" @click='navigateToStores'/>
+          <input class="store-heading" type="text" name="name" v-model="name" placeholder="Store name"/>
         </div>
-        <hr />
-        <div class="input-container">
-          <label for="name"> Name </label>
-          <input type="text" name="name" v-model="name" />
-        </div>
+        <hr style="width:50%" />
+        <div class="col-group">
+        <div>
         <div class="input-container">
           <label for="description"> Description </label>
-          <input type="text" name="description" v-model="description" />
+          <textarea class="description" type="text" name="description" v-model="description" />
         </div>
         <div class="input-container">
+          <label for="website"> Website </label>
+          <input type="website" name="website" v-model="website" />
+        </div>
+        </div>
+        <div>
+           <div class="input-container">
           <label for="street"> Street </label>
           <input type="text" name="street" v-model="street" />
         </div>
@@ -26,11 +31,9 @@
           <label for="city"> City </label>
           <input type="city" name="city" v-model="city" />
         </div>
-        <div class="input-container">
-          <label for="website"> Website </label>
-          <input type="website" name="website" v-model="website" />
         </div>
-        <button type="submit">Add store</button>
+        </div>
+        <RoundedButton title="Add store" @click.native="addStore" />
       </form>
     </div>
   </div>
@@ -38,9 +41,16 @@
 
 <script>
 import axios from "axios";
+import RoundedButton from '../components/RoundedButton.vue'
+import ChevronLeft from "vue-material-design-icons/ChevronLeft.vue";
+
 
 export default {
   name: "AddStore",
+  components: {
+    RoundedButton,
+    ChevronLeft
+  },
   data() {
     return {
       individual: {},
@@ -64,6 +74,9 @@ export default {
         })
         .catch((err) => console.log(err));
     },
+    navigateToStores() {
+      this.$router.push("/my-stores");
+    },
     addStore() {
       let data = {
         name: this.name,
@@ -76,7 +89,7 @@ export default {
       axios
         .post("api/stores", data)
         .then(() => {
-          this.$router.push("/my-stores");
+          this.navigateToStores()
         })
         .catch((err) => console.log(err));
     },
@@ -85,5 +98,40 @@ export default {
 </script>
 
 <style lang="scss">
-@import "../styles/_variables.scss";
+@import "../styles/abstracts/_variables.scss";
+
+.header {
+  display: flex;
+  align-items: center;
+}
+
+.store-heading {
+  border: 1px solid black;
+  font-weight: bold;
+  font-size: 25px;
+  text-align: center;
+  background: none;
+  color: grey;
+  width: 100%;
+}
+
+.col-group {
+  display: flex;
+}
+
+textarea {
+  width: 200px;
+  height: 80px;
+}
+
+.chevron-left {
+  cursor: pointer;
+}
+
+@media (max-width: 800px) {
+  .col-group {
+    flex-direction: column;
+  }
+}
+
 </style>

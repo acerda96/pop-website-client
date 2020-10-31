@@ -10,7 +10,7 @@
       </div>
       <form class="submit" @submit.prevent="submit">
         <input type="text" v-model="email" placeholder="Email address" />
-        <button class="submit-btn" type="submit">Submit</button>
+        <button class="contact-btn" type="submit">Submit</button>
       </form>
     </div>
   </div>
@@ -42,7 +42,7 @@ export default {
 </script>
 
 <style lang="scss">
-@import "../styles/_variables.scss";
+@import "../styles/abstracts/_variables.scss";
 .not-ready {
   display: flex;
   justify-content: center;

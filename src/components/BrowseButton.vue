@@ -13,7 +13,7 @@ export default {
 </script>
 
 <style lang="scss">
-@import "../styles/_variables.scss";
+@import "../styles/abstracts/_variables.scss";
 
 .browse-btn-container {
   display: flex;

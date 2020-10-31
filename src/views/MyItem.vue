@@ -51,10 +51,9 @@ export default {
 </script>
 
 <style lang="scss">
-@import "../styles/_variables.scss";
+@import "../styles/abstracts/_variables.scss";
 
 .my-item {
-  background: white;
   display: flex;
   flex-direction: column;
   align-items: center;

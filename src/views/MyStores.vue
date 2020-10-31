@@ -1,20 +1,23 @@
 <template>
   <div class="my-stores">
-    <div class="stores">
+    <div class="stores" v-if="!isLoading">
       <div class="store" v-for="store in stores" :key="store.id">
         <router-link :to="'/my-stores/' + store._id">
-          {{ store.name }}
+          {{ store.name }}, {{ store.city }}
         </router-link>
       </div>
     </div>
-    <router-link to="/add-store">
-      <button>Add store</button>
+    <router-link to="/add-store" v-if="!isLoading">
+      <RoundedButton title="Add store" />
     </router-link>
+    <Loader v-if="isLoading" />
   </div>
 </template>
 
 <script>
 import axios from "axios";
+import RoundedButton from '../components/RoundedButton.vue'
+import Loader from '../components/Loader.vue'
 
 export default {
   name: "MyStores",
@@ -22,9 +25,15 @@ export default {
     return {
       individual: {},
       stores: [],
+      isLoading: null
     };
   },
+    components: {
+    RoundedButton,
+    Loader
+  },
   async mounted() {
+    this.isLoading = true;
     await this.setIndividual();
     this.getStores();
   },
@@ -42,6 +51,7 @@ export default {
         .get(`api/stores?userId=${this.individual._id}`)
         .then((res) => {
           this.stores = res.data;
+          this.isLoading = false;
         })
         .catch((err) => console.log(err));
     },
@@ -50,7 +60,7 @@ export default {
 </script>
 
 <style lang="scss">
-@import "../styles/_variables.scss";
+@import "../styles/abstracts/_variables.scss";
 
 .store {
   background: white;
@@ -58,11 +68,15 @@ export default {
   margin: 10px;
   border-radius: 10px;
   width: 200px;
+  height: 150px;
   text-align: center;
   cursor: pointer;
   a {
     color: black;
   }
+  box-shadow: 0 8px 6px -6px black;
+  display: flex;
+  align-items: flex-end;
 }
 
 .my-stores {
@@ -81,5 +95,10 @@ export default {
   justify-content: center;
   flex-wrap: wrap;
   max-width: 600px;
+}
+
+textarea {
+  border: none;
+  border-radius: 5px;
 }
 </style>

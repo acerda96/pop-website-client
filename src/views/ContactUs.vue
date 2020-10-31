@@ -13,7 +13,7 @@
           placeholder="Type your message here..."
           class="input-message"
         />
-        <button type="submit" class="submit-btn">Submit</button>
+        <button type="submit" class="contact-btn">Submit</button>
       </form>
     </div>
   </div>
@@ -54,7 +54,7 @@ export default {
 </script>
 
 <style lang="scss">
-@import "../styles/_variables.scss";
+@import "../styles/abstracts/_variables.scss";
 
 $box-padding: 10px;
 

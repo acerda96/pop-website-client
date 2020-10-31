@@ -1,15 +1,16 @@
 <template>
   <div class="my-store">
     <h2>{{ store.name }}</h2>
+    <hr />
     <p>{{ store.description }}</p>
     <router-link :to="'/my-stores/' + this.$route.params.storeId + '/add'">
-      <button>Add item</button>
+      <RoundedButton title="Add item" />
     </router-link>
-    <p v-if="isItemsLoading">Loading items...</p>
-    <div class="items-container">
+    <Loader v-if="isItemsLoading" />
+    <div class="items-container" v-if="!isItemsLoading" >
       <div class="item" v-for="item in items" :key="item.id">
         <router-link :to="'/my-stores/' + store._id + '/' + item._id">
-          <div>
+          <div class="item-heading">
             {{ item.name }}
           </div>
           <img
@@ -24,9 +25,15 @@
 
 <script>
 import axios from "axios";
+import Loader from '../components/Loader.vue'
+import RoundedButton from '../components/RoundedButton.vue'
 
 export default {
   name: "MyStore",
+  components: {
+    Loader,
+    RoundedButton
+  },
   data() {
     return {
       isItemsLoading: true,
@@ -74,10 +81,9 @@ export default {
 </script>
 
 <style lang="scss">
-@import "../styles/_variables.scss";
+@import "../styles/abstracts/_variables.scss";
 
 .my-store {
-  background: white;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -100,6 +106,11 @@ button {
 .item-thumbnail {
   width: 200px;
   height: 200px;
+}
+
+.item-heading {
+  text-align: left;
+  padding: 7px;
 }
 
 .items-container {

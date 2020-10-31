@@ -6,37 +6,50 @@
         @submit.prevent="addItem"
         enctype="multipart/form-data"
       >
-        <div class="register-heading">
-          Add item
+       <div class="header">
+          <ChevronLeft class="chevron-left" @click='navigateToItems'/>
+          <input class="store-heading" type="text" name="name" v-model="name" placeholder="Item name"/>
         </div>
-        <hr />
-        <div class="input-container">
-          <label for="name"> Name </label>
-          <input type="text" name="name" v-model="name" />
+        <hr style="width:50%" />
+        <div class="col-group">
+          <div>
+            <div class="input-container">
+              <label for="description"> Description </label>
+              <textarea class="description" type="text" name="description" v-model="description" />
+            </div>
+            <div class="fl">
+            <div class="input-container">
+              <label for="initialQuantity"> Quantity </label>
+              <input style="width: 80px;" type="text" name="initialQuantity" v-model="initialQuantity" />
+            </div>
+            <div class="input-container">
+              <label for="unitPrice"> Price </label>
+              <input style="width: 80px;" type="unitPrice" name="unitPrice" v-model="unitPrice" />
+            </div>
+          </div>
+          <div class="input-container">
+            <label for="type"> Type </label>
+            <select style="padding: 8px; border: none; border-radius: 5px;" v-model="type" @change="onChange">
+              <option value disabled>Select a type</option>
+              <option value="1">Bottoms</option>
+              <option value="2">Dresses</option>
+              <option value="3">Jewellery</option>
+              <option value="4">Shoes</option>
+              <option value="5">Tops</option>
+            </select>
+          </div>
         </div>
-        <div class="input-container">
-          <label for="description"> Description </label>
-          <input type="text" name="description" v-model="description" />
+          <div class="fl-cl">
+            <input ref="fileInput" type="file" @input="pickFile" />
+              <img
+                v-if="previewImage"
+                class="item-thumbnail"
+                v-bind:src="this.previewImage"
+              />
+          </div>
         </div>
-        <div class="input-container">
-          <label for="initialQuantity"> Initial Quantity </label>
-          <input type="text" name="initialQuantity" v-model="initialQuantity" />
-        </div>
-        <div class="input-container">
-          <label for="type"> Type </label>
-          <input type="text" name="type" v-model="type" />
-        </div>
-        <div class="input-container">
-          <label for="unitPrice"> Price </label>
-          <input type="unitPrice" name="unitPrice" v-model="unitPrice" />
-        </div>
-        <img
-          v-if="previewImage"
-          class="item-thumbnail"
-          v-bind:src="this.previewImage"
-        />
-        <input ref="fileInput" type="file" @input="pickFile" />
-        <button type="submit">Add item</button>
+
+        <RoundedButton title="Add item" @click.native="addItem" />
       </form>
     </div>
   </div>
@@ -45,9 +58,15 @@
 
 <script>
 import axios from "axios";
+import RoundedButton from '../components/RoundedButton.vue'
+import ChevronLeft from "vue-material-design-icons/ChevronLeft.vue";
 
 export default {
   name: "AddStore",
+  components: {
+    RoundedButton,
+    ChevronLeft
+  },
   data() {
     return {
       individual: {},
@@ -72,6 +91,9 @@ export default {
         })
         .catch((err) => console.log(err));
     },
+    navigateToItems() {
+      this.$router.push(`/my-stores/${this.$route.params.storeId}`);
+    },
     addItem() {
       let values = {
         name: this.name,
@@ -93,7 +115,7 @@ export default {
       axios
         .post("api/items", data)
         .then(() => {
-          this.$router.push(`/my-stores/${this.$route.params.storeId}`);
+          this.navigateToItems();
         })
         .catch((err) => console.log(err));
     },
@@ -115,7 +137,7 @@ export default {
 </script>
 
 <style lang="scss">
-@import "../styles/_variables.scss";
+@import "../styles/abstracts/_variables.scss";
 
 .imagePreviewWrapper {
   width: 150px;
@@ -126,4 +148,11 @@ export default {
   background-size: cover;
   background-position: center center;
 }
+
+@media (max-width: 800px) {
+  select {
+    width: 200px;
+  }
+}
+
 </style>

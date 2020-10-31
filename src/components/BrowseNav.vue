@@ -46,7 +46,7 @@ export default {
 </script>
 
 <style lang="scss">
-@import "../styles/_variables.scss";
+@import "../styles/abstracts/_variables.scss";
 @import "vue-select/src/scss/vue-select.scss";
 
 $input-height: 30px;
