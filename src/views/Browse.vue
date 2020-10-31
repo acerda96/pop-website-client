@@ -1,21 +1,23 @@
 <template>
   <div class="browse">
     <BrowseNav @search="search" />
-    <p v-if="isItemsLoading">Loading items...</p>
-    <div v-if="!isItemsLoading" class="items-container">
-      <div class="item" v-for="item in items" :key="item._id">
-        <router-link :to="'/browse/' + item._id">
-          <div class="item-details">
-            {{ item.name }}
-            {{ "£" + item.unitPrice }}
-            <HeartOutline />
-            <HeartFilled />
-          </div>
-          <img
-            class="item-thumbnail"
-            v-bind:src="'data:image/jpeg;base64,' + item.images[0].buffer"
-          />
-        </router-link>
+    <div class="browse__body">
+      <Loader v-if="isLoading" />
+      <div v-if="!isLoading" class="browse__items">
+        <div class="browse__item" v-for="item in items" :key="item._id">
+          <router-link :to="'/browse/' + item._id">
+            <div class="browse__item-details">
+              {{ item.name }}
+              {{ "£" + item.unitPrice }}
+              <HeartOutline />
+              <HeartFilled />
+            </div>
+            <img
+              class="browse__item-thumbnail"
+              v-bind:src="'data:image/jpeg;base64,' + item.images[0].buffer"
+            />
+          </router-link>
+        </div>
       </div>
     </div>
   </div>
@@ -26,13 +28,14 @@ import BrowseNav from "../components/BrowseNav";
 import HeartOutline from "vue-material-design-icons/HeartOutline.vue";
 import HeartFilled from "vue-material-design-icons/Heart.vue";
 import axios from "axios";
+import Loader from "../components/Loader.vue";
 
 export default {
   name: "Browse",
-  components: { BrowseNav, HeartOutline, HeartFilled },
+  components: { BrowseNav, HeartOutline, HeartFilled, Loader },
   data() {
     return {
-      isItemsLoading: true,
+      isLoading: true,
       individual: {},
       items: [],
     };
@@ -55,40 +58,20 @@ export default {
         .get("api/items")
         .then((res) => {
           this.items = res.data;
-          this.isItemsLoading = false;
+          this.isLoading = false;
         })
         .catch((err) => console.log(err));
     },
     search(sortCriterion, type) {
-      this.isItemsLoading = true;
+      this.isLoading = true;
       axios
         .get(`api/items?sortCriterion=${sortCriterion}&type=${type}`)
         .then((res) => {
           this.items = res.data;
-          this.isItemsLoading = false;
+          this.isLoading = false;
         })
         .catch((err) => console.log(err));
     },
   },
 };
 </script>
-
-<style lang="scss">
-@import "../styles/abstracts/_variables.scss";
-
-.browse {
-  background: white;
-  min-height: 500px;
-
-  p {
-    text-align: center;
-  }
-}
-
-.item-details {
-  display: flex;
-  align-items: center;
-  color: black;
-  justify-content: space-evenly;
-}
-</style>

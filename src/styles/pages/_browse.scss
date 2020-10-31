@@ -1,0 +1,32 @@
+.browse {
+  background: white;
+  min-height: 500px;
+  width: 100%;
+}
+
+.browse__item-details {
+  display: flex;
+  align-items: center;
+  color: black;
+  justify-content: space-evenly;
+}
+
+.browse__item-thumbnail {
+  width: 200px;
+  height: 200px;
+}
+
+.browse__body {
+  display: flex;
+  justify-content: center;
+}
+
+.browse__items {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.browse__item {
+  padding: 20px;
+}
