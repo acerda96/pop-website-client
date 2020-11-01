@@ -42,7 +42,6 @@ export default {
         return this.newDate;
       },
       set(val) {
-        console.log(val);
         this.$emit("update:newDate", val);
       },
     },
@@ -51,7 +50,6 @@ export default {
         return this.newStartTime;
       },
       set(val) {
-        console.log(val);
         this.$emit("update:newStartTime", val);
       },
     },
@@ -65,7 +63,6 @@ export default {
         return this.newEndTime;
       },
       set(val) {
-        console.log(val);
         this.$emit("update:newEndTime", val);
       },
     },

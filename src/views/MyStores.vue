@@ -4,7 +4,7 @@
     <div class="my-stores__stores" v-if="!isLoading">
       <div class="my-stores__store" v-for="store in stores" :key="store.id">
         <router-link :to="'/my-stores/' + store._id">
-          {{ store.name }}, {{ store.city }}
+          <p>{{ store.name }}, {{ store.city }}</p>
         </router-link>
       </div>
     </div>

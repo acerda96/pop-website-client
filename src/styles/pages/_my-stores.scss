@@ -10,6 +10,9 @@
   justify-content: center;
   flex-wrap: wrap;
   max-width: 600px;
+  p {
+    font-size: 17px;
+  }
 }
 
 .my-stores__store {
@@ -17,14 +20,13 @@
   padding: 20px;
   margin: 10px;
   border-radius: 10px;
-  width: 200px;
-  height: 150px;
+  min-width: 200px;
   text-align: center;
+  box-shadow: 0 8px 6px -6px black;
+  display: flex;
+  align-items: flex-end;
   cursor: pointer;
   a {
     color: black;
   }
-  box-shadow: 0 8px 6px -6px black;
-  display: flex;
-  align-items: flex-end;
 }

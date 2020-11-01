@@ -52,6 +52,12 @@
             :newStartTime.sync="newStartTime"
             :newEndTime.sync="newEndTime"
           />
+          <div v-for="(date, index) in store.dates" :key="index">
+            <p>
+              {{ date.formatted.date }}, {{ date.formatted.startTime }} -
+              {{ date.formatted.endTime }}
+            </p>
+          </div>
         </div>
         <hr style="width:100%; border:1px dashed grey" />
         <div class="my-store__sec">
@@ -89,6 +95,7 @@
 import axios from "axios";
 import Loader from "../components/Loader.vue";
 import NewDate from "../components/NewDate.vue";
+import moment from "moment";
 
 export default {
   name: "MyStore",
@@ -162,15 +169,26 @@ export default {
       const startDate = new Date(this.newDate).getTime() + startTime;
       const endDate = new Date(this.newDate).getTime() + endTime;
 
-      const data = {
-        date: {
+      const formattedDate = moment(startDate).format("ddd Do MMM, YYYY");
+      const formattedStartTime = moment(startDate).format("HH:mm");
+      const formattedEndTime = moment(endDate).format("HH:mm");
+
+      const date = {
+        id: Math.random(),
+        iso: {
           start: new Date(startDate).toISOString(),
           end: new Date(endDate).toISOString(),
+        },
+        formatted: {
+          date: formattedDate,
+          startTime: formattedStartTime,
+          endTime: formattedEndTime,
         },
       };
 
       axios
-        .put(`api/stores/${this.$route.params.storeId}`, data)
+        .put(`api/stores/${this.$route.params.storeId}`, { date: date })
+        .then(() => this.store.dates.push(date))
         .catch((err) => console.log(err));
     },
   },

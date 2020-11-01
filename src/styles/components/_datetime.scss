@@ -1,3 +1,22 @@
+$theme: black;
+
+.vdatetime-popup__header {
+  background: $theme !important;
+}
+
+.vdatetime-popup__actions__button {
+  color: $theme !important;
+}
+
+.vdatetime-calendar__month__day--selected,
+.vdatetime-calendar__month__day {
+  color: $theme !important;
+}
+
+.vdatetime-time-picker__item .vdatetime-time-picker__item--selected {
+  color: $theme !important;
+}
+
 .datetime-picker {
   display: flex;
   flex-direction: column;
