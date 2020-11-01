@@ -9,7 +9,7 @@ import MyStores from "./views/MyStores.vue";
 import MyStore from "./views/MyStore.vue";
 import AddStore from "./views/AddStore.vue";
 import AddItem from "./views/AddItem.vue";
-import MyItem from "./views/MyItem.vue";
+import Item from "./views/Item.vue";
 import Register from "./views/Register.vue";
 import PrivacyPolicy from "./views/PrivacyPolicy.vue";
 import store from "./store.js";
@@ -75,8 +75,8 @@ let router = new Router({
     },
     {
       path: "/my-stores/:storeId/:itemId",
-      name: "my-item",
-      component: MyItem,
+      name: "item",
+      component: Item,
       meta: {
         requiresAuth: true,
       },
@@ -100,7 +100,7 @@ let router = new Router({
     {
       path: "/browse/:itemId",
       name: "browse-item",
-      component: MyItem,
+      component: Item,
     },
   ],
   scrollBehavior(to) {

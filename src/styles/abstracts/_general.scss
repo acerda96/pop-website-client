@@ -65,3 +65,15 @@ a {
   width: 100%;
   min-height: 500px;
 }
+
+@media (max-width: 600px) {
+  h2 {
+    font-size: 18px;
+  }
+  h4 {
+    font-size: 13px;
+  }
+  p {
+    font-size: 13px;
+  }
+}
