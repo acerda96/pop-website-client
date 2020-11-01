@@ -34,7 +34,7 @@
             v-model="confirmPassword"
           />
         </div>
-        <button class="rounded-btn" type="submit">Sign up</button>
+        <button class="square-btn" type="submit">Sign up</button>
       </form>
     </div>
   </div>

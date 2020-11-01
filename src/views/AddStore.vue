@@ -30,8 +30,8 @@
           <input type="city" name="city" v-model="city" />
         </div>
         <div class="add__buttons-ctn">
-          <button class="rounded-btn" @click="navigateToStores">Back</button>
-          <button class="rounded-btn" type="submit">Add store</button>
+          <button class="square-btn" @click="navigateToStores">Back</button>
+          <button class="square-btn" type="submit">Add store</button>
         </div>
       </form>
     </div>

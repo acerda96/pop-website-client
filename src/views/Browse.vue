@@ -5,6 +5,12 @@
       <Loader v-if="isLoading" />
       <div v-if="!isLoading" class="browse__items">
         <div class="browse__item" v-for="item in items" :key="item._id">
+          <router-link :to="'/browse/' + item._id">
+            <img
+              class="browse__item-thumbnail"
+              v-bind:src="'data:image/jpeg;base64,' + item.images[0].buffer"
+            />
+          </router-link>
           <div class="browse__item-details">
             {{ item.name }}
             {{ "£" + item.unitPrice }}
@@ -13,12 +19,6 @@
               @click.native="toggleSaved(item._id)"
             />
           </div>
-          <router-link :to="'/browse/' + item._id">
-            <img
-              class="browse__item-thumbnail"
-              v-bind:src="'data:image/jpeg;base64,' + item.images[0].buffer"
-            />
-          </router-link>
         </div>
       </div>
     </div>

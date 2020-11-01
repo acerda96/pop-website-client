@@ -14,7 +14,7 @@
           <label for="password"> Password </label>
           <input type="password" name="password" v-model="password" />
         </div>
-        <button type="submit" class="rounded-btn">Login</button>
+        <button type="submit" class="square-btn">Login</button>
         <div class="basic-form__links">
           <a>Forgotten your password?</a>
           <router-link to="/sign-up"

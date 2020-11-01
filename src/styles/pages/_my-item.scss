@@ -1,8 +1,38 @@
 .my-item-ctn {
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
   margin: 20px;
   background: white;
   width: 80%;
+  // min-height: 200px;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+
+  h4 {
+    margin: 0;
+  }
+}
+
+.my-item__thumbnail {
+  width: 250px;
+  height: 250px;
+  padding: 50px 0px 0px 50px;
+}
+
+.my-item__desc {
+  display: flex;
+  flex-direction: column;
+  width: 300px;
+  margin-top: 20px;
   border-radius: 10px;
+  padding: 20px;
+}
+
+.my-item__details {
+  width: 100%;
+}
+
+.my-item__title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }

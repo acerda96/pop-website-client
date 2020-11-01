@@ -97,6 +97,11 @@ let router = new Router({
         requiresAuth: true,
       },
     },
+    {
+      path: "/browse/:itemId",
+      name: "browse-item",
+      component: MyItem,
+    },
   ],
   scrollBehavior(to) {
     if (to.hash) {

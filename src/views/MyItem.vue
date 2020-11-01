@@ -2,14 +2,22 @@
   <div class="fl-cn">
     <div class="my-item-ctn">
       <Loader v-if="isLoading" />
-      <div class="my-store__details" v-if="!isLoading">
-        <h2>{{ item.name }}</h2>
-        <hr style="width:50%" />
-        <p>{{ item.description }}</p>
-        <img
-          class="my-store__item-thumbnail"
-          v-bind:src="'data:image/jpeg;base64,' + item.images[0].buffer"
-        />
+      <img
+        class="my-item__thumbnail"
+        v-bind:src="'data:image/jpeg;base64,' + item.images[0].buffer"
+      />
+      <div class="my-item__desc" v-if="!isLoading">
+        <div class="my-item__title">
+          <h2>{{ item.name }}, £{{ item.unitPrice }}</h2>
+          <button class="square-btn">Edit</button>
+        </div>
+        <hr style="width:100%" />
+        <div class="my-item__details">
+          <h4>Description</h4>
+          <p>{{ item.description }}</p>
+          <h4>Initial quantity</h4>
+          <p>{{ item.initialQuantity }}</p>
+        </div>
       </div>
     </div>
   </div>

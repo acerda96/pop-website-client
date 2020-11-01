@@ -68,8 +68,8 @@
           />
         </div>
         <div class="add__buttons-ctn">
-          <button class="rounded-btn" @click="navigateToItems">Back</button>
-          <button class="rounded-btn" type="submit">Add item</button>
+          <button class="square-btn" @click="navigateToItems">Back</button>
+          <button class="square-btn" type="submit">Add item</button>
         </div>
       </form>
     </div>

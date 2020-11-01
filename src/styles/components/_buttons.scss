@@ -8,7 +8,7 @@
   align-self: center;
 }
 
-.rounded-btn {
+.square-btn {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -22,11 +22,11 @@
   margin: 3px;
 }
 
-.rounded-btn--confirm {
+.square-btn--confirm {
   background: rgb(191, 247, 180);
 }
 
-.rounded-btn--cancel {
+.square-btn--cancel {
   background: rgb(252, 184, 179);
 }
 
@@ -63,7 +63,7 @@
 }
 
 @media (max-width: 500px) {
-  .rounded-btn {
+  .square-btn {
     width: 80px;
   }
 }

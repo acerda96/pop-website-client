@@ -2,7 +2,7 @@
   <div id="home">
     <div class="home__title">
       <div class="home__title-txt">Your Local Marketplace</div>
-      <router-link to="/app">
+      <router-link to="/browse">
         <BrowseButton />
       </router-link>
     </div>

@@ -28,7 +28,10 @@
 }
 
 .browse__item {
-  padding: 20px;
+  border: 1px solid grey;
+  margin: 20px;
+  cursor: pointer;
+  box-shadow: 0 8px 6px -6px rgb(121, 120, 120);
 }
 
 .browse__heart-icon {

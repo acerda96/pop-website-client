@@ -5,7 +5,7 @@
       <div class="my-store__details" v-if="!isLoading">
         <div class="my-store__heading">
           <h2>{{ store.name }}</h2>
-          <button class="rounded-btn">Edit</button>
+          <button class="square-btn">Edit</button>
         </div>
         <hr style="width:100%; border:1px dashed grey" />
         <div class="my-store__sec">
@@ -25,7 +25,7 @@
           <div class="my-store__heading">
             <h4>Dates</h4>
             <button
-              class="rounded-btn"
+              class="square-btn"
               @click="toggleNewDate"
               v-if="!isNewDateActive"
             >
@@ -33,13 +33,13 @@
             </button>
             <div v-if="isNewDateActive" class="my-store__add-date-btns">
               <button
-                class="rounded-btn rounded-btn--confirm"
+                class="square-btn square-btn--confirm"
                 @click="confirmNewDate"
               >
                 Confirm
               </button>
               <button
-                class="rounded-btn rounded-btn--cancel"
+                class="square-btn square-btn--cancel"
                 @click="toggleNewDate"
               >
                 Cancel
@@ -66,7 +66,7 @@
             <router-link
               :to="'/my-stores/' + this.$route.params.storeId + '/add'"
             >
-              <button class="rounded-btn">Add item</button>
+              <button class="square-btn">Add item</button>
             </router-link>
           </div>
           <div class="my-store__items">
