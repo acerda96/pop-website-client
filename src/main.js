@@ -6,10 +6,13 @@ import axios from "axios";
 import VueMeta from "vue-meta";
 import Vuex from "vuex";
 import store from "./store";
+import { Datetime } from "vue-datetime";
 
 Vue.use(Vuex);
 
 Vue.use(VueMeta);
+
+Vue.component("datetime", Datetime);
 
 Vue.config.productionTip = false;
 

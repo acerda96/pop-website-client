@@ -1,4 +1,5 @@
 @import "./abstracts/_variables";
+@import "../node_modules/vue-datetime/dist/vue-datetime.css";
 @import "./abstracts/_general.scss";
 
 @import "./layout/_grid.scss";
@@ -9,6 +10,7 @@
 @import "./components/_buttons.scss";
 @import "./components/_loader.scss";
 @import "./components/_browse-nav.scss";
+@import "./components/_datetime.scss";
 
 @import "./pages/_home.scss";
 @import "./pages/_contact.scss";

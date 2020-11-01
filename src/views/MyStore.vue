@@ -6,10 +6,17 @@
         <h2>{{ store.name }}</h2>
         <hr style="width:50%" />
         <p>{{ store.description }}</p>
-        <router-link :to="'/my-stores/' + this.$route.params.storeId + '/add'">
-          <button class="rounded-btn">Add item</button>
-        </router-link>
-        <div class="my-store__items" v-if="!isLoading">
+        <div>
+          <router-link
+            :to="'/my-stores/' + this.$route.params.storeId + '/add'"
+          >
+            <button class="rounded-btn">Add item</button>
+          </router-link>
+          <button class="rounded-btn">Add date</button>
+          <button class="rounded-btn">Edit</button>
+        </div>
+        <new-date />
+        <div class="my-store__items">
           <div class="my-store__item" v-for="item in items" :key="item.id">
             <router-link :to="'/my-stores/' + store._id + '/' + item._id">
               <div class="my-store__item-name">
@@ -30,11 +37,13 @@
 <script>
 import axios from "axios";
 import Loader from "../components/Loader.vue";
+import NewDate from "../components/NewDate.vue";
 
 export default {
   name: "MyStore",
   components: {
     Loader,
+    NewDate,
   },
   data() {
     return {
@@ -47,7 +56,7 @@ export default {
   async mounted() {
     await this.setIndividual();
     this.getStore();
-    this.getItems();
+    // this.getItems();
   },
   methods: {
     async setIndividual() {
@@ -63,6 +72,7 @@ export default {
         .get(`api/stores/${this.$route.params.storeId}`)
         .then((res) => {
           this.store = res.data;
+          this.isLoading = false;
         })
         .catch((err) => console.log(err));
     },

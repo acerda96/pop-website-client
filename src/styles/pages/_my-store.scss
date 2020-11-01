@@ -39,3 +39,9 @@
   flex-wrap: wrap;
   justify-content: center;
 }
+
+@media (max-width: 500px) {
+  .my-store-ctn {
+    width: 95%;
+  }
+}

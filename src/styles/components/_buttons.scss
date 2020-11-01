@@ -51,3 +51,9 @@
   width: 180px;
   height: 33px;
 }
+
+@media (max-width: 500px) {
+  .rounded-btn {
+    width: 80px;
+  }
+}

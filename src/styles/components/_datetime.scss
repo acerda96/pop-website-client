@@ -1,0 +1,57 @@
+.datetime-picker {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  margin: 14px;
+
+  border: 1px solid black;
+  border-radius: 20px;
+
+  input {
+    border: none;
+    width: 100px;
+    text-align: right;
+    font-weight: bold;
+    cursor: pointer;
+  }
+  svg {
+    width: 20px;
+    padding: 10px;
+    cursor: pointer;
+  }
+  p {
+    font-size: 14px;
+    margin: 0px;
+  }
+
+  .datetime-picker__col {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+  }
+
+  .datetime-picker__dates {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin: 10px;
+  }
+
+  .datetime-picker__icons {
+    display: flex;
+    justify-content: space-evenly;
+    width: 100%;
+  }
+}
+
+@media (max-width: 500px) {
+  // .datetime-picker__dates {
+  //   flex-direction: column;
+  // }
+  .datetime-picker {
+    input {
+      width: 70px;
+    }
+  }
+}
