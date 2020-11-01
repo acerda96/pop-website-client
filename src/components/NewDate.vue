@@ -46,12 +46,39 @@ export default {
     // Check,
     // Close,
   },
+  computed: {
+    date: {
+      get() {
+        return this.newDate;
+      },
+      set(val) {
+        console.log(val);
+        this.$emit("update:newDate", val);
+      },
+    },
+    startTime: {
+      get() {
+        return this.newStartTime;
+      },
+      set(val) {
+        console.log(val);
+        this.$emit("update:newStartTime", val);
+      },
+    },
+    endTime: {
+      get() {
+        return this.newEndTime;
+      },
+      set(val) {
+        console.log(val);
+        this.$emit("update:newEndTime", val);
+      },
+    },
+  },
+  props: ["newDate", "newStartTime", "newEndTime"],
   data() {
     return {
       currentDateTime: new Date().toISOString(),
-      date: new Date().toISOString(),
-      startTime: new Date().toISOString(),
-      endTime: new Date().toISOString(),
     };
   },
 };

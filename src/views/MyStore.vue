@@ -35,7 +35,12 @@
             Cancel
           </button>
         </div>
-        <new-date v-if="isNewDateActive" />
+        <new-date
+          v-if="isNewDateActive"
+          :newDate.sync="newDate"
+          :newStartTime.sync="newStartTime"
+          :newEndTime.sync="newEndTime"
+        />
         <div class="my-store__items">
           <div class="my-store__item" v-for="item in items" :key="item.id">
             <router-link :to="'/my-stores/' + store._id + '/' + item._id">
@@ -72,6 +77,9 @@ export default {
       store: [],
       items: [],
       isNewDateActive: false,
+      newDate: new Date().toISOString(),
+      newStartTime: new Date().toISOString(),
+      newEndTime: new Date().toISOString(),
     };
   },
   async mounted() {
@@ -110,6 +118,11 @@ export default {
     },
     toggleNewDate() {
       this.isNewDateActive = !this.isNewDateActive;
+    },
+    confirmNewDate() {
+      console.log(this.newDate);
+      console.log(this.newStartTime);
+      console.log(this.newEndTime);
     },
   },
 };
