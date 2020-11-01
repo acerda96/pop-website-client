@@ -1,17 +1,19 @@
 .datetime-picker {
   display: flex;
   flex-direction: column;
+  transition: opacity 0.25s ease-in-out;
   justify-content: space-around;
   align-items: center;
   margin: 14px;
-
+  max-width: 500px;
   border: 1px solid black;
-  border-radius: 20px;
+  align-self: center;
 
   input {
     border: none;
     width: 100px;
     text-align: right;
+    font-size: 16px;
     font-weight: bold;
     cursor: pointer;
   }
@@ -22,6 +24,7 @@
   }
   p {
     font-size: 14px;
+    font-weight: bold;
     margin: 0px;
   }
 
@@ -46,12 +49,13 @@
 }
 
 @media (max-width: 500px) {
-  // .datetime-picker__dates {
-  //   flex-direction: column;
-  // }
   .datetime-picker {
+    p {
+      font-size: 14px;
+    }
     input {
       width: 70px;
+      font-size: 13px;
     }
   }
 }

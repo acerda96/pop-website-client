@@ -1,6 +1,6 @@
 body {
   // background-image: url("./images/background.jpg");
-  background-color: rgb(219, 184, 204);
+  background-color: rgb(216, 216, 216);
   //   background-attachment: fixed;
   font-family: $main-font;
   background-size: 100%;
@@ -43,6 +43,7 @@ button {
 a {
   color: black;
   cursor: pointer;
+  text-decoration: none;
 }
 
 .chevron-left {

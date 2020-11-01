@@ -4,33 +4,67 @@
   margin: 20px;
   background: white;
   width: 80%;
-  border-radius: 10px;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  h4 {
+    margin: 10px 0 0 0;
+  }
+  p {
+    margin: 2px;
+  }
+}
+
+.my-store__heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.my-store__sec {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  width: 100%;
 }
 
 .my-store__details {
   display: flex;
   flex-direction: column;
+  width: 80%;
   align-items: center;
   margin-top: 20px;
   border-radius: 10px;
 }
 
+.my-store__add-date-btns {
+  display: flex;
+  justify-content: flex-end;
+}
+
+$item-size: 160px;
+
 .my-store__item {
-  padding: 30px;
   margin: 10px;
-  border-radius: 10px;
-  width: 200px;
+  width: $item-size;
   text-align: center;
   cursor: pointer;
+  box-shadow: 0 8px 6px -6px rgb(121, 120, 120);
+  border: 1px solid grey;
+
+  a {
+    color: black;
+    text-decoration: none;
+  }
 }
 
 .my-store__item-thumbnail {
-  width: 200px;
-  height: 200px;
+  width: $item-size;
+  height: $item-size;
 }
 
 .my-store__item-name {
-  text-align: left;
+  display: flex;
+  justify-content: space-between;
   padding: 7px;
 }
 
@@ -38,6 +72,7 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  padding-bottom: 30px;
 }
 
 @media (max-width: 500px) {

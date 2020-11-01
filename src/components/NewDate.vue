@@ -23,29 +23,19 @@
         <p>End time</p>
         <datetime
           class="datetime-picker__time"
-          :min-datetime="currentDateTime"
+          :min-datetime="startTime"
           type="time"
           v-model="endTime"
         />
       </div>
     </div>
-    <!-- <div class="datetime-picker__icons">
-      <Check />
-      <Close />
-    </div> -->
   </div>
 </template>
 
 <script>
-// import Check from "vue-material-design-icons/Check.vue";
-// import Close from "vue-material-design-icons/Close.vue";
-
 export default {
   name: "BrowseButton",
-  components: {
-    // Check,
-    // Close,
-  },
+  components: {},
   computed: {
     date: {
       get() {
@@ -67,6 +57,11 @@ export default {
     },
     endTime: {
       get() {
+        if (this.newStartTime > this.newEndTime) {
+          this.$emit("update:newEndTime", this.newStartTime);
+          return this.newStartTime;
+        }
+
         return this.newEndTime;
       },
       set(val) {

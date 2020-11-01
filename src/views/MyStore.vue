@@ -3,55 +3,81 @@
     <div class="my-store-ctn">
       <Loader v-if="isLoading" />
       <div class="my-store__details" v-if="!isLoading">
-        <h2>{{ store.name }}</h2>
-        <hr style="width:200px" />
-        <p>{{ store.description }}</p>
-        <div>
-          <router-link
-            :to="'/my-stores/' + this.$route.params.storeId + '/add'"
-          >
-            <button class="rounded-btn">Add item</button>
-          </router-link>
+        <div class="my-store__heading">
+          <h2>{{ store.name }}</h2>
           <button class="rounded-btn">Edit</button>
         </div>
-        <button
-          class="rounded-btn"
-          @click="toggleNewDate"
-          v-if="!isNewDateActive"
-        >
-          Add date
-        </button>
-        <div v-if="isNewDateActive">
-          <button
-            class="rounded-btn rounded-btn--confirm"
-            @click="confirmNewDate"
-          >
-            Confirm date
-          </button>
-          <button
-            class="rounded-btn rounded-btn--cancel"
-            @click="toggleNewDate"
-          >
-            Cancel
-          </button>
+        <hr style="width:100%; border:1px dashed grey" />
+        <div class="my-store__sec">
+          <h4>Description</h4>
+          <p>{{ store.description }}</p>
         </div>
-        <new-date
-          v-if="isNewDateActive"
-          :newDate.sync="newDate"
-          :newStartTime.sync="newStartTime"
-          :newEndTime.sync="newEndTime"
-        />
-        <div class="my-store__items">
-          <div class="my-store__item" v-for="item in items" :key="item.id">
-            <router-link :to="'/my-stores/' + store._id + '/' + item._id">
-              <div class="my-store__item-name">
-                {{ item.name }}
-              </div>
-              <img
-                class="my-store__item-thumbnail"
-                v-bind:src="'data:image/jpeg;base64,' + item.images[0].buffer"
-              />
+        <hr style="width:100%; border:1px dashed grey" />
+        <div class="my-store__sec">
+          <h4>Location</h4>
+          <p>{{ store.addressLine1 }},</p>
+          <p v-if="store.addressLine2">{{ store.addressLine2 }},</p>
+          <p>{{ store.postcode }},</p>
+          <p>{{ store.city }}</p>
+        </div>
+        <hr style="width:100%; border:1px dashed grey" />
+        <div class="my-store__sec">
+          <div class="my-store__heading">
+            <h4>Dates</h4>
+            <button
+              class="rounded-btn"
+              @click="toggleNewDate"
+              v-if="!isNewDateActive"
+            >
+              Add date
+            </button>
+            <div v-if="isNewDateActive" class="my-store__add-date-btns">
+              <button
+                class="rounded-btn rounded-btn--confirm"
+                @click="confirmNewDate"
+              >
+                Confirm
+              </button>
+              <button
+                class="rounded-btn rounded-btn--cancel"
+                @click="toggleNewDate"
+              >
+                Cancel
+              </button>
+            </div>
+          </div>
+          <new-date
+            v-if="isNewDateActive"
+            :newDate.sync="newDate"
+            :newStartTime.sync="newStartTime"
+            :newEndTime.sync="newEndTime"
+          />
+        </div>
+        <hr style="width:100%; border:1px dashed grey" />
+        <div class="my-store__sec">
+          <div class="my-store__heading">
+            <h4>Items</h4>
+            <router-link
+              :to="'/my-stores/' + this.$route.params.storeId + '/add'"
+            >
+              <button class="rounded-btn">Add item</button>
             </router-link>
+          </div>
+          <div class="my-store__items">
+            <div class="my-store__item" v-for="item in items" :key="item.id">
+              <router-link :to="'/my-stores/' + store._id + '/' + item._id">
+                <img
+                  class="my-store__item-thumbnail"
+                  v-bind:src="'data:image/jpeg;base64,' + item.images[0].buffer"
+                />
+              </router-link>
+              <div class="my-store__item-name">
+                <div>
+                  {{ item.name }}
+                </div>
+                <div>£{{ item.unitPrice }}</div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -74,7 +100,7 @@ export default {
     return {
       isLoading: true,
       individual: {},
-      store: [],
+      store: null,
       items: [],
       isNewDateActive: false,
       newDate: new Date().toISOString(),
@@ -85,7 +111,7 @@ export default {
   async mounted() {
     await this.setIndividual();
     this.getStore();
-    // this.getItems();
+    this.getItems();
   },
   methods: {
     async setIndividual() {
@@ -120,9 +146,32 @@ export default {
       this.isNewDateActive = !this.isNewDateActive;
     },
     confirmNewDate() {
-      console.log(this.newDate);
-      console.log(this.newStartTime);
-      console.log(this.newEndTime);
+      this.putDate();
+
+      this.isNewDateActive = false;
+    },
+    putDate() {
+      const startTime =
+        new Date(this.newStartTime).getTime() -
+        new Date(this.newStartTime).setHours(0, 0, 0, 0);
+
+      const endTime =
+        new Date(this.newEndTime).getTime() -
+        new Date(this.newEndTime).setHours(0, 0, 0, 0);
+
+      const startDate = new Date(this.newDate).getTime() + startTime;
+      const endDate = new Date(this.newDate).getTime() + endTime;
+
+      const data = {
+        date: {
+          start: new Date(startDate).toISOString(),
+          end: new Date(endDate).toISOString(),
+        },
+      };
+
+      axios
+        .put(`api/stores/${this.$route.params.storeId}`, data)
+        .catch((err) => console.log(err));
     },
   },
 };
