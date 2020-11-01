@@ -29,22 +29,22 @@
         />
       </div>
     </div>
-    <div class="datetime-picker__icons">
+    <!-- <div class="datetime-picker__icons">
       <Check />
       <Close />
-    </div>
+    </div> -->
   </div>
 </template>
 
 <script>
-import Check from "vue-material-design-icons/Check.vue";
-import Close from "vue-material-design-icons/Close.vue";
+// import Check from "vue-material-design-icons/Check.vue";
+// import Close from "vue-material-design-icons/Close.vue";
 
 export default {
   name: "BrowseButton",
   components: {
-    Check,
-    Close,
+    // Check,
+    // Close,
   },
   data() {
     return {

@@ -18,6 +18,15 @@
   width: 100px;
   text-align: center;
   font-weight: bold;
+  margin: 3px;
+}
+
+.rounded-btn--confirm {
+  background: rgb(191, 247, 180);
+}
+
+.rounded-btn--cancel {
+  background: rgb(252, 184, 179);
 }
 
 .browse-btn__outer {

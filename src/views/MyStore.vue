@@ -4,7 +4,7 @@
       <Loader v-if="isLoading" />
       <div class="my-store__details" v-if="!isLoading">
         <h2>{{ store.name }}</h2>
-        <hr style="width:50%" />
+        <hr style="width:200px" />
         <p>{{ store.description }}</p>
         <div>
           <router-link
@@ -12,10 +12,30 @@
           >
             <button class="rounded-btn">Add item</button>
           </router-link>
-          <button class="rounded-btn">Add date</button>
           <button class="rounded-btn">Edit</button>
         </div>
-        <new-date />
+        <button
+          class="rounded-btn"
+          @click="toggleNewDate"
+          v-if="!isNewDateActive"
+        >
+          Add date
+        </button>
+        <div v-if="isNewDateActive">
+          <button
+            class="rounded-btn rounded-btn--confirm"
+            @click="confirmNewDate"
+          >
+            Confirm date
+          </button>
+          <button
+            class="rounded-btn rounded-btn--cancel"
+            @click="toggleNewDate"
+          >
+            Cancel
+          </button>
+        </div>
+        <new-date v-if="isNewDateActive" />
         <div class="my-store__items">
           <div class="my-store__item" v-for="item in items" :key="item.id">
             <router-link :to="'/my-stores/' + store._id + '/' + item._id">
@@ -51,6 +71,7 @@ export default {
       individual: {},
       store: [],
       items: [],
+      isNewDateActive: false,
     };
   },
   async mounted() {
@@ -86,6 +107,9 @@ export default {
           this.isLoading = false;
         })
         .catch((err) => console.log(err));
+    },
+    toggleNewDate() {
+      this.isNewDateActive = !this.isNewDateActive;
     },
   },
 };
