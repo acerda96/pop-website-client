@@ -1,6 +1,5 @@
 <template>
   <div class="browse">
-    <BrowseNav @search="search" />
     <div class="browse__body">
       <Loader v-if="isLoading" />
       <div v-if="!isLoading" class="browse__items">
@@ -27,13 +26,12 @@
 
 <script>
 import axios from "axios";
-import BrowseNav from "../components/BrowseNav";
-import HeartIcon from "../components/HeartIcon";
 import Loader from "../components/Loader.vue";
+import HeartIcon from "../components/HeartIcon";
 
 export default {
-  name: "Browse",
-  components: { BrowseNav, HeartIcon, Loader },
+  name: "SavedItems",
+  components: { Loader, HeartIcon },
   data() {
     return {
       isLoading: true,
@@ -43,7 +41,7 @@ export default {
   },
   async mounted() {
     await this.setIndividual();
-    this.getItems();
+    this.getSavedItems();
   },
   methods: {
     async setIndividual() {
@@ -54,23 +52,19 @@ export default {
         })
         .catch((err) => console.log(err));
     },
-    getItems() {
+    getSavedItems() {
       axios
-        .get("api/items")
+        .get("api/individual/saved-items")
         .then((res) => {
-          this.items = this.parseSaved(res.data);
+          this.items = res.data.map((item) => {
+            return {
+              ...item,
+              isSaved: true,
+            };
+          });
           this.isLoading = false;
         })
         .catch((err) => console.log(err));
-    },
-    parseSaved(items) {
-      const savedItems = this.individual.savedItems;
-      return items.map((item) => {
-        return {
-          ...item,
-          isSaved: savedItems.some((savedId) => savedId === item._id),
-        };
-      });
     },
     toggleSaved(id) {
       this.items = this.items.map((item) => {
@@ -88,16 +82,6 @@ export default {
       axios
         .put(`api/individual`, { itemId: itemId })
         .then(() => {})
-        .catch((err) => console.log(err));
-    },
-    search(sortCriterion, type) {
-      this.isLoading = true;
-      axios
-        .get(`api/items?sortCriterion=${sortCriterion}&type=${type}`)
-        .then((res) => {
-          this.items = this.parseSaved(res.data);
-          this.isLoading = false;
-        })
         .catch((err) => console.log(err));
     },
   },

@@ -37,7 +37,7 @@ export const links = [
   {
     title: "Saved items",
     name: "saved-items",
-    to: "/app",
+    to: "/saved-items",
     requiresLogin: true,
     alwaysShow: false,
   },

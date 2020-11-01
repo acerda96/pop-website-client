@@ -2,6 +2,7 @@ import Vue from "vue";
 import Router from "vue-router";
 import Home from "./views/Home.vue";
 import Browse from "./views/Browse.vue";
+import SavedItems from "./views/SavedItems.vue";
 import ContactUs from "./views/ContactUs.vue";
 import Login from "./views/Login.vue";
 import MyStores from "./views/MyStores.vue";
@@ -84,6 +85,14 @@ let router = new Router({
       path: "/add-store",
       name: "add-store",
       component: AddStore,
+      meta: {
+        requiresAuth: true,
+      },
+    },
+    {
+      path: "/saved-items",
+      name: "saved-items",
+      component: SavedItems,
       meta: {
         requiresAuth: true,
       },
