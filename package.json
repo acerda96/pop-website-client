@@ -26,6 +26,7 @@
     "vue": "^2.6.11",
     "vue-class-component": "^7.2.6",
     "vue-datetime": "^1.0.0-beta.14",
+    "vue-js-modal": "^2.0.0-rc.6",
     "vue-material-design-icons": "^4.9.0",
     "vue-meta": "^2.4.0",
     "vue-property-decorator": "^9.0.0",

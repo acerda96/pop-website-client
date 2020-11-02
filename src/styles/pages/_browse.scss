@@ -33,6 +33,9 @@
   border: 1px solid rgb(201, 199, 199);
   margin: 20px;
   cursor: pointer;
+  &:hover {
+    transform: scale(1.02);
+  }
 }
 
 .browse__heart-icon {

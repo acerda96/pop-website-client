@@ -7,6 +7,9 @@ import VueMeta from "vue-meta";
 import Vuex from "vuex";
 import store from "./store";
 import { Datetime } from "vue-datetime";
+import vmodal from "vue-js-modal";
+
+Vue.use(vmodal, { componentName: "modal" });
 
 Vue.use(Vuex);
 

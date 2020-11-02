@@ -27,7 +27,8 @@ select:focus {
 
 input,
 textarea,
-button {
+button,
+select {
   font-family: $main-font;
 }
 
@@ -44,6 +45,9 @@ a {
   color: black;
   cursor: pointer;
   text-decoration: none;
+  &:hover {
+    color: grey;
+  }
 }
 
 .chevron-left {
@@ -59,11 +63,23 @@ a {
   flex-direction: column;
 }
 
+.fl-cl-cn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .fl-cn {
   display: flex;
   justify-content: center;
   width: 100%;
-  min-height: 500px;
+}
+
+.fl-cn-cn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
 }
 
 @media (max-width: 600px) {

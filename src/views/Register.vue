@@ -6,27 +6,27 @@
           Create your account
         </div>
         <hr />
-        <div class="basic-form__input-ctn">
+        <div class="basic-form__input-ctn--large">
           <label for="name"> Full name </label>
           <input type="text" name="name" v-model="name" />
         </div>
-        <div class="basic-form__input-ctn">
+        <div class="basic-form__input-ctn--large">
           <label for="company"> Company (optional) </label>
           <input type="text" name="company" v-model="company" />
         </div>
-        <div class="basic-form__input-ctn">
+        <div class="basic-form__input-ctn--large">
           <label for="mobileNumber"> Mobile number </label>
           <input type="text" name="mobileNumber" v-model="mobileNumber" />
         </div>
-        <div class="basic-form__input-ctn">
+        <div class="basic-form__input-ctn--large">
           <label for="email"> Email </label>
           <input type="email" name="email" v-model="email" />
         </div>
-        <div class="basic-form__input-ctn">
+        <div class="basic-form__input-ctn--large">
           <label for="password"> Password </label>
           <input type="password" name="password" v-model="password" />
         </div>
-        <div class="basic-form__input-ctn">
+        <div class="basic-form__input-ctn--large">
           <label for="confirmPassword"> Confirm password </label>
           <input
             type="password"

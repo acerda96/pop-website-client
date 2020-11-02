@@ -1,10 +1,10 @@
 .item-ctn {
   display: flex;
   flex-direction: column;
+  align-items: center;
   margin: 20px;
-  // padding: 30px;
   background: white;
-  width: 80%;
+  width: 100%;
   max-width: 700px;
   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 
@@ -13,18 +13,23 @@
   }
 }
 
+.item-sub-ctn {
+  width: 100%;
+}
+
 .item__main {
   display: flex;
   justify-content: space-around;
-
   h4 {
     margin: 0;
   }
 }
 
+$item-size: 220px;
+
 .item__thumbnail {
-  width: 250px;
-  height: 250px;
+  width: $item-size;
+  height: $item-size;
   padding-top: 50px;
 }
 
@@ -53,7 +58,7 @@
 
 @media (max-width: 800px) {
   .item-ctn {
-    padding: 0 30px 0 30px;
+    padding: 0 10px 0 10px;
   }
 
   .item__thumbnail {

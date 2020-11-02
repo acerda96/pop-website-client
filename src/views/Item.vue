@@ -1,28 +1,30 @@
 <template>
   <div class="fl-cn">
     <div class="item-ctn">
-      <div class="item__main">
-        <Loader v-if="isLoading" />
-        <img
-          class="item__thumbnail"
-          v-bind:src="'data:image/jpeg;base64,' + item.images[0].buffer"
-        />
-        <div class="item__desc" v-if="!isLoading">
-          <div class="item__title">
-            <h2>{{ item.name }}, £{{ item.unitPrice }}</h2>
-            <button v-if="isBrowsePage" class="square-btn">Edit</button>
-          </div>
-          <hr style="width:100%" />
-          <div class="item__details">
-            <h4>Description</h4>
-            <p>{{ item.description }}</p>
-            <h4>Initial quantity</h4>
-            <p>{{ item.initialQuantity }}</p>
+      <Loader v-if="isLoading" />
+      <div class="item-sub-ctn" v-if="!isLoading">
+        <div class="item__main">
+          <img
+            class="item__thumbnail"
+            v-bind:src="'data:image/jpeg;base64,' + item.images[0].buffer"
+          />
+          <div class="item__desc">
+            <div class="item__title">
+              <h2>{{ item.name }}, £{{ item.unitPrice }}</h2>
+              <button v-if="isBrowsePage" class="square-btn">Edit</button>
+            </div>
+            <hr style="width:100%" />
+            <div class="item__details">
+              <h4>Description</h4>
+              <p>{{ item.description }}</p>
+              <h4>Initial quantity</h4>
+              <p>{{ item.initialQuantity }}</p>
+            </div>
           </div>
         </div>
-      </div>
-      <div class="item__other">
-        <h4>Other items from the same store</h4>
+        <div class="item__other">
+          <h4>Other items from the same store</h4>
+        </div>
       </div>
     </div>
   </div>

@@ -5,13 +5,12 @@ import Browse from "./views/Browse.vue";
 import SavedItems from "./views/SavedItems.vue";
 import ContactUs from "./views/ContactUs.vue";
 import Login from "./views/Login.vue";
-import MyStores from "./views/MyStores.vue";
-import MyStore from "./views/MyStore.vue";
-import AddStore from "./views/AddStore.vue";
-import AddItem from "./views/AddItem.vue";
+import Stores from "./views/Stores.vue";
+import Store from "./views/Store.vue";
 import Item from "./views/Item.vue";
 import Register from "./views/Register.vue";
 import PrivacyPolicy from "./views/PrivacyPolicy.vue";
+import Account from "./views/Account.vue";
 import store from "./store.js";
 
 Vue.use(Router);
@@ -50,31 +49,23 @@ let router = new Router({
       component: PrivacyPolicy,
     },
     {
-      path: "/my-stores",
-      name: "my-stores",
-      component: MyStores,
+      path: "/stores",
+      name: "stores",
+      component: Stores,
       meta: {
         requiresAuth: true,
       },
     },
     {
-      path: "/my-stores/:storeId",
-      name: "my-store",
-      component: MyStore,
+      path: "/stores/:storeId",
+      name: "store",
+      component: Store,
       meta: {
         requiresAuth: true,
       },
     },
     {
-      path: "/my-stores/:storeId/add",
-      name: "add",
-      component: AddItem,
-      meta: {
-        requiresAuth: true,
-      },
-    },
-    {
-      path: "/my-stores/:storeId/:itemId",
+      path: "/stores/:storeId/:itemId",
       name: "item",
       component: Item,
       meta: {
@@ -82,16 +73,8 @@ let router = new Router({
       },
     },
     {
-      path: "/add-store",
-      name: "add-store",
-      component: AddStore,
-      meta: {
-        requiresAuth: true,
-      },
-    },
-    {
-      path: "/saved-items",
-      name: "saved-items",
+      path: "/saved",
+      name: "saved",
       component: SavedItems,
       meta: {
         requiresAuth: true,
@@ -101,6 +84,11 @@ let router = new Router({
       path: "/browse/:itemId",
       name: "browse-item",
       component: Item,
+    },
+    {
+      path: "/account",
+      name: "account",
+      component: Account,
     },
   ],
   scrollBehavior(to) {

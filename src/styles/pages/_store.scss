@@ -1,4 +1,4 @@
-.my-store-ctn {
+.store-ctn {
   display: flex;
   justify-content: center;
   margin: 20px;
@@ -13,21 +13,21 @@
   }
 }
 
-.my-store__heading {
+.store__heading {
   display: flex;
   justify-content: space-between;
   align-items: center;
   width: 100%;
 }
 
-.my-store__sec {
+.store__sec {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   width: 100%;
 }
 
-.my-store__details {
+.store__details {
   display: flex;
   flex-direction: column;
   width: 80%;
@@ -36,14 +36,28 @@
   border-radius: 10px;
 }
 
-.my-store__add-date-btns {
+.store__add-date-btns {
   display: flex;
   justify-content: flex-end;
 }
 
-$item-size: 160px;
+$item-size: 180px;
 
-.my-store__item {
+.store__date {
+  display: flex;
+}
+
+.store__date-remove {
+  text-decoration: underline;
+  font-size: 13px;
+  &:hover {
+    color: grey;
+  }
+  cursor: pointer;
+  padding-left: 30px;
+}
+
+.store__item {
   margin: 10px;
   width: $item-size;
   text-align: center;
@@ -55,20 +69,23 @@ $item-size: 160px;
     color: black;
     text-decoration: none;
   }
+  &:hover {
+    transform: scale(1.02);
+  }
 }
 
-.my-store__item-thumbnail {
+.store__item-thumbnail {
   width: $item-size;
   height: $item-size;
 }
 
-.my-store__item-name {
+.store__item-name {
   display: flex;
   justify-content: space-between;
   padding: 7px;
 }
 
-.my-store__items {
+.store__items {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -76,7 +93,7 @@ $item-size: 160px;
 }
 
 @media (max-width: 500px) {
-  .my-store-ctn {
+  .store-ctn {
     width: 95%;
   }
 }

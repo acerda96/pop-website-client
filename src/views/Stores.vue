@@ -1,25 +1,29 @@
 <template>
-  <div class="my-stores">
+  <div class="stores">
+    <NewStoreModal />
     <Loader v-if="isLoading" />
-    <div class="my-stores__stores" v-if="!isLoading">
-      <div class="my-stores__store" v-for="store in stores" :key="store.id">
-        <router-link :to="'/my-stores/' + store._id">
-          <p>{{ store.name }}</p>
-        </router-link>
+    <div class="fl-cl-cn" v-if="!isLoading">
+      <div class="stores__stores">
+        <div class="stores__store" v-for="store in stores" :key="store.id">
+          <router-link :to="'/stores/' + store._id">
+            <p>{{ store.name }}</p>
+          </router-link>
+        </div>
       </div>
+      <button class="square-btn" @click="$modal.show('newStoreModal')">
+        Add
+      </button>
     </div>
-    <router-link to="/add-store" v-if="!isLoading">
-      <button class="square-btn">Add store</button>
-    </router-link>
   </div>
 </template>
 
 <script>
 import axios from "axios";
 import Loader from "../components/Loader.vue";
+import NewStoreModal from "../views/NewStoreModal.vue";
 
 export default {
-  name: "MyStores",
+  name: "Stores",
   data() {
     return {
       individual: {},
@@ -29,6 +33,7 @@ export default {
   },
   components: {
     Loader,
+    NewStoreModal,
   },
   async mounted() {
     this.isLoading = true;

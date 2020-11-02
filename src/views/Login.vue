@@ -6,11 +6,11 @@
           Login
         </div>
         <hr />
-        <div class="basic-form__input-ctn">
+        <div class="basic-form__input-ctn--large">
           <label for="email"> Email </label>
           <input type="email" name="email" v-model="email" />
         </div>
-        <div class="basic-form__input-ctn">
+        <div class="basic-form__input-ctn--large">
           <label for="password"> Password </label>
           <input type="password" name="password" v-model="password" />
         </div>

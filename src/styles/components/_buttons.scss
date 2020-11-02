@@ -20,6 +20,9 @@
   width: 100px;
   height: 30px;
   margin: 3px;
+  &:hover {
+    background-color: rgb(221, 221, 221);
+  }
 }
 
 .square-btn--confirm {
@@ -64,6 +67,7 @@
 
 @media (max-width: 500px) {
   .square-btn {
+    padding: 0px;
     width: 70px;
   }
 }
