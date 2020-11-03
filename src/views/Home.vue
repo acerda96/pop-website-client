@@ -3,7 +3,7 @@
     <div class="home__title">
       <div class="home__title-txt">Your Local Marketplace</div>
       <router-link to="/browse">
-        <BrowseButton />
+        <BrowseNowButton />
       </router-link>
     </div>
     <div id="about">
@@ -41,12 +41,12 @@
 </template>
 
 <script>
-import BrowseButton from "../components/BrowseButton";
+import BrowseNowButton from "../components/BrowseNowButton";
 
 export default {
   name: "Home",
   components: {
-    BrowseButton,
+    BrowseNowButton,
   },
 };
 </script>

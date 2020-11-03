@@ -16,7 +16,7 @@ export default {
     NavBar,
     Footer,
   },
-  created: function() {
+  created() {
     this.$http.interceptors.response.use(undefined, function(err) {
       return new Promise(function() {
         if (err.status === 401 && err.config && !err.config.__isRetryRequest) {
@@ -30,5 +30,5 @@ export default {
 </script>
 
 <style lang="scss">
-@import "./styles/main.scss"
+@import "./styles/main.scss";
 </style>

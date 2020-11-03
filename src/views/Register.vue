@@ -54,7 +54,7 @@ export default {
     };
   },
   methods: {
-    register: function() {
+    register() {
       let data = {
         email: this.email,
         name: this.name,

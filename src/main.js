@@ -10,9 +10,7 @@ import { Datetime } from "vue-datetime";
 import vmodal from "vue-js-modal";
 
 Vue.use(vmodal, { componentName: "modal" });
-
 Vue.use(Vuex);
-
 Vue.use(VueMeta);
 
 Vue.component("datetime", Datetime);

@@ -10,7 +10,7 @@ import HeartOutline from "vue-material-design-icons/HeartOutline.vue";
 import HeartFilled from "vue-material-design-icons/Heart.vue";
 
 export default {
-  name: "HeartIcon",
+  name: "SaveIcon",
   props: ["isSaved"],
   components: {
     HeartOutline,

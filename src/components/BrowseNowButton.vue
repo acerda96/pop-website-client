@@ -8,6 +8,6 @@
 
 <script>
 export default {
-  name: "BrowseButton",
+  name: "BrowseNowButton",
 };
 </script>

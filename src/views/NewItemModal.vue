@@ -47,7 +47,6 @@
               <select
                 style="padding: 8px; border: none; border-radius: 5px;"
                 v-model="type"
-                @change="onChange"
               >
                 <option value disabled>Select a type</option>
                 <option value="1">Bottoms</option>
@@ -88,7 +87,6 @@
     </div>
   </modal>
 </template>
-<!-- v-bind:src="'data:image/jpeg;base64,' + image.buffer" -->
 
 <script>
 import axios from "axios";
@@ -105,7 +103,6 @@ export default {
       initialQuantity: "",
       type: "",
       unitPrice: "",
-      onChange: null,
     };
   },
   async mounted() {

@@ -7,7 +7,7 @@
         <div v-for="link in links" :key="link.name">
           <li
             v-if="isLoggedIn == link.requiresLogin || link.alwaysShow"
-            @click="executeClick(link.name)"
+            @click="onClick(link.name)"
           >
             <router-link :to="link.to" class="upper-navbar__link">{{
               link.title
@@ -22,8 +22,8 @@
           <li
             v-if="isLoggedIn == link.requiresLogin || link.alwaysShow"
             @click="
-              hideNav();
-              executeClick(link.name);
+              toggleNav();
+              onClick(link.name);
             "
           >
             <router-link :to="link.to" class="upper-navbar__link">{{
@@ -42,13 +42,13 @@ import { links } from "../nav-links";
 
 export default {
   name: "NavBar",
+  components: {
+    MenuIcon,
+  },
   data() {
     return {
       links: links,
     };
-  },
-  components: {
-    MenuIcon,
   },
   computed: {
     isLoggedIn: function() {
@@ -56,37 +56,33 @@ export default {
     },
   },
   methods: {
-    hideNav() {
+    toggleNav() {
       const nav = this.$refs.nav.classList;
-      nav.remove("active");
+      nav.contains("active") ? nav.remove("active") : nav.add("active");
+    },
+    onClick(name) {
+      switch (name) {
+        case "logout":
+          this.logout();
+          break;
+        case "about":
+          this.scrollTo();
+          break;
+        default:
+          return;
+      }
     },
     logout: function() {
       this.$store.dispatch("logout").then(() => {
         this.$router.push("/login");
       });
     },
-    toggleNav() {
-      const nav = this.$refs.nav.classList;
-      nav.contains("active") ? nav.remove("active") : nav.add("active");
-    },
-    scrollMeTo() {
+    scrollTo() {
       if (this.$route.fullPath === "/#about") {
         let el = document.getElementById("about");
         let top = el.offsetTop;
 
         window.scrollTo(0, top - 100);
-      }
-    },
-    executeClick(name) {
-      switch (name) {
-        case "logout":
-          this.logout();
-          break;
-        case "about":
-          this.scrollMeTo();
-          break;
-        default:
-          return;
       }
     },
   },

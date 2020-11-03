@@ -41,7 +41,7 @@
             <div v-if="isNewDateActive" class="store__add-date-btns">
               <button
                 class="square-btn square-btn--confirm"
-                @click="confirmNewDate"
+                @click="saveNewDate"
               >
                 Save
               </button>
@@ -125,7 +125,6 @@ export default {
       newDate: new Date().toISOString(),
       newStartTime: new Date().toISOString(),
       newEndTime: new Date().toISOString(),
-      showModal: false,
     };
   },
   async mounted() {
@@ -165,9 +164,8 @@ export default {
     toggleNewDate() {
       this.isNewDateActive = !this.isNewDateActive;
     },
-    confirmNewDate() {
+    saveNewDate() {
       this.putDate();
-
       this.isNewDateActive = false;
     },
     putDate() {
@@ -200,7 +198,7 @@ export default {
       };
 
       axios
-        .put(`api/stores/${this.$route.params.storeId}`, { date: date })
+        .put(`api/stores/${this.$route.params.storeId}`, { date })
         .then(() => this.store.dates.push(date))
         .catch((err) => console.log(err));
     },

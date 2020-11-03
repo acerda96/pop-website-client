@@ -14,7 +14,7 @@
           <div class="browse__item-details">
             {{ item.name }}
             {{ "£" + item.unitPrice }}
-            <HeartIcon
+            <SaveIcon
               :isSaved="item.isSaved"
               @click.native="toggleSaved(item._id)"
             />
@@ -28,12 +28,12 @@
 <script>
 import axios from "axios";
 import BrowseNav from "../components/BrowseNav";
-import HeartIcon from "../components/HeartIcon";
+import SaveIcon from "../components/SaveIcon";
 import Loader from "../components/Loader.vue";
 
 export default {
   name: "Browse",
-  components: { BrowseNav, HeartIcon, Loader },
+  components: { BrowseNav, SaveIcon, Loader },
   data() {
     return {
       isLoading: true,
@@ -58,12 +58,12 @@ export default {
       axios
         .get("api/items")
         .then((res) => {
-          this.items = this.parseSaved(res.data);
+          this.items = this.markSaved(res.data);
           this.isLoading = false;
         })
         .catch((err) => console.log(err));
     },
-    parseSaved(items) {
+    markSaved(items) {
       const savedItems = this.individual.savedItems;
       return items.map((item) => {
         return {
@@ -86,7 +86,7 @@ export default {
     },
     updateSavedItems(itemId) {
       axios
-        .put(`api/individual`, { itemId: itemId })
+        .put(`api/individual`, { itemId })
         .then(() => {})
         .catch((err) => console.log(err));
     },
@@ -95,7 +95,7 @@ export default {
       axios
         .get(`api/items?sortCriterion=${sortCriterion}&type=${type}`)
         .then((res) => {
-          this.items = this.parseSaved(res.data);
+          this.items = this.markSaved(res.data);
           this.isLoading = false;
         })
         .catch((err) => console.log(err));

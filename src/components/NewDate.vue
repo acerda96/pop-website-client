@@ -34,7 +34,7 @@
 
 <script>
 export default {
-  name: "BrowseButton",
+  name: "BrowseNowButton",
   components: {},
   computed: {
     date: {
@@ -59,7 +59,6 @@ export default {
           this.$emit("update:newEndTime", this.newStartTime);
           return this.newStartTime;
         }
-
         return this.newEndTime;
       },
       set(val) {

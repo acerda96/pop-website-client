@@ -15,7 +15,7 @@
           <div class="browse__item-details">
             {{ item.name }}
             {{ "£" + item.unitPrice }}
-            <HeartIcon
+            <SaveIcon
               :isSaved="item.isSaved"
               @click.native="toggleSaved(item._id)"
             />
@@ -29,11 +29,11 @@
 <script>
 import axios from "axios";
 import Loader from "../components/Loader.vue";
-import HeartIcon from "../components/HeartIcon";
+import SaveIcon from "../components/SaveIcon";
 
 export default {
   name: "SavedItems",
-  components: { Loader, HeartIcon },
+  components: { Loader, SaveIcon },
   data() {
     return {
       isLoading: true,
