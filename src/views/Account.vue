@@ -2,7 +2,7 @@
   <div class="stores">
     <NewStoreModal />
     <Loader v-if="isLoading" />
-    <div class="fl-cl-cn" v-if="!isLoading">
+    <div class="flex flex-col items-center" v-if="!isLoading">
       <p>Name</p>
       <p>Email</p>
       <p>Password</p>

@@ -1,5 +1,5 @@
 <template>
-  <div class="fl-cn">
+  <div class="flex justify-center">
     <div class="item-ctn">
       <Loader v-if="isLoading" />
       <div class="item-sub-ctn" v-if="!isLoading">

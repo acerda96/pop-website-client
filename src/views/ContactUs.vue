@@ -1,5 +1,5 @@
 <template>
-  <div class="fl-cn">
+  <div class="flex justify-center">
     <div>
       <form class="basic-form" @submit.prevent="submit">
         <div class="basic-form__heading">Contact Us</div>

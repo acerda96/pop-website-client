@@ -2,7 +2,7 @@
   <div class="stores">
     <NewStoreModal />
     <Loader v-if="isLoading" />
-    <div class="fl-cl-cn" v-if="!isLoading">
+    <div class="flex flex-col items-center" v-if="!isLoading">
       <div class="stores__stores">
         <div class="stores__store" v-for="store in stores" :key="store.id">
           <router-link :to="'/stores/' + store._id">

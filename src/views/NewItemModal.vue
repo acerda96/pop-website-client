@@ -6,7 +6,7 @@
     :scrollable="true"
     :height="600"
   >
-    <div class="fl-cn-cn">
+    <div class="flex justify-center items-center">
       <div>
         <form
           class="basic-form"

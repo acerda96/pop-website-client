@@ -45,6 +45,7 @@
     "eslint-plugin-vue": "^6.2.2",
     "nodemon": "^2.0.4",
     "sass-loader": "^9.0.3",
+    "tailwindcss": "^1.9.6",
     "vue-template-compiler": "^2.6.11"
   },
   "eslintConfig": {

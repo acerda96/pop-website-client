@@ -8,6 +8,7 @@ import Vuex from "vuex";
 import store from "./store";
 import { Datetime } from "vue-datetime";
 import vmodal from "vue-js-modal";
+import "@/styles/tailwind.css";
 
 Vue.use(vmodal, { componentName: "modal" });
 Vue.use(Vuex);

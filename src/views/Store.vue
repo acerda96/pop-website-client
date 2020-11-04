@@ -1,5 +1,5 @@
 <template>
-  <div class="fl-cn">
+  <div class="flex justify-center">
     <div class="store-ctn">
       <NewItemModal />
       <Loader v-if="isLoading" />

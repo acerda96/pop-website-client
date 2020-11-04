@@ -54,34 +54,6 @@ a {
   cursor: pointer;
 }
 
-.fl {
-  display: flex;
-}
-
-.fl-cl {
-  display: flex;
-  flex-direction: column;
-}
-
-.fl-cl-cn {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.fl-cn {
-  display: flex;
-  justify-content: center;
-  width: 100%;
-}
-
-.fl-cn-cn {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-}
-
 @media (max-width: 600px) {
   h2 {
     font-size: 18px;

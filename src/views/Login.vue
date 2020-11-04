@@ -1,5 +1,5 @@
 <template>
-  <div class="fl-cn">
+  <div class="flex justify-center">
     <div>
       <form class="basic-form" @submit.prevent="login">
         <div class="basic-form__heading">
