@@ -20,7 +20,7 @@
             @toggleEdit="toggleEdit"
           />
         </div>
-        <hr style="width:100%; border:1px dashed grey" />
+        <hr class="w-full" />
         <div class="store__sec">
           <div class="store__heading">
             <h4>Description</h4>
@@ -40,7 +40,7 @@
             class="border-solid border-2 border-gray-200"
           />
         </div>
-        <hr style="width:100%; border:1px dashed grey" />
+        <hr class="w-full" />
         <div class="store__sec">
           <div class="store__heading">
             <h4>Location</h4>
@@ -78,28 +78,22 @@
             />
           </div>
         </div>
-        <hr style="width:100%; border:1px dashed grey" />
+        <hr class="w-full" />
         <div class="store__sec">
           <div class="store__heading">
             <h4>Dates</h4>
             <button
-              class="square-btn"
+              class="underline text-gray-600"
               @click="toggleNewDate"
               v-if="!isNewDateActive"
             >
               Add date
             </button>
             <div v-if="isNewDateActive" class="store__add-date-btns">
-              <button
-                class="square-btn square-btn--confirm"
-                @click="saveNewDate"
-              >
+              <button class="underline text-gray-600 p-3" @click="saveNewDate">
                 Save
               </button>
-              <button
-                class="square-btn square-btn--cancel"
-                @click="toggleNewDate"
-              >
+              <button class="underline text-gray-600" @click="toggleNewDate">
                 Cancel
               </button>
             </div>
@@ -122,11 +116,14 @@
             <p class="store__date-remove">Remove</p>
           </div>
         </div>
-        <hr style="width:100%; border:1px dashed grey" />
+        <hr class="w-full" />
         <div class="store__sec">
           <div class="store__heading">
             <h4>Items</h4>
-            <button class="square-btn" @click="$modal.show('newItemModal')">
+            <button
+              class="underline text-gray-600"
+              @click="$modal.show('newItemModal')"
+            >
               Add
             </button>
           </div>

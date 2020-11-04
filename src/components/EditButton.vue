@@ -1,13 +1,17 @@
 <template>
   <div>
-    <button class="square-btn" v-if="!isEditingTest" @click="toggleEditTest">
+    <button
+      class="underline text-gray-600"
+      v-if="!isEditingTest"
+      @click="toggleEditTest"
+    >
       Edit
     </button>
     <div v-if="isEditingTest" class="store__add-date-btns">
-      <button class="square-btn square-btn--confirm" @click="saveEdit()">
+      <button class="underline p-3 text-gray-600" @click="saveEdit()">
         Save
       </button>
-      <button class="square-btn square-btn--cancel" @click="toggleEditTest">
+      <button class="underline text-gray-600" @click="toggleEditTest">
         Cancel
       </button>
     </div>
