@@ -31,10 +31,19 @@ export default {
       this.$emit("toggleEdit", this.isEditingFieldName, !this.isEditingTest);
     },
     saveEdit() {
-      console.log("STORE", this.store);
+      const data = {};
 
-      this.$emit("putStore", { [this.fields]: this.store[this.field] });
-      this.toggleEditTest();
+      this.fields.forEach((field) => {
+        console.log(this.store, field, data);
+        data[field] = this.store[field];
+      });
+
+      this.$emit(
+        "putStore",
+        data,
+        this.isEditingFieldName,
+        !this.isEditingTest
+      );
     },
   },
 };

@@ -6,7 +6,11 @@
       <div class="store__details" v-if="!isLoading">
         <div class="store__heading">
           <h2 v-if="!isEditingStore">{{ store.name }}</h2>
-          <input v-if="isEditingStore" v-model="store.name" />
+          <input
+            v-if="isEditingStore"
+            v-model="store.name"
+            class="border-solid border-2 border-gray-200"
+          />
           <EditButton
             :store="store"
             :fields="['name']"
@@ -20,20 +24,59 @@
         <div class="store__sec">
           <div class="store__heading">
             <h4>Description</h4>
-            <button class="square-btn">Edit</button>
+            <EditButton
+              :store="store"
+              :fields="['description']"
+              isEditingFieldName="isEditingDescription"
+              :isEditing.sync="isEditingDescription"
+              @putStore="putStore"
+              @toggleEdit="toggleEdit"
+            />
           </div>
-          <p>{{ store.description }}</p>
+          <p v-if="!isEditingDescription">{{ store.description }}</p>
+          <input
+            v-if="isEditingDescription"
+            v-model="store.description"
+            class="border-solid border-2 border-gray-200"
+          />
         </div>
         <hr style="width:100%; border:1px dashed grey" />
         <div class="store__sec">
           <div class="store__heading">
             <h4>Location</h4>
-            <button class="square-btn">Edit</button>
+            <EditButton
+              :store="store"
+              :fields="['addressLine1', 'addressLine2', 'postcode', 'city']"
+              isEditingFieldName="isEditingLocation"
+              :isEditing.sync="isEditingLocation"
+              @putStore="putStore"
+              @toggleEdit="toggleEdit"
+            />
           </div>
-          <p>{{ store.addressLine1 }},</p>
-          <p v-if="store.addressLine2">{{ store.addressLine2 }},</p>
-          <p>{{ store.postcode }},</p>
-          <p>{{ store.city }}</p>
+          <div v-if="!isEditingLocation">
+            <p>{{ store.addressLine1 }},</p>
+            <p v-if="!isEditingLocation">{{ store.addressLine2 }},</p>
+            <p>{{ store.postcode }},</p>
+            <p>{{ store.city }}</p>
+          </div>
+          <div class="flex flex-col" v-if="isEditingLocation">
+            <input
+              class="border-solid border-2 border-gray-200"
+              v-model="store.addressLine1"
+            />
+            <input
+              class="border-solid border-2 border-gray-200"
+              v-model="store.addressLine2"
+            />
+            <input
+              class="border-solid border-2 border-gray-200"
+              v-model="store.postcode"
+            />
+            <input
+              class="border-solid border-2 border-gray-200"
+              v-model="store.city"
+            />
+          </div>
         </div>
         <hr style="width:100%; border:1px dashed grey" />
         <div class="store__sec">
@@ -136,6 +179,8 @@ export default {
       newStartTime: new Date().toISOString(),
       newEndTime: new Date().toISOString(),
       isEditingStore: false,
+      isEditingLocation: false,
+      isEditingDescription: false,
     };
   },
   async mounted() {
@@ -184,11 +229,13 @@ export default {
       console.log(field, val);
       this[field] = val;
     },
-    putStore(data) {
+    putStore(data, field, val) {
       console.log("put store", data);
       axios
         .put(`api/stores/${this.$route.params.storeId}`, data)
-        .then(() => {})
+        .then(() => {
+          this.toggleEdit(field, val);
+        })
         .catch((err) => console.log(err));
     },
     putDate() {
