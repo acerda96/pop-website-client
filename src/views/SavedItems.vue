@@ -1,7 +1,7 @@
 <template>
   <div class="browse">
-    <h2 style="padding-left:30px;">Saved Items</h2>
-    <hr style="width:90%;" />
+    <h2 class="pl-6">Saved Items</h2>
+    <hr class="w-full" />
     <div class="browse__body">
       <Loader v-if="isLoading" />
       <div v-if="!isLoading" class="browse__items">

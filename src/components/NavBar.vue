@@ -7,6 +7,7 @@
         <div v-for="link in links" :key="link.name">
           <li
             v-if="isLoggedIn == link.requiresLogin || link.alwaysShow"
+            :class="getActive($route.name)"
             @click="onClick(link.name)"
           >
             <router-link :to="link.to" class="upper-navbar__link">{{
@@ -59,6 +60,12 @@ export default {
     toggleNav() {
       const nav = this.$refs.nav.classList;
       nav.contains("active") ? nav.remove("active") : nav.add("active");
+    },
+    getActive(name) {
+      switch (name) {
+        case "saved":
+          return "text-gray";
+      }
     },
     onClick(name) {
       switch (name) {

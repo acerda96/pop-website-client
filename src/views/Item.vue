@@ -13,7 +13,7 @@
               <h2>{{ item.name }}, £{{ item.unitPrice }}</h2>
               <button v-if="isBrowsePage" class="square-btn">Edit</button>
             </div>
-            <hr style="width:100%" />
+            <hr class="w-full" />
             <div class="item__details">
               <h4>Description</h4>
               <p>{{ item.description }}</p>

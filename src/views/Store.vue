@@ -5,8 +5,16 @@
       <Loader v-if="isLoading" />
       <div class="store__details" v-if="!isLoading">
         <div class="store__heading">
-          <h2>{{ store.name }}</h2>
-          <button class="square-btn">Edit</button>
+          <h2 v-if="!isEditingStore">{{ store.name }}</h2>
+          <input v-if="isEditingStore" v-model="store.name" />
+          <EditButton
+            :store="store"
+            :fields="['name']"
+            isEditingFieldName="isEditingStore"
+            :isEditing.sync="isEditingStore"
+            @putStore="putStore"
+            @toggleEdit="toggleEdit"
+          />
         </div>
         <hr style="width:100%; border:1px dashed grey" />
         <div class="store__sec">
@@ -105,6 +113,7 @@
 import axios from "axios";
 import Loader from "../components/Loader.vue";
 import NewDate from "../components/NewDate.vue";
+import EditButton from "../components/EditButton.vue";
 import NewItemModal from "../views/NewItemModal.vue";
 import moment from "moment";
 
@@ -114,6 +123,7 @@ export default {
     Loader,
     NewDate,
     NewItemModal,
+    EditButton,
   },
   data() {
     return {
@@ -125,6 +135,7 @@ export default {
       newDate: new Date().toISOString(),
       newStartTime: new Date().toISOString(),
       newEndTime: new Date().toISOString(),
+      isEditingStore: false,
     };
   },
   async mounted() {
@@ -167,6 +178,18 @@ export default {
     saveNewDate() {
       this.putDate();
       this.isNewDateActive = false;
+    },
+    toggleEdit(field, val) {
+      console.log("store toggle edit");
+      console.log(field, val);
+      this[field] = val;
+    },
+    putStore(data) {
+      console.log("put store", data);
+      axios
+        .put(`api/stores/${this.$route.params.storeId}`, data)
+        .then(() => {})
+        .catch((err) => console.log(err));
     },
     putDate() {
       const startTime =

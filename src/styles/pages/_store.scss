@@ -45,6 +45,7 @@ $item-size: 180px;
 
 .store__date {
   display: flex;
+  justify-content: space-around;
 }
 
 .store__date-remove {
@@ -54,7 +55,6 @@ $item-size: 180px;
     color: grey;
   }
   cursor: pointer;
-  padding-left: 30px;
 }
 
 .store__item {

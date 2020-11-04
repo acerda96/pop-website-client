@@ -36,6 +36,7 @@
 export default {
   name: "BrowseNowButton",
   components: {},
+  props: ["newDate", "newStartTime", "newEndTime"],
   computed: {
     date: {
       get() {
@@ -66,7 +67,7 @@ export default {
       },
     },
   },
-  props: ["newDate", "newStartTime", "newEndTime"],
+
   data() {
     return {
       currentDateTime: new Date().toISOString(),
