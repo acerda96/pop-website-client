@@ -20,7 +20,7 @@
 <script>
 import axios from "axios";
 import Loader from "@/components/Loader.vue";
-import NewStoreModal from "@/views/NewStoreModal.vue";
+import NewStoreModal from "@/components/NewStoreModal.vue";
 import setIndividual from "@/utils/individual";
 
 export default {
@@ -43,13 +43,10 @@ export default {
   },
   methods: {
     getStores() {
-      axios
-        .get(`api/stores?userId=${this.individual._id}`)
-        .then((res) => {
-          this.stores = res.data;
-          this.isLoading = false;
-        })
-        .catch((err) => console.log(err));
+      axios.get(`api/stores?userId=${this.individual._id}`).then((res) => {
+        this.stores = res.data;
+        this.isLoading = false;
+      });
     },
   },
 };

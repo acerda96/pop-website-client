@@ -155,7 +155,7 @@ import moment from "moment";
 import Loader from "@/components/Loader.vue";
 import NewDate from "@/components/NewDate.vue";
 import EditButton from "@/components/EditButton.vue";
-import NewItemModal from "@/views/NewItemModal.vue";
+import NewItemModal from "@/components/NewItemModal.vue";
 import setIndividual from "@/utils/individual";
 
 export default {
@@ -188,13 +188,10 @@ export default {
   },
   methods: {
     getStore() {
-      axios
-        .get(`api/stores/${this.$route.params.storeId}`)
-        .then((res) => {
-          this.store = res.data;
-          this.isLoading = false;
-        })
-        .catch((err) => console.log(err));
+      axios.get(`api/stores/${this.$route.params.storeId}`).then((res) => {
+        this.store = res.data;
+        this.isLoading = false;
+      });
     },
     getItems() {
       axios
@@ -204,8 +201,7 @@ export default {
         .then((res) => {
           this.items = res.data;
           this.isLoading = false;
-        })
-        .catch((err) => console.log(err));
+        });
     },
     toggleNewDate() {
       this.isNewDateActive = !this.isNewDateActive;
@@ -215,18 +211,12 @@ export default {
       this.isNewDateActive = false;
     },
     toggleEdit(field, val) {
-      console.log("store toggle edit");
-      console.log(field, val);
       this[field] = val;
     },
     putStore(data, field, val) {
-      console.log("put store", data);
-      axios
-        .put(`api/stores/${this.$route.params.storeId}`, data)
-        .then(() => {
-          this.toggleEdit(field, val);
-        })
-        .catch((err) => console.log(err));
+      axios.put(`api/stores/${this.$route.params.storeId}`, data).then(() => {
+        this.toggleEdit(field, val);
+      });
     },
     putDate() {
       const startTime =
@@ -259,8 +249,7 @@ export default {
 
       axios
         .put(`api/stores/${this.$route.params.storeId}`, { date })
-        .then(() => this.store.dates.push(date))
-        .catch((err) => console.log(err));
+        .then(() => this.store.dates.push(date));
     },
   },
 };

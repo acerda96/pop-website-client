@@ -42,10 +42,10 @@
             <textarea type="text" name="description" v-model="description" />
           </div>
           <div class="add__buttons-ctn">
+            <button class="square-btn" type="submit">Add store</button>
             <button class="square-btn" @click="$modal.hide('newStoreModal')">
               Cancel
             </button>
-            <button class="square-btn" type="submit">Add store</button>
           </div>
         </form>
       </div>
@@ -76,12 +76,9 @@ export default {
   },
   methods: {
     setIndividual() {
-      axios
-        .get("api/individual")
-        .then((res) => {
-          this.individual = res.data;
-        })
-        .catch((err) => console.log(err));
+      axios.get("api/individual").then((res) => {
+        this.individual = res.data;
+      });
     },
     addStore() {
       let data = {
@@ -93,12 +90,10 @@ export default {
         city: this.city,
         website: this.website,
       };
-      axios
-        .post("api/stores", data)
-        .then((res) => {
-          this.$router.push(`/store/${res._id}`);
-        })
-        .catch((err) => console.log(err));
+      axios.post("api/stores", data).then((res) => {
+        console.log("RESR", res);
+        this.$router.push(`/stores/${res.data._id}`);
+      });
     },
   },
 };

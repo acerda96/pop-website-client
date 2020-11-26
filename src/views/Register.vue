@@ -63,10 +63,7 @@ export default {
         mobileNumber: this.mobileNumber,
         company: this.company,
       };
-      this.$store
-        .dispatch("register", data)
-        .then(() => this.$router.push("/"))
-        .catch((err) => console.log(err));
+      this.$store.dispatch("register", data).then(() => this.$router.push("/"));
     },
   },
 };

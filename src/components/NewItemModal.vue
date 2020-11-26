@@ -77,10 +77,10 @@
             </div>
           </div>
           <div class="add__buttons-ctn">
+            <button class="square-btn" type="submit">Add item</button>
             <button class="square-btn" @click="$modal.hide('newItemModal')">
               Cancel
             </button>
-            <button class="square-btn" type="submit">Add item</button>
           </div>
         </form>
       </div>
@@ -128,12 +128,9 @@ export default {
 
       data.append("storeId", this.$route.params.storeId);
 
-      axios
-        .post("api/items", data)
-        .then(() => {
-          this.$modal.hide("newItemModal");
-        })
-        .catch((err) => console.log(err));
+      axios.post("api/items", data).then(() => {
+        this.$modal.hide("newItemModal");
+      });
     },
     pickFile() {
       let input = this.$refs.fileInput;

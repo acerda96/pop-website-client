@@ -38,7 +38,6 @@ export default {
           });
         })
         .catch(() => {
-          console.log("HI");
           this.error = true;
         });
     },

@@ -16,7 +16,7 @@
             {{ "£" + item.unitPrice }}
             <SaveIcon
               :isSaved="item.isSaved"
-              @click.native="toggleSaved(item._id)"
+              @click.native="updateSavedItems(item._id)"
             />
           </div>
         </div>
@@ -48,13 +48,10 @@ export default {
   },
   methods: {
     getItems() {
-      axios
-        .get("api/items")
-        .then((res) => {
-          this.items = this.markSaved(res.data);
-          this.isLoading = false;
-        })
-        .catch((err) => console.log(err));
+      axios.get("api/items").then((res) => {
+        this.items = this.markSaved(res.data);
+        this.isLoading = false;
+      });
     },
     markSaved(items) {
       const savedItems = this.individual.savedItems;
@@ -63,6 +60,11 @@ export default {
           ...item,
           isSaved: savedItems.some((savedId) => savedId === item._id),
         };
+      });
+    },
+    updateSavedItems(itemId) {
+      axios.put(`api/individual`, { itemId }).then(() => {
+        this.toggleSaved(itemId);
       });
     },
     toggleSaved(id) {
@@ -75,13 +77,6 @@ export default {
         }
         return item;
       });
-      this.updateSavedItems(id);
-    },
-    updateSavedItems(itemId) {
-      axios
-        .put(`api/individual`, { itemId })
-        .then(() => {})
-        .catch((err) => console.log(err));
     },
     search(sortCriterion, type) {
       this.isLoading = true;
@@ -90,8 +85,7 @@ export default {
         .then((res) => {
           this.items = this.markSaved(res.data);
           this.isLoading = false;
-        })
-        .catch((err) => console.log(err));
+        });
     },
   },
 };

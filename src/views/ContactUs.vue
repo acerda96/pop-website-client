@@ -51,8 +51,7 @@ export default {
           email: this.email,
           message: this.message,
         })
-        .then(() => (this.success = true))
-        .catch((err) => console.log(err));
+        .then(() => (this.success = true));
 
       this.firstName = "";
       this.lastName = "";
