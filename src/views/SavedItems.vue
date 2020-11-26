@@ -28,8 +28,9 @@
 
 <script>
 import axios from "axios";
-import Loader from "../components/Loader.vue";
-import SaveIcon from "../components/SaveIcon";
+import Loader from "@/components/Loader.vue";
+import SaveIcon from "@/components/SaveIcon";
+import setIndividual from "@/utils/individual";
 
 export default {
   name: "SavedItems",
@@ -42,18 +43,10 @@ export default {
     };
   },
   async mounted() {
-    await this.setIndividual();
+    this.individual = await setIndividual();
     this.getSavedItems();
   },
   methods: {
-    async setIndividual() {
-      await axios
-        .get("api/individual")
-        .then((res) => {
-          this.individual = res.data;
-        })
-        .catch((err) => console.log(err));
-    },
     getSavedItems() {
       axios
         .get("api/individual/saved-items")

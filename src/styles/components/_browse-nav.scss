@@ -15,18 +15,13 @@ $filter-height: 30px;
   border: none;
 }
 
-.browse-nav__location {
-  display: flex;
-  align-items: center;
-  height: $filter-height;
-}
-
 .browse-nav {
   background-color: $sub-accent-color;
   width: 100%;
   padding: 10px;
+  padding-right: 30px;
   display: flex;
-  justify-content: space-evenly;
+  justify-content: flex-end;
   align-items: center;
   flex-wrap: wrap;
 }

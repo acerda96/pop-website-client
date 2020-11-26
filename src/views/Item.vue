@@ -32,7 +32,8 @@
 
 <script>
 import axios from "axios";
-import Loader from "../components/Loader.vue";
+import Loader from "@/components/Loader.vue";
+import setIndividual from "@/utils/individual";
 
 export default {
   name: "Item",
@@ -48,18 +49,10 @@ export default {
     };
   },
   async mounted() {
-    await this.setIndividual();
+    this.individual = await setIndividual();
     this.getItem();
   },
   methods: {
-    async setIndividual() {
-      await axios
-        .get("api/individual")
-        .then((res) => {
-          this.individual = res.data;
-        })
-        .catch((err) => console.log(err));
-    },
     getItem() {
       console.log(this.$route);
       axios
@@ -73,3 +66,4 @@ export default {
   },
 };
 </script>
+``

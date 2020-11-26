@@ -1,43 +1,46 @@
 <template>
-  <div class="stores">
-    <NewStoreModal />
-    <Loader v-if="isLoading" />
-    <div class="flex flex-col items-center" v-if="!isLoading">
-      <p>Name</p>
-      <p>Email</p>
-      <p>Password</p>
+  <div class="flex flex-col items-center mt-10">
+    <div class="flex flex-col">
+      <label> Password: </label>
+      <input v-model="password" type="password" />
     </div>
+    <button class="square-btn w-40 m-5" @click="deleteAccount">
+      Delete account
+    </button>
+    <div class="mt-5 text-red-700" v-if="error">Failed to delete account</div>
   </div>
 </template>
 
 <script>
 import axios from "axios";
-import Loader from "../components/Loader.vue";
+import setIndividual from "@/utils/individual";
 
 export default {
-  name: "Stores",
+  name: "Account",
   data() {
     return {
       individual: {},
-      isLoading: null,
+      password: "",
+      error: false,
     };
   },
-  components: {
-    Loader,
-  },
   async mounted() {
-    this.isLoading = true;
-    await this.setIndividual();
+    this.individual = await setIndividual();
   },
   methods: {
-    async setIndividual() {
-      await axios
-        .get("api/individual")
-        .then((res) => {
-          this.individual = res.data;
-          this.isLoading = false;
+    deleteAccount() {
+      axios
+        .delete("api/account", { data: { password: this.password } })
+        .then(() => {
+          this.error = false;
+          this.$store.dispatch("logout").then(() => {
+            this.$router.push("/");
+          });
         })
-        .catch((err) => console.log(err));
+        .catch(() => {
+          console.log("HI");
+          this.error = true;
+        });
     },
   },
 };

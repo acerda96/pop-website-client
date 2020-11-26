@@ -10,7 +10,7 @@
       <div class="home__sub-title">Discover new styles</div>
     </div>
     <div class="home__row">
-      <img src="../images/image1.jpg" class="h-full" />
+      <img src="@/images/image1.jpg" class="h-full" />
       <div class="home__row-txt-ctn">
         <div class="home__row-txt-title">See what's on sale</div>
         <div class="home__row-txt-desc">
@@ -26,10 +26,10 @@
           store
         </div>
       </div>
-      <img src="../images/image2.jpg" class="h-full" />
+      <img src="@/images/image2.jpg" class="h-full" />
     </div>
     <div class="home__row">
-      <img src="../images/image3.jpg" class="h-full" />
+      <img src="@/images/image3.jpg" class="h-full" />
       <div class="home__row-txt">
         <div class="home__row-txt-title">Support local businesses</div>
         <div class="home__row-txt-desc">
@@ -41,7 +41,7 @@
 </template>
 
 <script>
-import BrowseNowButton from "../components/BrowseNowButton";
+import BrowseNowButton from "@/components/BrowseNowButton";
 
 export default {
   name: "Home",

@@ -1,5 +1,5 @@
 <template>
-  <div class="flex justify-center">
+  <div class="flex justify-center pt-5">
     <div>
       <form class="basic-form" @submit.prevent="login">
         <div class="basic-form__heading">
@@ -15,12 +15,7 @@
           <input type="password" name="password" v-model="password" />
         </div>
         <button type="submit" class="square-btn">Login</button>
-        <div class="basic-form__links">
-          <a>Forgotten your password?</a>
-          <router-link to="/sign-up"
-            >Don't have an account? Sign up now!</router-link
-          >
-        </div>
+        <div class="mt-5 text-red-700" v-if="error">Login failed</div>
       </form>
     </div>
   </div>
@@ -33,6 +28,7 @@ export default {
     return {
       email: "",
       password: "",
+      error: false,
     };
   },
   methods: {
@@ -41,8 +37,11 @@ export default {
       let password = this.password;
       this.$store
         .dispatch("login", { email, password })
-        .then(() => this.$router.push("/browse"))
-        .catch((err) => console.log(err));
+        .then(() => {
+          this.error = false;
+          this.$router.push("/browse");
+        })
+        .catch(() => (this.error = true));
     },
   },
 };

@@ -151,11 +151,12 @@
 
 <script>
 import axios from "axios";
-import Loader from "../components/Loader.vue";
-import NewDate from "../components/NewDate.vue";
-import EditButton from "../components/EditButton.vue";
-import NewItemModal from "../views/NewItemModal.vue";
 import moment from "moment";
+import Loader from "@/components/Loader.vue";
+import NewDate from "@/components/NewDate.vue";
+import EditButton from "@/components/EditButton.vue";
+import NewItemModal from "@/views/NewItemModal.vue";
+import setIndividual from "@/utils/individual";
 
 export default {
   name: "Store",
@@ -181,19 +182,11 @@ export default {
     };
   },
   async mounted() {
-    await this.setIndividual();
+    this.individual = await setIndividual();
     this.getStore();
     this.getItems();
   },
   methods: {
-    async setIndividual() {
-      await axios
-        .get("api/individual")
-        .then((res) => {
-          this.individual = res.data;
-        })
-        .catch((err) => console.log(err));
-    },
     getStore() {
       axios
         .get(`api/stores/${this.$route.params.storeId}`)

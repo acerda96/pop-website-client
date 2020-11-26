@@ -19,8 +19,9 @@
 
 <script>
 import axios from "axios";
-import Loader from "../components/Loader.vue";
-import NewStoreModal from "../views/NewStoreModal.vue";
+import Loader from "@/components/Loader.vue";
+import NewStoreModal from "@/views/NewStoreModal.vue";
+import setIndividual from "@/utils/individual";
 
 export default {
   name: "Stores",
@@ -37,18 +38,10 @@ export default {
   },
   async mounted() {
     this.isLoading = true;
-    await this.setIndividual();
+    this.individual = await setIndividual();
     this.getStores();
   },
   methods: {
-    async setIndividual() {
-      await axios
-        .get("api/individual")
-        .then((res) => {
-          this.individual = res.data;
-        })
-        .catch((err) => console.log(err));
-    },
     getStores() {
       axios
         .get(`api/stores?userId=${this.individual._id}`)

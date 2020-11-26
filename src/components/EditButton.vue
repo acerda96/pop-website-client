@@ -31,14 +31,12 @@ export default {
   },
   methods: {
     toggleEditTest() {
-      console.log(this.isEditingFieldName);
       this.$emit("toggleEdit", this.isEditingFieldName, !this.isEditingTest);
     },
     saveEdit() {
       const data = {};
 
       this.fields.forEach((field) => {
-        console.log(this.store, field, data);
         data[field] = this.store[field];
       });
 

@@ -1,11 +1,5 @@
 <template>
   <div class="browse-nav">
-    <div class="browse-nav__location">
-      <button class="map-marker">
-        <MapMarker />
-      </button>
-      <input placeholder="City/postcode" class="filter" />
-    </div>
     <select class="filter dropdown" v-model="sortCriterion" @change="onChange">
       <option value disabled>Sort by...</option>
       <option value="0">Recently added</option>
@@ -24,13 +18,9 @@
 </template>
 
 <script>
-import MapMarker from "vue-material-design-icons/MapMarker.vue";
-
 export default {
   name: "BrowseNav",
-  components: {
-    MapMarker,
-  },
+
   data() {
     return {
       sortCriterion: 0,

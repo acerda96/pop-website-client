@@ -90,6 +90,7 @@
 
 <script>
 import axios from "axios";
+import setIndividual from "@/utils/individual";
 
 export default {
   name: "NewStoreModal",
@@ -106,17 +107,9 @@ export default {
     };
   },
   async mounted() {
-    await this.setIndividual();
+    this.individual = await setIndividual();
   },
   methods: {
-    async setIndividual() {
-      await axios
-        .get("api/individual")
-        .then((res) => {
-          this.individual = res.data;
-        })
-        .catch((err) => console.log(err));
-    },
     addItem() {
       let values = {
         name: this.name,

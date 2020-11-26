@@ -27,9 +27,10 @@
 
 <script>
 import axios from "axios";
-import BrowseNav from "../components/BrowseNav";
-import SaveIcon from "../components/SaveIcon";
-import Loader from "../components/Loader.vue";
+import BrowseNav from "@/components/BrowseNav";
+import SaveIcon from "@/components/SaveIcon";
+import Loader from "@/components/Loader.vue";
+import setIndividual from "@/utils/individual";
 
 export default {
   name: "Browse",
@@ -42,18 +43,10 @@ export default {
     };
   },
   async mounted() {
-    await this.setIndividual();
+    this.individual = await setIndividual();
     this.getItems();
   },
   methods: {
-    async setIndividual() {
-      await axios
-        .get("api/individual")
-        .then((res) => {
-          this.individual = res.data;
-        })
-        .catch((err) => console.log(err));
-    },
     getItems() {
       axios
         .get("api/items")
