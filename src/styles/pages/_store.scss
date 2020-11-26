@@ -1,0 +1,98 @@
+.store-ctn {
+  display: flex;
+  justify-content: center;
+  margin: 20px;
+  background: white;
+  width: 80%;
+  h4 {
+    margin: 10px 0 0 0;
+  }
+  p {
+    margin: 2px;
+  }
+}
+
+.store__heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.store__sec {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  width: 100%;
+}
+
+.store__details {
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+  align-items: center;
+  margin-top: 20px;
+  border-radius: 10px;
+}
+
+.store__add-date-btns {
+  display: flex;
+  justify-content: flex-end;
+}
+
+$item-size: 180px;
+
+.store__date {
+  display: flex;
+  justify-content: space-around;
+}
+
+.store__date-remove {
+  text-decoration: underline;
+  font-size: 13px;
+  &:hover {
+    color: grey;
+  }
+  cursor: pointer;
+}
+
+.store__item {
+  margin: 10px;
+  width: $item-size;
+  text-align: center;
+  cursor: pointer;
+  box-shadow: 0 5px 6px -6px black;
+  border: 1px solid rgb(201, 199, 199);
+
+  a {
+    color: black;
+    text-decoration: none;
+  }
+  &:hover {
+    transform: scale(1.02);
+  }
+}
+
+.store__item-thumbnail {
+  width: $item-size;
+  height: $item-size;
+}
+
+.store__item-name {
+  display: flex;
+  justify-content: space-between;
+  padding: 7px;
+}
+
+.store__items {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding-bottom: 30px;
+}
+
+@media (max-width: 500px) {
+  .store-ctn {
+    width: 95%;
+  }
+}

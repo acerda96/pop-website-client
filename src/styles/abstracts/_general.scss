@@ -1,0 +1,76 @@
+body {
+  // background-image: url("./images/background.jpg");
+  background-color: rgb(216, 216, 216);
+  //   background-attachment: fixed;
+  font-family: $main-font;
+  background-size: 100%;
+  scroll-padding-top: 50px;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  margin: 0;
+}
+
+input:focus,
+textarea:focus,
+button:focus,
+select:focus {
+  outline: none;
+}
+
+input,
+textarea,
+button,
+select {
+  font-family: $main-font;
+}
+
+li {
+  list-style-type: none;
+  padding: 10px 20px;
+}
+
+button {
+  cursor: pointer;
+}
+
+a {
+  color: black;
+  cursor: pointer;
+  text-decoration: none;
+  &:hover {
+    color: grey;
+  }
+}
+
+h2 {
+  font-size: 28px !important;
+  font-weight: bold !important;
+}
+
+h4 {
+  font-weight: bold !important;
+}
+
+.chevron-left {
+  cursor: pointer;
+}
+
+@media (max-width: 600px) {
+  h2 {
+    font-size: 23px !important;
+  }
+  h4 {
+    font-size: 18px !important;
+  }
+  p {
+    font-size: 16px !important;
+  }
+}
