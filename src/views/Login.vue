@@ -1,9 +1,9 @@
 <template>
-  <div class="flex justify-center pt-5">
+  <div class="fade-in flex justify-center pt-5">
     <div>
       <form class="basic-form" @submit.prevent="login">
         <div class="basic-form__heading">
-          Login
+          Welcome back!
         </div>
         <hr />
         <div class="basic-form__input-ctn--large">
@@ -14,8 +14,13 @@
           <label for="password"> Password </label>
           <input type="password" name="password" v-model="password" />
         </div>
-        <button type="submit" class="square-btn">Login</button>
-        <div class="mt-5 text-red-700" v-if="error">Login failed</div>
+        <div class="w-full flex flex-col items-center justify-around">
+          <button type="submit" class="square-btn">Login</button>
+          <router-link to="/sign-up">Don't have an account?</router-link>
+        </div>
+        <div class="mt-5 text-red-700" v-if="error">
+          Your email or password is incorrect
+        </div>
       </form>
     </div>
   </div>

@@ -1,11 +1,25 @@
-$theme: black;
+$theme: $sub-accent-color;
+
+.vdatetime-popup {
+  width: 280px !important;
+}
 
 .vdatetime-popup__header {
   background: $theme !important;
+  font-family: $main-font !important;
+}
+
+.vdatetime-calendar {
+  font-family: $main-font !important;
+}
+
+.vdatetime-time-picker {
+  font-family: $main-font !important;
 }
 
 .vdatetime-popup__actions__button {
   color: $theme !important;
+  font-family: $main-font !important;
 }
 
 .vdatetime-calendar__month__day--selected,
@@ -17,15 +31,18 @@ $theme: black;
   color: $theme !important;
 }
 
+.vdatetime-input {
+  text-align: left !important;
+  color: rgb(95, 93, 93) !important;
+}
+
 .datetime-picker {
   display: flex;
   flex-direction: column;
   transition: opacity 0.25s ease-in-out;
-  justify-content: space-around;
   align-items: center;
   margin: 14px;
-  max-width: 500px;
-  border: 1px solid black;
+  width: 100%;
   align-self: center;
 
   input {
@@ -33,7 +50,6 @@ $theme: black;
     width: 100px;
     text-align: right;
     font-size: 16px;
-    font-weight: bold;
     cursor: pointer;
   }
   svg {
@@ -42,22 +58,27 @@ $theme: black;
     cursor: pointer;
   }
   p {
-    font-size: 14px;
-    font-weight: bold;
+    font-size: 18px;
     margin: 0px;
   }
 
   .datetime-picker__col {
     display: flex;
-    flex-direction: column;
-    align-items: flex-end;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
   }
 
   .datetime-picker__dates {
     display: flex;
-    justify-content: space-around;
+    flex-direction: column;
+    justify-content: space-between;
     align-items: center;
-    margin: 10px;
+    width: 400px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-top: 1px solid gray;
+    border-bottom: 1px solid gray;
   }
 
   .datetime-picker__icons {
@@ -74,7 +95,9 @@ $theme: black;
     }
     input {
       width: 70px;
-      font-size: 13px;
+    }
+    .datetime-picker__dates {
+      width: 100%;
     }
   }
 }

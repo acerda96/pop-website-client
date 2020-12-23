@@ -1,12 +1,5 @@
 export const links = [
   {
-    title: "About",
-    name: "about",
-    to: "/#about",
-    requiresLogin: false,
-    alwaysShow: false,
-  },
-  {
     title: "Browse",
     name: "browse",
     to: "/browse",
@@ -18,34 +11,20 @@ export const links = [
     name: "host",
     to: "/stores",
     requiresLogin: false,
-    alwaysShow: false,
-  },
-  {
-    title: "Login",
-    name: "login",
-    to: "/login",
-    requiresLogin: false,
-    alwaysShow: false,
-  },
-  {
-    title: "Sign up",
-    name: "sign-up",
-    to: "/sign-up",
-    requiresLogin: false,
-    alwaysShow: false,
+    alwaysShow: true,
   },
   {
     title: "Saved items",
     name: "saved",
     to: "/saved",
     requiresLogin: true,
-    alwaysShow: false,
+    alwaysShow: true,
   },
   {
-    title: "My Stores",
-    name: "stores",
-    to: "/stores",
-    requiresLogin: true,
+    title: "Login/Sign up",
+    name: "login",
+    to: "/login",
+    requiresLogin: false,
     alwaysShow: false,
   },
   {

@@ -1,5 +1,5 @@
 <template>
-  <div class="flex justify-center pt-5">
+  <div class="fade-in flex justify-center pt-5">
     <div>
       <form class="basic-form" @submit.prevent="register">
         <div class="basic-form__heading">
@@ -34,7 +34,10 @@
             v-model="confirmPassword"
           />
         </div>
-        <button class="square-btn" type="submit">Sign up</button>
+        <div class="w-full flex flex-col items-center justify-around">
+          <button class="square-btn" type="submit">Sign up</button>
+          <router-link to="/login">Already have an account?</router-link>
+        </div>
       </form>
     </div>
   </div>

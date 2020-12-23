@@ -1,52 +1,31 @@
 <template>
-  <div id="home">
-    <div class="home__title">
-      <div class="home__title-txt">Your Local Marketplace</div>
-      <router-link to="/browse">
-        <BrowseNowButton />
-      </router-link>
-    </div>
-    <div id="about">
-      <div class="home__sub-title">Discover new styles</div>
-    </div>
-    <div class="home__row">
-      <img src="@/images/image1.jpg" class="h-full" />
-      <div class="home__row-txt-ctn">
-        <div class="home__row-txt-title">See what's on sale</div>
-        <div class="home__row-txt-desc">
-          Find your next favourite shirt or shoes from nearby stores
+  <div
+    class="fade-in-slow flex flex-col items-center justify-center my-10 xs:mt-0 h-4/6 xs:h-full"
+  >
+    <div
+      class="w-2/4 h-full lg:w-full bg-white flex flex-col items-center mb-10"
+    >
+      <div class="home__title flex flex-col items-center pt-20 xs:pt-10">
+        <div class="text-8xl text-center">Your Local Marketplace</div>
+        <div
+          class="text-2xl text-center px-2 my-5 xs:my-0 sm:text-lg xs:text-base"
+        >
+          Discover new brands & support small businesses
         </div>
-      </div>
-    </div>
-    <div class="home__row">
-      <div class="home__row-txt-ctn">
-        <div class="home__row-txt-title">Get directions</div>
-        <div class="home__row-txt-desc">
-          When you've found your new fit Pop will show you how to get to the
-          store
-        </div>
-      </div>
-      <img src="@/images/image2.jpg" class="h-full" />
-    </div>
-    <div class="home__row">
-      <img src="@/images/image3.jpg" class="h-full" />
-      <div class="home__row-txt">
-        <div class="home__row-txt-title">Support local businesses</div>
-        <div class="home__row-txt-desc">
-          All items are sold by independent sellers
-        </div>
+        <router-link to="/browse">
+          <button
+            class="bg-black text-white text-xl hover:bg-gray-200 hover:text-black p-2 px-6 uppercase xs:text-xs"
+          >
+            Browse now
+          </button>
+        </router-link>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import BrowseNowButton from "@/components/BrowseNowButton";
-
 export default {
   name: "Home",
-  components: {
-    BrowseNowButton,
-  },
 };
 </script>

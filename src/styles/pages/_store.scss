@@ -1,31 +1,3 @@
-.store-ctn {
-  display: flex;
-  justify-content: center;
-  margin: 20px;
-  background: white;
-  width: 80%;
-  h4 {
-    margin: 10px 0 0 0;
-  }
-  p {
-    margin: 2px;
-  }
-}
-
-.store__heading {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%;
-}
-
-.store__sec {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  width: 100%;
-}
-
 .store__details {
   display: flex;
   flex-direction: column;

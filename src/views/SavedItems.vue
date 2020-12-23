@@ -1,10 +1,10 @@
 <template>
-  <div class="browse">
-    <h2 class="pl-6">Saved Items</h2>
+  <div class="bg-white w-full my-4 xs:mt-1">
+    <h2 class="text-3xl text-center py-3">Saved Items</h2>
     <hr class="w-full" />
     <div class="browse__body">
       <Loader v-if="isLoading" />
-      <div v-if="!isLoading" class="browse__items">
+      <div v-if="!isLoading" class="browse__items fade-in">
         <div class="browse__item" v-for="item in items" :key="item._id">
           <router-link :to="'/browse/' + item._id">
             <img

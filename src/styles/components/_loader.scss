@@ -1,36 +1,35 @@
-.loader {
-  display: flex;
-  flex-direction: row;
-  padding-top: 100px;
-  .circle {
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
-    background-color: rgb(168, 168, 168);
-    animation-name: loading;
-    animation-duration: 800ms;
-    animation-iteration-count: infinite;
+.lds-ring {
+  display: inline-block;
+  position: relative;
+  width: 80px;
+  height: 80px;
+}
+.lds-ring div {
+  box-sizing: border-box;
+  display: block;
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  margin: 8px;
+  border: 5px solid $sub-accent-color;
+  border-radius: 50%;
+  animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+  border-color: $sub-accent-color transparent transparent transparent;
+}
+.lds-ring div:nth-child(1) {
+  animation-delay: -0.45s;
+}
+.lds-ring div:nth-child(2) {
+  animation-delay: -0.3s;
+}
+.lds-ring div:nth-child(3) {
+  animation-delay: -0.15s;
+}
+@keyframes lds-ring {
+  0% {
+    transform: rotate(0deg);
   }
-}
-
-@keyframes loading {
-  from {
-    transform: scale(1);
+  100% {
+    transform: rotate(360deg);
   }
-  to {
-    transform: scale(-1);
-  }
-}
-
-.a {
-  animation-delay: 0ms;
-}
-.b {
-  animation-delay: 100ms;
-}
-.c {
-  animation-delay: 200ms;
-}
-.d {
-  animation-delay: 300ms;
 }

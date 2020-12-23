@@ -1,14 +1,9 @@
 <template>
-  <div class="datetime-picker">
+  <div class="fade-in datetime-picker">
     <div class="datetime-picker__dates">
       <div class="datetime-picker__col">
         <p>Date</p>
-        <datetime
-          class="datetime-picker__date"
-          :min-datetime="currentDateTime"
-          type="date"
-          v-model="date"
-        />
+        <datetime :min-datetime="currentDateTime" type="date" v-model="date" />
       </div>
       <div class="datetime-picker__col">
         <p>Start time</p>
@@ -17,6 +12,7 @@
           :min-datetime="currentDateTime"
           type="time"
           v-model="startTime"
+          title="Start time"
         />
       </div>
       <div class="datetime-picker__col">
@@ -26,6 +22,7 @@
           :min-datetime="startTime"
           type="time"
           v-model="endTime"
+          title="End time"
         />
       </div>
     </div>

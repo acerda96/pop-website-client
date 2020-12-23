@@ -10,7 +10,7 @@
             :class="getActive($route.name)"
             @click="onClick(link.name)"
           >
-            <router-link :to="link.to" class="upper-navbar__link">{{
+            <router-link :to="link.to" class="upper-navbar__link uppercase">{{
               link.title
             }}</router-link>
           </li>
@@ -42,7 +42,7 @@ import MenuIcon from "vue-material-design-icons/Menu.vue";
 import { links } from "@/nav-links";
 
 export default {
-  name: "NavBar",
+  name: "Navigation",
   components: {
     MenuIcon,
   },

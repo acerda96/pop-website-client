@@ -5,7 +5,7 @@ import Browse from "./views/Browse.vue";
 import SavedItems from "./views/SavedItems.vue";
 import ContactUs from "./views/ContactUs.vue";
 import Login from "./views/Login.vue";
-import Stores from "./views/Stores.vue";
+import Host from "./views/Host.vue";
 import Store from "./views/Store.vue";
 import Item from "./views/Item.vue";
 import Register from "./views/Register.vue";
@@ -51,7 +51,7 @@ let router = new Router({
     {
       path: "/stores",
       name: "stores",
-      component: Stores,
+      component: Host,
       meta: {
         requiresAuth: true,
       },

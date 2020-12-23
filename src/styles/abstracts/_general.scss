@@ -1,7 +1,5 @@
 body {
-  // background-image: url("./images/background.jpg");
-  background-color: rgb(216, 216, 216);
-  //   background-attachment: fixed;
+  background-color: $accent-color;
   font-family: $main-font;
   background-size: 100%;
   scroll-padding-top: 50px;
@@ -48,15 +46,6 @@ a {
   &:hover {
     color: grey;
   }
-}
-
-h2 {
-  font-size: 28px !important;
-  font-weight: bold !important;
-}
-
-h4 {
-  font-weight: bold !important;
 }
 
 .chevron-left {

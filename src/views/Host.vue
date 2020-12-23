@@ -1,10 +1,16 @@
 <template>
-  <div class="stores">
+  <div class="bg-white w-full my-4 flex flex-col items-center xs:mt-1">
     <NewStoreModal />
+    <h2 class="text-3xl text-center py-3">My Stores</h2>
+    <hr class="w-full" />
     <Loader v-if="isLoading" />
-    <div class="flex flex-col items-center" v-if="!isLoading">
-      <div class="stores__stores">
-        <div class="stores__store" v-for="store in stores" :key="store.id">
+    <div class="flex flex-col items-center mb-10" v-else>
+      <div class="fade-in flex justify-center flex-wrap w-1/2">
+        <div
+          class="bg-white flex p-5 m-5 justify-center pointer border border-gray-700 w-40 text-center shadow-md"
+          v-for="store in stores"
+          :key="store.id"
+        >
           <router-link :to="'/stores/' + store._id">
             <p>{{ store.name }}</p>
           </router-link>
@@ -24,7 +30,7 @@ import NewStoreModal from "@/components/NewStoreModal.vue";
 import setIndividual from "@/utils/individual";
 
 export default {
-  name: "Stores",
+  name: "Host",
   data() {
     return {
       individual: {},

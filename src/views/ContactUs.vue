@@ -1,27 +1,27 @@
 <template>
-  <div class="flex justify-center">
+  <div class="fade-in flex justify-center mt-5">
     <div>
       <form class="basic-form" @submit.prevent="submit">
         <div class="basic-form__heading">Contact Us</div>
-        <div class="basic-form__input-ctn">
+        <div class="basic-form__input-ctn--large">
           <label for="name"> First name </label>
           <input type="text" name="firstName" v-model="firstName" />
         </div>
-        <div class="basic-form__input-ctn">
+        <div class="basic-form__input-ctn--large">
           <label for="name"> Last name </label>
           <input type="text" name="lastName" v-model="lastName" />
         </div>
-        <div class="basic-form__input-ctn">
+        <div class="basic-form__input-ctn--large">
           <label for="name"> Email </label>
           <input type="text" name="email" v-model="email" />
         </div>
-        <div class="basic-form__input-ctn">
+        <div class="basic-form__input-ctn--large">
           <label for="name"> Message </label>
           <textarea type="text" name="message" v-model="message" />
         </div>
-        <button type="submit" class="contact-btn">Submit</button>
+        <button type="submit" class="square-btn">Submit</button>
         <div v-if="success" class="basic-form--success">
-          Thanks, we will try to get back to you within 24h!
+          Thanks, we will try to get back to you within 24 hours!
         </div>
       </form>
     </div>

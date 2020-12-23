@@ -1,42 +1,45 @@
 <template>
-  <div class="footer">
-    <ul class="footer__links">
-      <li>
-        <router-link to="/contact">
-          <div class="footer__link">
-            <div class="footer__link-txt">Contact Us</div>
-          </div>
-        </router-link>
-      </li>
-      <li>
-        <router-link to="/"
-          ><div class="footer__link">
-            <a
-              class="footer__link-txt"
-              href="https://twitter.com/Pop_Marketplace"
-            >
-              Follow Us
-            </a>
-          </div>
-        </router-link>
-      </li>
-      <li>
-        <router-link to="/privacy">
-          <div class="footer__link">
-            <div class="footer__link-txt">Privacy Policy</div>
-          </div></router-link
-        >
-      </li>
-    </ul>
-    <div class="copyright-icon"><Copyright />Pop Marketplace</div>
+  <div class="bg-white">
+    <div class="flex justify-between h-full pt-2">
+      <div class="h-full pl-10 flex-col items-center justify-center">
+        <div class="flex items-center xs:p-1">
+          <div>©</div>
+          <div class="xxs:text-sm text-center">Pop Marketplace</div>
+        </div>
+        <div class="flex items-center justify-center pt-1">
+          <a
+            class="xs:p-1 underline xxs:text-sm text-gray-600 "
+            href="https://twitter.com/Pop_Marketplace"
+          >
+            <Twitter :size="20" class="icon" />
+          </a>
+        </div>
+      </div>
+      <div class="h-full pr-10 flex flex-col items-center">
+        <div class="xs:p-1">
+          <router-divnk to="/contact">
+            <div>
+              <div class="underline xxs:text-sm">Contact Us</div>
+            </div>
+          </router-divnk>
+        </div>
+        <div class="xs:p-1">
+          <router-divnk to="/privacy">
+            <div>
+              <div class="underline xs:p-1 xxs:text-sm">Privacy</div>
+            </div></router-divnk
+          >
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
-import Copyright from "vue-material-design-icons/Copyright.vue";
+import Twitter from "vue-material-design-icons/Twitter.vue";
 
 export default {
   name: "Footer",
-  components: { Copyright },
+  components: { Twitter },
 };
 </script>

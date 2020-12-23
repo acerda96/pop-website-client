@@ -1,15 +1,17 @@
 <template>
-  <div class="flex justify-center">
-    <div class="store-ctn">
+  <div class="flex justify-center xs:w-full">
+    <div class="flex justify-center my-10 bg-white w-5/6 xs:w-full xs:my-1">
       <NewItemModal />
       <Loader v-if="isLoading" />
       <div class="store__details" v-if="!isLoading">
-        <div class="store__heading">
-          <h2 v-if="!isEditingStore">{{ store.name }}</h2>
+        <div class="flex justify-between items-center w-full">
+          <h2 class="text-3xl text-center py-3" v-if="!isEditingStore">
+            {{ store.name }}
+          </h2>
           <input
             v-if="isEditingStore"
             v-model="store.name"
-            class="border-solid border-2 border-gray-200"
+            class="border border-gray-600 pl-4"
           />
           <EditButton
             :store="store"
@@ -21,9 +23,9 @@
           />
         </div>
         <hr class="w-full" />
-        <div class="store__sec">
-          <div class="store__heading">
-            <h4>Description</h4>
+        <div class="flex flex-col justify-start w-full mb-5">
+          <div class="flex justify-between">
+            <h4 class="text-xl">Description</h4>
             <EditButton
               :store="store"
               :fields="['description']"
@@ -37,13 +39,13 @@
           <input
             v-if="isEditingDescription"
             v-model="store.description"
-            class="border-solid border-2 border-gray-200"
+            class="border border-gray-600 pl-4"
           />
         </div>
         <hr class="w-full" />
-        <div class="store__sec">
-          <div class="store__heading">
-            <h4>Location</h4>
+        <div class="flex flex-col justify-start w-full mb-5">
+          <div class="flex justify-between">
+            <h4 class="text-xl">Location</h4>
             <EditButton
               :store="store"
               :fields="['addressLine1', 'addressLine2', 'postcode', 'city']"
@@ -54,34 +56,33 @@
             />
           </div>
           <div v-if="!isEditingLocation">
-            <p>{{ store.addressLine1 }},</p>
-            <p v-if="!isEditingLocation">{{ store.addressLine2 }},</p>
-            <p>{{ store.postcode }},</p>
-            <p>{{ store.city }}</p>
+            <p v-if="store.addressLine1">{{ store.addressLine1 }},</p>
+            <p v-if="store.addressLine2 && !isEditingLocation">
+              {{ store.addressLine2 }},
+            </p>
+            <p v-if="store.postcode">{{ store.postcode }},</p>
+            <p v-if="store.city">{{ store.city }}</p>
           </div>
           <div class="flex flex-col" v-if="isEditingLocation">
             <input
-              class="border-solid border-2 border-gray-200"
+              class="border border-gray-600 pl-4"
               v-model="store.addressLine1"
             />
             <input
-              class="border-solid border-2 border-gray-200"
+              class="border border-gray-600 pl-4"
               v-model="store.addressLine2"
             />
             <input
-              class="border-solid border-2 border-gray-200"
+              class="border border-gray-600 pl-4"
               v-model="store.postcode"
             />
-            <input
-              class="border-solid border-2 border-gray-200"
-              v-model="store.city"
-            />
+            <input class="border border-gray-600 pl-4" v-model="store.city" />
           </div>
         </div>
         <hr class="w-full" />
-        <div class="store__sec">
-          <div class="store__heading">
-            <h4>Dates</h4>
+        <div class="flex flex-col justify-start w-full mb-5">
+          <div class="flex justify-between">
+            <h4 class="text-xl">Dates</h4>
             <button
               class="underline text-gray-600"
               @click="toggleNewDate"
@@ -117,9 +118,9 @@
           </div>
         </div>
         <hr class="w-full" />
-        <div class="store__sec">
-          <div class="store__heading">
-            <h4>Items</h4>
+        <div class="flex flex-col justify-start w-full mb-5">
+          <div class="flex justify-between">
+            <h4 class="text-xl">Items</h4>
             <button
               class="underline text-gray-600"
               @click="$modal.show('newItemModal')"

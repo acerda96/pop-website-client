@@ -2,9 +2,10 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 30px;
+  padding: 10px 10px 30px 10px;
   width: 500px;
   background-color: white;
+  margin-bottom: 30px;
 
   .basic-form__input-ctn--large {
     width: 100%;
@@ -37,12 +38,13 @@
 
   input {
     border: none;
-    border-bottom: 1px solid black;
+    border: 1px solid rgb(212, 212, 212);
     height: 30px;
+    padding: 0px 4px 0px 4px;
   }
 
   textarea {
-    border: 1px solid black;
+    border: 1px solid rgb(212, 212, 212);
     height: 50px;
     width: 100%;
   }
@@ -63,11 +65,9 @@
   }
 }
 
-@media (max-width: 800px) {
+@media (max-width: 600px) {
   .basic-form {
-    margin-top: 20px;
-    margin-bottom: 20px;
-    width: 280px;
+    width: 400px;
 
     .basic-form__heading {
       font-weight: bold;
@@ -76,12 +76,8 @@
   }
 }
 
-@media (max-width: 500px) {
-  .basic-form__input-ctn {
-    padding: 5px !important;
-  }
-
-  .basic-form__input-ctn--large {
-    padding: 0px !important;
+@media (max-width: 400px) {
+  .basic-form {
+    width: 280px;
   }
 }

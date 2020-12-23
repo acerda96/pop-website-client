@@ -1,5 +1,5 @@
 <template>
-  <div class="browse">
+  <div class="bg-white w-full my-4">
     <BrowseNav @search="search" />
     <div class="browse__body">
       <Loader v-if="isLoading" />
