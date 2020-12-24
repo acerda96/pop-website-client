@@ -33,8 +33,6 @@ $item-size: 180px;
   width: $item-size;
   text-align: center;
   cursor: pointer;
-  box-shadow: 0 5px 6px -6px black;
-  border: 1px solid rgb(201, 199, 199);
 
   a {
     color: black;
@@ -52,6 +50,7 @@ $item-size: 180px;
 
 .store__item-name {
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
   padding: 7px;
 }

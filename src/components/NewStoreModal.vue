@@ -6,7 +6,7 @@
     :scrollable="true"
     :height="700"
   >
-    <div class="flex justify-center">
+    <div class="flex justify-center pt-5">
       <div>
         <form class="basic-form" @submit.prevent="addStore">
           <input

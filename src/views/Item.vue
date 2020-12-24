@@ -1,31 +1,34 @@
 <template>
   <div class="flex justify-center">
-    <div class="item-ctn">
+    <div
+      class="flex flex-col items-center my-10 pt-10 bg-white w-4/6 xs:w-full"
+    >
       <Loader v-if="isLoading" />
-      <div class="item-sub-ctn" v-if="!isLoading">
-        <div class="item__main">
+      <div class="w-full" v-if="!isLoading">
+        <div class="flex justify-around">
           <img
             class="item__thumbnail"
             v-bind:src="'data:image/jpeg;base64,' + item.images[0].buffer"
           />
-          <div class="item__desc">
-            <div class="item__title">
-              <h2>{{ item.name }}, £{{ item.unitPrice }}</h2>
-              <button v-if="isBrowsePage" class="square-btn">Edit</button>
-            </div>
-            <hr class="w-full" />
-            <div class="item__details">
-              <h4>Description</h4>
-              <p>{{ item.description }}</p>
-              <h4>Initial quantity</h4>
-              <p>{{ item.initialQuantity }}</p>
-            </div>
+        </div>
+        <div class="flex flex-col items-center">
+          <div class="flex p-2">
+            <h2 class="text-2xl">{{ item.name }}, £{{ item.unitPrice }}</h2>
+          </div>
+          <hr class="w-full" />
+          <div class="pl-10 w-full">
+            <h4 class="text-xl">Description</h4>
+            <p class="mb-2">{{ item.description }}</p>
+            <h4 class="text-xl">Initial quantity</h4>
+            <p>{{ item.initialQuantity }}</p>
           </div>
         </div>
-        <div class="item__other">
-          <h4>Other items from the same store</h4>
+        <div class="mt-10 flex justify-center">
+          <h4 class="text-xl">Other items from the same store</h4>
         </div>
       </div>
+
+      <div></div>
     </div>
   </div>
 </template>

@@ -1,8 +1,8 @@
 <template>
-  <div class="bg-white w-full my-4 xs:mt-1">
+  <div class="bg-white w-full mt-10 my-4 xs:mt-5">
     <h2 class="text-3xl text-center py-3">Saved Items</h2>
     <hr class="w-full" />
-    <div class="browse__body">
+    <div class="flex justify-center">
       <Loader v-if="isLoading" />
       <div v-if="!isLoading" class="browse__items fade-in">
         <div class="browse__item" v-for="item in items" :key="item._id">
@@ -13,11 +13,14 @@
             />
           </router-link>
           <div class="browse__item-details">
-            {{ item.name }}
-            {{ "£" + item.unitPrice }}
+            <div>
+              <div>{{ item.name }}</div>
+              <div>£{{ item.unitPrice }}</div>
+            </div>
             <SaveIcon
               :isSaved="item.isSaved"
               @click.native="toggleSaved(item._id)"
+              class="pt-1"
             />
           </div>
         </div>

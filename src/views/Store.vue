@@ -1,6 +1,6 @@
 <template>
   <div class="flex justify-center xs:w-full">
-    <div class="flex justify-center my-10 bg-white w-5/6 xs:w-full xs:my-1">
+    <div class="flex justify-center bg-white w-5/6 xs:w-full xs:my-1">
       <NewItemModal />
       <Loader v-if="isLoading" />
       <div class="store__details" v-if="!isLoading">
@@ -11,7 +11,7 @@
           <input
             v-if="isEditingStore"
             v-model="store.name"
-            class="border border-gray-600 pl-4"
+            class="border border-accent-dark pl-4"
           />
           <EditButton
             :store="store"
@@ -39,7 +39,7 @@
           <input
             v-if="isEditingDescription"
             v-model="store.description"
-            class="border border-gray-600 pl-4"
+            class="border border-accent-dark pl-4"
           />
         </div>
         <hr class="w-full" />
@@ -65,18 +65,21 @@
           </div>
           <div class="flex flex-col" v-if="isEditingLocation">
             <input
-              class="border border-gray-600 pl-4"
+              class="border border-accent-dark pl-4"
               v-model="store.addressLine1"
             />
             <input
-              class="border border-gray-600 pl-4"
+              class="border border-accent-dark pl-4"
               v-model="store.addressLine2"
             />
             <input
-              class="border border-gray-600 pl-4"
+              class="border border-accent-dark pl-4"
               v-model="store.postcode"
             />
-            <input class="border border-gray-600 pl-4" v-model="store.city" />
+            <input
+              class="border border-accent-dark pl-4"
+              v-model="store.city"
+            />
           </div>
         </div>
         <hr class="w-full" />
@@ -84,17 +87,20 @@
           <div class="flex justify-between">
             <h4 class="text-xl">Dates</h4>
             <button
-              class="underline text-gray-600"
+              class="underline text-accent-dark"
               @click="toggleNewDate"
               v-if="!isNewDateActive"
             >
               Add date
             </button>
             <div v-if="isNewDateActive" class="store__add-date-btns">
-              <button class="underline text-gray-600 p-3" @click="saveNewDate">
+              <button
+                class="underline text-accent-dark p-3"
+                @click="saveNewDate"
+              >
                 Save
               </button>
-              <button class="underline text-gray-600" @click="toggleNewDate">
+              <button class="underline text-accent-dark" @click="toggleNewDate">
                 Cancel
               </button>
             </div>
@@ -122,7 +128,7 @@
           <div class="flex justify-between">
             <h4 class="text-xl">Items</h4>
             <button
-              class="underline text-gray-600"
+              class="underline text-accent-dark"
               @click="$modal.show('newItemModal')"
             >
               Add

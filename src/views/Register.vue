@@ -1,5 +1,5 @@
 <template>
-  <div class="fade-in flex justify-center pt-5">
+  <div class="fade-in flex justify-center mt-5 pt-5">
     <div>
       <form class="basic-form" @submit.prevent="register">
         <div class="basic-form__heading">

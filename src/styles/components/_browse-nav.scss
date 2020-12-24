@@ -8,20 +8,20 @@ $filter-height: 30px;
 }
 
 .filter {
-  padding: 7px;
+  padding: 2px;
   margin: 10px;
   width: 150px;
-  border-radius: 5px;
   border: none;
+  background: white;
 }
 
 .browse-nav {
-  background-color: $sub-accent-color;
   width: 100%;
   padding: 10px;
+  padding-left: 30px;
   padding-right: 30px;
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
   align-items: center;
   flex-wrap: wrap;
 }
@@ -38,10 +38,6 @@ $filter-height: 30px;
     flex-wrap: nowrap;
     align-items: space-evenly;
     justify-content: space-evenly;
-  }
-  .filter {
-    padding: 4px;
-    width: 120px;
   }
   .dropdown {
     width: 170px;

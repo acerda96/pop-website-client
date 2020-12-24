@@ -6,7 +6,7 @@
     :scrollable="true"
     :height="600"
   >
-    <div class="flex justify-center items-center">
+    <div class="flex justify-center items-center pt-5">
       <div>
         <form
           class="basic-form"
@@ -33,21 +33,21 @@
             </div>
             <div class="basic-form__input-ctn">
               <label for="unitPrice"> Price </label>
-              <input
-                class="basic-form__input--small"
-                style="width: 100px;"
-                type="unitPrice"
-                name="unitPrice"
-                v-model="unitPrice"
-              />
+              <div>
+                £
+                <input
+                  class="basic-form__input--small"
+                  style="width: 100px;"
+                  type="unitPrice"
+                  name="unitPrice"
+                  v-model="unitPrice"
+                />
+              </div>
             </div>
 
             <div class="basic-form__input-ctn">
               <label for="type"> Type </label>
-              <select
-                style="padding: 8px; border: none; border-radius: 5px;"
-                v-model="type"
-              >
+              <select class="p-1 border:none" v-model="type">
                 <option value disabled>Select a type</option>
                 <option value="1">Bottoms</option>
                 <option value="2">Dresses</option>
@@ -67,7 +67,12 @@
             />
           </div>
           <div class="add__image-preview">
-            <input ref="fileInput" type="file" @input="pickFile" />
+            <input
+              class="border-0"
+              ref="fileInput"
+              type="file"
+              @input="pickFile"
+            />
             <div class="add__image-ctn">
               <img
                 v-if="previewImage"

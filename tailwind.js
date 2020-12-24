@@ -2,7 +2,13 @@ module.exports = {
   future: {},
   purge: [],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        "accent-dark": "#363436",
+        "accent-medium": "#909699",
+        "accent-light": "#dadcdd",
+      },
+    },
     screens: {
       "2xl": { max: "1535px" },
       xl: { max: "1279px" },

@@ -1,6 +1,6 @@
 <template>
-  <div class="privacy-policy">
-    <h1>Privacy Policy for Pop Marketplace</h1>
+  <div class="bg-white m-10 p-8">
+    <h1 class="text-3xl">Privacy Policy for Pop Marketplace</h1>
 
     <p>
       At www.pop-marketplace.co.uk, accessible from
@@ -30,14 +30,14 @@
       >.
     </p>
 
-    <h2>Consent</h2>
+    <h2 class="text-2xl mt-4">Consent</h2>
 
     <p>
       By using our website, you hereby consent to our Privacy Policy and agree
       to its terms.
     </p>
 
-    <h2>Information we collect</h2>
+    <h2 class="text-2xl mt-4">Information we collect</h2>
 
     <p>
       The personal information that you are asked to provide, and the reasons
@@ -56,26 +56,34 @@
       telephone number.
     </p>
 
-    <h2>How we use your information</h2>
+    <h2 class="text-2xl mt-4">How we use your information</h2>
 
     <p>We use the information we collect in various ways, including to:</p>
 
     <ul>
-      <li>Provide, operate, and maintain our website</li>
-      <li>Improve, personalise, and expand our website</li>
-      <li>Understand and analyse how you use our website</li>
-      <li>Develop new products, services, features, and functionality</li>
-      <li>
+      <li class="list-disc ml-10">
+        Provide, operate, and maintain our website
+      </li>
+      <li class="list-disc ml-10">
+        Improve, personalise, and expand our website
+      </li>
+      <li class="list-disc ml-10">
+        Understand and analyse how you use our website
+      </li>
+      <li class="list-disc ml-10">
+        Develop new products, services, features, and functionality
+      </li>
+      <li class="list-disc ml-10">
         Communicate with you, either directly or through one of our partners,
         including for customer service, to provide you with updates and other
         information relating to the website, and for marketing and promotional
         purposes
       </li>
-      <li>Send you emails</li>
-      <li>Find and prevent fraud</li>
+      <li class="list-disc ml-10">Send you emails</li>
+      <li class="list-disc ml-10">Find and prevent fraud</li>
     </ul>
 
-    <h2>Log Files</h2>
+    <h2 class="text-2xl mt-4">Log Files</h2>
 
     <p>
       www.pop-marketplace.co.uk follows a standard procedure of using log files.
@@ -89,7 +97,7 @@
       users' movement on the website, and gathering demographic information.
     </p>
 
-    <h2>Advertising Partners Privacy Policies</h2>
+    <h2 class="text-2xl mt-4">Advertising Partners Privacy Policies</h2>
 
     <P
       >You may consult this list to find the Privacy Policy for each of the
@@ -111,7 +119,7 @@
       cookies that are used by third-party advertisers.
     </p>
 
-    <h2>Third Party Privacy Policies</h2>
+    <h2 class="text-2xl mt-4">Third Party Privacy Policies</h2>
 
     <p>
       www.pop-marketplace.co.uk's Privacy Policy does not apply to other
@@ -127,7 +135,9 @@
       web browsers, it can be found at the browsers' respective websites.
     </p>
 
-    <h2>CCPA Privacy Rights (Do Not Sell My Personal Information)</h2>
+    <h2 class="text-2xl mt-4">
+      CCPA Privacy Rights (Do Not Sell My Personal Information)
+    </h2>
 
     <p>
       Under the CCPA, among other rights, California consumers have the right
@@ -151,7 +161,7 @@
       like to exercise any of these rights, please contact us.
     </p>
 
-    <h2>GDPR Data Protection Rights</h2>
+    <h2 class="text-2xl mt-4">GDPR Data Protection Rights</h2>
 
     <p>
       We would like to make sure you are fully aware of all of your data
@@ -188,7 +198,7 @@
       like to exercise any of these rights, please contact us.
     </p>
 
-    <h2>Children's Information</h2>
+    <h2 class="text-2xl mt-4">Children's Information</h2>
 
     <p>
       Another part of our priority is adding protection for children while using

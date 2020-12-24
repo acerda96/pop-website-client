@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-white w-full my-4 flex flex-col items-center xs:mt-1">
+  <div class="bg-white w-full mt-10 my-4 flex flex-col items-center xs:mt-5">
     <NewStoreModal />
     <h2 class="text-3xl text-center py-3">My Stores</h2>
     <hr class="w-full" />
@@ -7,7 +7,7 @@
     <div class="flex flex-col items-center mb-10 w-full" v-else>
       <div class="fade-in flex justify-center flex-wrap w-1/2">
         <div
-          class="bg-white flex p-5 m-5 justify-center pointer border border-gray-700 w-72 text-center shadow-md"
+          class="bg-white flex p-5 m-5 justify-center pointer border border-gray-700 w-40 text-center shadow-md"
           v-for="store in stores"
           :key="store.id"
         >

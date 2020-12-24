@@ -1,10 +1,10 @@
 <template>
-  <div class="bg-white w-full my-4">
-    <BrowseNav @search="search" />
-    <div class="browse__body">
+  <div class="bg-white w-full">
+    <BrowseNav @search="search" class="z-10" />
+    <div class="flex justify-center mt-24">
       <Loader v-if="isLoading" />
       <div v-if="!isLoading" class="browse__items">
-        <div class="browse__item" v-for="item in items" :key="item._id">
+        <div class="browse__item z-0" v-for="item in items" :key="item._id">
           <router-link :to="'/browse/' + item._id">
             <img
               class="browse__item-thumbnail"
@@ -12,11 +12,14 @@
             />
           </router-link>
           <div class="browse__item-details">
-            {{ item.name }}
-            {{ "£" + item.unitPrice }}
+            <div>
+              <div>{{ item.name }}</div>
+              <div>£{{ item.unitPrice }}</div>
+            </div>
             <SaveIcon
               :isSaved="item.isSaved"
               @click.native="updateSavedItems(item._id)"
+              class="pt-1"
             />
           </div>
         </div>
