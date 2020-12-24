@@ -30,7 +30,7 @@ export default {
   methods: {
     deleteAccount() {
       axios
-        .delete("api/account", { data: { password: this.password } })
+        .delete("account", { data: { password: this.password } })
         .then(() => {
           this.error = false;
           this.$store.dispatch("logout").then(() => {

@@ -48,7 +48,7 @@ export default {
   },
   methods: {
     getItems() {
-      axios.get("api/items").then((res) => {
+      axios.get("items").then((res) => {
         this.items = this.markSaved(res.data);
         this.isLoading = false;
       });
@@ -63,7 +63,7 @@ export default {
       });
     },
     updateSavedItems(itemId) {
-      axios.put(`api/individual`, { itemId }).then(() => {
+      axios.put(`individual`, { itemId }).then(() => {
         this.toggleSaved(itemId);
       });
     },
@@ -81,7 +81,7 @@ export default {
     search(sortCriterion, type) {
       this.isLoading = true;
       axios
-        .get(`api/items?sortCriterion=${sortCriterion}&type=${type}`)
+        .get(`items?sortCriterion=${sortCriterion}&type=${type}`)
         .then((res) => {
           this.items = this.markSaved(res.data);
           this.isLoading = false;

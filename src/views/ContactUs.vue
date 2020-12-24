@@ -45,7 +45,7 @@ export default {
   methods: {
     submit() {
       axios
-        .post("api/contact", {
+        .post("contact", {
           firstName: this.firstName,
           lastName: this.lastName,
           email: this.email,

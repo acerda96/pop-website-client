@@ -128,7 +128,7 @@ export default {
 
       data.append("storeId", this.$route.params.storeId);
 
-      axios.post("api/items", data).then(() => {
+      axios.post("items", data).then(() => {
         this.$modal.hide("newItemModal");
       });
     },

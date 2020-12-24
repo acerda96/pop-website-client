@@ -6,7 +6,7 @@
       class="w-2/4 h-full lg:w-full bg-white flex flex-col items-center mb-10"
     >
       <div class="home__title flex flex-col items-center pt-20 xs:pt-10">
-        <div class="text-8xl text-center">Your Local Marketplace</div>
+        <div class="text-8xl text-center title">Your Local Marketplace</div>
         <div
           class="text-2xl text-center px-2 my-5 xs:my-0 sm:text-lg xs:text-base"
         >

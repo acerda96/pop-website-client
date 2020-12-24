@@ -54,7 +54,7 @@ export default {
   },
   methods: {
     getItem() {
-      axios.get(`api/items/${this.$route.params.itemId}`).then((res) => {
+      axios.get(`items/${this.$route.params.itemId}`).then((res) => {
         this.item = res.data;
         this.isLoading = false;
       });

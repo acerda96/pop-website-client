@@ -189,7 +189,7 @@ export default {
   },
   methods: {
     getStore() {
-      axios.get(`api/stores/${this.$route.params.storeId}`).then((res) => {
+      axios.get(`stores/${this.$route.params.storeId}`).then((res) => {
         this.store = res.data;
         this.isLoading = false;
       });
@@ -197,7 +197,7 @@ export default {
     getItems() {
       axios
         .get(
-          `api/items?sortCriterion=0&type=0&storeId=${this.$route.params.storeId}`
+          `items?sortCriterion=0&type=0&storeId=${this.$route.params.storeId}`
         )
         .then((res) => {
           this.items = res.data;
@@ -215,7 +215,7 @@ export default {
       this[field] = val;
     },
     putStore(data, field, val) {
-      axios.put(`api/stores/${this.$route.params.storeId}`, data).then(() => {
+      axios.put(`stores/${this.$route.params.storeId}`, data).then(() => {
         this.toggleEdit(field, val);
       });
     },
@@ -249,7 +249,7 @@ export default {
       };
 
       axios
-        .put(`api/stores/${this.$route.params.storeId}`, { date })
+        .put(`stores/${this.$route.params.storeId}`, { date })
         .then(() => this.store.dates.push(date));
     },
   },

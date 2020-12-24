@@ -48,7 +48,7 @@ export default {
   },
   methods: {
     getSavedItems() {
-      axios.get("api/individual/saved-items").then((res) => {
+      axios.get("individual/saved-items").then((res) => {
         this.items = res.data.map((item) => {
           return {
             ...item,
@@ -71,7 +71,7 @@ export default {
       this.updateSavedItems(id);
     },
     updateSavedItems(itemId) {
-      axios.put(`api/individual`, { itemId: itemId }).then(() => {});
+      axios.put(`individual`, { itemId: itemId }).then(() => {});
     },
   },
 };

@@ -4,6 +4,10 @@
   height: 350px;
 }
 
+.title {
+  font-family: $title-font;
+}
+
 @media (max-width: 800px) {
   .home__title {
     font-size: 70px;

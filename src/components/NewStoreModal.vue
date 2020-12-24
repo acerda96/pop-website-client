@@ -76,7 +76,7 @@ export default {
   },
   methods: {
     setIndividual() {
-      axios.get("api/individual").then((res) => {
+      axios.get("individual").then((res) => {
         this.individual = res.data;
       });
     },
@@ -90,7 +90,7 @@ export default {
         city: this.city,
         website: this.website,
       };
-      axios.post("api/stores", data).then((res) => {
+      axios.post("stores", data).then((res) => {
         console.log("RESR", res);
         this.$router.push(`/stores/${res.data._id}`);
       });

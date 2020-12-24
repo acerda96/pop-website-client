@@ -3,7 +3,7 @@ import axios from "axios";
 export default async function setIndividual() {
   let individual;
   await axios
-    .get("api/individual")
+    .get("individual")
     .then((res) => {
       individual = res.data;
     })

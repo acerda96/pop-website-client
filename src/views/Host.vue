@@ -4,10 +4,10 @@
     <h2 class="text-3xl text-center py-3">My Stores</h2>
     <hr class="w-full" />
     <Loader v-if="isLoading" />
-    <div class="flex flex-col items-center mb-10" v-else>
+    <div class="flex flex-col items-center mb-10 w-full" v-else>
       <div class="fade-in flex justify-center flex-wrap w-1/2">
         <div
-          class="bg-white flex p-5 m-5 justify-center pointer border border-gray-700 w-40 text-center shadow-md"
+          class="bg-white flex p-5 m-5 justify-center pointer border border-gray-700 w-72 text-center shadow-md"
           v-for="store in stores"
           :key="store.id"
         >
@@ -49,7 +49,7 @@ export default {
   },
   methods: {
     getStores() {
-      axios.get(`api/stores?userId=${this.individual._id}`).then((res) => {
+      axios.get(`stores?userId=${this.individual._id}`).then((res) => {
         this.stores = res.data;
         this.isLoading = false;
       });
