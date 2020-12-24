@@ -1,7 +1,8 @@
 <template>
-  <div class="flex justify-center xs:w-full">
+  <div class="flex justify-center my-10 xs:w-full">
+    <div v-if="error">Store not found :(</div>
     <div class="flex justify-center bg-white w-5/6 xs:w-full xs:my-1">
-      <NewItemModal />
+      <NewItemModal @getItems="getItems" />
       <Loader v-if="isLoading" />
       <div class="store__details" v-if="!isLoading">
         <div class="flex justify-between items-center w-full">
@@ -145,8 +146,13 @@
               <div class="store__item-name">
                 <div>
                   {{ item.name }}
+                  £{{ item.unitPrice }}
                 </div>
-                <div>£{{ item.unitPrice }}</div>
+                <div class="italic text-accent-medium">
+                  {{
+                    item.status === "approved" ? "Approved" : "Pending approval"
+                  }}
+                </div>
               </div>
             </div>
           </div>
@@ -163,7 +169,7 @@ import Loader from "@/components/Loader.vue";
 import NewDate from "@/components/NewDate.vue";
 import EditButton from "@/components/EditButton.vue";
 import NewItemModal from "@/components/NewItemModal.vue";
-import setIndividual from "@/utils/individual";
+import setIndividual from "@/lib/individual";
 
 export default {
   name: "Store",
@@ -186,6 +192,7 @@ export default {
       isEditingStore: false,
       isEditingLocation: false,
       isEditingDescription: false,
+      error: false,
     };
   },
   async mounted() {
@@ -195,16 +202,24 @@ export default {
   },
   methods: {
     getStore() {
-      axios.get(`stores/${this.$route.params.storeId}`).then((res) => {
-        this.store = res.data;
-        this.isLoading = false;
-      });
+      axios
+        .get(`stores/${this.$route.params.storeId}`)
+        .then((res) => {
+          if (
+            res.data.status !== "approved" &&
+            this.individual._id !== res.data.userId
+          ) {
+            throw Error();
+          }
+          this.store = res.data;
+          this.isLoading = false;
+        })
+        .catch(() => (this.error = true));
     },
     getItems() {
+      console.log("GETTING ITEMS");
       axios
-        .get(
-          `items?sortCriterion=0&type=0&storeId=${this.$route.params.storeId}`
-        )
+        .get(`items?sortCriterion=0&storeId=${this.$route.params.storeId}`)
         .then((res) => {
           this.items = res.data;
           this.isLoading = false;

@@ -4,7 +4,11 @@
     <div class="flex justify-center mt-24">
       <Loader v-if="isLoading" />
       <div v-if="!isLoading" class="browse__items">
-        <div class="browse__item z-0" v-for="item in items" :key="item._id">
+        <div
+          class="browse__item fade-in\ z-0"
+          v-for="item in items"
+          :key="item._id"
+        >
           <router-link :to="'/browse/' + item._id">
             <img
               class="browse__item-thumbnail"
@@ -33,7 +37,7 @@ import axios from "axios";
 import BrowseNav from "@/components/BrowseNav";
 import SaveIcon from "@/components/SaveIcon";
 import Loader from "@/components/Loader.vue";
-import setIndividual from "@/utils/individual";
+import setIndividual from "@/lib/individual";
 
 export default {
   name: "Browse",
@@ -81,14 +85,12 @@ export default {
         return item;
       });
     },
-    search(sortCriterion, type) {
+    search(sortCriterion) {
       this.isLoading = true;
-      axios
-        .get(`items?sortCriterion=${sortCriterion}&type=${type}`)
-        .then((res) => {
-          this.items = this.markSaved(res.data);
-          this.isLoading = false;
-        });
+      axios.get(`items?sortCriterion=${sortCriterion}`).then((res) => {
+        this.items = this.markSaved(res.data);
+        this.isLoading = false;
+      });
     },
   },
 };

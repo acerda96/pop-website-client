@@ -35,12 +35,11 @@ export default {
   data() {
     return {
       sortCriterion: 0,
-      type: 0,
     };
   },
   methods: {
     onChange() {
-      this.$emit("search", this.sortCriterion, this.type);
+      this.$emit("search", this.sortCriterion);
     },
   },
 };

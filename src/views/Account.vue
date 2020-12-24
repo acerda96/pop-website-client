@@ -15,7 +15,7 @@
 
 <script>
 import axios from "axios";
-import setIndividual from "@/utils/individual";
+import setIndividual from "@/lib/individual";
 
 export default {
   name: "Account",

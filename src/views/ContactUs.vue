@@ -1,5 +1,5 @@
 <template>
-  <div class="fade-in flex justify-center mt-5">
+  <div class="fade-in flex justify-center mt-10">
     <div>
       <form class="basic-form" @submit.prevent="submit">
         <div class="basic-form__heading">Contact Us</div>

@@ -42,7 +42,9 @@
             <textarea type="text" name="description" v-model="description" />
           </div>
           <div class="add__buttons-ctn">
-            <button class="square-btn" type="submit">Add store</button>
+            <button class="square-btn" type="submit">
+              Submit for approval
+            </button>
             <button class="square-btn" @click="$modal.hide('newStoreModal')">
               Cancel
             </button>
@@ -55,7 +57,7 @@
 
 <script>
 import axios from "axios";
-import setIndividual from "@/utils/individual";
+import setIndividual from "@/lib/individual";
 
 export default {
   name: "NewStoreModal",

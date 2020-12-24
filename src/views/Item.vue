@@ -36,7 +36,7 @@
 <script>
 import axios from "axios";
 import Loader from "@/components/Loader.vue";
-import setIndividual from "@/utils/individual";
+import setIndividual from "@/lib/individual";
 
 export default {
   name: "Item",

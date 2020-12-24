@@ -45,7 +45,7 @@
               </div>
             </div>
 
-            <div class="basic-form__input-ctn">
+            <!-- <div class="basic-form__input-ctn">
               <label for="type"> Type </label>
               <select class="p-1 border:none" v-model="type">
                 <option value disabled>Select a type</option>
@@ -55,7 +55,7 @@
                 <option value="4">Shoes</option>
                 <option value="5">Tops</option>
               </select>
-            </div>
+            </div> -->
           </div>
           <div class="basic-form__input-ctn--large">
             <label for="description"> Description </label>
@@ -95,7 +95,7 @@
 
 <script>
 import axios from "axios";
-import setIndividual from "@/utils/individual";
+import setIndividual from "@/lib/individual";
 
 export default {
   name: "NewStoreModal",
@@ -135,6 +135,7 @@ export default {
 
       axios.post("items", data).then(() => {
         this.$modal.hide("newItemModal");
+        this.$emit("getItems");
       });
     },
     pickFile() {

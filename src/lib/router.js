@@ -1,17 +1,16 @@
 import Vue from "vue";
 import Router from "vue-router";
-import Home from "./views/Home.vue";
-import Browse from "./views/Browse.vue";
-import SavedItems from "./views/SavedItems.vue";
-import ContactUs from "./views/ContactUs.vue";
-import Login from "./views/Login.vue";
-import Host from "./views/Host.vue";
-import Store from "./views/Store.vue";
-import Item from "./views/Item.vue";
-import Register from "./views/Register.vue";
-import PrivacyPolicy from "./views/PrivacyPolicy.vue";
-import Account from "./views/Account.vue";
-import store from "./store.js";
+import Home from "../views/Home.vue";
+import Browse from "../views/Browse.vue";
+import SavedItems from "../views/SavedItems.vue";
+import ContactUs from "../views/ContactUs.vue";
+import Login from "../views/Login.vue";
+import Host from "../views/Host.vue";
+import Store from "../views/Store.vue";
+import Item from "../views/Item.vue";
+import Register from "../views/Register.vue";
+import PrivacyPolicy from "../views/PrivacyPolicy.vue";
+import Account from "../views/Account.vue";
 
 Vue.use(Router);
 
@@ -95,13 +94,17 @@ let router = new Router({
 
 router.beforeEach((to, from, next) => {
   if (to.matched.some((record) => record.meta.requiresAuth)) {
-    if (store.getters.isLoggedIn) {
+    if (localStorage.getItem("token")) {
       next();
       return;
     }
     next("/login");
   } else {
     next();
+  }
+
+  if (to.fullPath === "/login" && localStorage.getItem("token")) {
+    next("/browse");
   }
 });
 

@@ -5,6 +5,9 @@
     <hr class="w-full" />
     <Loader v-if="isLoading" />
     <div class="flex flex-col items-center mb-10 w-full" v-else>
+      <p class="pt-3">
+        Only approved stores/items will be visible to the public.
+      </p>
       <div class="fade-in flex justify-center flex-wrap w-1/2">
         <div
           class="bg-white flex p-5 m-5 justify-center pointer border border-gray-700 w-40 text-center shadow-md"
@@ -13,7 +16,10 @@
         >
           <router-link :to="'/stores/' + store._id">
             <p>{{ store.name }}</p>
-          </router-link>
+            <p class="italic text-accent-medium">
+              {{ store.status == "approved" ? "Approved" : "Pending approval" }}
+            </p></router-link
+          >
         </div>
       </div>
       <button class="square-btn" @click="$modal.show('newStoreModal')">
@@ -27,7 +33,7 @@
 import axios from "axios";
 import Loader from "@/components/Loader.vue";
 import NewStoreModal from "@/components/NewStoreModal.vue";
-import setIndividual from "@/utils/individual";
+import setIndividual from "@/lib/individual";
 
 export default {
   name: "Host",
