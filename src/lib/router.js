@@ -48,27 +48,27 @@ let router = new Router({
       component: PrivacyPolicy,
     },
     {
-      path: "/stores",
-      name: "stores",
+      path: "/store/:storeId",
+      name: "store",
+      component: Store,
+      meta: {
+        requiresAuth: false,
+      },
+    },
+    {
+      path: "/host",
+      name: "host",
       component: Host,
       meta: {
         requiresAuth: true,
       },
     },
     {
-      path: "/stores/:storeId",
-      name: "store",
-      component: Store,
-      meta: {
-        requiresAuth: true,
-      },
-    },
-    {
-      path: "/stores/:storeId/:itemId",
+      path: "/item/:itemId",
       name: "item",
       component: Item,
       meta: {
-        requiresAuth: true,
+        requiresAuth: false,
       },
     },
     {
@@ -78,11 +78,6 @@ let router = new Router({
       meta: {
         requiresAuth: true,
       },
-    },
-    {
-      path: "/browse/:itemId",
-      name: "browse-item",
-      component: Item,
     },
     {
       path: "/account",

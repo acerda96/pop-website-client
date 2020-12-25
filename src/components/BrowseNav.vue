@@ -9,10 +9,6 @@
             @click="$modal.show('mapModal')"
           />
         </button>
-        <input placeholder="City/postcode" class="pl-2" />
-        <button class="bg-white border px-3 border border-accent-dark ml-2">
-          Search
-        </button>
       </div>
       <select
         class="filter dropdown "
@@ -20,8 +16,9 @@
         @change="onChange"
       >
         <option value disabled>Sort by...</option>
-        <option value="0">Recently added</option>
-        <option value="1">Price</option>
+        <option value="0">Nearest first</option>
+        <option value="1">Recently added</option>
+        <option value="2">Price</option>
       </select>
     </div>
   </div>
@@ -41,6 +38,7 @@ export default {
   data() {
     return {
       sortCriterion: 0,
+      searchTerm: "",
     };
   },
   methods: {

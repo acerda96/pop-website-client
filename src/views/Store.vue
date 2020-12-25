@@ -1,10 +1,10 @@
 <template>
   <div class="flex justify-center my-10 xs:w-full">
-    <div v-if="error">Store not found :(</div>
     <div class="flex justify-center bg-white w-5/6 xs:w-full xs:my-1">
-      <NewItemModal @getItems="getItems" />
+      <div v-if="error" class="pt-5">Store not found</div>
+      <NewItemModal v-if="individual._id" @getItems="getItems" />
       <Loader v-if="isLoading" />
-      <div class="store__details" v-if="!isLoading">
+      <div class="store__details" v-if="!isLoading && !error">
         <div class="flex justify-between items-center w-full">
           <h2 class="text-3xl text-center py-3" v-if="!isEditingStore">
             {{ store.name }}
@@ -15,6 +15,7 @@
             class="border border-accent-dark pl-4"
           />
           <EditButton
+            v-if="isAbleToEdit"
             :document="store"
             :fields="['name']"
             isEditingFieldName="isEditingStore"
@@ -28,6 +29,7 @@
           <div class="flex justify-between">
             <h4 class="text-xl">Description</h4>
             <EditButton
+              v-if="isAbleToEdit"
               :document="store"
               :fields="['description']"
               isEditingFieldName="isEditingDescription"
@@ -48,6 +50,7 @@
           <div class="flex justify-between">
             <h4 class="text-xl">Location</h4>
             <EditButton
+              v-if="isAbleToEdit"
               :document="store"
               :fields="['addressLine1', 'addressLine2', 'postcode', 'city']"
               isEditingFieldName="isEditingLocation"
@@ -90,7 +93,7 @@
             <button
               class="underline text-accent-dark"
               @click="toggleNewDate"
-              v-if="!isNewDateActive"
+              v-if="!isNewDateActive && isAbleToEdit"
             >
               Add date
             </button>
@@ -121,7 +124,7 @@
               {{ date.formatted.date }}, {{ date.formatted.startTime }} -
               {{ date.formatted.endTime }}
             </p>
-            <p class="store__date-remove">Remove</p>
+            <p v-if="isAbleToEdit" class="store__date-remove">Remove</p>
           </div>
         </div>
         <hr class="w-full" />
@@ -129,6 +132,7 @@
           <div class="flex justify-between">
             <h4 class="text-xl">Items</h4>
             <button
+              v-if="isAbleToEdit"
               class="underline text-accent-dark"
               @click="$modal.show('newItemModal')"
             >
@@ -142,10 +146,11 @@
               :key="item.id"
             >
               <CloseOutline
+                v-if="isAbleToEdit"
                 class="underline text-accent-medium mt-5 cursor-pointer"
                 @click="deleteItem(item._id)"
               />
-              <router-link :to="'/stores/' + store._id + '/' + item._id">
+              <router-link :to="'/item/' + item._id">
                 <img
                   class="store__item-thumbnail"
                   v-bind:src="'data:image/jpeg;base64,' + item.images[0].buffer"
@@ -156,7 +161,7 @@
                   {{ item.name }}
                   £{{ item.unitPrice }}
                 </div>
-                <div class="italic text-accent-medium">
+                <div v-if="isAbleToEdit" class="italic text-accent-medium">
                   {{
                     item.status === "approved" ? "Approved" : "Pending approval"
                   }}
@@ -203,13 +208,24 @@ export default {
       isEditingLocation: false,
       isEditingDescription: false,
       error: false,
+      isAbleToEdit: false,
     };
   },
+  computed: {
+    isLoggedIn: function() {
+      return !!this.$store.getters.token;
+    },
+  },
   async mounted() {
-    this.individual = await setIndividual();
+    console.log("HELLO", this.isLoggedIn);
+    if (this.isLoggedIn) {
+      console.log("AM I HERE");
+      this.individual = await setIndividual();
+    }
     this.getStore();
     this.getItems();
   },
+
   methods: {
     async getStore() {
       try {
@@ -220,15 +236,17 @@ export default {
           throw Error();
         }
         this.store = data;
+        this.isAbleToEdit = this.individual._id === this.store.userId;
         this.isLoading = false;
       } catch {
         this.error = true;
+        this.isLoading = false;
       }
     },
     async getItems() {
       try {
         const { data } = await axios.get(
-          `items?sortCriterion=0&storeId=${this.$route.params.storeId}`
+          `items?sortCriterion=1&storeId=${this.$route.params.storeId}`
         );
         this.items = data;
         this.isLoading = false;
@@ -251,12 +269,23 @@ export default {
       this[field] = val;
     },
     async putStore(data, field, val) {
-      try {
-        await axios.put(`stores/${this.$route.params.storeId}`, data);
-        this.toggleEdit(field, val);
-      } catch (err) {
-        console.log(err);
-      }
+      const addressObj = {
+        address_line_1: this.store.addressLine1,
+        address_line_2: this.store.addressLine2,
+        city: this.store.city,
+        postal_code: this.store.postcode,
+      };
+
+      this.$geocoder.send(addressObj, async (response) => {
+        const position = response.results[0].geometry.location;
+        data.position = position;
+        try {
+          await axios.put(`stores/${this.$route.params.storeId}`, data);
+          this.toggleEdit(field, val);
+        } catch (err) {
+          console.log(err);
+        }
+      });
     },
     putDate() {
       const startTime =

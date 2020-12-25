@@ -57,7 +57,7 @@
         <router-link
           v-if="previewingStore.name"
           class="underline"
-          :to="'/stores/' + previewingStore._id"
+          :to="'/store/' + previewingStore._id"
         >
           View Store
         </router-link>
@@ -108,7 +108,6 @@ export default {
           address_line_2: store.addressLine2,
           city: store.city,
           postal_code: store.postcode,
-          country: "United Kingdom",
         };
 
         this.$geocoder.send(addressObj, async (response) => {

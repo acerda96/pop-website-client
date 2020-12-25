@@ -9,7 +9,7 @@ export const links = [
   {
     title: "Host",
     name: "host",
-    to: "/stores",
+    to: "/host",
     requiresLogin: false,
     alwaysShow: true,
   },

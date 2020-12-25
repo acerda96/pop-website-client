@@ -6,7 +6,7 @@
       <Loader v-if="isLoading" />
       <div v-if="!isLoading" class="browse__items fade-in">
         <div class="browse__item" v-for="item in items" :key="item._id">
-          <router-link :to="'/browse/' + item._id">
+          <router-link :to="'/item/' + item._id">
             <img
               class="browse__item-thumbnail"
               v-bind:src="'data:image/jpeg;base64,' + item.images[0].buffer"

@@ -40,6 +40,8 @@ export default {
         data[field] = this.document[field];
       });
 
+      console.log("edit", this.document, data);
+
       this.$emit(
         "callback",
         data,

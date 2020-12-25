@@ -1,15 +1,16 @@
 <template>
   <div class="bg-white w-full">
     <BrowseNav @search="search" class="z-10" />
-    <div class="flex justify-center mt-24">
+
+    <div class="flex flex-col items-center mt-24">
       <Loader v-if="isLoading" />
-      <div v-if="!isLoading" class="browse__items">
+      <div v-if="!isLoading" class="browse__items fade-in">
         <div
           class="browse__item fade-in\ z-0"
           v-for="item in items"
           :key="item._id"
         >
-          <router-link :to="'/browse/' + item._id">
+          <router-link :to="'/item/' + item._id">
             <img
               class="browse__item-thumbnail"
               v-bind:src="'data:image/jpeg;base64,' + item.images[0].buffer"
@@ -61,8 +62,12 @@ export default {
     this.getItems();
   },
   methods: {
-    async getItems() {
-      const { data } = await axios.get("items");
+    async getItems(sortCriterion) {
+      const { lat, lng } = await this.$getLocation({});
+
+      const { data } = await axios.get(
+        `items?latitude=${lat}&longitude=${lng}&sortCriterion=${sortCriterion}`
+      );
       if (this.isLoggedIn) {
         this.items = this.markSaved(data);
       } else {

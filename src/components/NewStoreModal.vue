@@ -87,12 +87,25 @@ export default {
         city: this.city,
         website: this.website,
       };
-      try {
-        const { data: store } = await axios.post("stores", data);
-        this.$router.push(`/stores/${store._id}`);
-      } catch (err) {
-        console.log(err);
-      }
+
+      const addressObj = {
+        address_line_1: this.addressLine1,
+        address_line_2: this.addressLine2,
+        city: this.city,
+        postal_code: this.postcode,
+      };
+
+      this.$geocoder.send(addressObj, async (response) => {
+        const position = response.results[0].geometry.location;
+        data.position = position;
+
+        try {
+          const { data: store } = await axios.post("stores", data);
+          this.$router.push(`/store/${store._id}`);
+        } catch (err) {
+          console.log(err);
+        }
+      });
     },
   },
 };
