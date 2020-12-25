@@ -43,6 +43,11 @@ export default {
   components: {
     Loader,
   },
+  computed: {
+    isLoggedIn: function() {
+      return !!this.$store.getters.token;
+    },
+  },
   data() {
     return {
       isLoading: true,
@@ -52,7 +57,9 @@ export default {
     };
   },
   async mounted() {
-    this.individual = await setIndividual();
+    if (this.isLoggedIn) {
+      this.individual = setIndividual();
+    }
     this.getItem();
   },
   methods: {

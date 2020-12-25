@@ -15,11 +15,11 @@
             class="border border-accent-dark pl-4"
           />
           <EditButton
-            :store="store"
+            :document="store"
             :fields="['name']"
             isEditingFieldName="isEditingStore"
             :isEditing.sync="isEditingStore"
-            @putStore="putStore"
+            @callback="putStore"
             @toggleEdit="toggleEdit"
           />
         </div>
@@ -28,11 +28,11 @@
           <div class="flex justify-between">
             <h4 class="text-xl">Description</h4>
             <EditButton
-              :store="store"
+              :document="store"
               :fields="['description']"
               isEditingFieldName="isEditingDescription"
               :isEditing.sync="isEditingDescription"
-              @putStore="putStore"
+              @callback="putStore"
               @toggleEdit="toggleEdit"
             />
           </div>
@@ -48,11 +48,11 @@
           <div class="flex justify-between">
             <h4 class="text-xl">Location</h4>
             <EditButton
-              :store="store"
+              :document="store"
               :fields="['addressLine1', 'addressLine2', 'postcode', 'city']"
               isEditingFieldName="isEditingLocation"
               :isEditing.sync="isEditingLocation"
-              @putStore="putStore"
+              @callback="putStore"
               @toggleEdit="toggleEdit"
             />
           </div>
@@ -136,7 +136,15 @@
             </button>
           </div>
           <div class="store__items">
-            <div class="store__item" v-for="item in items" :key="item.id">
+            <div
+              class="store__item flex flex-col items-center"
+              v-for="item in items"
+              :key="item.id"
+            >
+              <CloseOutline
+                class="underline text-accent-medium mt-5 cursor-pointer"
+                @click="deleteItem(item._id)"
+              />
               <router-link :to="'/stores/' + store._id + '/' + item._id">
                 <img
                   class="store__item-thumbnail"
@@ -170,6 +178,7 @@ import NewDate from "@/components/NewDate.vue";
 import EditButton from "@/components/EditButton.vue";
 import NewItemModal from "@/components/NewItemModal.vue";
 import setIndividual from "@/lib/individual";
+import CloseOutline from "vue-material-design-icons/CloseOutline.vue";
 
 export default {
   name: "Store",
@@ -178,6 +187,7 @@ export default {
     NewDate,
     NewItemModal,
     EditButton,
+    CloseOutline,
   },
   data() {
     return {
@@ -217,7 +227,6 @@ export default {
         .catch(() => (this.error = true));
     },
     getItems() {
-      console.log("GETTING ITEMS");
       axios
         .get(`items?sortCriterion=0&storeId=${this.$route.params.storeId}`)
         .then((res) => {
@@ -231,6 +240,10 @@ export default {
     saveNewDate() {
       this.putDate();
       this.isNewDateActive = false;
+    },
+    deleteDate(id) {
+      const newDates = this.stores.dates.filter((date) => date._id !== id);
+      this.putStore({ dates: newDates });
     },
     toggleEdit(field, val) {
       this[field] = val;
@@ -269,9 +282,18 @@ export default {
         },
       };
 
+      const dates = this.store.dates;
+      dates.push(date);
       axios
-        .put(`stores/${this.$route.params.storeId}`, { date })
-        .then(() => this.store.dates.push(date));
+        .put(`stores/${this.$route.params.storeId}`, { dates })
+        .catch(() => {});
+    },
+    deleteItem(id) {
+      if (window.confirm("Are you sure you want to delete this item?")) {
+        axios.delete(`items/${id}`).then(() => {
+          this.getItems();
+        });
+      }
     },
   },
 };

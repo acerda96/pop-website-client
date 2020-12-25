@@ -2,16 +2,16 @@
   <div>
     <button
       class="underline text-accent-dark"
-      v-if="!isEditingTest"
-      @click="toggleEditTest"
+      v-if="!currentlyEditing"
+      @click="emitToggleEdit"
     >
       Edit
     </button>
-    <div v-if="isEditingTest" class="store__add-date-btns">
+    <div v-if="currentlyEditing" class="store__add-date-btns">
       <button class="underline p-3 text-accent-dark" @click="saveEdit()">
         Save
       </button>
-      <button class="underline text-accent-dark" @click="toggleEditTest">
+      <button class="underline text-accent-dark" @click="emitToggleEdit">
         Cancel
       </button>
     </div>
@@ -21,30 +21,30 @@
 <script>
 export default {
   name: "EditButton",
-  props: ["isEditing", "isEditingFieldName", "store", "fields"],
+  props: ["isEditing", "isEditingFieldName", "document", "fields"],
   computed: {
-    isEditingTest: {
+    currentlyEditing: {
       get() {
         return this.isEditing;
       },
     },
   },
   methods: {
-    toggleEditTest() {
-      this.$emit("toggleEdit", this.isEditingFieldName, !this.isEditingTest);
+    emitToggleEdit() {
+      this.$emit("toggleEdit", this.isEditingFieldName, !this.currentlyEditing);
     },
     saveEdit() {
       const data = {};
 
       this.fields.forEach((field) => {
-        data[field] = this.store[field];
+        data[field] = this.document[field];
       });
 
       this.$emit(
-        "putStore",
+        "callback",
         data,
         this.isEditingFieldName,
-        !this.isEditingTest
+        !this.currentlyEditing
       );
     },
   },

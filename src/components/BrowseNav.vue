@@ -1,9 +1,13 @@
 <template>
   <div class="bg-accent-dark fixed w-full mt-6 xs:mt-0">
+    <Map />
     <div class="browse-nav">
       <div class="flex">
         <button class="map-marker">
-          <MapMarker class="text-accent-light" />
+          <MapMarker
+            class="text-accent-light"
+            @click="$modal.show('mapModal')"
+          />
         </button>
         <input placeholder="City/postcode" class="pl-2" />
         <button class="bg-white border px-3 border border-accent-dark ml-2">
@@ -25,11 +29,13 @@
 
 <script>
 import MapMarker from "vue-material-design-icons/MapMarker.vue";
+import Map from "@/components/Map";
 
 export default {
   name: "BrowseNav",
   components: {
     MapMarker,
+    Map,
   },
 
   data() {

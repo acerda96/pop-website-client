@@ -2,6 +2,7 @@
   <div class="bg-white w-full mt-10 my-4 flex flex-col items-center xs:mt-5">
     <NewStoreModal />
     <h2 class="text-3xl text-center py-3">My Stores</h2>
+
     <hr class="w-full" />
     <Loader v-if="isLoading" />
     <div class="flex flex-col items-center mb-10 w-full" v-else>
@@ -10,16 +11,26 @@
       </p>
       <div class="fade-in flex justify-center flex-wrap w-1/2">
         <div
-          class="bg-white flex p-5 m-5 justify-center pointer border border-gray-700 w-40 text-center shadow-md"
+          class="flex flex-col items-center"
           v-for="store in stores"
           :key="store.id"
         >
-          <router-link :to="'/stores/' + store._id">
-            <p>{{ store.name }}</p>
-            <p class="italic text-accent-medium">
-              {{ store.status == "approved" ? "Approved" : "Pending approval" }}
-            </p></router-link
+          <div
+            class="bg-white flex p-5 mx-5 mt-5 justify-center pointer border border-gray-700 w-40 text-center shadow-md"
           >
+            <router-link :to="'/stores/' + store._id">
+              <p>{{ store.name }}</p>
+              <p class="italic text-accent-medium">
+                {{
+                  store.status == "approved" ? "Approved" : "Pending approval"
+                }}
+              </p></router-link
+            >
+          </div>
+          <CloseOutline
+            class="underline text-accent-medium mt-2 mb-5 cursor-pointer"
+            @click="deleteStore(store._id)"
+          />
         </div>
       </div>
       <button class="square-btn" @click="$modal.show('newStoreModal')">
@@ -34,6 +45,7 @@ import axios from "axios";
 import Loader from "@/components/Loader.vue";
 import NewStoreModal from "@/components/NewStoreModal.vue";
 import setIndividual from "@/lib/individual";
+import CloseOutline from "vue-material-design-icons/CloseOutline.vue";
 
 export default {
   name: "Host",
@@ -47,6 +59,7 @@ export default {
   components: {
     Loader,
     NewStoreModal,
+    CloseOutline,
   },
   async mounted() {
     this.isLoading = true;
@@ -59,6 +72,13 @@ export default {
         this.stores = res.data;
         this.isLoading = false;
       });
+    },
+    deleteStore(storeId) {
+      if (window.confirm("Are you sure you want to delete this store?")) {
+        axios.delete(`stores/${storeId}`).then(() => {
+          this.getStores();
+        });
+      }
     },
   },
 };

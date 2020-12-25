@@ -44,18 +44,6 @@
                 />
               </div>
             </div>
-
-            <!-- <div class="basic-form__input-ctn">
-              <label for="type"> Type </label>
-              <select class="p-1 border:none" v-model="type">
-                <option value disabled>Select a type</option>
-                <option value="1">Bottoms</option>
-                <option value="2">Dresses</option>
-                <option value="3">Jewellery</option>
-                <option value="4">Shoes</option>
-                <option value="5">Tops</option>
-              </select>
-            </div> -->
           </div>
           <div class="basic-form__input-ctn--large">
             <label for="description"> Description </label>

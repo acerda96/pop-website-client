@@ -24,14 +24,14 @@ export const authActions = {
     } catch {
       commit("setToken", null);
 
-      localStorage.remove("token");
+      localStorage.removeItem("token");
       router.push("/login");
     }
   },
   logout({ commit }) {
     commit("setToken", null);
 
-    localStorage.remove("token");
+    localStorage.removeItem("token");
     router.push("/login");
 
     delete axios.defaults.headers.common["Authorization"];

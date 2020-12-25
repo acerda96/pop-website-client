@@ -39,7 +39,7 @@
 
 <script>
 import MenuIcon from "vue-material-design-icons/Menu.vue";
-import { links } from "@/nav-links";
+import { links } from "@/lib/navigationLinks";
 
 export default {
   name: "Navigation",

@@ -1,4 +1,6 @@
 import axios from "axios";
+import store from "./store";
+import router from "./router";
 
 export default async function setIndividual() {
   let individual;
@@ -8,8 +10,8 @@ export default async function setIndividual() {
       individual = res.data;
     })
     .catch(() =>
-      this.$store.dispatch("logout").then(() => {
-        this.$router.push("/");
+      store.dispatch("logout").then(() => {
+        router.push("/");
       })
     );
   return individual;

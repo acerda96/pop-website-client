@@ -8,7 +8,9 @@
       <button class="square-btn w-40 m-5" @click="deleteAccount">
         Delete account
       </button>
-      <div class="mt-5 text-red-700" v-if="error">Failed to delete account</div>
+      <div class="mt-5 text-red-700 text-center" v-if="error">
+        Incorrect password
+      </div>
     </div>
   </div>
 </template>
@@ -31,17 +33,20 @@ export default {
   },
   methods: {
     deleteAccount() {
-      axios
-        .delete("account", { data: { password: this.password } })
-        .then(() => {
-          this.error = false;
-          this.$store.dispatch("logout").then(() => {
-            this.$router.push("/");
+      if (window.confirm("Are you sure you want to delete your account?")) {
+        axios
+          .post("account/delete", { password: this.password })
+          .then(() => {
+            this.error = false;
+            this.$store.dispatch("logout").then(() => {
+              this.$router.push("/");
+            });
+            this.error = false;
+          })
+          .catch(() => {
+            this.error = true;
           });
-        })
-        .catch(() => {
-          this.error = true;
-        });
+      }
     },
   },
 };

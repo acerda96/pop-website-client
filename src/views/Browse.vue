@@ -42,6 +42,11 @@ import setIndividual from "@/lib/individual";
 export default {
   name: "Browse",
   components: { BrowseNav, SaveIcon, Loader },
+  computed: {
+    isLoggedIn: function() {
+      return !!this.$store.getters.token;
+    },
+  },
   data() {
     return {
       isLoading: true,
@@ -50,13 +55,19 @@ export default {
     };
   },
   async mounted() {
-    this.individual = await setIndividual();
+    if (this.isLoggedIn) {
+      this.individual = await setIndividual();
+    }
     this.getItems();
   },
   methods: {
     getItems() {
       axios.get("items").then((res) => {
-        this.items = this.markSaved(res.data);
+        if (this.isLoggedIn) {
+          this.items = this.markSaved(res.data);
+        } else {
+          this.items = res.data;
+        }
         this.isLoading = false;
       });
     },
