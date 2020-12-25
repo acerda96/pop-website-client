@@ -211,28 +211,30 @@ export default {
     this.getItems();
   },
   methods: {
-    getStore() {
-      axios
-        .get(`stores/${this.$route.params.storeId}`)
-        .then((res) => {
-          if (
-            res.data.status !== "approved" &&
-            this.individual._id !== res.data.userId
-          ) {
-            throw Error();
-          }
-          this.store = res.data;
-          this.isLoading = false;
-        })
-        .catch(() => (this.error = true));
+    async getStore() {
+      try {
+        const { data } = await axios.get(
+          `stores/${this.$route.params.storeId}`
+        );
+        if (data.status !== "approved" && this.individual._id !== data.userId) {
+          throw Error();
+        }
+        this.store = data;
+        this.isLoading = false;
+      } catch {
+        this.error = true;
+      }
     },
-    getItems() {
-      axios
-        .get(`items?sortCriterion=0&storeId=${this.$route.params.storeId}`)
-        .then((res) => {
-          this.items = res.data;
-          this.isLoading = false;
-        });
+    async getItems() {
+      try {
+        const { data } = await axios.get(
+          `items?sortCriterion=0&storeId=${this.$route.params.storeId}`
+        );
+        this.items = data;
+        this.isLoading = false;
+      } catch (err) {
+        console.log(err);
+      }
     },
     toggleNewDate() {
       this.isNewDateActive = !this.isNewDateActive;
@@ -248,10 +250,13 @@ export default {
     toggleEdit(field, val) {
       this[field] = val;
     },
-    putStore(data, field, val) {
-      axios.put(`stores/${this.$route.params.storeId}`, data).then(() => {
+    async putStore(data, field, val) {
+      try {
+        await axios.put(`stores/${this.$route.params.storeId}`, data);
         this.toggleEdit(field, val);
-      });
+      } catch (err) {
+        console.log(err);
+      }
     },
     putDate() {
       const startTime =
@@ -288,11 +293,14 @@ export default {
         .put(`stores/${this.$route.params.storeId}`, { dates })
         .catch(() => {});
     },
-    deleteItem(id) {
+    async deleteItem(id) {
       if (window.confirm("Are you sure you want to delete this item?")) {
-        axios.delete(`items/${id}`).then(() => {
+        try {
+          await axios.delete(`items/${id}`);
           this.getItems();
-        });
+        } catch (err) {
+          console.log(err);
+        }
       }
     },
   },

@@ -34,18 +34,13 @@ export default {
   methods: {
     deleteAccount() {
       if (window.confirm("Are you sure you want to delete your account?")) {
-        axios
-          .post("account/delete", { password: this.password })
-          .then(() => {
-            this.error = false;
-            this.$store.dispatch("logout").then(() => {
-              this.$router.push("/");
-            });
-            this.error = false;
-          })
-          .catch(() => {
-            this.error = true;
-          });
+        try {
+          axios.post("account/delete", { password: this.password });
+          this.$store.dispatch("logout");
+          this.error = false;
+        } catch {
+          this.error = true;
+        }
       }
     },
   },

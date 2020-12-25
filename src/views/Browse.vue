@@ -61,15 +61,14 @@ export default {
     this.getItems();
   },
   methods: {
-    getItems() {
-      axios.get("items").then((res) => {
-        if (this.isLoggedIn) {
-          this.items = this.markSaved(res.data);
-        } else {
-          this.items = res.data;
-        }
-        this.isLoading = false;
-      });
+    async getItems() {
+      const { data } = await axios.get("items");
+      if (this.isLoggedIn) {
+        this.items = this.markSaved(data);
+      } else {
+        this.items = data;
+      }
+      this.isLoading = false;
     },
     markSaved(items) {
       const savedItems = this.individual.savedItems;
@@ -80,10 +79,13 @@ export default {
         };
       });
     },
-    updateSavedItems(itemId) {
-      axios.put(`individual`, { itemId }).then(() => {
+    async updateSavedItems(itemId) {
+      try {
+        await axios.put(`individual`, { itemId });
         this.toggleSaved(itemId);
-      });
+      } catch (err) {
+        console.log(err);
+      }
     },
     toggleSaved(id) {
       this.items = this.items.map((item) => {
@@ -96,12 +98,17 @@ export default {
         return item;
       });
     },
-    search(sortCriterion) {
+    async search(sortCriterion) {
       this.isLoading = true;
-      axios.get(`items?sortCriterion=${sortCriterion}`).then((res) => {
-        this.items = this.markSaved(res.data);
+      try {
+        const { data } = await axios.get(
+          `items?sortCriterion=${sortCriterion}`
+        );
+        this.items = this.markSaved(data);
         this.isLoading = false;
-      });
+      } catch (err) {
+        console.log(err);
+      }
     },
   },
 };

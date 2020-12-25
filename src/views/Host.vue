@@ -67,17 +67,25 @@ export default {
     this.getStores();
   },
   methods: {
-    getStores() {
-      axios.get(`stores?userId=${this.individual._id}`).then((res) => {
-        this.stores = res.data;
+    async getStores() {
+      try {
+        const { data } = await axios.get(
+          `stores?userId=${this.individual._id}`
+        );
+        this.stores = data;
         this.isLoading = false;
-      });
+      } catch (err) {
+        console.log(err);
+      }
     },
-    deleteStore(storeId) {
+    async deleteStore(storeId) {
       if (window.confirm("Are you sure you want to delete this store?")) {
-        axios.delete(`stores/${storeId}`).then(() => {
+        try {
+          await axios.delete(`stores/${storeId}`);
           this.getStores();
-        });
+        } catch (err) {
+          console.log(err);
+        }
       }
     },
   },

@@ -8,11 +8,13 @@ export const authMutations = {
 };
 
 export const authActions = {
-  async login({ commit }, user) {
+  async login({ commit }, { user, isRegister }) {
     try {
       const {
         data: { token },
-      } = await axios.post("account/login", user);
+      } = isRegister
+        ? await axios.post("account/register", user)
+        : await axios.post("account/login", user);
       if (token) {
         commit("setToken", token);
 
@@ -23,9 +25,7 @@ export const authActions = {
       }
     } catch {
       commit("setToken", null);
-
       localStorage.removeItem("token");
-      router.push("/login");
     }
   },
   logout({ commit }) {

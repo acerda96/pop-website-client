@@ -63,11 +63,14 @@ export default {
     this.getItem();
   },
   methods: {
-    getItem() {
-      axios.get(`items/${this.$route.params.itemId}`).then((res) => {
-        this.item = res.data;
+    async getItem() {
+      try {
+        const { data } = await axios.get(`items/${this.$route.params.itemId}`);
+        this.item = data;
         this.isLoading = false;
-      });
+      } catch (err) {
+        console.log(err);
+      }
     },
   },
 };

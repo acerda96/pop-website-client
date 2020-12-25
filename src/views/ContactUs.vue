@@ -43,20 +43,22 @@ export default {
     };
   },
   methods: {
-    submit() {
-      axios
-        .post("contact", {
+    async submit() {
+      try {
+        await axios.post("contact", {
           firstName: this.firstName,
           lastName: this.lastName,
           email: this.email,
           message: this.message,
-        })
-        .then(() => (this.success = true));
-
-      this.firstName = "";
-      this.lastName = "";
-      this.email = "";
-      this.message = "";
+        });
+        this.success = true;
+        this.firstName = "";
+        this.lastName = "";
+        this.email = "";
+        this.message = "";
+      } catch (err) {
+        console.log(err);
+      }
     },
   },
 };

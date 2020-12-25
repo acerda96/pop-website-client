@@ -50,16 +50,19 @@ export default {
     this.getSavedItems();
   },
   methods: {
-    getSavedItems() {
-      axios.get("individual/saved-items").then((res) => {
-        this.items = res.data.map((item) => {
+    async getSavedItems() {
+      try {
+        const { data } = await axios.get("individual/saved-items");
+        this.items = data.map((item) => {
           return {
             ...item,
             isSaved: true,
           };
         });
         this.isLoading = false;
-      });
+      } catch (err) {
+        console.log(err);
+      }
     },
     toggleSaved(id) {
       this.items = this.items.map((item) => {
@@ -73,8 +76,12 @@ export default {
       });
       this.updateSavedItems(id);
     },
-    updateSavedItems(itemId) {
-      axios.put(`individual`, { itemId: itemId }).then(() => {});
+    async updateSavedItems(itemId) {
+      try {
+        await axios.put(`individual`, { itemId: itemId });
+      } catch (err) {
+        console.log(err);
+      }
     },
   },
 };

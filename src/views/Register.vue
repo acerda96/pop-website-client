@@ -38,6 +38,9 @@
           <button class="square-btn" type="submit">Sign up</button>
           <router-link to="/login">Already have an account?</router-link>
         </div>
+        <div class="mt-5 text-red-700" v-if="error">
+          Please fill in all fields
+        </div>
       </form>
     </div>
   </div>
@@ -54,10 +57,11 @@ export default {
       confirmPassword: "",
       mobileNumber: "",
       company: "",
+      error: false,
     };
   },
   methods: {
-    register() {
+    async register() {
       let data = {
         email: this.email,
         name: this.name,
@@ -66,7 +70,9 @@ export default {
         mobileNumber: this.mobileNumber,
         company: this.company,
       };
-      this.$store.dispatch("register", data).then(() => this.$router.push("/"));
+      await this.$store.dispatch("login", { user: data, isRegister: true });
+
+      this.error = !this.$store.getters.token;
     },
   },
 };

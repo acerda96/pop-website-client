@@ -77,12 +77,7 @@ export default {
     this.individual = await setIndividual();
   },
   methods: {
-    setIndividual() {
-      axios.get("individual").then((res) => {
-        this.individual = res.data;
-      });
-    },
-    addStore() {
+    async addStore() {
       let data = {
         name: this.name,
         description: this.description,
@@ -92,10 +87,12 @@ export default {
         city: this.city,
         website: this.website,
       };
-      axios.post("stores", data).then((res) => {
-        console.log("RESR", res);
-        this.$router.push(`/stores/${res.data._id}`);
-      });
+      try {
+        const { data: store } = await axios.post("stores", data);
+        this.$router.push(`/stores/${store._id}`);
+      } catch (err) {
+        console.log(err);
+      }
     },
   },
 };

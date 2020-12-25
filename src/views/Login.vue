@@ -37,16 +37,15 @@ export default {
     };
   },
   methods: {
-    login() {
-      let email = this.email;
-      let password = this.password;
-      this.$store
-        .dispatch("login", { email, password })
-        .then(() => {
-          this.error = false;
-          this.$router.push("/browse");
-        })
-        .catch(() => (this.error = true));
+    async login() {
+      const data = {
+        email: this.email,
+        password: this.password,
+      };
+
+      await this.$store.dispatch("login", { user: data, isRegister: false });
+
+      this.error = !this.$store.getters.token;
     },
   },
 };
