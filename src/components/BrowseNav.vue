@@ -3,7 +3,7 @@
     <Map />
     <div class="browse-nav">
       <div class="flex">
-        <button class="map-marker">
+        <button class="map-marker pr-2">
           <MapMarker
             class="text-accent-light"
             @click="$modal.show('mapModal')"

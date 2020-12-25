@@ -103,7 +103,7 @@ export default {
     this.individual = await setIndividual();
   },
   methods: {
-    addItem() {
+    async addItem() {
       let values = {
         name: this.name,
         description: this.description,
@@ -121,10 +121,13 @@ export default {
 
       data.append("storeId", this.$route.params.storeId);
 
-      axios.post("items", data).then(() => {
+      try {
+        await axios.post("items", data);
         this.$modal.hide("newItemModal");
         this.$emit("getItems");
-      });
+      } catch (err) {
+        console.log(err);
+      }
     },
     pickFile() {
       let input = this.$refs.fileInput;

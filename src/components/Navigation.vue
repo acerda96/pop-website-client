@@ -79,10 +79,8 @@ export default {
           return;
       }
     },
-    logout: function() {
-      this.$store.dispatch("logout").then(() => {
-        this.$router.push("/login");
-      });
+    async logout() {
+      await this.$store.dispatch("logout");
     },
     scrollTo() {
       if (this.$route.fullPath === "/#about") {

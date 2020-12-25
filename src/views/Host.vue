@@ -16,9 +16,9 @@
           :key="store.id"
         >
           <div
-            class="bg-white flex p-5 mx-5 mt-5 justify-center pointer border border-gray-700 w-40 text-center shadow-md"
+            class="bg-white flex p-5 mx-5 mt-5 justify-center cursor-pointer border border-gray-700 w-40 text-center shadow-md hover:bg-gray-100"
           >
-            <router-link :to="'/stores/' + store._id">
+            <router-link tag="p" :to="'/stores/' + store._id">
               <p>{{ store.name }}</p>
               <p class="italic text-accent-medium">
                 {{
