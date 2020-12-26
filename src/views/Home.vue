@@ -3,7 +3,7 @@
     class="fade-in-scroll flex flex-col items-center justify-center my-10 mt-20 xs:mt-0 h-4/6 xs:h-full xs:mt-5"
   >
     <div class="home__main bg-white flex flex-col items-center mb-10">
-      <div class="home__title flex flex-col items-center pt-20 xs:pt-10">
+      <div class="home__title flex flex-col items-center">
         <div class="text-8xl text-center title">Your Local Marketplace</div>
         <div
           class="text-2xl text-center px-2 my-5 xs:my-0 sm:text-lg xs:text-base"

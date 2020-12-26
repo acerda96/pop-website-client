@@ -1,15 +1,11 @@
 const path = require("path");
-// const HTMLWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = {
   outputDir: path.resolve(__dirname, "./public"),
-  // configureWebpack: {
-  //   plugins: [
-  //     new HTMLWebpackPlugin({
-  //       showErrors: true,
-  //       cache: true,
-  //       template: path.resolve(__dirname, "src/index.html"),
-  //     }),
-  //   ],
-  // },
+  chainWebpack: (config) => {
+    config.plugin("html").tap((args) => {
+      args[0].template = "./src/index.html";
+      return args;
+    });
+  },
 };
