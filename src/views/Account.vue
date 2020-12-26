@@ -3,7 +3,7 @@
     <div>
       <div class="flex flex-col">
         <label> Password: </label>
-        <input class="border" v-model="password" type="password" />
+        <input class="pl-2 border" v-model="password" type="password" />
       </div>
       <button class="square-btn w-40 m-5" @click="deleteAccount">
         Delete account

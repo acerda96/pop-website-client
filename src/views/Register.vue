@@ -8,15 +8,16 @@
         <hr />
         <div class="basic-form__input-ctn--large">
           <label for="name"> Full name </label>
-          <input type="text" name="name" v-model="name" required />
+          <input class="pl-2" type="text" name="name" v-model="name" required />
         </div>
         <div class="basic-form__input-ctn--large">
           <label for="company"> Company (optional) </label>
-          <input type="text" name="company" v-model="company" />
+          <input class="pl-2" type="text" name="company" v-model="company" />
         </div>
         <div class="basic-form__input-ctn--large">
           <label for="mobileNumber"> Mobile number </label>
           <input
+            class="pl-2"
             type="text"
             name="mobileNumber"
             v-model="mobileNumber"
@@ -25,15 +26,28 @@
         </div>
         <div class="basic-form__input-ctn--large">
           <label for="email"> Email </label>
-          <input type="email" name="email" v-model="email" required />
+          <input
+            class="pl-2"
+            type="email"
+            name="email"
+            v-model="email"
+            required
+          />
         </div>
         <div class="basic-form__input-ctn--large">
           <label for="password"> Password </label>
-          <input type="password" name="password" v-model="password" required />
+          <input
+            class="pl-2"
+            type="password"
+            name="password"
+            v-model="password"
+            required
+          />
         </div>
         <div class="basic-form__input-ctn--large">
           <label for="confirmPassword"> Confirm password </label>
           <input
+            class="pl-2"
             type="password"
             name="confirmPassword"
             v-model="confirmPassword"

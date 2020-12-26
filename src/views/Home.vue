@@ -6,17 +6,26 @@
       <div class="home__title flex flex-col items-center">
         <div class="text-8xl text-center title">Your Local Marketplace</div>
         <div
-          class="text-2xl text-center px-2 my-5 xs:my-0 sm:text-lg xs:text-base"
+          class="text-2xl text-center px-2 my-2 xs:my-0 sm:text-lg xs:text-base"
         >
-          Discover new brands & support small businesses
+          Find unique pop-up stores
         </div>
-        <router-link to="/browse">
-          <button
-            class="bg-black text-white text-xl hover:bg-gray-200 hover:text-black p-2 px-6 uppercase xs:text-xs"
-          >
-            Browse now
-          </button>
-        </router-link>
+        <div
+          class="text-2xl text-center px-2 my-2 xs:my-0 sm:text-lg xs:text-base"
+        >
+          Discover new brands
+        </div>
+        <div
+          class="text-2xl text-center px-2 my-2 xs:my-0 sm:text-lg xs:text-base"
+        >
+          Support small businesses
+        </div>
+        <button
+          class="bg-black text-white text-xl hover:bg-gray-200 hover:text-black p-2 px-6 mt-8 uppercase xs:text-xs"
+          @click="$router.push('/browse')"
+        >
+          Browse now
+        </button>
       </div>
     </div>
   </div>

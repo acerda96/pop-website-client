@@ -28,7 +28,7 @@
             <div class="w-full">
               <div class="w-full flex flex-col xs:px-1">
                 <div class="w-full text-xl xxs:text-sm pt-1">Name</div>
-                <input class="" type="text" name="name" v-model="name" />
+                <input class="pl-2" type="text" name="name" v-model="name" />
               </div>
               <div class="w-full flex justify-between items-center mt-8">
                 <div class="flex flex-col">
@@ -36,7 +36,7 @@
                     Quantity
                   </label>
                   <input
-                    class="basic-form__input--small"
+                    class="pl-2 basic-form__input--small"
                     style="width: 100px;"
                     type="text"
                     name="initialQuantity"
@@ -48,7 +48,7 @@
                   <div>
                     £
                     <input
-                      class="basic-form__input--small"
+                      class="pl-2 basic-form__input--small"
                       style="width: 100px;"
                       type="price"
                       name="price"
@@ -60,7 +60,7 @@
             </div>
             <div class="flex flex-col relative items-center ml-5 mt-6">
               <input
-                class="border-0"
+                class="pl-2 border-0"
                 ref="fileInput"
                 type="file"
                 @input="pickFile"
@@ -77,7 +77,7 @@
           <div class="flex flex-col w-full mt-8">
             <label class="text-xl" for="description"> Description </label>
             <textarea
-              class="description"
+              class="description pl-1"
               type="text"
               name="description"
               v-model="description"

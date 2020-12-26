@@ -20,7 +20,7 @@
           </div>
           <div class="w-full flex flex-col xs:px-1">
             <div class="w-full text-xl xxs:text-sm pt-1">Name</div>
-            <input class="w-full" type="text" name="name" v-model="name" />
+            <input class="pl-2 w-full" type="text" name="name" v-model="name" />
           </div>
 
           <div class="w-full text-xl xxs:text-sm pt-1 xs:pl-1">Location</div>
@@ -28,21 +28,36 @@
             <label class="text-accent-dark" for="addressLine1">
               Address Line 1
             </label>
-            <input type="text" name="addressLine1" v-model="addressLine1" />
+            <input
+              class="pl-2"
+              type="text"
+              name="addressLine1"
+              v-model="addressLine1"
+            />
           </div>
           <div class="w-full flex flex-col pb-3 xs:px-1 xs:pb-0 xxs:text-xs">
             <label class="text-accent-dark" for="addressLine2">
               Address Line 2
             </label>
-            <input type="text" name="addressLine2" v-model="addressLine2" />
+            <input
+              class="pl-2"
+              type="text"
+              name="addressLine2"
+              v-model="addressLine2"
+            />
           </div>
           <div class="w-full flex flex-col pb-3 xs:px-1 xs:pb-0 xxs:text-xs">
             <label class="text-accent-dark" for="postcode"> Postcode </label>
-            <input type="text" name="postcode" v-model="postcode" />
+            <input
+              class="pl-2"
+              type="text"
+              name="postcode"
+              v-model="postcode"
+            />
           </div>
           <div class="w-full flex flex-col pb-3 xs:px-1 xs:pb-0 xxs:text-xs">
             <label class="text-accent-dark" for="city"> City </label>
-            <input type="city" name="city" v-model="city" />
+            <input class="pl-2" type="city" name="city" v-model="city" />
           </div>
           <div class="w-full flex flex-col pb-3 xs:p-1 xxs:text-sm">
             <label
@@ -51,7 +66,12 @@
             >
               Website (Optional)</label
             >
-            <input type="website" name="website" v-model="website" />
+            <input
+              class="pl-2"
+              type="website"
+              name="website"
+              v-model="website"
+            />
           </div>
           <div class="w-full flex flex-col pb-3 xs:p-1">
             <label
@@ -60,7 +80,12 @@
             >
               Description
             </label>
-            <textarea type="text" name="description" v-model="description" />
+            <textarea
+              class="pl-1"
+              type="text"
+              name="description"
+              v-model="description"
+            />
           </div>
           <div class="flex justify-center py-2">
             <button class="square-btn w-40" type="submit">

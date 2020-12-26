@@ -9,7 +9,6 @@
         <p>Start time</p>
         <datetime
           class="datetime-picker__time"
-          :min-datetime="currentDateTime"
           type="time"
           v-model="startTime"
           title="Start time"

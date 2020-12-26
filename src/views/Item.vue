@@ -19,7 +19,7 @@
             <div v-else>
               <div class="w-full flex flex-col relative items-center mt-6">
                 <input
-                  class="item__image-edit border-0"
+                  class="pl-2 item__image-edit border-0"
                   ref="fileInput"
                   type="file"
                   @change="pickFile"
@@ -38,7 +38,6 @@
               </div>
             </div>
           </div>
-
           <div class="flex flex-col items-center">
             <div class="flex items-center justify-between px-10 w-full">
               <div v-if="!isEditingName" class="flex items-center">
@@ -51,10 +50,14 @@
                   }}
                 </div>
               </div>
-              <form v-else @submit.prevent="putItem(item, 'isEditingName')">
+              <form
+                v-else
+                class="w-full"
+                @submit.prevent="putItem(item, 'isEditingName')"
+              >
                 <input
                   v-model="item.name"
-                  class="border border-accent-dark pl-4"
+                  class="border border-accent-dark pl-2 w-4/6 mt-2 xs:w-full"
                 />
               </form>
               <EditButton
@@ -89,9 +92,9 @@
               <textarea
                 v-else
                 v-model="item.description"
-                class="border border-accent-dark pl-4 w-full"
+                class="border border-accent-dark pl-1 w-full"
               />
-              <div class="flex justify-between pt-5">
+              <div class="flex justify-between pt-5 xs:flex-col">
                 <div>
                   <div class="flex justify-between items-center">
                     <h4 class="text-xl pr-5">Price</h4>
@@ -112,12 +115,12 @@
                   >
                     £<input
                       v-model="item.price"
-                      class="border border-accent-dark pl-4 ml-1"
+                      class="border border-accent-dark pl-2 ml-1"
                     />
                   </form>
                 </div>
                 <div>
-                  <div class="flex items-center">
+                  <div class="flex justify-between items-center">
                     <h4 class="text-xl pr-5">Initial quantity</h4>
                     <EditButton
                       v-if="isAbleToEdit"
@@ -136,7 +139,7 @@
                   >
                     <input
                       v-model="item.initialQuantity"
-                      class="border border-accent-dark pl-4"
+                      class="border border-accent-dark pl-2"
                     />
                   </form>
                 </div>

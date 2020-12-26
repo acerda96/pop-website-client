@@ -16,10 +16,14 @@
               }}
             </div>
           </div>
-          <form v-else @submit.prevent="putStore(store, 'isEditingName')">
+          <form
+            v-else
+            class="w-full"
+            @submit.prevent="putStore(store, 'isEditingName')"
+          >
             <input
               v-model="store.name"
-              class="border border-accent-dark pl-4"
+              class="border border-accent-dark pl-2 w-4/6"
             />
           </form>
           <EditButton
@@ -34,7 +38,7 @@
         </div>
         <hr class="w-full" />
         <div class="flex flex-col justify-start w-full mb-5">
-          <div class="flex justify-between">
+          <div class="flex justify-between items-center">
             <h4 class="text-xl">Description</h4>
             <EditButton
               v-if="isAbleToEdit"
@@ -50,12 +54,12 @@
           <textarea
             v-else
             v-model="store.description"
-            class="border border-accent-dark pl-4 w-full"
+            class="border border-accent-dark pl-1 w-full"
           />
         </div>
         <hr class="w-full" />
         <div class="flex flex-col justify-start w-full mb-5">
-          <div class="flex justify-between">
+          <div class="flex justify-between items-center">
             <h4 class="text-xl">Location</h4>
             <EditButton
               v-if="isAbleToEdit"
@@ -77,19 +81,19 @@
           </div>
           <div v-else class="flex flex-col">
             <input
-              class="border border-accent-dark pl-4 my-1"
+              class="border border-accent-dark pl-2 my-1"
               v-model="store.addressLine1"
             />
             <input
-              class="border border-accent-dark pl-4 my-1"
+              class="border border-accent-dark pl-2 my-1"
               v-model="store.addressLine2"
             />
             <input
-              class="border border-accent-dark pl-4 my-1"
+              class="border border-accent-dark pl-2 my-1"
               v-model="store.postcode"
             />
             <input
-              class="border border-accent-dark pl-4 my-1"
+              class="border border-accent-dark pl-2 my-1"
               v-model="store.city"
             />
           </div>
@@ -171,7 +175,7 @@
                     {{ item.name }}
                     £{{ item.price }}
                   </div>
-                  <div v-if="isAbleToEdit" class="italic text-accent-medium">
+                  <div v-if="isAbleToEdit" class="text-accent-medium">
                     {{
                       item.status === "approved"
                         ? "Approved"

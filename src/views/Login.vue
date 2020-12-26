@@ -8,11 +8,23 @@
         <hr />
         <div class="basic-form__input-ctn--large">
           <label for="email"> Email </label>
-          <input type="email" name="email" v-model="email" required />
+          <input
+            class="pl-2"
+            type="email"
+            name="email"
+            v-model="email"
+            required
+          />
         </div>
         <div class="basic-form__input-ctn--large">
           <label for="password"> Password </label>
-          <input type="password" name="password" v-model="password" required />
+          <input
+            class="pl-2"
+            type="password"
+            name="password"
+            v-model="password"
+            required
+          />
         </div>
         <div class="w-full flex flex-col items-center justify-around">
           <button type="submit" class="square-btn">Login</button>
