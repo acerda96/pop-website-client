@@ -11,7 +11,7 @@
 .upper-navbar__logo {
   color: $main-font-color;
   font-size: 40px;
-  padding: 30px 30px 20px 70px;
+  padding: 30px 30px 25px 70px;
   text-decoration: none;
 }
 
@@ -70,11 +70,7 @@
     padding: 15px 0px 10px 40px;
   }
   .upper-navbar__logo {
-    padding: 5px 25px 0px 0px;
     text-decoration: none;
-  }
-  .upper-navbar {
-    height: $nav-bar-height-mobile;
   }
   .upper-navbar__items {
     display: none;
@@ -83,10 +79,10 @@
 @media (max-width: 550px) {
   .upper-navbar__menu-icon {
     display: block;
-    padding: 15px 0px 10px 30px;
+    padding: 0px 0px 0px 30px;
   }
   .upper-navbar__logo {
     font-size: 30px;
-    padding: 10px 35px 0px 0px;
+    padding: 0px 35px 0px 0px;
   }
 }

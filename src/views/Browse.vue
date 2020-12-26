@@ -1,7 +1,7 @@
 <template>
   <div class="bg-white w-full">
     <BrowseNav @getItems="getItems" class="z-10" />
-    <div class="flex flex-col items-center mt-24 xs:mt-12">
+    <div class="flex flex-col items-center mt-16 xs:mt-12">
       <Loader v-if="isLoading" class="pt-10" />
       <div v-if="!isLoading" class="browse__items fade-in">
         <div

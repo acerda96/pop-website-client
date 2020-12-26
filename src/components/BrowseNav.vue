@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-accent-dark fixed w-full mt-6 xs:mt-0">
+  <div class="bg-accent-dark fixed w-full">
     <Map />
     <div class="browse-nav">
       <div class="flex">

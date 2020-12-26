@@ -4,7 +4,8 @@ import router from "./router";
 
 axios.defaults.withCredentials = true;
 axios.defaults.headers["X-Requested-With"] = "XMLHttpRequest";
-axios.defaults.baseURL = process.env.VUE_APP_BASE_URL;
+axios.defaults.baseURL =
+  process.env.VUE_APP_BASE_URL || "https://api-pop-marketplace.herokuapp.com";
 
 axios.interceptors.request.use((config) => {
   const token = store.getters.token;
