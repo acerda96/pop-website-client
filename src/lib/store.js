@@ -7,6 +7,7 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     token: localStorage.getItem("token"),
+    authError: null,
   },
   mutations: {
     ...authMutations,
@@ -16,5 +17,6 @@ export default new Vuex.Store({
   },
   getters: {
     token: (state) => state.token,
+    authError: (state) => state.authError,
   },
 });

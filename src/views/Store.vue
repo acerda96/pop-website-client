@@ -278,7 +278,6 @@ export default {
     },
     async deleteDate(id) {
       const newDates = this.store.dates.filter((date) => date.id !== id);
-      console.log(newDates);
       try {
         await axios.put(`stores/${this.$route.params.storeId}`, {
           dates: newDates,

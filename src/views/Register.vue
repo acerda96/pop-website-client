@@ -45,7 +45,7 @@
           <router-link to="/login">Already have an account?</router-link>
         </div>
         <div class="mt-5 text-red-700" v-if="error">
-          Please fill in all fields
+          {{ error }}
         </div>
       </form>
     </div>
@@ -78,7 +78,7 @@ export default {
       };
       await this.$store.dispatch("login", { user: data, isRegister: true });
 
-      this.error = !this.$store.getters.token;
+      this.error = this.$store.getters.authError;
     },
   },
 };

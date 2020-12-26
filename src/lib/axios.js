@@ -22,5 +22,6 @@ axios.interceptors.response.use(
       store.dispatch("logout");
       router.push("/login");
     }
+    throw error;
   }
 );

@@ -5,16 +5,18 @@ export const authMutations = {
   setToken(state, token) {
     state.token = token;
   },
+  setAuthError(state, error) {
+    state.authError = error;
+  },
 };
 
 export const authActions = {
   async login({ commit }, { user, isRegister }) {
     try {
-      const {
-        data: { token },
-      } = isRegister
-        ? await axios.post("account/register", user)
-        : await axios.post("account/login", user);
+      const endpoint = isRegister ? "register" : "login";
+      const res = await axios.post(`account/${endpoint}`, user);
+
+      const token = res.data && res.data.token;
       if (token) {
         commit("setToken", token);
 
@@ -22,9 +24,11 @@ export const authActions = {
         router.push("/browse");
 
         axios.defaults.headers.common["Authorization"] = token;
+        commit("authError", null);
       }
-    } catch {
+    } catch (err) {
       commit("setToken", null);
+      commit("setAuthError", err.response.data.error);
       localStorage.removeItem("token");
     }
   },
