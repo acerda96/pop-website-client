@@ -1,8 +1,7 @@
 <template>
   <div class="bg-white w-full">
-    <BrowseNav @search="search" class="z-10" />
-
-    <div class="flex flex-col items-center mt-24">
+    <BrowseNav @getItems="getItems" class="z-10" />
+    <div class="flex flex-col items-center mt-24 xs:mt-12">
       <Loader v-if="isLoading" />
       <div v-if="!isLoading" class="browse__items fade-in">
         <div
@@ -29,6 +28,7 @@
           </div>
         </div>
       </div>
+      <div v-if="!isLoading && items.length == 0">No items to display</div>
     </div>
   </div>
 </template>
@@ -59,15 +59,18 @@ export default {
     if (this.isLoggedIn) {
       this.individual = await setIndividual();
     }
-    this.getItems();
+    const sortCriterion = 1;
+    this.getItems(sortCriterion);
   },
   methods: {
     async getItems(sortCriterion) {
+      this.isLoading = true;
       const { lat, lng } = await this.$getLocation({});
 
       const { data } = await axios.get(
         `items?latitude=${lat}&longitude=${lng}&sortCriterion=${sortCriterion}`
       );
+
       if (this.isLoggedIn) {
         this.items = this.markSaved(data);
       } else {
@@ -102,18 +105,6 @@ export default {
         }
         return item;
       });
-    },
-    async search(sortCriterion) {
-      this.isLoading = true;
-      try {
-        const { data } = await axios.get(
-          `items?sortCriterion=${sortCriterion}`
-        );
-        this.items = this.markSaved(data);
-        this.isLoading = false;
-      } catch (err) {
-        console.log(err);
-      }
     },
   },
 };

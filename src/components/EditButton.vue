@@ -21,7 +21,7 @@
 <script>
 export default {
   name: "EditButton",
-  props: ["isEditing", "isEditingFieldName", "document", "fields"],
+  props: ["isEditing", "fieldName", "document", "fields"],
   computed: {
     currentlyEditing: {
       get() {
@@ -31,7 +31,7 @@ export default {
   },
   methods: {
     emitToggleEdit() {
-      this.$emit("toggleEdit", this.isEditingFieldName, !this.currentlyEditing);
+      this.$emit("toggleEdit", this.fieldName, !this.currentlyEditing);
     },
     saveEdit() {
       const data = {};
@@ -40,14 +40,7 @@ export default {
         data[field] = this.document[field];
       });
 
-      console.log("edit", this.document, data);
-
-      this.$emit(
-        "callback",
-        data,
-        this.isEditingFieldName,
-        !this.currentlyEditing
-      );
+      this.$emit("callback", data, this.fieldName);
     },
   },
 };

@@ -1,65 +1,165 @@
 <template>
   <div class="flex justify-center">
     <div
-      class="flex flex-col items-center my-10 pt-10 bg-white w-4/6 xs:w-full"
+      class="flex flex-col items-center my-10 py-10 bg-white w-4/6 xs:w-full"
     >
       <div v-if="error">Item not found</div>
       <Loader v-if="isLoading" />
-      <div class="w-full" v-if="!isLoading && !error">
-        <div class="flex justify-around">
-          <img
-            class="item__thumbnail"
-            v-bind:src="'data:image/jpeg;base64,' + item.images[0].buffer"
-          />
-        </div>
-        <div class="flex flex-col items-center">
-          <div class="flex p-2">
-            <h2 class="text-2xl">{{ item.name }}</h2>
+      <div
+        class="w-full h-full flex flex-col fade-in justify-between"
+        v-if="!isLoading && !error"
+      >
+        <div>
+          <div class="flex justify-around">
+            <img
+              class="item__thumbnail"
+              v-bind:src="'data:image/jpeg;base64,' + item.images[0].buffer"
+            />
           </div>
-          <hr class="w-full" />
-          <div class="px-10 w-full">
-            <h4 class="text-xl">Description</h4>
-            <p class="mb-2">{{ item.description }}</p>
-            <div class="flex justify-between">
-              <div>
-                <h4 class="text-xl pt-3">Price</h4>
-                <p>£{{ item.unitPrice }}</p>
+          <div class="flex flex-col items-center">
+            <div class="flex items-center justify-between px-10 w-full">
+              <div v-if="!isEditingName" class="flex items-center">
+                <h2 class="text-2xl py-3">
+                  {{ item.name }}
+                </h2>
+                <div v-if="isAbleToEdit" class="text-accent-medium pl-5">
+                  {{
+                    item.status === "approved" ? "Approved" : "Pending approval"
+                  }}
+                </div>
               </div>
-              <div>
-                <h4 class="text-xl pt-3">Initial quantity</h4>
-                <p>{{ item.initialQuantity }}</p>
+              <form v-else @submit.prevent="putItem(item, 'isEditingName')">
+                <input
+                  v-model="item.name"
+                  class="border border-accent-dark pl-4"
+                />
+              </form>
+              <EditButton
+                v-if="isAbleToEdit"
+                :document="item"
+                :fields="['name']"
+                fieldName="isEditingName"
+                :isEditing.sync="isEditingName"
+                @callback="putItem"
+                @toggleEdit="toggleEdit"
+              />
+            </div>
+            <hr class="w-full" />
+            <div class="px-10 w-full">
+              <div class="flex items-center justify-between">
+                <h4 class="text-xl">
+                  Description
+                </h4>
+                <EditButton
+                  v-if="isAbleToEdit"
+                  :document="item"
+                  :fields="['description']"
+                  fieldName="isEditingDescription"
+                  :isEditing.sync="isEditingDescription"
+                  @callback="putItem"
+                  @toggleEdit="toggleEdit"
+                />
+              </div>
+              <p v-if="!isEditingDescription">
+                {{ item.description }}
+              </p>
+              <textarea
+                v-else
+                v-model="item.description"
+                class="border border-accent-dark pl-4 w-full"
+              />
+              <div class="flex justify-between pt-5">
+                <div>
+                  <div class="flex justify-between items-center">
+                    <h4 class="text-xl pr-5">Price</h4>
+                    <EditButton
+                      v-if="isAbleToEdit"
+                      :document="item"
+                      :fields="['unitPrice']"
+                      fieldName="isEditingPrice"
+                      :isEditing.sync="isEditingPrice"
+                      @callback="putItem"
+                      @toggleEdit="toggleEdit"
+                    />
+                  </div>
+                  <p v-if="!isEditingPrice">£{{ item.unitPrice }}</p>
+                  <form
+                    v-else
+                    @submit.prevent="putItem(item, 'isEditingPrice')"
+                  >
+                    £<input
+                      v-model="item.unitPrice"
+                      class="border border-accent-dark pl-4 ml-1"
+                    />
+                  </form>
+                </div>
+                <div>
+                  <div class="flex items-center">
+                    <h4 class="text-xl pr-5">Initial quantity</h4>
+                    <EditButton
+                      v-if="isAbleToEdit"
+                      :document="item"
+                      :fields="['initialQuantity']"
+                      fieldName="isEditingQuantity"
+                      :isEditing.sync="isEditingQuantity"
+                      @callback="putItem"
+                      @toggleEdit="toggleEdit"
+                    />
+                  </div>
+                  <p v-if="!isEditingQuantity">{{ item.initialQuantity }}</p>
+                  <form
+                    v-else
+                    @submit.prevent="putItem(item, 'isEditingQuantity')"
+                  >
+                    <input
+                      v-model="item.initialQuantity"
+                      class="border border-accent-dark pl-4"
+                    />
+                  </form>
+                </div>
               </div>
             </div>
-            <h4 class="text-xl pt-3">Host</h4>
-            <router-link
-              :to="'/store/' + store._id"
-              class="mb-2 hover:text-accent-medium"
-              >{{ store.name }}</router-link
-            >
+          </div>
+          <div
+            v-if="items.length > 0"
+            class="mt-10 flex flex-col items-center w-full"
+          >
+            <div class="flex">
+              <div class="text-xl pt-3">Other items by</div>
+              <router-link
+                class="text-xl pl-5 pt-3 hover:underline"
+                :to="'/store/' + store._id"
+              >
+                {{ store.name }}
+              </router-link>
+            </div>
+            <div class="flex flex-wrap justify-center w-full">
+              <router-link
+                v-for="item in items"
+                :key="item._id"
+                :to="'/item/' + item._id"
+                class="m-5"
+              >
+                <img
+                  class="store__item-thumbnail"
+                  v-bind:src="'data:image/jpeg;base64,' + item.images[0].buffer"
+                />
+                <div class="text-center">
+                  {{ item.name }}
+                  £{{ item.unitPrice }}
+                </div>
+              </router-link>
+            </div>
           </div>
         </div>
-        <div
-          v-if="items.length > 0"
-          class="mt-10 flex flex-col items-center w-full"
-        >
-          <h4 class="text-xl pt-3">Other items from the same store</h4>
-          <div class="flex flex-wrap justify-center w-full">
-            <router-link
-              v-for="item in items"
-              :key="item._id"
-              :to="'/item/' + item._id"
-              class="m-5"
-            >
-              <img
-                class="store__item-thumbnail"
-                v-bind:src="'data:image/jpeg;base64,' + item.images[0].buffer"
-              />
-              <div class="text-center">
-                {{ item.name }}
-                £{{ item.unitPrice }}
-              </div>
-            </router-link>
-          </div>
+        <div v-if="items.length == 0" class="flex justify-center">
+          <div class="text-lg pt-3 italic h-full">Hosted by</div>
+          <router-link
+            class="text-lg pl-5 pt-3 hover:underline italic"
+            :to="'/store/' + store._id"
+          >
+            {{ store.name }}
+          </router-link>
         </div>
       </div>
     </div>
@@ -70,11 +170,13 @@
 import axios from "axios";
 import Loader from "@/components/Loader.vue";
 import setIndividual from "@/lib/individual";
+import EditButton from "@/components/EditButton.vue";
 
 export default {
   name: "Item",
   components: {
     Loader,
+    EditButton,
   },
   computed: {
     isLoggedIn: function() {
@@ -90,6 +192,11 @@ export default {
       items: [],
       store: {},
       error: false,
+      isAbleToEdit: true,
+      isEditingName: false,
+      isEditingDescription: false,
+      isEditingPrice: false,
+      isEditingQuantity: false,
     };
   },
   async mounted() {
@@ -125,6 +232,18 @@ export default {
       } catch (err) {
         console.log(err);
         this.isLoading = false;
+      }
+    },
+    toggleEdit(field, val) {
+      this[field] = val;
+    },
+    async putItem(data, field) {
+      try {
+        await axios.put(`items/${this.$route.params.itemId}`, data);
+        this.toggleEdit(field, false);
+        await this.getItem();
+      } catch (err) {
+        console.log(err);
       }
     },
   },

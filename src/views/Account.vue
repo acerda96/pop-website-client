@@ -32,10 +32,10 @@ export default {
     this.individual = await setIndividual();
   },
   methods: {
-    deleteAccount() {
+    async deleteAccount() {
       if (window.confirm("Are you sure you want to delete your account?")) {
         try {
-          axios.post("account/delete", { password: this.password });
+          await axios.post("account/delete", { password: this.password });
           this.$store.dispatch("logout");
           this.error = false;
         } catch {

@@ -45,13 +45,6 @@ $item-size: 180px;
   height: $item-size;
 }
 
-.store__item-name {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  padding: 7px;
-}
-
 .store__items {
   display: flex;
   flex-wrap: wrap;

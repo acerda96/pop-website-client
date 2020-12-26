@@ -8,7 +8,7 @@
         <hr />
         <div class="basic-form__input-ctn--large">
           <label for="name"> Full name </label>
-          <input type="text" name="name" v-model="name" />
+          <input type="text" name="name" v-model="name" required />
         </div>
         <div class="basic-form__input-ctn--large">
           <label for="company"> Company (optional) </label>
@@ -16,15 +16,20 @@
         </div>
         <div class="basic-form__input-ctn--large">
           <label for="mobileNumber"> Mobile number </label>
-          <input type="text" name="mobileNumber" v-model="mobileNumber" />
+          <input
+            type="text"
+            name="mobileNumber"
+            v-model="mobileNumber"
+            required
+          />
         </div>
         <div class="basic-form__input-ctn--large">
           <label for="email"> Email </label>
-          <input type="email" name="email" v-model="email" />
+          <input type="email" name="email" v-model="email" required />
         </div>
         <div class="basic-form__input-ctn--large">
           <label for="password"> Password </label>
-          <input type="password" name="password" v-model="password" />
+          <input type="password" name="password" v-model="password" required />
         </div>
         <div class="basic-form__input-ctn--large">
           <label for="confirmPassword"> Confirm password </label>
@@ -32,6 +37,7 @@
             type="password"
             name="confirmPassword"
             v-model="confirmPassword"
+            required
           />
         </div>
         <div class="w-full flex flex-col items-center justify-around">

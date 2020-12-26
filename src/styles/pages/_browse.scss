@@ -25,3 +25,10 @@
 .browse__heart-icon {
   cursor: pointer;
 }
+
+@media (max-width: 450px) {
+  .browse__item-thumbnail {
+    width: 250px;
+    height: 250px;
+  }
+}

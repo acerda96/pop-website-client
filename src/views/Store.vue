@@ -4,22 +4,30 @@
       <div v-if="error" class="pt-5">Store not found</div>
       <NewItemModal v-if="individual._id" @getItems="getItems" />
       <Loader v-if="isLoading" />
-      <div class="store__details" v-if="!isLoading && !error">
+      <div class="store__details fade-in" v-if="!isLoading && !error">
         <div class="flex justify-between items-center w-full">
-          <h2 class="text-3xl text-center py-3" v-if="!isEditingStore">
-            {{ store.name }}
-          </h2>
-          <input
-            v-if="isEditingStore"
-            v-model="store.name"
-            class="border border-accent-dark pl-4"
-          />
+          <div v-if="!isEditingName" class="flex items-center">
+            <h2 class="text-2xl py-3">
+              {{ store.name }}
+            </h2>
+            <div v-if="isAbleToEdit" class="text-accent-medium pl-5">
+              {{
+                store.status === "approved" ? "Approved" : "Pending approval"
+              }}
+            </div>
+          </div>
+          <form v-else @submit.prevent="putStore(store, 'isEditingName')">
+            <input
+              v-model="store.name"
+              class="border border-accent-dark pl-4"
+            />
+          </form>
           <EditButton
             v-if="isAbleToEdit"
             :document="store"
             :fields="['name']"
-            isEditingFieldName="isEditingStore"
-            :isEditing.sync="isEditingStore"
+            fieldName="isEditingName"
+            :isEditing.sync="isEditingName"
             @callback="putStore"
             @toggleEdit="toggleEdit"
           />
@@ -32,17 +40,17 @@
               v-if="isAbleToEdit"
               :document="store"
               :fields="['description']"
-              isEditingFieldName="isEditingDescription"
+              fieldName="isEditingDescription"
               :isEditing.sync="isEditingDescription"
               @callback="putStore"
               @toggleEdit="toggleEdit"
             />
           </div>
           <p v-if="!isEditingDescription">{{ store.description }}</p>
-          <input
-            v-if="isEditingDescription"
+          <textarea
+            v-else
             v-model="store.description"
-            class="border border-accent-dark pl-4"
+            class="border border-accent-dark pl-4 w-full"
           />
         </div>
         <hr class="w-full" />
@@ -53,7 +61,7 @@
               v-if="isAbleToEdit"
               :document="store"
               :fields="['addressLine1', 'addressLine2', 'postcode', 'city']"
-              isEditingFieldName="isEditingLocation"
+              fieldName="isEditingLocation"
               :isEditing.sync="isEditingLocation"
               @callback="putStore"
               @toggleEdit="toggleEdit"
@@ -67,7 +75,7 @@
             <p v-if="store.postcode">{{ store.postcode }},</p>
             <p v-if="store.city">{{ store.city }}</p>
           </div>
-          <div class="flex flex-col" v-if="isEditingLocation">
+          <div v-else class="flex flex-col">
             <input
               class="border border-accent-dark pl-4"
               v-model="store.addressLine1"
@@ -124,7 +132,13 @@
               {{ date.formatted.date }}, {{ date.formatted.startTime }} -
               {{ date.formatted.endTime }}
             </p>
-            <p v-if="isAbleToEdit" class="store__date-remove">Remove</p>
+            <p
+              v-if="isAbleToEdit"
+              class="store__date-remove"
+              @click="deleteDate(date.id)"
+            >
+              Remove
+            </p>
           </div>
         </div>
         <hr class="w-full" />
@@ -145,27 +159,31 @@
               v-for="item in items"
               :key="item.id"
             >
-              <CloseOutline
-                v-if="isAbleToEdit"
-                class="underline text-accent-medium mt-5 cursor-pointer"
-                @click="deleteItem(item._id)"
-              />
               <router-link :to="'/item/' + item._id">
                 <img
                   class="store__item-thumbnail"
                   v-bind:src="'data:image/jpeg;base64,' + item.images[0].buffer"
                 />
               </router-link>
-              <div class="store__item-name">
+              <div class="flex justify-center items-center w-full mt-1">
                 <div>
-                  {{ item.name }}
-                  £{{ item.unitPrice }}
+                  <div>
+                    {{ item.name }}
+                    £{{ item.unitPrice }}
+                  </div>
+                  <div v-if="isAbleToEdit" class="italic text-accent-medium">
+                    {{
+                      item.status === "approved"
+                        ? "Approved"
+                        : "Pending approval"
+                    }}
+                  </div>
                 </div>
-                <div v-if="isAbleToEdit" class="italic text-accent-medium">
-                  {{
-                    item.status === "approved" ? "Approved" : "Pending approval"
-                  }}
-                </div>
+                <CloseOutline
+                  v-if="isAbleToEdit"
+                  class="underline text-accent-medium cursor-pointer pl-2"
+                  @click="deleteItem(item._id)"
+                />
               </div>
             </div>
           </div>
@@ -204,7 +222,7 @@ export default {
       newDate: new Date().toISOString(),
       newStartTime: new Date().toISOString(),
       newEndTime: new Date().toISOString(),
-      isEditingStore: false,
+      isEditingName: false,
       isEditingLocation: false,
       isEditingDescription: false,
       error: false,
@@ -217,9 +235,7 @@ export default {
     },
   },
   async mounted() {
-    console.log("HELLO", this.isLoggedIn);
     if (this.isLoggedIn) {
-      console.log("AM I HERE");
       this.individual = await setIndividual();
     }
     this.getStore();
@@ -237,10 +253,8 @@ export default {
         }
         this.store = data;
         this.isAbleToEdit = this.individual._id === this.store.userId;
-        this.isLoading = false;
       } catch {
         this.error = true;
-        this.isLoading = false;
       }
     },
     async getItems() {
@@ -252,23 +266,32 @@ export default {
         this.isLoading = false;
       } catch (err) {
         console.log(err);
+        this.isLoading = false;
       }
     },
     toggleNewDate() {
       this.isNewDateActive = !this.isNewDateActive;
     },
     saveNewDate() {
-      this.putDate();
+      this.addDate();
       this.isNewDateActive = false;
     },
-    deleteDate(id) {
-      const newDates = this.stores.dates.filter((date) => date._id !== id);
-      this.putStore({ dates: newDates });
+    async deleteDate(id) {
+      const newDates = this.store.dates.filter((date) => date.id !== id);
+      console.log(newDates);
+      try {
+        await axios.put(`stores/${this.$route.params.storeId}`, {
+          dates: newDates,
+        });
+        await this.getStore();
+      } catch (err) {
+        console.log(err);
+      }
     },
     toggleEdit(field, val) {
       this[field] = val;
     },
-    async putStore(data, field, val) {
+    async putStore(data, field) {
       const addressObj = {
         address_line_1: this.store.addressLine1,
         address_line_2: this.store.addressLine2,
@@ -281,13 +304,16 @@ export default {
         data.position = position;
         try {
           await axios.put(`stores/${this.$route.params.storeId}`, data);
-          this.toggleEdit(field, val);
+          if (field) {
+            this.toggleEdit(field, false);
+          }
+          await this.getStore();
         } catch (err) {
           console.log(err);
         }
       });
     },
-    putDate() {
+    async addDate() {
       const startTime =
         new Date(this.newStartTime).getTime() -
         new Date(this.newStartTime).setHours(0, 0, 0, 0);
@@ -304,7 +330,7 @@ export default {
       const formattedEndTime = moment(endDate).format("HH:mm");
 
       const date = {
-        id: Math.random(),
+        id: Math.random() * 100000000,
         iso: {
           start: new Date(startDate).toISOString(),
           end: new Date(endDate).toISOString(),
@@ -318,9 +344,7 @@ export default {
 
       const dates = this.store.dates;
       dates.push(date);
-      axios
-        .put(`stores/${this.$route.params.storeId}`, { dates })
-        .catch(() => {});
+      await axios.put(`stores/${this.$route.params.storeId}`, { dates });
     },
     async deleteItem(id) {
       if (window.confirm("Are you sure you want to delete this item?")) {

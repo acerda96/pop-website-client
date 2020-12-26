@@ -17,7 +17,7 @@ $filter-height: 30px;
 
 .browse-nav {
   width: 100%;
-  padding: 10px;
+  padding: 5px;
   padding-left: 30px;
   padding-right: 30px;
   display: flex;
@@ -25,22 +25,10 @@ $filter-height: 30px;
   align-items: center;
   flex-wrap: wrap;
 }
-@media (max-width: 570px) {
-  .browse-nav__location {
-    margin-left: 90px;
-    margin-right: 90px;
-  }
-}
 
 @media (max-width: 400px) {
-  .browse-nav {
-    flex-direction: column;
-    flex-wrap: nowrap;
-    align-items: space-evenly;
-    justify-content: space-evenly;
-  }
   .dropdown {
-    width: 170px;
+    width: 140px;
     margin: 5px;
   }
 }

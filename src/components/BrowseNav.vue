@@ -43,7 +43,7 @@ export default {
   },
   methods: {
     onChange() {
-      this.$emit("search", this.sortCriterion);
+      this.$emit("getItems", this.sortCriterion);
     },
   },
 };
