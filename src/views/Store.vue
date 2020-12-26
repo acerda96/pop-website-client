@@ -10,7 +10,7 @@
             <h2 class="text-2xl py-3">
               {{ store.name }}
             </h2>
-            <div v-if="isAbleToEdit" class="text-accent-medium pl-5 italic">
+            <div v-if="isAbleToEdit" class="text-accent-medium pl-5">
               {{
                 store.status === "approved" ? "Approved" : "Pending approval"
               }}
@@ -77,19 +77,19 @@
           </div>
           <div v-else class="flex flex-col">
             <input
-              class="border border-accent-dark pl-4"
+              class="border border-accent-dark pl-4 my-1"
               v-model="store.addressLine1"
             />
             <input
-              class="border border-accent-dark pl-4"
+              class="border border-accent-dark pl-4 my-1"
               v-model="store.addressLine2"
             />
             <input
-              class="border border-accent-dark pl-4"
+              class="border border-accent-dark pl-4 my-1"
               v-model="store.postcode"
             />
             <input
-              class="border border-accent-dark pl-4"
+              class="border border-accent-dark pl-4 my-1"
               v-model="store.city"
             />
           </div>

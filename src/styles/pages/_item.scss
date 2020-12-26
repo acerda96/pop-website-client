@@ -4,10 +4,25 @@ $item-size: 220px;
   width: $item-size;
   height: $item-size;
 }
+
+.item__image-edit {
+  border: 0;
+  position: absolute;
+  overflow: hidden;
+  padding: 0px;
+  position: absolute !important;
+  white-space: nowrap;
+  width: 85.5px;
+  top: 200px;
+}
+
 @media (max-width: 800px) {
   .item__thumbnail {
     width: 190px;
     height: 190px;
+  }
+  .item__image-edit {
+    top: 170px;
   }
 }
 
@@ -15,5 +30,8 @@ $item-size: 220px;
   .item__thumbnail {
     width: 200px;
     height: 200px;
+  }
+  .item__image-edit {
+    top: 180px;
   }
 }

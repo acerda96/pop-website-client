@@ -1,7 +1,7 @@
 <template>
   <div class="flex justify-center">
     <div
-      class="flex flex-col items-center my-10 py-10 bg-white w-4/6 xs:w-full"
+      class="flex flex-col items-center my-10 py-10 xs:py-5 bg-white w-4/6 xs:w-full"
     >
       <div v-if="error">Item not found</div>
       <Loader v-if="isLoading" class="pt-10" />
@@ -10,12 +10,35 @@
         v-if="!isLoading && !error"
       >
         <div>
-          <div class="flex justify-around">
+          <div class="flex justify-center">
             <img
+              v-if="!isAbleToEdit"
               class="item__thumbnail"
-              v-bind:src="'data:image/jpeg;base64,' + item.images[0].buffer"
+              v-bind:src="previewImage"
             />
+            <div v-else>
+              <div class="w-full flex flex-col relative items-center mt-6">
+                <input
+                  class="item__image-edit border-0"
+                  ref="fileInput"
+                  type="file"
+                  @change="pickFile"
+                />
+                <div>
+                  <img class="item__thumbnail" v-bind:src="previewImage" />
+                </div>
+              </div>
+              <div v-if="isEditingImage" class="mt-5 flex justify-around">
+                <button class="underline" @click="cancelImageEdit">
+                  <Close />
+                </button>
+                <button class="underline" @click="uploadImage">
+                  <Check />
+                </button>
+              </div>
+            </div>
           </div>
+
           <div class="flex flex-col items-center">
             <div class="flex items-center justify-between px-10 w-full">
               <div v-if="!isEditingName" class="flex items-center">
@@ -171,12 +194,16 @@ import axios from "axios";
 import Loader from "@/components/Loader.vue";
 import setIndividual from "@/lib/individual";
 import EditButton from "@/components/EditButton.vue";
+import Close from "vue-material-design-icons/Close.vue";
+import Check from "vue-material-design-icons/Check.vue";
 
 export default {
   name: "Item",
   components: {
     Loader,
     EditButton,
+    Close,
+    Check,
   },
   computed: {
     isLoggedIn: function() {
@@ -189,6 +216,8 @@ export default {
       individual: {},
       isBrowsePage: this.$route.name === "browse-item",
       item: {},
+      imageFile: null,
+      previewImage: null,
       items: [],
       store: {},
       error: false,
@@ -197,6 +226,7 @@ export default {
       isEditingDescription: false,
       isEditingPrice: false,
       isEditingQuantity: false,
+      isEditingImage: false,
     };
   },
   async mounted() {
@@ -215,6 +245,7 @@ export default {
         this.item = item;
         const { data: store } = await axios.get(`stores/${this.item.storeId}`);
         this.store = store;
+        this.previewImage = "data:image/jpeg;base64," + item.images[0].buffer;
       } catch (err) {
         this.error = true;
         this.isLoading = false;
@@ -229,8 +260,7 @@ export default {
           .filter((item) => item._id !== this.item._id)
           .slice(0, 4);
         this.isLoading = false;
-      } catch (err) {
-        console.log(err);
+      } catch {
         this.isLoading = false;
       }
     },
@@ -242,6 +272,40 @@ export default {
         await axios.put(`items/${this.$route.params.itemId}`, data);
         this.toggleEdit(field, false);
         await this.getItem();
+      } catch (err) {
+        console.log(err);
+      }
+    },
+    pickFile() {
+      console.log("CALLIING");
+      let input = this.$refs.fileInput;
+      let file = input.files;
+
+      this.imageFile = file[0];
+      if (file && file[0]) {
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          this.previewImage = e.target.result;
+          this.isEditingImage = true;
+        };
+        reader.readAsDataURL(file[0]);
+      }
+    },
+    cancelImageEdit() {
+      const originalImage =
+        "data:image/jpeg;base64," + this.item.images[0].buffer;
+      this.$refs.fileInput.value = "";
+      this.previewImage = originalImage;
+      this.imageFile = originalImage;
+      this.isEditingImage = false;
+    },
+    async uploadImage() {
+      let data = new FormData();
+      data.append("images", this.imageFile);
+
+      try {
+        await axios.put(`items/${this.$route.params.itemId}`, data);
+        this.isEditingImage = false;
       } catch (err) {
         console.log(err);
       }

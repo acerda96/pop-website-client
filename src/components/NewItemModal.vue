@@ -162,12 +162,12 @@ export default {
       }
     },
     pickFile() {
-      let input = this.$refs.fileInput;
-      let file = input.files;
+      const input = this.$refs.fileInput;
+      const file = input.files;
 
       this.image = file[0];
       if (file && file[0]) {
-        let reader = new FileReader();
+        const reader = new FileReader();
         reader.onload = (e) => {
           this.previewImage = e.target.result;
         };

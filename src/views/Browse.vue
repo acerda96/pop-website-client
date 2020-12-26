@@ -28,7 +28,7 @@
           </div>
         </div>
       </div>
-      <div class="pt-18" v-if="!isLoading && items.length == 0">
+      <div class="pt-10" v-if="!isLoading && items.length == 0">
         No items to display
       </div>
     </div>

@@ -20,7 +20,7 @@
           >
             <router-link tag="p" :to="'/store/' + store._id">
               <p>{{ store.name }}</p>
-              <p class="italic text-accent-medium">
+              <p class="text-accent-medium">
                 {{
                   store.status == "approved" ? "Approved" : "Pending approval"
                 }}
