@@ -18,7 +18,7 @@
           <div class="browse__item-details">
             <div>
               <div>{{ item.name }}</div>
-              <div>£{{ item.unitPrice }}</div>
+              <div>£{{ item.price }}</div>
             </div>
             <SaveIcon
               :isSaved="item.isSaved"
@@ -28,7 +28,9 @@
           </div>
         </div>
       </div>
-      <div v-if="!isLoading && items.length == 0">No items to display</div>
+      <div class="pt-18" v-if="!isLoading && items.length == 0">
+        No items to display
+      </div>
     </div>
   </div>
 </template>

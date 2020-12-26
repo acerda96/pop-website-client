@@ -4,7 +4,7 @@
       class="flex flex-col items-center my-10 py-10 bg-white w-4/6 xs:w-full"
     >
       <div v-if="error">Item not found</div>
-      <Loader v-if="isLoading" />
+      <Loader v-if="isLoading" class="pt-10" />
       <div
         class="w-full h-full flex flex-col fade-in justify-between"
         v-if="!isLoading && !error"
@@ -75,20 +75,20 @@
                     <EditButton
                       v-if="isAbleToEdit"
                       :document="item"
-                      :fields="['unitPrice']"
+                      :fields="['price']"
                       fieldName="isEditingPrice"
                       :isEditing.sync="isEditingPrice"
                       @callback="putItem"
                       @toggleEdit="toggleEdit"
                     />
                   </div>
-                  <p v-if="!isEditingPrice">£{{ item.unitPrice }}</p>
+                  <p v-if="!isEditingPrice">£{{ item.price }}</p>
                   <form
                     v-else
                     @submit.prevent="putItem(item, 'isEditingPrice')"
                   >
                     £<input
-                      v-model="item.unitPrice"
+                      v-model="item.price"
                       class="border border-accent-dark pl-4 ml-1"
                     />
                   </form>
@@ -146,7 +146,7 @@
                 />
                 <div class="text-center">
                   {{ item.name }}
-                  £{{ item.unitPrice }}
+                  £{{ item.price }}
                 </div>
               </router-link>
             </div>

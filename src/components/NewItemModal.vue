@@ -6,47 +6,76 @@
     :scrollable="true"
     :height="600"
   >
-    <div class="flex justify-center items-center pt-5">
+    <div class="flex justify-center items-center">
       <div>
         <form
           class="basic-form"
           @submit.prevent="addItem"
           enctype="multipart/form-data"
         >
-          <input
-            class="add__heading-input"
-            type="text"
-            name="name"
-            v-model="name"
-            placeholder="Item name"
-          />
-          <div class="basic-form__sub-ctn">
-            <div class="basic-form__input-ctn">
-              <label for="initialQuantity"> Quantity </label>
-              <input
-                class="basic-form__input--small"
-                style="width: 100px;"
-                type="text"
-                name="initialQuantity"
-                v-model="initialQuantity"
-              />
+          <div class="w-full flex justify-end">
+            <Close
+              class="cursor-pointer pt-3"
+              @click="
+                $modal.hide('newItemModal');
+                this.error = false;
+              "
+            />
+          </div>
+          <div
+            class="flex w-full items-start justify-between xs:flex-col xs:items-center mt-16 xs:mt-0"
+          >
+            <div class="w-full">
+              <div class="w-full flex flex-col xs:px-1">
+                <div class="w-full text-xl xxs:text-sm pt-1">Name</div>
+                <input class="" type="text" name="name" v-model="name" />
+              </div>
+              <div class="w-full flex justify-between items-center mt-8">
+                <div class="flex flex-col">
+                  <label class="text-xl" for="initialQuantity">
+                    Quantity
+                  </label>
+                  <input
+                    class="basic-form__input--small"
+                    style="width: 100px;"
+                    type="text"
+                    name="initialQuantity"
+                    v-model="initialQuantity"
+                  />
+                </div>
+                <div class="flex flex-col ml-5">
+                  <label class="text-xl" for="price"> Price </label>
+                  <div>
+                    £
+                    <input
+                      class="basic-form__input--small"
+                      style="width: 100px;"
+                      type="price"
+                      name="price"
+                      v-model="price"
+                    />
+                  </div>
+                </div>
+              </div>
             </div>
-            <div class="basic-form__input-ctn">
-              <label for="unitPrice"> Price </label>
-              <div>
-                £
-                <input
-                  class="basic-form__input--small"
-                  style="width: 100px;"
-                  type="unitPrice"
-                  name="unitPrice"
-                  v-model="unitPrice"
+            <div class="flex flex-col relative items-center ml-5 mt-6">
+              <input
+                class="border-0"
+                ref="fileInput"
+                type="file"
+                @input="pickFile"
+              />
+              <div class="add__image-ctn">
+                <img
+                  v-if="previewImage"
+                  class="add__image-thumbnail"
+                  v-bind:src="previewImage"
                 />
               </div>
             </div>
           </div>
-          <div class="basic-form__input-ctn--large">
-            <label for="description"> Description </label>
+          <div class="flex flex-col w-full mt-8">
+            <label class="text-xl" for="description"> Description </label>
             <textarea
               class="description"
               type="text"
@@ -54,26 +83,13 @@
               v-model="description"
             />
           </div>
-          <div class="add__image-preview">
-            <input
-              class="border-0"
-              ref="fileInput"
-              type="file"
-              @input="pickFile"
-            />
-            <div class="add__image-ctn">
-              <img
-                v-if="previewImage"
-                class="add__image-thumbnail"
-                v-bind:src="previewImage"
-              />
-            </div>
-          </div>
-          <div class="add__buttons-ctn">
-            <button class="square-btn" type="submit">Add item</button>
-            <button class="square-btn" @click="$modal.hide('newItemModal')">
-              Cancel
+          <div class="flex justify-center pt-3">
+            <button class="square-btn w-40" type="submit">
+              Submit for approval
             </button>
+          </div>
+          <div class="text-red-700" v-if="error">
+            {{ error }}
           </div>
         </form>
       </div>
@@ -84,19 +100,23 @@
 <script>
 import axios from "axios";
 import setIndividual from "@/lib/individual";
+import Close from "vue-material-design-icons/Close.vue";
 
 export default {
   name: "NewStoreModal",
+  components: {
+    Close,
+  },
   data() {
     return {
       individual: {},
       previewImage: null,
-      image: {},
+      image: null,
       name: "",
       description: "",
       initialQuantity: "",
-      type: "",
-      unitPrice: "",
+      price: "",
+      error: false,
     };
   },
   async mounted() {
@@ -104,12 +124,15 @@ export default {
   },
   methods: {
     async addItem() {
+      if (!this.image) {
+        this.error = "Please add an image";
+        return;
+      }
       let values = {
         name: this.name,
         description: this.description,
         initialQuantity: this.initialQuantity,
-        type: this.type,
-        unitPrice: this.unitPrice,
+        price: this.price,
       };
 
       let data = new FormData();
@@ -123,10 +146,19 @@ export default {
 
       try {
         await axios.post("items", data);
+
+        this.previewImage = null;
+        this.image = null;
+        this.name = "";
+        this.description = "";
+        this.initialQuantity = "";
+        this.price = "";
+        this.error = false;
+
         this.$modal.hide("newItemModal");
         this.$emit("getItems");
       } catch (err) {
-        console.log(err);
+        this.error = err.response.data.error;
       }
     },
     pickFile() {

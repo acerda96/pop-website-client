@@ -1,16 +1,8 @@
 .add__heading-input {
-  border: none;
   font-weight: bold;
   font-size: 25px;
   text-align: center;
-  background: none;
-  color: grey;
   width: 100%;
-}
-
-.add-item__modal {
-  display: flex;
-  justify-content: center;
 }
 
 textarea {
@@ -18,34 +10,21 @@ textarea {
   height: 80px;
 }
 
-.add__buttons-ctn {
-  padding: 20px;
-  width: 100%;
-  display: flex;
-  justify-content: space-around;
-}
-
 .add__items-form-ctn {
   display: flex;
   justify-content: space-between;
 }
 
-.add__image-preview {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
 .add__image-ctn {
-  width: 200px;
-  height: 200px;
+  width: 120px;
+  height: 120px;
   border: 1px solid grey;
   margin-top: 7px;
 }
 
 .add__image-thumbnail {
-  width: 200px;
-  height: 200px;
+  width: 120px;
+  height: 120px;
 }
 
 @media (max-width: 400px) {

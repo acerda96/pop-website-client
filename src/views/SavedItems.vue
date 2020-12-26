@@ -3,7 +3,7 @@
     <h2 class="text-3xl text-center py-3">Saved Items</h2>
     <hr class="w-full" />
     <div class="flex justify-center">
-      <Loader v-if="isLoading" />
+      <Loader v-if="isLoading" class="pt-10" />
       <div v-if="!isLoading" class="browse__items fade-in">
         <div class="browse__item" v-for="item in items" :key="item._id">
           <router-link :to="'/item/' + item._id">
@@ -15,7 +15,7 @@
           <div class="browse__item-details">
             <div>
               <div>{{ item.name }}</div>
-              <div>£{{ item.unitPrice }}</div>
+              <div>£{{ item.price }}</div>
             </div>
             <SaveIcon
               :isSaved="item.isSaved"

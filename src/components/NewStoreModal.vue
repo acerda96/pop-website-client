@@ -6,48 +6,69 @@
     :scrollable="true"
     :height="700"
   >
-    <div class="flex justify-center pt-5">
-      <div>
-        <form class="basic-form" @submit.prevent="addStore">
-          <input
-            class="add__heading-input"
-            type="text"
-            name="name"
-            v-model="name"
-            placeholder="Store name"
-          />
+    <div class="flex justify-center">
+      <div class="w-full flex justify-center">
+        <form class="basic-form xs:mx-8 xs:w-full" @submit.prevent="addStore">
+          <div class="w-full flex justify-end">
+            <Close
+              class="cursor-pointer pt-3"
+              @click="
+                $modal.hide('newStoreModal');
+                this.error = false;
+              "
+            />
+          </div>
+          <div class="w-full flex flex-col xs:px-1">
+            <div class="w-full text-xl xxs:text-sm pt-1">Name</div>
+            <input class="w-full" type="text" name="name" v-model="name" />
+          </div>
 
-          <div class="basic-form__input-ctn--large ">
-            <label for="addressLine1"> Address Line 1 </label>
+          <div class="w-full text-xl xxs:text-sm pt-1 xs:pl-1">Location</div>
+          <div class="w-full flex flex-col pb-3 xs:px-1 xs:pb-0 xxs:text-xs">
+            <label class="text-accent-dark" for="addressLine1">
+              Address Line 1
+            </label>
             <input type="text" name="addressLine1" v-model="addressLine1" />
           </div>
-          <div class="basic-form__input-ctn--large ">
-            <label for="addressLine2"> Address Line 2 </label>
+          <div class="w-full flex flex-col pb-3 xs:px-1 xs:pb-0 xxs:text-xs">
+            <label class="text-accent-dark" for="addressLine2">
+              Address Line 2
+            </label>
             <input type="text" name="addressLine2" v-model="addressLine2" />
           </div>
-          <div class="basic-form__input-ctn--large ">
-            <label for="postcode"> Postcode </label>
+          <div class="w-full flex flex-col pb-3 xs:px-1 xs:pb-0 xxs:text-xs">
+            <label class="text-accent-dark" for="postcode"> Postcode </label>
             <input type="text" name="postcode" v-model="postcode" />
           </div>
-          <div class="basic-form__input-ctn--large ">
-            <label for="city"> City </label>
+          <div class="w-full flex flex-col pb-3 xs:px-1 xs:pb-0 xxs:text-xs">
+            <label class="text-accent-dark" for="city"> City </label>
             <input type="city" name="city" v-model="city" />
           </div>
-          <div class="basic-form__input-ctn--large ">
-            <label for="website"> Website </label>
+          <div class="w-full flex flex-col pb-3 xs:p-1 xxs:text-sm">
+            <label
+              class="text-left w-full text-xl xxs:text-sm pt-1"
+              for="website"
+            >
+              Website (Optional)</label
+            >
             <input type="website" name="website" v-model="website" />
           </div>
-          <div class="basic-form__input-ctn--large ">
-            <label for="description"> Description </label>
+          <div class="w-full flex flex-col pb-3 xs:p-1">
+            <label
+              class="text-left w-full text-xl xxs:text-sm pt-1"
+              for="description"
+            >
+              Description
+            </label>
             <textarea type="text" name="description" v-model="description" />
           </div>
-          <div class="add__buttons-ctn">
-            <button class="square-btn" type="submit">
+          <div class="flex justify-center py-2">
+            <button class="square-btn w-40" type="submit">
               Submit for approval
             </button>
-            <button class="square-btn" @click="$modal.hide('newStoreModal')">
-              Cancel
-            </button>
+          </div>
+          <div class="text-red-700 xxs:text-sm" v-if="error">
+            {{ error }}
           </div>
         </form>
       </div>
@@ -58,9 +79,13 @@
 <script>
 import axios from "axios";
 import setIndividual from "@/lib/individual";
+import Close from "vue-material-design-icons/Close.vue";
 
 export default {
   name: "NewStoreModal",
+  components: {
+    Close,
+  },
   data() {
     return {
       individual: {},
@@ -71,6 +96,7 @@ export default {
       postcode: "",
       city: "",
       website: "",
+      error: null,
     };
   },
   async mounted() {
@@ -103,7 +129,7 @@ export default {
           const { data: store } = await axios.post("stores", data);
           this.$router.push(`/store/${store._id}`);
         } catch (err) {
-          console.log(err);
+          this.error = err.response.data.error;
         }
       });
     },

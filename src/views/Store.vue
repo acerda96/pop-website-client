@@ -3,14 +3,14 @@
     <div class="flex justify-center bg-white w-5/6 xs:w-full xs:my-1">
       <div v-if="error" class="pt-5">Store not found</div>
       <NewItemModal v-if="individual._id" @getItems="getItems" />
-      <Loader v-if="isLoading" />
+      <Loader v-if="isLoading" class="pt-10" />
       <div class="store__details fade-in" v-if="!isLoading && !error">
         <div class="flex justify-between items-center w-full">
           <div v-if="!isEditingName" class="flex items-center">
             <h2 class="text-2xl py-3">
               {{ store.name }}
             </h2>
-            <div v-if="isAbleToEdit" class="text-accent-medium pl-5">
+            <div v-if="isAbleToEdit" class="text-accent-medium pl-5 italic">
               {{
                 store.status === "approved" ? "Approved" : "Pending approval"
               }}
@@ -169,7 +169,7 @@
                 <div>
                   <div>
                     {{ item.name }}
-                    £{{ item.unitPrice }}
+                    £{{ item.price }}
                   </div>
                   <div v-if="isAbleToEdit" class="italic text-accent-medium">
                     {{
@@ -238,8 +238,8 @@ export default {
     if (this.isLoggedIn) {
       this.individual = await setIndividual();
     }
-    this.getStore();
-    this.getItems();
+    await this.getStore();
+    await this.getItems();
   },
 
   methods: {

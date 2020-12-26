@@ -1,6 +1,6 @@
 <template>
-  <div class="z-10">
-    <nav class="upper-navbar">
+  <div>
+    <nav class="upper-navbar z-10">
       <MenuIcon class="upper-navbar__menu-icon" @click="toggleNav" />
       <router-link class="upper-navbar__logo" to="/">POP</router-link>
       <ul class="upper-navbar__items">
@@ -17,7 +17,7 @@
         </div>
       </ul>
     </nav>
-    <nav class="side-navbar" ref="nav">
+    <nav class="side-navbar z-20" ref="nav">
       <ul>
         <div v-for="link in links" :key="link.name">
           <li

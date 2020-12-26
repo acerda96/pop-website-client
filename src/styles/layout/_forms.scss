@@ -7,6 +7,17 @@
   background-color: white;
   margin-bottom: 30px;
 
+  [type="file"] {
+    border: 0;
+    position: absolute;
+    overflow: hidden;
+    padding: 0px;
+    position: absolute !important;
+    white-space: nowrap;
+    width: 85.5px;
+    top: 130px;
+  }
+
   .basic-form__input-ctn--large {
     width: 100%;
     display: flex;
@@ -14,11 +25,11 @@
     padding: 15px;
   }
 
-  .basic-form__input-ctn {
-    display: flex;
-    flex-direction: column;
-    padding: 15px;
-  }
+  // .basic-form__input-ctn {
+  //   display: flex;
+  //   flex-direction: column;
+  //   padding: 15px;
+  // }
 
   .basic-form__input--small {
     align-self: center;
