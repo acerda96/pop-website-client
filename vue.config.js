@@ -8,7 +8,7 @@ module.exports = {
       new HTMLWebpackPlugin({
         showErrors: true,
         cache: true,
-        template: path.resolve(__dirname, "public/index.html"),
+        template: path.resolve(__dirname, "src/index.html"),
       }),
     ],
   },
