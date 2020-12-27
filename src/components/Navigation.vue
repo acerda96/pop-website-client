@@ -16,14 +16,14 @@
         </div>
       </ul>
     </nav>
-    <nav class="side-navbar z-20" ref="nav" v-click-outside="hideNav">
+    <nav class="side-navbar z-20" ref="nav" v-click-outside-side-nav="hideNav">
       <ul>
         <div v-for="link in links" :key="link.name">
           <li
             v-if="isLoggedIn == link.requiresLogin || link.alwaysShow"
             @click="
               toggleNav();
-              onClick(link.name);
+              handleLinkClick(link.name);
             "
           >
             <router-link :to="link.to" class="upper-navbar__link">{{
@@ -39,21 +39,6 @@
 <script>
 import MenuIcon from "vue-material-design-icons/Menu.vue";
 import { links } from "@/lib/navigationLinks";
-import Vue from "vue";
-
-Vue.directive("click-outside", {
-  bind: function(el, binding, vnode) {
-    this.event = function(event) {
-      if (!(el == event.target || el.contains(event.target))) {
-        vnode.context[binding.expression](event);
-      }
-    };
-    document.body.addEventListener("click", this.event);
-  },
-  unbind: function() {
-    document.body.removeEventListener("click", this.event);
-  },
-});
 
 export default {
   name: "Navigation",
@@ -87,23 +72,29 @@ export default {
     },
   },
   directives: {
-    "click-outside": {
+    "click-outside-side-nav": {
       bind: function(el, binding, vnode) {
         window.event = function(event) {
-          const isToggleButton =
-            event.target.className.animVal === "material-design-icon__svg" ||
-            event.target.firstChild.textContent == "Menu Icon";
+          try {
+            const isToggleButton =
+              (event.target.className.animVal &&
+                event.target.className.animVal ===
+                  "material-design-icon__svg") ||
+              (event.target.firstChild.textContent &&
+                event.target.firstChild.textContent) == "Menu Icon";
+            const hasClickedOnElement = el == event.target;
+            const isClickedOnChild = el.contains(event.target);
+            const isNavBarOpen = el.classList.contains("active");
 
-          const hasClickedOnElement = el == event.target;
-          const isClickedOnChild = el.contains(event.target);
-          const isNavBarOpen = el.classList.contains("active");
-
-          if (
-            !(hasClickedOnElement || isClickedOnChild) &&
-            isNavBarOpen &&
-            !isToggleButton
-          ) {
-            vnode.context[binding.expression](event);
+            if (
+              !(hasClickedOnElement || isClickedOnChild) &&
+              isNavBarOpen &&
+              !isToggleButton
+            ) {
+              vnode.context[binding.expression](event);
+            }
+          } catch (err) {
+            console.log(err);
           }
         };
         document.body.addEventListener("click", window.event);

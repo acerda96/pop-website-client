@@ -11,9 +11,7 @@
               {{ store.name }}
             </h2>
             <div v-if="isAbleToEdit" class="text-accent-medium pl-5">
-              {{
-                store.status === "approved" ? "Approved" : "Pending approval"
-              }}
+              {{ statusText }}
             </div>
           </div>
           <form
@@ -161,14 +159,13 @@
             <div
               class="store__item flex flex-col items-center"
               v-for="item in items"
-              :key="item.id"
+              :key="item._id"
             >
-              <router-link :to="'/item/' + item._id">
-                <img
-                  class="store__item-thumbnail"
-                  v-bind:src="'data:image/jpeg;base64,' + item.images[0].buffer"
-                />
-              </router-link>
+              <img
+                class="store__item-thumbnail"
+                v-bind:src="'data:image/jpeg;base64,' + item.images[0].buffer"
+                @click="$router.push('/item/' + item._id)"
+              />
               <div class="flex justify-center items-center w-full mt-1">
                 <div>
                   <div>
@@ -177,7 +174,7 @@
                   </div>
                   <div v-if="isAbleToEdit" class="text-accent-medium">
                     {{
-                      item.status === "approved"
+                      item.status === "approved" && isAbleToEdit
                         ? "Approved"
                         : "Pending approval"
                     }}
@@ -237,6 +234,15 @@ export default {
     isLoggedIn: function() {
       return !!this.$store.getters.token;
     },
+    statusText: function() {
+      if (this.isAbleToEdit) {
+        return this.store.status === "approved"
+          ? "Approved"
+          : "Pending approval";
+      } else {
+        return null;
+      }
+    },
   },
   async mounted() {
     if (this.isLoggedIn) {
@@ -293,6 +299,9 @@ export default {
     },
     toggleEdit(field, val) {
       this[field] = val;
+    },
+    selectItem(id) {
+      this.$router.push("/item/" + id);
     },
     async putStore(data, field) {
       const addressObj = {

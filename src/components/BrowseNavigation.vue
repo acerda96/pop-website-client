@@ -1,20 +1,16 @@
 <template>
-  <div class="bg-accent-dark fixed w-full">
+  <div class="bg-accent-dark fixed w-full py-1">
     <Map />
-    <div class="browse-nav">
+    <div class="w-full flex justify-between px-8 tems-center flex-wrap ">
       <div class="flex">
-        <button class="map-marker pr-2">
+        <button class="pr-2">
           <MapMarker
-            class="text-accent-light"
+            class="text-accent-light cursor-pointer"
             @click="$modal.show('mapModal')"
           />
         </button>
       </div>
-      <select
-        class="filter dropdown "
-        v-model="sortCriterion"
-        @change="onChange"
-      >
+      <select class="bg-white m-2" v-model="sortCriterion" @change="onChange">
         <option value disabled>Sort by...</option>
         <option value="0">Recently added</option>
         <option value="1">Price</option>

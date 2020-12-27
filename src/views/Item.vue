@@ -1,7 +1,7 @@
 <template>
   <div class="flex justify-center">
     <div
-      class="flex flex-col items-center my-10 py-10 xs:py-5 bg-white w-4/6 xs:w-full"
+      class="flex flex-col items-center my-10 py-10 xs:py-5 bg-white w-4/6 xs:my-5 xs:py-0 xs:w-full"
     >
       <div v-if="error">Item not found</div>
       <Loader v-if="isLoading" class="pt-10" />
@@ -17,7 +17,7 @@
               v-bind:src="previewImage"
             />
             <div v-else>
-              <div class="w-full flex flex-col relative items-center mt-6">
+              <div class="w-full flex flex-col relative items-center">
                 <input
                   class="pl-2 item__image-edit border-0"
                   ref="fileInput"
@@ -38,7 +38,7 @@
               </div>
             </div>
           </div>
-          <div class="flex flex-col items-start">
+          <div class="flex flex-col items-start mt-6">
             <div
               class="flex items-center xs:items-start justify-between px-10 w-full"
             >
@@ -53,9 +53,7 @@
                   v-if="isAbleToEdit"
                   class="text-accent-medium pl-5 xs:pt-4 mr-2"
                 >
-                  {{
-                    item.status === "approved" ? "Approved" : "Pending approval"
-                  }}
+                  {{ statusText }}
                 </div>
               </div>
               <form
@@ -160,30 +158,29 @@
             class="mt-10 flex flex-col items-center w-full"
           >
             <div class="flex">
-              <div class="text-xl pt-3">Other items by</div>
+              <div class="text-xl pt-3 italic text-accent-medium">
+                Other items by
+              </div>
               <router-link
-                class="text-xl pl-5 pt-3 hover:underline"
+                class="text-xl pl-5 pt-3 hover:underline italic text-accent-medium"
                 :to="'/store/' + store._id"
               >
                 {{ store.name }}
               </router-link>
             </div>
             <div class="flex flex-wrap justify-center w-full">
-              <router-link
+              <div
                 v-for="item in items"
                 :key="item._id"
-                :to="'/item/' + item._id"
-                class="m-5"
+                @click="selectItem(item._id)"
+                class="m-5 item__other"
               >
                 <img
-                  class="store__item-thumbnail"
+                  class="item__other-thumbnail"
                   v-bind:src="'data:image/jpeg;base64,' + item.images[0].buffer"
                 />
-                <div class="text-center">
-                  {{ item.name }}
-                  £{{ item.price }}
-                </div>
-              </router-link>
+                <div class="text-left">£{{ item.price }}</div>
+              </div>
             </div>
           </div>
         </div>
@@ -220,6 +217,15 @@ export default {
   computed: {
     isLoggedIn: function() {
       return !!this.$store.getters.token;
+    },
+    statusText: function() {
+      if (this.isAbleToEdit) {
+        return this.item.status === "approved"
+          ? "Approved"
+          : "Pending approval";
+      } else {
+        return null;
+      }
     },
   },
   data() {
@@ -309,6 +315,11 @@ export default {
       this.previewImage = originalImage;
       this.imageFile = originalImage;
       this.isEditingImage = false;
+    },
+    selectItem(id) {
+      this.$router.push("/item/" + id);
+      this.getItem(id);
+      window.scrollTo(0, 0);
     },
     async uploadImage() {
       let data = new FormData();
