@@ -60,7 +60,7 @@
                   class="border border-accent-dark pl-2 w-4/6 mt-2 xs:w-full"
                 />
               </form>
-              <EditButton
+              <ButtonEdit
                 v-if="isAbleToEdit"
                 :document="item"
                 :fields="['name']"
@@ -76,7 +76,7 @@
                 <h4 class="text-xl">
                   Description
                 </h4>
-                <EditButton
+                <ButtonEdit
                   v-if="isAbleToEdit"
                   :document="item"
                   :fields="['description']"
@@ -98,7 +98,7 @@
                 <div>
                   <div class="flex justify-between items-center">
                     <h4 class="text-xl pr-5">Price</h4>
-                    <EditButton
+                    <ButtonEdit
                       v-if="isAbleToEdit"
                       :document="item"
                       :fields="['price']"
@@ -122,7 +122,7 @@
                 <div>
                   <div class="flex justify-between items-center">
                     <h4 class="text-xl pr-5">Initial quantity</h4>
-                    <EditButton
+                    <ButtonEdit
                       v-if="isAbleToEdit"
                       :document="item"
                       :fields="['initialQuantity']"
@@ -196,7 +196,7 @@
 import axios from "axios";
 import Loader from "@/components/Loader.vue";
 import setIndividual from "@/lib/individual";
-import EditButton from "@/components/EditButton.vue";
+import ButtonEdit from "@/components/ButtonEdit.vue";
 import Close from "vue-material-design-icons/Close.vue";
 import Check from "vue-material-design-icons/Check.vue";
 
@@ -204,7 +204,7 @@ export default {
   name: "Item",
   components: {
     Loader,
-    EditButton,
+    ButtonEdit,
     Close,
     Check,
   },

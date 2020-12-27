@@ -16,9 +16,9 @@
         @change="onChange"
       >
         <option value disabled>Sort by...</option>
-        <option value="0">Nearest first</option>
-        <option value="1">Recently added</option>
-        <option value="2">Price</option>
+        <option value="0">Recently added</option>
+        <option value="1">Price</option>
+        <option value="2">Nearest first</option>
       </select>
     </div>
   </div>
@@ -29,7 +29,7 @@ import MapMarker from "vue-material-design-icons/MapMarker.vue";
 import Map from "@/components/Map";
 
 export default {
-  name: "BrowseNav",
+  name: "BrowseNavigation",
   components: {
     MapMarker,
     Map,

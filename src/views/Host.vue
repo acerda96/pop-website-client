@@ -1,6 +1,6 @@
 <template>
   <div class="bg-white w-full mt-10 my-4 flex flex-col items-center xs:mt-5">
-    <NewStoreModal />
+    <StoreNew />
     <h2 class="text-3xl text-center py-3">My Stores</h2>
 
     <hr class="w-full" />
@@ -43,7 +43,7 @@
 <script>
 import axios from "axios";
 import Loader from "@/components/Loader.vue";
-import NewStoreModal from "@/components/NewStoreModal.vue";
+import StoreNew from "@/components/StoreNew.vue";
 import setIndividual from "@/lib/individual";
 import CloseOutline from "vue-material-design-icons/CloseOutline.vue";
 
@@ -58,7 +58,7 @@ export default {
   },
   components: {
     Loader,
-    NewStoreModal,
+    StoreNew,
     CloseOutline,
   },
   async mounted() {

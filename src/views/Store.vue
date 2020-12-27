@@ -2,7 +2,7 @@
   <div class="flex justify-center my-10 xs:w-full">
     <div class="flex justify-center bg-white w-5/6 xs:w-full xs:my-1">
       <div v-if="error" class="pt-5">Store not found</div>
-      <NewItemModal v-if="individual._id" @getItems="getItems" />
+      <ItemNew v-if="individual._id" @getItems="getItems" />
       <Loader v-if="isLoading" class="pt-10" />
       <div class="store__details fade-in" v-if="!isLoading && !error">
         <div class="flex justify-between items-center w-full">
@@ -26,7 +26,7 @@
               class="border border-accent-dark pl-2 w-4/6"
             />
           </form>
-          <EditButton
+          <ButtonEdit
             v-if="isAbleToEdit"
             :document="store"
             :fields="['name']"
@@ -40,7 +40,7 @@
         <div class="flex flex-col justify-start w-full mb-5">
           <div class="flex justify-between items-center">
             <h4 class="text-xl">Description</h4>
-            <EditButton
+            <ButtonEdit
               v-if="isAbleToEdit"
               :document="store"
               :fields="['description']"
@@ -61,7 +61,7 @@
         <div class="flex flex-col justify-start w-full mb-5">
           <div class="flex justify-between items-center">
             <h4 class="text-xl">Location</h4>
-            <EditButton
+            <ButtonEdit
               v-if="isAbleToEdit"
               :document="store"
               :fields="['addressLine1', 'addressLine2', 'postcode', 'city']"
@@ -104,25 +104,25 @@
             <h4 class="text-xl">Dates</h4>
             <button
               class="underline text-accent-dark"
-              @click="toggleNewDate"
-              v-if="!isNewDateActive && isAbleToEdit"
+              @click="toggleDateNew"
+              v-if="!isDateNewActive && isAbleToEdit"
             >
               Add date
             </button>
-            <div v-if="isNewDateActive" class="store__add-date-btns">
+            <div v-if="isDateNewActive" class="store__add-date-btns">
               <button
                 class="underline text-accent-dark p-3"
-                @click="saveNewDate"
+                @click="saveDateNew"
               >
                 Save
               </button>
-              <button class="underline text-accent-dark" @click="toggleNewDate">
+              <button class="underline text-accent-dark" @click="toggleDateNew">
                 Cancel
               </button>
             </div>
           </div>
-          <new-date
-            v-if="isNewDateActive"
+          <DateNew
+            v-if="isDateNewActive"
             :newDate.sync="newDate"
             :newStartTime.sync="newStartTime"
             :newEndTime.sync="newEndTime"
@@ -201,9 +201,9 @@
 import axios from "axios";
 import moment from "moment";
 import Loader from "@/components/Loader.vue";
-import NewDate from "@/components/NewDate.vue";
-import EditButton from "@/components/EditButton.vue";
-import NewItemModal from "@/components/NewItemModal.vue";
+import DateNew from "@/components/DateNew.vue";
+import ButtonEdit from "@/components/ButtonEdit.vue";
+import ItemNew from "@/components/ItemNew.vue";
 import setIndividual from "@/lib/individual";
 import CloseOutline from "vue-material-design-icons/CloseOutline.vue";
 
@@ -211,9 +211,9 @@ export default {
   name: "Store",
   components: {
     Loader,
-    NewDate,
-    NewItemModal,
-    EditButton,
+    DateNew,
+    ItemNew,
+    ButtonEdit,
     CloseOutline,
   },
   data() {
@@ -222,7 +222,7 @@ export default {
       individual: {},
       store: null,
       items: [],
-      isNewDateActive: false,
+      isDateNewActive: false,
       newDate: new Date().toISOString(),
       newStartTime: new Date().toISOString(),
       newEndTime: new Date().toISOString(),
@@ -273,12 +273,12 @@ export default {
         this.isLoading = false;
       }
     },
-    toggleNewDate() {
-      this.isNewDateActive = !this.isNewDateActive;
+    toggleDateNew() {
+      this.isDateNewActive = !this.isDateNewActive;
     },
-    saveNewDate() {
+    saveDateNew() {
       this.addDate();
-      this.isNewDateActive = false;
+      this.isDateNewActive = false;
     },
     async deleteDate(id) {
       const newDates = this.store.dates.filter((date) => date.id !== id);

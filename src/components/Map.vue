@@ -25,7 +25,6 @@
           v-if="currentPosition"
           :position="currentPosition"
           :clickable="true"
-          @click="center = currentPosition"
           icon="http://maps.google.com/mapfiles/ms/icons/blue-dot.png"
         />
         <div v-for="store in stores" :key="store._id">
@@ -107,12 +106,12 @@ export default {
       try {
         const currentPosition = await this.$getLocation({});
         this.currentPosition = currentPosition;
+        console.log(currentPosition);
       } catch {
         this.currentPosition = null;
       }
 
       stores.forEach((store) => {
-        console.log("!!!!");
         const addressObj = {
           address_line_1: store.addressLine1,
           address_line_2: store.addressLine2,
@@ -122,7 +121,6 @@ export default {
 
         this.$geocoder.send(addressObj, async (response) => {
           const position = response.results[0].geometry.location;
-          console.log("POS", position);
           pushStore({
             ...store,
             position,

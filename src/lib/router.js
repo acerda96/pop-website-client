@@ -3,7 +3,7 @@ import Router from "vue-router";
 import Home from "../views/Home.vue";
 import Browse from "../views/Browse.vue";
 import SavedItems from "../views/SavedItems.vue";
-import ContactUs from "../views/ContactUs.vue";
+import Contact from "../views/Contact.vue";
 import Login from "../views/Login.vue";
 import Host from "../views/Host.vue";
 import Store from "../views/Store.vue";
@@ -40,7 +40,7 @@ let router = new Router({
     {
       path: "/contact",
       name: "contact-us",
-      component: ContactUs,
+      component: Contact,
     },
     {
       path: "/privacy",

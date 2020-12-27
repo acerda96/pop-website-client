@@ -1,6 +1,6 @@
 <template>
   <div class="bg-white w-full">
-    <BrowseNav @getItems="getItems" class="z-10" />
+    <BrowseNavigation @getItems="getItems" class="z-10" />
     <div class="flex flex-col items-center mt-16 xs:mt-12">
       <Loader v-if="isLoading" class="pt-10" />
       <div v-if="!isLoading" class="browse__items fade-in">
@@ -37,14 +37,14 @@
 
 <script>
 import axios from "axios";
-import BrowseNav from "@/components/BrowseNav";
+import BrowseNavigation from "@/components/BrowseNavigation";
 import SaveIcon from "@/components/SaveIcon";
 import Loader from "@/components/Loader.vue";
 import setIndividual from "@/lib/individual";
 
 export default {
   name: "Browse",
-  components: { BrowseNav, SaveIcon, Loader },
+  components: { BrowseNavigation, SaveIcon, Loader },
   computed: {
     isLoggedIn: function() {
       return !!this.$store.getters.token;

@@ -50,7 +50,7 @@
 import axios from "axios";
 
 export default {
-  name: "ContactUs",
+  name: "Contact",
   data() {
     return {
       firstName: "",

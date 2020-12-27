@@ -20,7 +20,7 @@
 
 <script>
 export default {
-  name: "EditButton",
+  name: "ButtonEdit",
   props: ["isEditing", "fieldName", "document", "fields"],
   computed: {
     currentlyEditing: {

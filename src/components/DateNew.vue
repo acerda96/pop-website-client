@@ -30,7 +30,7 @@
 
 <script>
 export default {
-  name: "BrowseNowButton",
+  name: "DateNew",
   components: {},
   props: ["newDate", "newStartTime", "newEndTime"],
   computed: {

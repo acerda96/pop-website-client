@@ -103,7 +103,7 @@ import setIndividual from "@/lib/individual";
 import Close from "vue-material-design-icons/Close.vue";
 
 export default {
-  name: "NewStoreModal",
+  name: "StoreNew",
   components: {
     Close,
   },
