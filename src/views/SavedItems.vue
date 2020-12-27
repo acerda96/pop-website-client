@@ -4,15 +4,19 @@
     <hr class="w-full" />
     <div class="flex justify-center">
       <Loader v-if="isLoading" class="pt-10" />
-      <div v-if="!isLoading" class="browse__items fade-in">
-        <div class="browse__item" v-for="item in items" :key="item._id">
+      <div v-if="!isLoading" class="flex justify-center flex-wrap fade-in">
+        <div
+          class="browse__item flex flex-col m-4 cursor-pointer items-center"
+          v-for="item in items"
+          :key="item._id"
+        >
           <router-link :to="'/item/' + item._id">
             <img
               class="browse__item-thumbnail"
               v-bind:src="'data:image/jpeg;base64,' + item.images[0].buffer"
             />
           </router-link>
-          <div class="browse__item-details">
+          <div class="flex items-end text-black justify-between w-full pt-1">
             <div>
               <div>{{ item.name }}</div>
               <div>£{{ item.price }}</div>

@@ -1,5 +1,5 @@
 <template>
-  <div class="browse__heart-icon">
+  <div class="h-full">
     <HeartFilled v-if="isSaved" />
     <HeartOutline v-else />
   </div>

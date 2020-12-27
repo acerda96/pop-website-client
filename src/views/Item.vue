@@ -280,7 +280,6 @@ export default {
       }
     },
     pickFile() {
-      console.log("CALLIING");
       let input = this.$refs.fileInput;
       let file = input.files;
 

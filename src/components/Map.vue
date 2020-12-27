@@ -106,7 +106,6 @@ export default {
       try {
         const currentPosition = await this.$getLocation({});
         this.currentPosition = currentPosition;
-        console.log(currentPosition);
       } catch {
         this.currentPosition = null;
       }

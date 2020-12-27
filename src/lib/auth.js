@@ -24,7 +24,7 @@ export const authActions = {
         router.push("/browse");
 
         axios.defaults.headers.common["Authorization"] = token;
-        commit("authError", null);
+        commit("setAuthError", null);
       }
     } catch (err) {
       commit("setToken", null);

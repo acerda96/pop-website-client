@@ -3,19 +3,19 @@
     <BrowseNavigation @getItems="getItems" class="z-10" />
     <div class="flex flex-col items-center mt-16 xs:mt-12">
       <Loader v-if="isLoading" class="pt-10" />
-      <div v-if="!isLoading" class="browse__items fade-in">
+      <div v-if="!isLoading" class="flex justify-center flex-wrap fade-in">
         <div
-          class="browse__item fade-in\ z-0"
+          class="browse__item flex flex-col m-4 fade-in z-0"
           v-for="item in items"
           :key="item._id"
         >
-          <router-link :to="'/item/' + item._id">
+          <router-link class="w-full" :to="'/item/' + item._id">
             <img
               class="browse__item-thumbnail"
               v-bind:src="'data:image/jpeg;base64,' + item.images[0].buffer"
             />
           </router-link>
-          <div class="browse__item-details">
+          <div class="flex items-end text-black justify-between w-full pt-1">
             <div>
               <div>{{ item.name }}</div>
               <div>£{{ item.price }}</div>
@@ -23,7 +23,6 @@
             <SaveIcon
               :isSaved="item.isSaved"
               @click.native="updateSavedItems(item._id)"
-              class="pt-1"
             />
           </div>
         </div>
@@ -77,14 +76,18 @@ export default {
         console.log(err);
       }
 
-      const { data } = await axios.get(
-        `items?latitude=${latitude}&longitude=${longitude}&sortCriterion=${sortCriterion}`
-      );
+      try {
+        const { data } = await axios.get(
+          `items?latitude=${latitude}&longitude=${longitude}&sortCriterion=${sortCriterion}`
+        );
 
-      if (this.isLoggedIn) {
-        this.items = this.markSaved(data);
-      } else {
-        this.items = data;
+        if (this.isLoggedIn) {
+          this.items = this.markSaved(data);
+        } else {
+          this.items = data;
+        }
+      } catch (err) {
+        console.log(err);
       }
       this.isLoading = false;
     },

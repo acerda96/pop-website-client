@@ -1,34 +1,20 @@
-.browse__item-details {
-  display: flex;
-  align-items: center;
-  color: black;
-  justify-content: space-between;
-  align-items: flex-start;
-}
-
 .browse__item-thumbnail {
+  float: left;
   width: 200px;
   height: 200px;
 }
 
-.browse__items {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-}
-
 .browse__item {
-  margin: 20px;
-  cursor: pointer;
-}
-
-.browse__heart-icon {
-  cursor: pointer;
+  width: 200px;
 }
 
 @media (max-width: 450px) {
   .browse__item-thumbnail {
     width: 250px;
     height: 250px;
+  }
+
+  .browse__item {
+    width: 250px;
   }
 }
