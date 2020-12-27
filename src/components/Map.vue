@@ -117,14 +117,17 @@ export default {
           city: store.city,
           postal_code: store.postcode,
         };
-
-        this.$geocoder.send(addressObj, async (response) => {
-          const position = response.results[0].geometry.location;
-          pushStore({
-            ...store,
-            position,
+        try {
+          this.$geocoder.send(addressObj, async (response) => {
+            const position = response.results[0].geometry.location;
+            pushStore({
+              ...store,
+              position,
+            });
           });
-        });
+        } catch (err) {
+          console.log("Geocoder error", err);
+        }
       });
     },
     viewStore(store) {

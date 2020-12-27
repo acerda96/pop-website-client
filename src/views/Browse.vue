@@ -60,7 +60,7 @@ export default {
     if (this.isLoggedIn) {
       this.individual = await setIndividual();
     }
-    const sortCriterion = 1;
+    const sortCriterion = 0;
     this.getItems(sortCriterion);
   },
   methods: {
@@ -87,7 +87,7 @@ export default {
           this.items = data;
         }
       } catch (err) {
-        console.log(err);
+        console.log("Browse error", err);
       }
       this.isLoading = false;
     },
