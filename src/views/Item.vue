@@ -38,13 +38,21 @@
               </div>
             </div>
           </div>
-          <div class="flex flex-col items-center">
-            <div class="flex items-center justify-between px-10 w-full">
-              <div v-if="!isEditingName" class="flex items-center">
+          <div class="flex flex-col items-start">
+            <div
+              class="flex items-center xs:items-start justify-between px-10 w-full"
+            >
+              <div
+                v-if="!isEditingName"
+                class="flex items-center xs:items-start"
+              >
                 <h2 class="text-2xl py-3">
                   {{ item.name }}
                 </h2>
-                <div v-if="isAbleToEdit" class="text-accent-medium pl-5">
+                <div
+                  v-if="isAbleToEdit"
+                  class="text-accent-medium pl-5 xs:pt-4 mr-2"
+                >
                   {{
                     item.status === "approved" ? "Approved" : "Pending approval"
                   }}
@@ -57,10 +65,11 @@
               >
                 <input
                   v-model="item.name"
-                  class="border border-accent-dark pl-2 w-4/6 mt-2 xs:w-full"
+                  class="border border-accent-dark pl-2 w-4/6 mt-2 xs:w-full mt-6"
                 />
               </form>
               <ButtonEdit
+                class="xs:pt-4"
                 v-if="isAbleToEdit"
                 :document="item"
                 :fields="['name']"
