@@ -7,8 +7,7 @@
         <div v-for="link in links" :key="link.name">
           <li
             v-if="isLoggedIn == link.requiresLogin || link.alwaysShow"
-            :class="getActive($route.name)"
-            @click="onClick(link.name)"
+            @click="handleLinkClick(link.name)"
           >
             <router-link :to="link.to" class="upper-navbar__link uppercase">{{
               link.title
@@ -17,7 +16,7 @@
         </div>
       </ul>
     </nav>
-    <nav class="side-navbar z-20" ref="nav">
+    <nav class="side-navbar z-20" ref="nav" v-click-outside="hideNav">
       <ul>
         <div v-for="link in links" :key="link.name">
           <li
@@ -40,6 +39,21 @@
 <script>
 import MenuIcon from "vue-material-design-icons/Menu.vue";
 import { links } from "@/lib/navigationLinks";
+import Vue from "vue";
+
+Vue.directive("click-outside", {
+  bind: function(el, binding, vnode) {
+    this.event = function(event) {
+      if (!(el == event.target || el.contains(event.target))) {
+        vnode.context[binding.expression](event);
+      }
+    };
+    document.body.addEventListener("click", this.event);
+  },
+  unbind: function() {
+    document.body.removeEventListener("click", this.event);
+  },
+});
 
 export default {
   name: "Navigation",
@@ -59,36 +73,59 @@ export default {
   methods: {
     toggleNav() {
       const nav = this.$refs.nav.classList;
-      nav.contains("active") ? nav.remove("active") : nav.add("active");
-    },
-    getActive(name) {
-      switch (name) {
-        case "saved":
-          return "text-gray";
-      }
-    },
-    onClick(name) {
-      switch (name) {
-        case "logout":
-          this.logout();
-          break;
-        case "about":
-          this.scrollTo();
-          break;
-        default:
-          return;
-      }
-    },
-    async logout() {
-      await this.$store.dispatch("logout");
-    },
-    scrollTo() {
-      if (this.$route.fullPath === "/#about") {
-        let el = document.getElementById("about");
-        let top = el.offsetTop;
+      console.log("toggle nav", nav.contains("active"), nav);
 
-        window.scrollTo(0, top - 100);
+      nav.contains("active") ? nav.remove("active") : nav.add("active");
+      console.log("after toggle nav", nav.contains("active"), nav);
+    },
+    hideNav() {
+      console.log("hiding nav");
+      const nav = this.$refs.nav.classList;
+      nav.remove("active");
+    },
+    async handleLinkClick(name) {
+      if (name === "logout") {
+        await this.$store.dispatch("logout");
       }
+    },
+  },
+  directives: {
+    "click-outside": {
+      bind: function(el, binding, vnode) {
+        console.log("BINDING", el);
+
+        window.event = function(event) {
+          console.log("classlist", el.classList);
+          console.log(
+            "target",
+            event.target.className.animVal === "material-design-icon__svg"
+          );
+
+          const isToggleButton =
+            event.target.className.animVal === "material-design-icon__svg";
+
+          const hasClickedOnElement = el == event.target;
+          const isClickedOnChild = el.contains(event.target);
+          const isNavBarOpen = el.classList.contains("active");
+
+          console.log("isToggleButton", isToggleButton);
+          console.log("isNavBarOpen", isNavBarOpen);
+
+          if (
+            !(hasClickedOnElement || isClickedOnChild) &&
+            isNavBarOpen &&
+            !isToggleButton
+          ) {
+            console.log("calling", binding.expression);
+            vnode.context[binding.expression](event);
+          }
+        };
+        document.body.addEventListener("click", window.event);
+      },
+      unbind: function() {
+        console.log("UNBINDING");
+        document.body.removeEventListener("click", window.event);
+      },
     },
   },
 };

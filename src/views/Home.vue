@@ -23,7 +23,7 @@
           </div>
         </div>
         <button
-          class="bg-black text-white text-xl hover:bg-gray-200 hover:text-black p-2 px-6 mt-8 uppercase xs:text-xs"
+          class="bg-black text-white text-xl hover:bg-accent-light hover:text-black p-2 px-6 mt-8 uppercase xs:text-xs"
           @click="$router.push('/browse')"
         >
           Browse now
