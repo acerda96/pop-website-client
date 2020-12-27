@@ -73,13 +73,10 @@ export default {
   methods: {
     toggleNav() {
       const nav = this.$refs.nav.classList;
-      console.log("toggle nav", nav.contains("active"), nav);
 
       nav.contains("active") ? nav.remove("active") : nav.add("active");
-      console.log("after toggle nav", nav.contains("active"), nav);
     },
     hideNav() {
-      console.log("hiding nav");
       const nav = this.$refs.nav.classList;
       nav.remove("active");
     },
@@ -92,39 +89,24 @@ export default {
   directives: {
     "click-outside": {
       bind: function(el, binding, vnode) {
-        console.log("BINDING", el);
-
         window.event = function(event) {
-          console.log("classlist", el.classList);
-          console.log(
-            "target",
-            event.target.className.animVal === "material-design-icon__svg"
-          );
-
           const isToggleButton =
-            event.target.className.animVal === "material-design-icon__svg";
+            event.target.className.animVal === "material-design-icon__svg" ||
+            event.target.firstChild.textContent == "Menu Icon";
 
           const hasClickedOnElement = el == event.target;
           const isClickedOnChild = el.contains(event.target);
           const isNavBarOpen = el.classList.contains("active");
-
-          console.log("isToggleButton", isToggleButton);
-          console.log("isNavBarOpen", isNavBarOpen);
 
           if (
             !(hasClickedOnElement || isClickedOnChild) &&
             isNavBarOpen &&
             !isToggleButton
           ) {
-            console.log("calling", binding.expression);
             vnode.context[binding.expression](event);
           }
         };
         document.body.addEventListener("click", window.event);
-      },
-      unbind: function() {
-        console.log("UNBINDING");
-        document.body.removeEventListener("click", window.event);
       },
     },
   },
