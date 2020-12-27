@@ -25,21 +25,9 @@
     padding: 15px;
   }
 
-  .basic-form__input--small {
-    align-self: center;
-    width: 100px;
-  }
-
   .basic-form__heading {
     font-weight: bold;
     font-size: 30px;
-  }
-
-  .basic-form__sub-ctn {
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    width: 100%;
   }
 
   input {
@@ -56,18 +44,6 @@
 
   a {
     text-decoration: underline;
-  }
-
-  .basic-form__links {
-    padding-top: 30px;
-    font-size: 15px;
-  }
-
-  .basic-form--success {
-    background-color: rgb(209, 245, 209);
-    border: 1px solid green;
-    padding: 10px;
-    margin-top: 10px;
   }
 }
 

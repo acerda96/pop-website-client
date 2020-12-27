@@ -6,7 +6,7 @@
           Welcome back!
         </div>
         <hr />
-        <div class="basic-form__input-ctn--large">
+        <div class="w-full flex flex-col p-2">
           <label for="email"> Email </label>
           <input
             class="pl-2"
@@ -16,7 +16,7 @@
             required
           />
         </div>
-        <div class="basic-form__input-ctn--large">
+        <div class="w-full flex flex-col p-2">
           <label for="password"> Password </label>
           <input
             class="pl-2"

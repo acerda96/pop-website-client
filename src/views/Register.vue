@@ -6,15 +6,15 @@
           Create your account
         </div>
         <hr />
-        <div class="basic-form__input-ctn--large">
+        <div class="w-full flex flex-col p-2">
           <label for="name"> Full name </label>
           <input class="pl-2" type="text" name="name" v-model="name" required />
         </div>
-        <div class="basic-form__input-ctn--large">
+        <div class="w-full flex flex-col p-2">
           <label for="company"> Company (optional) </label>
           <input class="pl-2" type="text" name="company" v-model="company" />
         </div>
-        <div class="basic-form__input-ctn--large">
+        <div class="w-full flex flex-col p-2">
           <label for="mobileNumber"> Mobile number </label>
           <input
             class="pl-2"
@@ -24,7 +24,7 @@
             required
           />
         </div>
-        <div class="basic-form__input-ctn--large">
+        <div class="w-full flex flex-col p-2">
           <label for="email"> Email </label>
           <input
             class="pl-2"
@@ -34,7 +34,7 @@
             required
           />
         </div>
-        <div class="basic-form__input-ctn--large">
+        <div class="w-full flex flex-col p-2">
           <label for="password"> Password </label>
           <input
             class="pl-2"
@@ -44,7 +44,7 @@
             required
           />
         </div>
-        <div class="basic-form__input-ctn--large">
+        <div class="w-full flex flex-col p-2">
           <label for="confirmPassword"> Confirm password </label>
           <input
             class="pl-2"

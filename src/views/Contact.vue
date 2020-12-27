@@ -3,7 +3,7 @@
     <div>
       <form class="basic-form" @submit.prevent="submit">
         <div class="basic-form__heading">Contact Us</div>
-        <div class="basic-form__input-ctn--large">
+        <div class="w-full flex flex-col p-2">
           <label for="name"> First name </label>
           <input
             class="pl-2"
@@ -13,11 +13,11 @@
             required
           />
         </div>
-        <div class="basic-form__input-ctn--large">
+        <div class="w-full flex flex-col p-2">
           <label for="name"> Last name </label>
           <input class="pl-2" type="text" name="lastName" v-model="lastName" />
         </div>
-        <div class="basic-form__input-ctn--large">
+        <div class="w-full flex flex-col p-2">
           <label for="name"> Email </label>
           <input
             class="pl-2"
@@ -27,7 +27,7 @@
             required
           />
         </div>
-        <div class="basic-form__input-ctn--large">
+        <div class="w-full flex flex-col p-2">
           <label for="name"> Message </label>
           <textarea
             class="pl-1"
@@ -38,7 +38,10 @@
           />
         </div>
         <button type="submit" class="square-btn">Submit</button>
-        <div v-if="success" class="basic-form--success">
+        <div
+          v-if="success"
+          class="bg-green-100 border-1 border-green-400 p-2 mt-2"
+        >
           Thanks, we will try to get back to you within 24 hours!
         </div>
       </form>

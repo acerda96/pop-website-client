@@ -19,8 +19,9 @@
   padding: 0px;
   position: absolute !important;
   white-space: nowrap;
-  width: 85.5px;
+  width: 95px;
   top: 200px;
+  right: 0px;
 }
 
 @media (max-width: 800px) {
@@ -35,12 +36,12 @@
   }
 
   .item__image-edit {
-    top: 170px;
+    top: 100px;
   }
 }
 
 @media (max-width: 650px) {
   .item__image-edit {
-    top: 180px;
+    top: 160px;
   }
 }

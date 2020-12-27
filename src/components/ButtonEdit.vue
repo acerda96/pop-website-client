@@ -7,8 +7,8 @@
     >
       Edit
     </button>
-    <div v-if="currentlyEditing" class="store__add-date-btns">
-      <button class="underline p-3 text-accent-dark" @click="saveEdit()">
+    <div v-if="currentlyEditing" class="flex p-3">
+      <button class="underline pr-3 text-accent-dark" @click="saveEdit()">
         Save
       </button>
       <button class="underline text-accent-dark" @click="emitToggleEdit">

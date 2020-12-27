@@ -38,20 +38,15 @@
               </div>
             </div>
           </div>
-          <div class="flex flex-col items-start mt-6">
-            <div
-              class="flex items-center xs:items-start justify-between px-10 w-full"
-            >
-              <div
-                v-if="!isEditingName"
-                class="flex items-center xs:items-start"
-              >
-                <h2 class="text-2xl py-3">
+          <div class="flex flex-col items-start">
+            <div class="flex justify-between px-10 w-full pt-5 items-start">
+              <div v-if="!isEditingName" class="flex items-start">
+                <h2 class="text-2xl">
                   {{ item.name }}
                 </h2>
                 <div
                   v-if="isAbleToEdit"
-                  class="text-accent-medium pl-5 xs:pt-4 mr-2"
+                  class="text-accent-medium pl-5 mr-2 pt-1"
                 >
                   {{ statusText }}
                 </div>
@@ -63,11 +58,11 @@
               >
                 <input
                   v-model="item.name"
-                  class="border border-accent-dark pl-2 w-4/6 mt-2 xs:w-full mt-6"
+                  class="border border-accent-dark pl-2 w-4/6 xs:w-full mt-4"
                 />
               </form>
               <ButtonEdit
-                class="xs:pt-4"
+                class="pt-1"
                 v-if="isAbleToEdit"
                 :document="item"
                 :fields="['name']"
@@ -162,7 +157,7 @@
                 Other items by
               </div>
               <router-link
-                class="text-xl pl-5 pt-3 hover:underline italic text-accent-medium"
+                class="text-xl pl-2 pt-3 hover:underline italic text-accent-medium"
                 :to="'/store/' + store._id"
               >
                 {{ store.name }}
@@ -173,7 +168,7 @@
                 v-for="item in items"
                 :key="item._id"
                 @click="selectItem(item._id)"
-                class="m-5 item__other"
+                class="m-5 cursor-pointer item__other"
               >
                 <img
                   class="item__other-thumbnail"

@@ -32,11 +32,11 @@
               </div>
               <div class="w-full flex justify-between items-center mt-8">
                 <div class="flex flex-col">
-                  <label class="text-xl" for="initialQuantity">
+                  <label class="text-xl xxs:text-sm" for="initialQuantity">
                     Quantity
                   </label>
                   <input
-                    class="pl-2 basic-form__input--small"
+                    class="pl-2 self-center w-10"
                     style="width: 100px;"
                     type="text"
                     name="initialQuantity"
@@ -44,11 +44,11 @@
                   />
                 </div>
                 <div class="flex flex-col ml-5">
-                  <label class="text-xl" for="price"> Price </label>
+                  <label class="text-xl xxs:text-sm" for="price"> Price </label>
                   <div>
                     £
                     <input
-                      class="pl-2 basic-form__input--small"
+                      class="pl-2 self-center w-10"
                       style="width: 100px;"
                       type="price"
                       name="price"
@@ -75,7 +75,9 @@
             </div>
           </div>
           <div class="flex flex-col w-full mt-8">
-            <label class="text-xl" for="description"> Description </label>
+            <label class="text-xl xxs:text-sm" for="description">
+              Description
+            </label>
             <textarea
               class="description pl-1"
               type="text"
@@ -84,7 +86,7 @@
             />
           </div>
           <div class="flex justify-center pt-3">
-            <button class="square-btn w-40" type="submit">
+            <button class="square-btn w-40 xxs:text-sm" type="submit">
               Submit for approval
             </button>
           </div>

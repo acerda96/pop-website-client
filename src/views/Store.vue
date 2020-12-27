@@ -4,14 +4,17 @@
       <div v-if="error" class="pt-5">Store not found</div>
       <ItemNew v-if="individual._id" @getItems="getItems" />
       <Loader v-if="isLoading" class="pt-10" />
-      <div class="store__details fade-in" v-if="!isLoading && !error">
+      <div
+        class="flex flex-col w-5/6 items-center mt-10  fade-in"
+        v-if="!isLoading && !error"
+      >
         <div class="flex justify-between items-center w-full">
           <div v-if="!isEditingName" class="flex items-center">
             <h2 class="text-2xl py-3">
               {{ store.name }}
             </h2>
             <div v-if="isAbleToEdit" class="text-accent-medium pl-5">
-              {{ statusText }}
+              {{ storeStatusText }}
             </div>
           </div>
           <form
@@ -125,22 +128,24 @@
             :newStartTime.sync="newStartTime"
             :newEndTime.sync="newEndTime"
           />
-          <div
-            class="store__date"
-            v-for="(date, index) in store.dates"
-            :key="index"
-          >
-            <p>
-              {{ date.formatted.date }}, {{ date.formatted.startTime }} -
-              {{ date.formatted.endTime }}
-            </p>
-            <p
-              v-if="isAbleToEdit"
-              class="store__date-remove"
-              @click="deleteDate(date.id)"
+          <div class="mt-2">
+            <div
+              class="flex justify-between"
+              v-for="(date, index) in store.dates"
+              :key="index"
             >
-              Remove
-            </p>
+              <p>
+                {{ date.formatted.date }}, {{ date.formatted.startTime }} -
+                {{ date.formatted.endTime }}
+              </p>
+              <p
+                v-if="isAbleToEdit"
+                class="underline text-accent-medium cursor-pointer text-sm"
+                @click="deleteDate(date.id)"
+              >
+                Remove
+              </p>
+            </div>
           </div>
         </div>
         <hr class="w-full" />
@@ -155,29 +160,22 @@
               Add
             </button>
           </div>
-          <div class="store__items">
+          <div class="flex flex-wrap justify-center pb-10">
             <div
-              class="store__item flex flex-col items-center"
+              class="store__other flex flex-col items-center m-5"
               v-for="item in items"
               :key="item._id"
             >
               <img
-                class="store__item-thumbnail"
+                class="store__other-thumbnail cursor-pointer"
                 v-bind:src="'data:image/jpeg;base64,' + item.images[0].buffer"
                 @click="$router.push('/item/' + item._id)"
               />
               <div class="flex justify-center items-center w-full mt-1">
                 <div>
-                  <div>
-                    {{ item.name }}
-                    £{{ item.price }}
-                  </div>
+                  <div>£{{ item.price }}</div>
                   <div v-if="isAbleToEdit" class="text-accent-medium">
-                    {{
-                      item.status === "approved" && isAbleToEdit
-                        ? "Approved"
-                        : "Pending approval"
-                    }}
+                    {{ getItemStatusText(item._id) }}
                   </div>
                 </div>
                 <CloseOutline
@@ -234,7 +232,7 @@ export default {
     isLoggedIn: function() {
       return !!this.$store.getters.token;
     },
-    statusText: function() {
+    storeStatusText: function() {
       if (this.isAbleToEdit) {
         return this.store.status === "approved"
           ? "Approved"
@@ -253,6 +251,15 @@ export default {
   },
 
   methods: {
+    getItemStatusText: function(id) {
+      const item = this.items.find((item) => item._id == id);
+
+      if (this.isAbleToEdit) {
+        return item.status === "approved" ? "Approved" : "Pending approval";
+      } else {
+        return null;
+      }
+    },
     async getStore() {
       try {
         const { data } = await axios.get(
