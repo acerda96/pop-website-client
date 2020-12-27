@@ -67,10 +67,18 @@ export default {
   methods: {
     async getItems(sortCriterion) {
       this.isLoading = true;
-      const { lat, lng } = await this.$getLocation({});
+      let latitude, longitude;
+
+      try {
+        const currentPosition = await this.$getLocation({});
+        latitude = currentPosition.lat;
+        longitude = currentPosition.lng;
+      } catch (err) {
+        console.log(err);
+      }
 
       const { data } = await axios.get(
-        `items?latitude=${lat}&longitude=${lng}&sortCriterion=${sortCriterion}`
+        `items?latitude=${latitude}&longitude=${longitude}&sortCriterion=${sortCriterion}`
       );
 
       if (this.isLoggedIn) {

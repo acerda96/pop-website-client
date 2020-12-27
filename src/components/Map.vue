@@ -12,12 +12,17 @@
         <Close class="pr-4 cursor-pointer" @click="$modal.hide('mapModal')" />
       </div>
       <GmapMap
-        :center="{ lat: currentPosition.lat, lng: currentPosition.lng }"
+        :center="
+          currentPosition
+            ? { lat: currentPosition.lat, lng: currentPosition.lng }
+            : { lat: 51.509865, lng: -0.118092 }
+        "
         :zoom="8"
         map-type-id="terrain"
         class="map"
       >
         <GmapMarker
+          v-if="currentPosition"
           :position="currentPosition"
           :clickable="true"
           @click="center = currentPosition"
@@ -99,10 +104,15 @@ export default {
       const { data: stores } = await axios.get("stores");
       const pushStore = (store) => this.stores.push(store);
 
-      const currentPosition = await this.$getLocation({});
-      this.currentPosition = currentPosition;
+      try {
+        const currentPosition = await this.$getLocation({});
+        this.currentPosition = currentPosition;
+      } catch {
+        this.currentPosition = null;
+      }
 
       stores.forEach((store) => {
+        console.log("!!!!");
         const addressObj = {
           address_line_1: store.addressLine1,
           address_line_2: store.addressLine2,
@@ -112,6 +122,7 @@ export default {
 
         this.$geocoder.send(addressObj, async (response) => {
           const position = response.results[0].geometry.location;
+          console.log("POS", position);
           pushStore({
             ...store,
             position,
