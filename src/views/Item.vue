@@ -264,10 +264,12 @@ export default {
     },
     async getItems() {
       try {
-        const { data } = await axios.get(
+        const {
+          data: { items },
+        } = await axios.get(
           `items?sortCriterion=1&storeId=${this.item.storeId}`
         );
-        this.items = data
+        this.items = items
           .filter((item) => item._id !== this.item._id)
           .slice(0, 4);
         this.isLoading = false;

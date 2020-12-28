@@ -42,7 +42,11 @@ export default {
   },
   methods: {
     onChange() {
-      this.$emit("getItems", this.sortCriterion);
+      this.$emit(
+        "getItems",
+        this.sortCriterion,
+        Number(this.$route.query.page)
+      );
     },
   },
 };

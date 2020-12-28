@@ -309,10 +309,12 @@ export default {
     },
     async getItems() {
       try {
-        const { data } = await axios.get(
+        const {
+          data: { items },
+        } = await axios.get(
           `items?sortCriterion=1&storeId=${this.$route.params.storeId}`
         );
-        this.items = data;
+        this.items = items;
         this.isLoading = false;
       } catch (err) {
         console.log(err);
