@@ -25,19 +25,18 @@
           v-if="currentPosition"
           :position="currentPosition"
           :clickable="true"
-          icon="http://maps.google.com/mapfiles/ms/icons/blue-dot.png"
         />
         <div v-for="store in stores" :key="store._id">
           <GmapMarker
             :position="store.position"
             :clickable="true"
             @click="viewStore(store)"
-            icon="http://maps.google.com/mapfiles/ms/icons/orange-dot.png"
+            label="S"
           />
         </div>
       </GmapMap>
       <p class="pt-2">Click a pin to view a store's details</p>
-      <div class="flex justify-between w-full px-10">
+      <div class="flex justify-between w-full px-10 py-5">
         <div class="flex flex-col">
           <div class="text-xl">
             {{ previewingStore.name }}

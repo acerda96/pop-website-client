@@ -44,11 +44,22 @@
                   </div>
                 </div>
               </div>
-              <div class="w-full flex flex-col xs:px-1 pt-10">
+              <div class="w-full flex flex-col xs:px-1 pt-10 mb-8">
                 <div class="w-full text-xl xxs:text-sm pt-1">Name</div>
                 <input class="pl-2" type="text" name="name" v-model="name" />
               </div>
-              <div class="w-full flex justify-between items-center mt-8">
+              <div class="flex flex-col w-full mb-8">
+                <label class="text-xl xxs:text-sm" for="description">
+                  Description
+                </label>
+                <textarea
+                  class="description pl-1"
+                  type="text"
+                  name="description"
+                  v-model="description"
+                />
+              </div>
+              <div class="w-full flex justify-between items-center mb-3">
                 <div class="flex flex-col">
                   <label class="text-xl xxs:text-sm" for="initialQuantity">
                     Quantity
@@ -76,17 +87,6 @@
                 </div>
               </div>
             </div>
-          </div>
-          <div class="flex flex-col w-full mt-8">
-            <label class="text-xl xxs:text-sm" for="description">
-              Description
-            </label>
-            <textarea
-              class="description pl-1"
-              type="text"
-              name="description"
-              v-model="description"
-            />
           </div>
           <div class="flex justify-center pt-3">
             <button class="square-btn w-40 xxs:text-sm" type="submit">
