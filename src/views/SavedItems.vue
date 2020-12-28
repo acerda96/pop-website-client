@@ -21,7 +21,7 @@
             </router-link>
             <div class="flex items-end text-black justify-between w-full pt-1">
               <div>
-                <div>{{ item.name }}</div>
+                <div>{{ truncateName(item.name) }}</div>
                 <div>£{{ item.price }}</div>
               </div>
               <SaveIcon
@@ -41,6 +41,7 @@ import axios from "axios";
 import Loader from "@/components/Loader.vue";
 import SaveIcon from "@/components/SaveIcon";
 import setIndividual from "@/lib/individual";
+import { truncateName } from "@/lib/helpers";
 
 export default {
   name: "SavedItems",
@@ -50,6 +51,7 @@ export default {
       isLoading: true,
       individual: {},
       items: [],
+      truncateName: truncateName,
     };
   },
   async mounted() {

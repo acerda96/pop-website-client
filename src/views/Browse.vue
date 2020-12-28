@@ -55,6 +55,8 @@ import SaveIcon from "@/components/SaveIcon";
 import Loader from "@/components/Loader.vue";
 import Pagination from "@/components/Pagination.vue";
 import setIndividual from "@/lib/individual";
+import constants from "@/lib/constants";
+import { truncateName } from "@/lib/helpers";
 
 export default {
   name: "Browse",
@@ -71,25 +73,28 @@ export default {
       items: [],
       currentPage: 0,
       totalResults: null,
+      size: constants.RESULTS_PER_PAGE,
+      truncateName: truncateName,
     };
   },
   async mounted() {
     if (this.isLoggedIn) {
       this.individual = await setIndividual();
     }
-    const sortCriterion = this.$route.query.sortCriterion;
-    const page = Number(this.$route.query.page);
+    const sortCriterion = this.$route.query.sortCriterion || 0;
+    const page = Number(this.$route.query.page) || 0;
     this.getItems(sortCriterion, page);
   },
   methods: {
     async getItems(sortCriterion, page) {
       this.isLoading = true;
+      window.scrollTo({ top: 0, behavior: "smooth" });
 
       try {
         const {
           data: { items, totalResults },
         } = await axios.get(
-          `items?sortCriterion=${sortCriterion}&page=${page}`
+          `items?sortCriterion=${sortCriterion}&page=${page}&size=${this.size}`
         );
 
         if (this.isLoggedIn) {
@@ -98,15 +103,15 @@ export default {
           this.items = items;
         }
         this.totalResults = totalResults;
+
+        this.sortCriterion = sortCriterion;
+        this.currentPage = page;
+
+        this.$router.push(`browse?sortCriterion=${sortCriterion}&page=${page}`);
       } catch (err) {
         console.log("Browse error", err);
       }
       this.isLoading = false;
-
-      this.sortCriterion = sortCriterion;
-      this.currentPage = page;
-
-      this.$router.push(`browse?sortCriterion=${sortCriterion}&page=${page}`);
     },
     markSaved(items) {
       const savedItems = this.individual.savedItems;
@@ -135,14 +140,6 @@ export default {
         }
         return item;
       });
-    },
-    truncateName(name) {
-      const CUT_OFF = 24;
-
-      if (name.length > CUT_OFF) {
-        return name.slice(0, CUT_OFF).trim() + "...";
-      }
-      return name;
     },
   },
 };

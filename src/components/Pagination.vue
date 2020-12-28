@@ -31,10 +31,6 @@ export default {
       }
     },
     getClasses(chevron) {
-      console.log(
-        this.page,
-        Math.ceil(this.totalResults / RESULTS_PER_PAGE - 1)
-      );
       if (
         (this.page == 0 && chevron === "L") ||
         (this.page == Math.ceil(this.totalResults / RESULTS_PER_PAGE - 1) &&

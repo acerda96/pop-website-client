@@ -160,7 +160,7 @@
                 {{ store.name }}
               </button>
             </div>
-            <div class="flex flex-wrap justify-center w-full">
+            <div class="flex flex-wrap justify-center w-full md:w-4/6">
               <div
                 v-for="item in items"
                 :key="item._id"
@@ -267,11 +267,9 @@ export default {
         const {
           data: { items },
         } = await axios.get(
-          `items?sortCriterion=1&storeId=${this.item.storeId}`
+          `items?sortCriterion=0&storeId=${this.item.storeId}&size=4`
         );
-        this.items = items
-          .filter((item) => item._id !== this.item._id)
-          .slice(0, 4);
+        this.items = items;
         this.isLoading = false;
       } catch {
         this.isLoading = false;

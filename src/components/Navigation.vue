@@ -9,9 +9,12 @@
             v-if="isLoggedIn == link.requiresLogin || link.alwaysShow"
             @click="handleLinkClick(link.name)"
           >
-            <router-link :to="link.to" class="upper-navbar__link uppercase">{{
-              link.title
-            }}</router-link>
+            <div
+              @click="selectNavItem(link.to)"
+              class="upper-navbar__link uppercase cursor-pointer"
+            >
+              {{ link.title }}
+            </div>
           </li>
         </div>
       </ul>
@@ -26,9 +29,12 @@
               handleLinkClick(link.name);
             "
           >
-            <router-link :to="link.to" class="upper-navbar__link">{{
-              link.title
-            }}</router-link>
+            <div
+              @click="selectNavItem(link.to)"
+              class="upper-navbar__link uppercase cursor-pointer text-white"
+            >
+              {{ link.title }}
+            </div>
           </li>
         </div>
       </ul>
@@ -69,6 +75,10 @@ export default {
       if (name === "logout") {
         await this.$store.dispatch("logout");
       }
+    },
+    selectNavItem(route) {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+      this.$router.push(route);
     },
   },
   directives: {
