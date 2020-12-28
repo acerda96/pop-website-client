@@ -17,7 +17,9 @@
           </router-link>
           <div class="flex items-end text-black justify-between w-full pt-1">
             <div>
-              <div>{{ item.name }}</div>
+              <div>
+                {{ truncateName(item.name) }}
+              </div>
               <div>£{{ item.price }}</div>
             </div>
             <SaveIcon
@@ -118,6 +120,27 @@ export default {
         }
         return item;
       });
+    },
+    truncateName(name) {
+      const CUT_OFF = 23;
+
+      if (name.length > CUT_OFF) {
+        const words = name.split(" ");
+        const truncatedName = [];
+        let currentLength = 0;
+
+        for (const index in words) {
+          const word = words[index];
+          currentLength += word.length;
+          if (currentLength > CUT_OFF) {
+            truncatedName.push(word);
+            break;
+          }
+          truncatedName.push(word);
+        }
+        return truncatedName.join(" ") + "...";
+      }
+      return name;
     },
   },
 };

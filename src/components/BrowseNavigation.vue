@@ -1,7 +1,7 @@
 <template>
   <div class="bg-white border-t border-b border-accent-light fixed w-full py-1">
     <Map />
-    <div class="w-full flex justify-between px-8 tems-center flex-wrap">
+    <div class="w-full flex justify-between px-8 tems-center flex-wrap xs:px-4">
       <div class="flex">
         <button class="pr-2">
           <MapMarker

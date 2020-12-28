@@ -1,9 +1,11 @@
 .item__thumbnail {
   width: 230px;
   height: 230px;
+  border-radius: $image-border-radius;
 }
 
 .item__other-thumbnail {
+  border-radius: $image-border-radius - 5px;
   width: 110px;
   height: 110px;
 }
@@ -20,7 +22,7 @@
   position: absolute !important;
   white-space: nowrap;
   width: 95px;
-  top: 200px;
+  bottom: 0px;
   right: 0px;
 }
 
@@ -31,17 +33,7 @@
   }
 
   .item__other-thumbnail {
-    width: 90px;
-    height: 90px;
-  }
-
-  .item__image-edit {
-    top: 100px;
-  }
-}
-
-@media (max-width: 650px) {
-  .item__image-edit {
-    top: 160px;
+    object-fit: cover;
+    width: 110px;
   }
 }

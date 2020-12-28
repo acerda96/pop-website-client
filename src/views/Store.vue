@@ -1,6 +1,6 @@
 <template>
-  <div class="flex justify-center my-10 xs:w-full">
-    <div class="flex justify-center bg-white w-5/6 xs:w-full xs:my-1">
+  <div class="flex justify-center  my-5 xs:w-full xs:my-3">
+    <div class="max-width flex bg-white justify-center w-5/6 xs:w-full">
       <div v-if="error" class="pt-5">Store not found</div>
       <ItemNew v-if="individual._id" @getItems="getItems" />
       <Loader v-if="isLoading" class="pt-10" />
@@ -162,7 +162,7 @@
           </div>
           <div class="flex flex-wrap justify-center pb-10">
             <div
-              class="store__other flex flex-col items-center m-5"
+              class="store__other flex flex-col m-5 xs:m-2"
               v-for="item in items"
               :key="item._id"
             >
@@ -171,7 +171,7 @@
                 v-bind:src="'data:image/jpeg;base64,' + item.images[0].buffer"
                 @click="$router.push('/item/' + item._id)"
               />
-              <div class="flex justify-center items-center w-full mt-1">
+              <div class="flex justify-center items-center mt-1 store__other">
                 <div>
                   <div>£{{ item.price }}</div>
                   <div v-if="isAbleToEdit" class="text-accent-medium">

@@ -1,7 +1,7 @@
 <template>
   <div class="flex justify-center">
     <div
-      class="flex flex-col items-center my-10 py-10 xs:py-5 bg-white w-4/6 xs:my-5 xs:py-0 xs:w-full"
+      class="max-width bg-white w-5/6 flex flex-col items-center my-5 py-5 pt-5 xs:my-3 xs:w-full"
     >
       <div v-if="error">Item not found</div>
       <Loader v-if="isLoading" class="pt-10" />
@@ -40,13 +40,13 @@
           </div>
           <div class="flex flex-col items-start">
             <div class="flex justify-between px-10 w-full pt-5 items-start">
-              <div v-if="!isEditingName" class="flex items-start">
-                <h2 class="text-2xl">
+              <div v-if="!isEditingName" class="flex items-start pb-3">
+                <h2 class="text-2xl md:text-xl">
                   {{ item.name }}
                 </h2>
                 <div
                   v-if="isAbleToEdit"
-                  class="text-accent-medium pl-5 mr-2 pt-1"
+                  class="text-accent-medium px-5 pt-1 xs:pt-0"
                 >
                   {{ statusText }}
                 </div>
@@ -62,7 +62,7 @@
                 />
               </form>
               <ButtonEdit
-                class="pt-1"
+                class="pt-1 xs:pt-0"
                 v-if="isAbleToEdit"
                 :document="item"
                 :fields="['name']"
@@ -73,7 +73,7 @@
               />
             </div>
             <hr class="w-full" />
-            <div class="px-10 w-full">
+            <div class="px-10 w-full pt-3">
               <div class="flex items-center justify-between">
                 <h4 class="text-xl">
                   Description
@@ -96,55 +96,52 @@
                 v-model="item.description"
                 class="border border-accent-dark pl-1 w-full"
               />
-              <div class="flex justify-between pt-5 xs:flex-col">
-                <div>
-                  <div class="flex justify-between items-center">
-                    <h4 class="text-xl pr-5">Price</h4>
-                    <ButtonEdit
-                      v-if="isAbleToEdit"
-                      :document="item"
-                      :fields="['price']"
-                      fieldName="isEditingPrice"
-                      :isEditing.sync="isEditingPrice"
-                      @callback="putItem"
-                      @toggleEdit="toggleEdit"
-                    />
-                  </div>
-                  <p v-if="!isEditingPrice">£{{ item.price }}</p>
-                  <form
-                    v-else
-                    @submit.prevent="putItem(item, 'isEditingPrice')"
-                  >
-                    £<input
-                      v-model="item.price"
-                      class="border border-accent-dark pl-2 ml-1"
-                    />
-                  </form>
+              <div class="pt-3">
+                <div class="flex justify-between items-center">
+                  <h4 class="text-xl pr-5">Price</h4>
+                  <ButtonEdit
+                    v-if="isAbleToEdit"
+                    :document="item"
+                    :fields="['price']"
+                    fieldName="isEditingPrice"
+                    :isEditing.sync="isEditingPrice"
+                    @callback="putItem"
+                    @toggleEdit="toggleEdit"
+                  />
                 </div>
-                <div>
-                  <div class="flex justify-between items-center">
-                    <h4 class="text-xl pr-5">Initial quantity</h4>
-                    <ButtonEdit
-                      v-if="isAbleToEdit"
-                      :document="item"
-                      :fields="['initialQuantity']"
-                      fieldName="isEditingQuantity"
-                      :isEditing.sync="isEditingQuantity"
-                      @callback="putItem"
-                      @toggleEdit="toggleEdit"
-                    />
-                  </div>
-                  <p v-if="!isEditingQuantity">{{ item.initialQuantity }}</p>
-                  <form
-                    v-else
-                    @submit.prevent="putItem(item, 'isEditingQuantity')"
-                  >
-                    <input
-                      v-model="item.initialQuantity"
-                      class="border border-accent-dark pl-2"
-                    />
-                  </form>
+                <p v-if="!isEditingPrice">£{{ item.price }}</p>
+                <form v-else @submit.prevent="putItem(item, 'isEditingPrice')">
+                  £<input
+                    v-model="item.price"
+                    class="border border-accent-dark pl-2 ml-1"
+                  />
+                </form>
+              </div>
+              <div class="pt-3">
+                <div class="flex justify-between items-center">
+                  <h4 class="text-xl pr-5 xs:pt-3">
+                    Initial quantity
+                  </h4>
+                  <ButtonEdit
+                    v-if="isAbleToEdit"
+                    :document="item"
+                    :fields="['initialQuantity']"
+                    fieldName="isEditingQuantity"
+                    :isEditing.sync="isEditingQuantity"
+                    @callback="putItem"
+                    @toggleEdit="toggleEdit"
+                  />
                 </div>
+                <p v-if="!isEditingQuantity">{{ item.initialQuantity }}</p>
+                <form
+                  v-else
+                  @submit.prevent="putItem(item, 'isEditingQuantity')"
+                >
+                  <input
+                    v-model="item.initialQuantity"
+                    class="border border-accent-dark pl-2"
+                  />
+                </form>
               </div>
             </div>
           </div>
@@ -157,7 +154,7 @@
                 Other items by
               </div>
               <router-link
-                class="text-xl pl-2 pt-3 hover:underline italic text-accent-medium"
+                class="text-xl pl-2 pt-3 underline italic text-accent-medium"
                 :to="'/store/' + store._id"
               >
                 {{ store.name }}
@@ -168,13 +165,13 @@
                 v-for="item in items"
                 :key="item._id"
                 @click="selectItem(item._id)"
-                class="m-5 cursor-pointer item__other"
+                class="item__other flex flex-col m-5 cursor-pointer"
               >
                 <img
                   class="item__other-thumbnail"
                   v-bind:src="'data:image/jpeg;base64,' + item.images[0].buffer"
                 />
-                <div class="text-left">£{{ item.price }}</div>
+                <div>£{{ item.price }}</div>
               </div>
             </div>
           </div>

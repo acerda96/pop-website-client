@@ -4,7 +4,7 @@
       <form class="basic-form" @submit.prevent="submit">
         <div class="basic-form__heading">Contact Us</div>
         <div class="w-full flex flex-col p-2">
-          <label for="name"> First name </label>
+          <label for="name"> First name * </label>
           <input
             class="pl-2"
             type="text"
@@ -18,7 +18,7 @@
           <input class="pl-2" type="text" name="lastName" v-model="lastName" />
         </div>
         <div class="w-full flex flex-col p-2">
-          <label for="name"> Email </label>
+          <label for="name"> Email *</label>
           <input
             class="pl-2"
             type="email"
@@ -28,7 +28,7 @@
           />
         </div>
         <div class="w-full flex flex-col p-2">
-          <label for="name"> Message </label>
+          <label for="name"> Message *</label>
           <textarea
             class="pl-1"
             type="text"
@@ -36,6 +36,9 @@
             v-model="message"
             required
           />
+        </div>
+        <div class="w-full text-right pr-3 text-xs text-accent-medium">
+          * required
         </div>
         <button type="submit" class="square-btn">Submit</button>
         <div
