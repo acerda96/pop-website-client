@@ -153,12 +153,12 @@
               <div class="text-xl pt-3 text-accent-dark">
                 Other items by
               </div>
-              <router-link
+              <button
                 class="text-xl pl-2 pt-3 underline text-accent-dark"
-                :to="'/store/' + store._id"
+                @click="selectStore"
               >
                 {{ store.name }}
-              </router-link>
+              </button>
             </div>
             <div class="flex flex-wrap justify-center w-full">
               <div
@@ -313,6 +313,10 @@ export default {
       this.$router.push("/item/" + id);
       this.getItem(id);
       window.scrollTo({ top: 0, behavior: "smooth" });
+    },
+    selectStore() {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+      this.$router.push("/store/" + this.store._id);
     },
     async uploadImage() {
       let data = new FormData();

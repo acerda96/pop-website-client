@@ -170,7 +170,7 @@
               <img
                 class="store__other-thumbnail cursor-pointer"
                 v-bind:src="'data:image/jpeg;base64,' + item.images[0].buffer"
-                @click="$router.push('/item/' + item._id)"
+                @click="selectItem(item._id)"
               />
               <Close
                 v-if="isAbleToEdit"
@@ -310,6 +310,7 @@ export default {
     },
     selectItem(id) {
       this.$router.push("/item/" + id);
+      window.scrollTo({ top: 0, behavior: "smooth" });
     },
     async putStore(data, field) {
       const addressObj = {
