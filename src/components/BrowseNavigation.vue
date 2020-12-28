@@ -18,7 +18,6 @@
         <option value disabled>Sort by...</option>
         <option value="0">Recently added</option>
         <option value="1">Price</option>
-        <option value="2">Nearest first</option>
       </select>
     </div>
   </div>
