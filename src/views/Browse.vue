@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-white w-full">
+  <div class="fade-in bg-white w-full min-height">
     <BrowseNavigation @getItems="getItems" class="z-10" />
     <div class="flex flex-col items-center mt-16 xs:mt-12 mx-24">
       <Loader v-if="isLoading" />

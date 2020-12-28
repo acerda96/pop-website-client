@@ -41,7 +41,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: flex-end;
-  background: $sub-accent-color;
+  background: black;
   position: fixed;
   transition: 300ms ease all;
   left: -300px;
@@ -49,12 +49,9 @@
   height: 260px;
   width: 200px;
   padding-bottom: 13px;
+  box-shadow: 3px 3px $accent-color-light;
   a {
     color: white;
-  }
-  .upper-navbar__link {
-    color: white;
-    font-size: 14px;
   }
   li {
     width: 150px;

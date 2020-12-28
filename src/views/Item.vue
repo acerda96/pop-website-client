@@ -1,8 +1,6 @@
 <template>
-  <div class="flex justify-center">
-    <div
-      class="max-width bg-white w-5/6 flex flex-col items-center my-5 py-5 pt-5 xs:my-3 xs:w-full"
-    >
+  <div class="flex justify-center w-full bg-white min-height my-5 xs:my-3">
+    <div class="max-width w-5/6 flex flex-col items-center pt-5 xs:w-full">
       <div v-if="error">Item not found</div>
       <Loader v-if="isLoading" />
       <div
@@ -314,7 +312,7 @@ export default {
     selectItem(id) {
       this.$router.push("/item/" + id);
       this.getItem(id);
-      window.scrollTo(0, 0);
+      window.scrollTo({ top: 0, behavior: "smooth" });
     },
     async uploadImage() {
       let data = new FormData();

@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-col items-center mt-3 bg-white h-1/2 pt-10">
+  <div class="fade-in flex flex-col items-center mt-3 bg-white h-1/2 pt-10">
     <div>
       <div class="flex flex-col">
         <label> Password: </label>

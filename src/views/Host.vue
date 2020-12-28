@@ -1,6 +1,8 @@
 <template>
-  <div class="flex justify-center my-5 xs:w-full xs:my-3">
-    <div class="max-width flex bg-white w-5/6 flex-col items-center">
+  <div
+    class="fade-in flex justify-center bg-white min-height my-5 w-full xs:my-3"
+  >
+    <div class="max-width flex w-5/6 flex-col items-center">
       <StoreNew />
       <h2 class="text-3xl text-center py-3">My Stores</h2>
 

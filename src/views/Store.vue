@@ -1,6 +1,6 @@
 <template>
-  <div class="flex justify-center  my-5 xs:w-full xs:my-3">
-    <div class="max-width flex bg-white justify-center w-5/6 xs:w-full">
+  <div class="flex justify-center bg-white min-height w-full my-5 xs:my-3">
+    <div class="flex justify-center max-width w-full">
       <div v-if="error" class="pt-5">Store not found</div>
       <ItemNew v-if="individual._id" @getItems="getItems" />
       <Loader v-if="isLoading" />
