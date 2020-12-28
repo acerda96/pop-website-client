@@ -12,7 +12,7 @@
             <img
               v-if="!isAbleToEdit"
               class="item__thumbnail"
-              v-bind:src="previewImage"
+              v-bind:src="initialImage"
             />
             <div v-else>
               <div class="w-full flex flex-col items-center">
@@ -157,12 +157,12 @@
                 {{ store.name }}
               </button>
             </div>
-            <div class="flex flex-wrap justify-center w-full md:w-4/6">
+            <div class="flex flex-wrap justify-center w-full">
               <div
                 v-for="item in items"
                 :key="item._id"
                 @click="selectItem(item._id)"
-                class="item__other flex flex-col m-5 cursor-pointer"
+                class="item__other flex flex-col m-5 xs:m-4 cursor-pointer"
               >
                 <img
                   class="item__other-thumbnail"

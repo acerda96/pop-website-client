@@ -1,9 +1,11 @@
 <template>
-  <div class="lds-ring mt-10 ">
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
+  <div class="mt-10">
+    <div class="lds-ring">
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
   </div>
 </template>
 

@@ -4,7 +4,7 @@
     <div
       class="flex flex-col items-center mt-16 xs:mt-12 mx-24 justify-between h-full"
     >
-      <Loader v-if="isLoading" />
+      <Loader v-if="isLoading" mt-10 />
       <div v-if="!isLoading" class="flex flex-col items-center fade-in">
         <div class="flex flex-col items-center w-full">
           <Pagination
@@ -47,7 +47,7 @@
         </div>
       </div>
       <Pagination
-        v-if="items.length != 0"
+        v-if="items.length != 0 && !isLoading"
         class="pb-20 xs:pb-10"
         :page="currentPage"
         :totalResults="totalResults"
