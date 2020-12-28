@@ -27,24 +27,14 @@
           >
             <div class="w-full">
               <div>
-                <div class="flex flex-col  items-center">
-                  <div class="add__image relative">
-                    <input
-                      class="pl-2 add__image-upload border-0"
-                      ref="fileInput"
-                      type="file"
-                      @change="pickFile"
-                    />
-                    <div>
-                      <img
-                        class="add__image-thumbnail"
-                        v-bind:src="previewImage"
-                      />
-                    </div>
-                  </div>
+                <div class="flex justify-center w-full">
+                  <croppa
+                    v-model="previewImage"
+                    remove-button-color="black"
+                  ></croppa>
                 </div>
               </div>
-              <div class="w-full flex flex-col xs:px-1 pt-10 mb-8">
+              <div class="w-full flex flex-col xs:px-1 pt-2 mb-8">
                 <div class="w-full text-xl xxs:text-sm pt-1">Name</div>
                 <input class="pl-2" type="text" name="name" v-model="name" />
               </div>
@@ -88,7 +78,7 @@
               </div>
             </div>
           </div>
-          <div class="flex justify-center pt-3">
+          <div class="flex justify-center pt-2">
             <button class="square-btn w-40 xxs:text-sm" type="submit">
               Submit for approval
             </button>
@@ -116,7 +106,7 @@ export default {
     return {
       individual: {},
       previewImage: null,
-      image: null,
+      imageFile: null,
       name: "",
       description: "",
       initialQuantity: "",
@@ -129,7 +119,9 @@ export default {
   },
   methods: {
     async addItem() {
-      if (!this.image) {
+      this.assignImageFile();
+
+      if (!this.imageFile) {
         this.error = "Please add an image";
         return;
       }
@@ -141,7 +133,7 @@ export default {
       };
 
       let data = new FormData();
-      data.append("images", this.image);
+      data.append("images", this.imageFile);
 
       Object.keys(values).forEach((key) => {
         data.append(key, values[key]);
@@ -153,7 +145,7 @@ export default {
         await axios.post("items", data);
 
         this.previewImage = null;
-        this.image = null;
+        this.imageFile = null;
         this.name = "";
         this.description = "";
         this.initialQuantity = "";
@@ -166,18 +158,11 @@ export default {
         this.error = err.response.data.error;
       }
     },
-    pickFile() {
-      const input = this.$refs.fileInput;
+    assignImageFile() {
+      const input = this.previewImage.$refs.fileInput;
       const file = input.files;
 
-      this.image = file[0];
-      if (file && file[0]) {
-        const reader = new FileReader();
-        reader.onload = (e) => {
-          this.previewImage = e.target.result;
-        };
-        reader.readAsDataURL(file[0]);
-      }
+      this.imageFile = file[0];
     },
   },
 };

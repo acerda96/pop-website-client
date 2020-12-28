@@ -5,11 +5,13 @@ import VueScrollTo from "vue-scrollto";
 import VueMeta from "vue-meta";
 import VueGeolocation from "vue-browser-geolocation";
 import Geocoder from "@pderas/vue2-geocoder";
+import Croppa from "vue-croppa";
 import * as VueGoogleMaps from "vue2-google-maps";
 import Vuex from "vuex";
 import store from "./lib/store";
 import { Datetime } from "vue-datetime";
 import vmodal from "vue-js-modal";
+import "vue-croppa/dist/vue-croppa.css";
 import "@/styles/tailwind.css";
 import "./lib/axios";
 
@@ -18,6 +20,7 @@ Vue.use(Vuex);
 Vue.use(VueMeta);
 Vue.use(VueScrollTo);
 Vue.use(VueGeolocation);
+Vue.use(Croppa);
 
 Vue.use(VueGoogleMaps, {
   load: {

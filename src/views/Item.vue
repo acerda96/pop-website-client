@@ -15,24 +15,21 @@
               v-bind:src="previewImage"
             />
             <div v-else>
-              <div class="w-full flex flex-col relative items-center">
-                <input
-                  class="pl-2 item__image-edit border-0"
-                  ref="fileInput"
-                  type="file"
-                  @change="pickFile"
-                />
-                <div>
-                  <img class="item__thumbnail" v-bind:src="previewImage" />
+              <div class="w-full flex flex-col items-center">
+                <croppa
+                  v-model="previewImage"
+                  :initial-image="initialImage"
+                  remove-button-color="black"
+                ></croppa>
+                <div class="underline cursor-pointer pt-2" @click="uploadImage">
+                  Save Image
                 </div>
-              </div>
-              <div v-if="isEditingImage" class="mt-3 flex justify-around">
-                <button class="underline" @click="cancelImageEdit">
-                  <Close />
-                </button>
-                <button class="underline" @click="uploadImage">
-                  <Check />
-                </button>
+                <div v-if="imageError" class="text-red-500">
+                  No new image
+                </div>
+                <div v-if="imageSuccess" class="text-green-500">
+                  Saved
+                </div>
               </div>
             </div>
           </div>
@@ -195,16 +192,11 @@ import axios from "axios";
 import Loader from "@/components/Loader.vue";
 import setIndividual from "@/lib/individual";
 import ButtonEdit from "@/components/ButtonEdit.vue";
-import Close from "vue-material-design-icons/Close.vue";
-import Check from "vue-material-design-icons/Check.vue";
-
 export default {
   name: "Item",
   components: {
     Loader,
     ButtonEdit,
-    Close,
-    Check,
   },
   computed: {
     isLoggedIn: function() {
@@ -224,9 +216,9 @@ export default {
     return {
       isLoading: true,
       individual: {},
-      isBrowsePage: this.$route.name === "browse-item",
       item: {},
       imageFile: null,
+      initialImage: null,
       previewImage: null,
       items: [],
       store: {},
@@ -237,6 +229,8 @@ export default {
       isEditingPrice: false,
       isEditingQuantity: false,
       isEditingImage: false,
+      imageError: false,
+      imageSuccess: false,
     };
   },
   async mounted() {
@@ -256,7 +250,7 @@ export default {
         const { data: store } = await axios.get(`stores/${this.item.storeId}`);
         this.store = store;
         this.isAbleToEdit = this.individual._id === item.userId;
-        this.previewImage = "data:image/jpeg;base64," + item.images[0].buffer;
+        this.initialImage = "data:image/jpeg;base64," + item.images[0].buffer;
       } catch (err) {
         this.error = true;
         this.isLoading = false;
@@ -269,7 +263,7 @@ export default {
         } = await axios.get(
           `items?sortCriterion=0&storeId=${this.item.storeId}&size=4`
         );
-        this.items = items;
+        this.items = items.filter((item) => item._id !== this.item._id);
         this.isLoading = false;
       } catch {
         this.isLoading = false;
@@ -287,27 +281,14 @@ export default {
         console.log(err);
       }
     },
-    pickFile() {
-      let input = this.$refs.fileInput;
-      let file = input.files;
+    assignImageFile() {
+      const input = this.previewImage.$refs.fileInput;
+      const file = input.files;
 
       this.imageFile = file[0];
-      if (file && file[0]) {
-        const reader = new FileReader();
-        reader.onload = (e) => {
-          this.previewImage = e.target.result;
-          this.isEditingImage = true;
-        };
-        reader.readAsDataURL(file[0]);
-      }
     },
-    cancelImageEdit() {
-      const originalImage =
-        "data:image/jpeg;base64," + this.item.images[0].buffer;
-      this.$refs.fileInput.value = "";
-      this.previewImage = originalImage;
-      this.imageFile = originalImage;
-      this.isEditingImage = false;
+    editImage() {
+      this.isEditingImage = true;
     },
     selectItem(id) {
       this.$router.push("/item/" + id);
@@ -319,12 +300,25 @@ export default {
       this.$router.push("/store/" + this.store._id);
     },
     async uploadImage() {
+      const isNewImageUploaded =
+        this.previewImage.$refs.fileInput.files.length === 1;
+
+      if (!isNewImageUploaded) {
+        this.imageError = true;
+        this.imageSuccess = false;
+        return;
+      }
+
+      this.assignImageFile();
+
       let data = new FormData();
       data.append("images", this.imageFile);
 
       try {
         await axios.put(`items/${this.$route.params.itemId}`, data);
         this.isEditingImage = false;
+        this.imageError = false;
+        this.imageSuccess = true;
       } catch (err) {
         console.log(err);
       }
