@@ -1,49 +1,58 @@
 <template>
   <div class="fade-in bg-white w-full min-height">
     <BrowseNavigation @getItems="getItems" class="z-10" />
-    <div class="flex flex-col items-center mt-16 xs:mt-12 mx-24">
+    <div
+      class="flex flex-col items-center mt-16 xs:mt-12 mx-24 justify-between h-full"
+    >
       <Loader v-if="isLoading" />
       <div v-if="!isLoading" class="flex flex-col items-center fade-in">
-        <Pagination
-          :page="currentPage"
-          :totalResults="totalResults"
-          @getItems="getItems"
-        />
-        <div class="flex justify-center flex-wrap">
-          <div
-            class="browse__item flex flex-col m-4 fade-in z-0 xs:my-1"
-            v-for="item in items"
-            :key="item._id"
-          >
-            <router-link class="w-full" :to="'/item/' + item._id">
-              <img
-                class="browse__item-thumbnail"
-                v-bind:src="'data:image/jpeg;base64,' + item.images[0].buffer"
-              />
-            </router-link>
-            <div class="flex items-end text-black justify-between w-full pt-1">
-              <div>
+        <div class="flex flex-col items-center w-full">
+          <Pagination
+            v-if="items.length != 0"
+            :page="currentPage"
+            :totalResults="totalResults"
+            @getItems="getItems"
+          />
+          <div class="flex justify-center flex-wrap">
+            <div
+              class="browse__item flex flex-col m-4 fade-in z-0 xs:my-1"
+              v-for="item in items"
+              :key="item._id"
+            >
+              <router-link class="w-full" :to="'/item/' + item._id">
+                <img
+                  class="browse__item-thumbnail"
+                  v-bind:src="'data:image/jpeg;base64,' + item.images[0].buffer"
+                />
+              </router-link>
+              <div
+                class="flex items-end text-black justify-between w-full pt-1"
+              >
                 <div>
-                  {{ truncateName(item.name) }}
+                  <div>
+                    {{ truncateName(item.name) }}
+                  </div>
+                  <div>£{{ item.price }}</div>
                 </div>
-                <div>£{{ item.price }}</div>
+                <SaveIcon
+                  :isSaved="item.isSaved"
+                  @click.native="updateSavedItems(item._id)"
+                />
               </div>
-              <SaveIcon
-                :isSaved="item.isSaved"
-                @click.native="updateSavedItems(item._id)"
-              />
             </div>
           </div>
+          <div class="pt-10" v-if="!isLoading && items.length == 0">
+            No items to display
+          </div>
         </div>
-        <div class="pt-10" v-if="!isLoading && items.length == 0">
-          No items to display
-        </div>
-        <Pagination
-          :page="currentPage"
-          :totalResults="totalResults"
-          @getItems="getItems"
-        />
       </div>
+      <Pagination
+        v-if="items.length != 0"
+        class="pb-20 xs:pb-10"
+        :page="currentPage"
+        :totalResults="totalResults"
+        @getItems="getItems"
+      />
     </div>
   </div>
 </template>
