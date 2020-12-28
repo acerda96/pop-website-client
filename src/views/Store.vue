@@ -3,7 +3,7 @@
     <div class="max-width flex bg-white justify-center w-5/6 xs:w-full">
       <div v-if="error" class="pt-5">Store not found</div>
       <ItemNew v-if="individual._id" @getItems="getItems" />
-      <Loader v-if="isLoading" class="pt-10" />
+      <Loader v-if="isLoading" />
       <div
         class="flex flex-col w-5/6 items-center mt-10  fade-in"
         v-if="!isLoading && !error"

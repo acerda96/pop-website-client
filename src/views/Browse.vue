@@ -2,7 +2,7 @@
   <div class="bg-white w-full">
     <BrowseNavigation @getItems="getItems" class="z-10" />
     <div class="flex flex-col items-center mt-16 xs:mt-12 mx-24">
-      <Loader v-if="isLoading" class="pt-10" />
+      <Loader v-if="isLoading" />
       <div v-if="!isLoading" class="flex justify-center flex-wrap fade-in pt-8">
         <div
           class="browse__item flex flex-col m-4 fade-in z-0 xs:my-1"

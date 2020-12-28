@@ -4,7 +4,7 @@
       <h2 class="text-3xl text-center py-3">Saved Items</h2>
       <hr class="w-full" />
       <div class="flex justify-center">
-        <Loader v-if="isLoading" class="pt-10" />
+        <Loader v-if="isLoading" />
         <div v-if="!isLoading" class="flex justify-center flex-wrap fade-in">
           <div
             class="browse__item flex flex-col m-4 cursor-pointer items-center"

@@ -5,7 +5,7 @@
       <h2 class="text-3xl text-center py-3">My Stores</h2>
 
       <hr class="w-full" />
-      <Loader v-if="isLoading" class="pt-10" />
+      <Loader v-if="isLoading" />
       <div class="flex flex-col items-center mb-10 w-full" v-else>
         <p class="pt-3 px-8 text-center">
           Only approved stores/items will be visible to the public.

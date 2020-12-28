@@ -4,7 +4,7 @@
       class="max-width bg-white w-5/6 flex flex-col items-center my-5 py-5 pt-5 xs:my-3 xs:w-full"
     >
       <div v-if="error">Item not found</div>
-      <Loader v-if="isLoading" class="pt-10" />
+      <Loader v-if="isLoading" />
       <div
         class="w-full h-full flex flex-col fade-in justify-between"
         v-if="!isLoading && !error"
@@ -41,7 +41,7 @@
           <div class="flex flex-col items-start">
             <div class="flex justify-between px-10 w-full pt-5 items-start">
               <div v-if="!isEditingName" class="flex items-start pb-3">
-                <h2 class="text-2xl md:text-xl">
+                <h2 class="text-2xl">
                   {{ item.name }}
                 </h2>
                 <div
@@ -73,30 +73,32 @@
               />
             </div>
             <hr class="w-full" />
-            <div class="px-10 w-full pt-3">
-              <div class="flex items-center justify-between">
-                <h4 class="text-xl">
-                  Description
-                </h4>
-                <ButtonEdit
-                  v-if="isAbleToEdit"
-                  :document="item"
-                  :fields="['description']"
-                  fieldName="isEditingDescription"
-                  :isEditing.sync="isEditingDescription"
-                  @callback="putItem"
-                  @toggleEdit="toggleEdit"
+            <div class="px-10 w-full mt-3">
+              <div class="mb-5">
+                <div class="flex items-center justify-between">
+                  <h4 class="text-xl">
+                    Description
+                  </h4>
+                  <ButtonEdit
+                    v-if="isAbleToEdit"
+                    :document="item"
+                    :fields="['description']"
+                    fieldName="isEditingDescription"
+                    :isEditing.sync="isEditingDescription"
+                    @callback="putItem"
+                    @toggleEdit="toggleEdit"
+                  />
+                </div>
+                <p v-if="!isEditingDescription">
+                  {{ item.description }}
+                </p>
+                <textarea
+                  v-else
+                  v-model="item.description"
+                  class="border border-accent-dark pl-1 w-full"
                 />
               </div>
-              <p v-if="!isEditingDescription">
-                {{ item.description }}
-              </p>
-              <textarea
-                v-else
-                v-model="item.description"
-                class="border border-accent-dark pl-1 w-full"
-              />
-              <div class="pt-3">
+              <div class="mb-5">
                 <div class="flex justify-between items-center">
                   <h4 class="text-xl pr-5">Price</h4>
                   <ButtonEdit
@@ -117,9 +119,9 @@
                   />
                 </form>
               </div>
-              <div class="pt-3">
+              <div class="mb-5">
                 <div class="flex justify-between items-center">
-                  <h4 class="text-xl pr-5 xs:pt-3">
+                  <h4 class="text-xl pr-5">
                     Initial quantity
                   </h4>
                   <ButtonEdit
@@ -147,7 +149,7 @@
           </div>
           <div
             v-if="items.length > 0"
-            class="mt-10 flex flex-col items-center w-full"
+            class="flex flex-col items-center w-full"
           >
             <div class="flex">
               <div class="text-xl pt-3 text-accent-dark">
@@ -241,7 +243,7 @@ export default {
   },
   async mounted() {
     if (this.isLoggedIn) {
-      this.individual = setIndividual();
+      this.individual = await setIndividual();
     }
     await this.getItem();
     await this.getItems();
@@ -255,6 +257,7 @@ export default {
         this.item = item;
         const { data: store } = await axios.get(`stores/${this.item.storeId}`);
         this.store = store;
+        this.isAbleToEdit = this.individual._id === item.userId;
         this.previewImage = "data:image/jpeg;base64," + item.images[0].buffer;
       } catch (err) {
         this.error = true;
