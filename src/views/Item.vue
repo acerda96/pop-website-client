@@ -28,7 +28,7 @@
                   <img class="item__thumbnail" v-bind:src="previewImage" />
                 </div>
               </div>
-              <div v-if="isEditingImage" class="mt-5 flex justify-around">
+              <div v-if="isEditingImage" class="mt-3 flex justify-around">
                 <button class="underline" @click="cancelImageEdit">
                   <Close />
                 </button>
@@ -150,11 +150,11 @@
             class="mt-10 flex flex-col items-center w-full"
           >
             <div class="flex">
-              <div class="text-xl pt-3 italic text-accent-medium">
+              <div class="text-xl pt-3 text-accent-dark">
                 Other items by
               </div>
               <router-link
-                class="text-xl pl-2 pt-3 underline italic text-accent-medium"
+                class="text-xl pl-2 pt-3 underline text-accent-dark"
                 :to="'/store/' + store._id"
               >
                 {{ store.name }}

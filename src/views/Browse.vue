@@ -122,7 +122,7 @@ export default {
       });
     },
     truncateName(name) {
-      const CUT_OFF = 23;
+      const CUT_OFF = 20;
 
       if (name.length > CUT_OFF) {
         const words = name.split(" ");

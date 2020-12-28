@@ -162,7 +162,7 @@
           </div>
           <div class="flex flex-wrap justify-center pb-10">
             <div
-              class="store__other flex flex-col m-5 xs:m-2"
+              class="store__other flex flex-col items-center m-5 xs:m-2 relative"
               v-for="item in items"
               :key="item._id"
             >
@@ -171,18 +171,18 @@
                 v-bind:src="'data:image/jpeg;base64,' + item.images[0].buffer"
                 @click="$router.push('/item/' + item._id)"
               />
-              <div class="flex justify-center items-center mt-1 store__other">
+              <Close
+                v-if="isAbleToEdit"
+                class="store__other-thumbnail--close"
+                @click="deleteItem(item._id)"
+              />
+              <div class="flex justify-start items-center mt-1 store__other">
                 <div>
                   <div>£{{ item.price }}</div>
                   <div v-if="isAbleToEdit" class="text-accent-medium">
                     {{ getItemStatusText(item._id) }}
                   </div>
                 </div>
-                <CloseOutline
-                  v-if="isAbleToEdit"
-                  class="underline text-accent-medium cursor-pointer pl-2"
-                  @click="deleteItem(item._id)"
-                />
               </div>
             </div>
           </div>
@@ -200,7 +200,7 @@ import DateNew from "@/components/DateNew.vue";
 import ButtonEdit from "@/components/ButtonEdit.vue";
 import ItemNew from "@/components/ItemNew.vue";
 import setIndividual from "@/lib/individual";
-import CloseOutline from "vue-material-design-icons/CloseOutline.vue";
+import Close from "vue-material-design-icons/Close.vue";
 
 export default {
   name: "Store",
@@ -209,7 +209,7 @@ export default {
     DateNew,
     ItemNew,
     ButtonEdit,
-    CloseOutline,
+    Close,
   },
   data() {
     return {

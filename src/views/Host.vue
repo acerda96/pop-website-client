@@ -7,12 +7,14 @@
       <hr class="w-full" />
       <Loader v-if="isLoading" class="pt-10" />
       <div class="flex flex-col items-center mb-10 w-full" v-else>
-        <p class="pt-3 px-4 text-center">
+        <p class="pt-3 px-8 text-center">
           Only approved stores/items will be visible to the public.
         </p>
-        <div class="fade-in flex justify-center flex-wrap w-3/4">
+        <div
+          class="fade-in flex justify-center flex-wrap w-3/4 pt-6 pb-10 xs:pt-2"
+        >
           <div
-            class="flex flex-col items-center"
+            class="flex flex-col items-center relative"
             v-for="store in stores"
             :key="store.id"
           >
@@ -28,10 +30,7 @@
                 </p></router-link
               >
             </div>
-            <CloseOutline
-              class="underline text-accent-medium mt-2 mb-5 cursor-pointer"
-              @click="deleteStore(store._id)"
-            />
+            <Close class="host__store--close" @click="deleteStore(store._id)" />
           </div>
         </div>
         <button class="square-btn" @click="$modal.show('newStoreModal')">
@@ -47,7 +46,7 @@ import axios from "axios";
 import Loader from "@/components/Loader.vue";
 import StoreNew from "@/components/StoreNew.vue";
 import setIndividual from "@/lib/individual";
-import CloseOutline from "vue-material-design-icons/CloseOutline.vue";
+import Close from "vue-material-design-icons/Close.vue";
 
 export default {
   name: "Host",
@@ -61,7 +60,7 @@ export default {
   components: {
     Loader,
     StoreNew,
-    CloseOutline,
+    Close,
   },
   async mounted() {
     this.isLoading = true;

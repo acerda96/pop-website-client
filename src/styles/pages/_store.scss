@@ -1,11 +1,29 @@
 .store__other-thumbnail {
-  width: 110px;
-  height: 110px;
+  width: 160px;
+  height: 160px;
   border-radius: $image-border-radius;
 }
 
 .store__other {
-  width: 110px;
+  width: 160px;
+}
+
+.store__other-thumbnail--close {
+  cursor: pointer;
+  position: absolute;
+  color: black;
+  text-decoration: underline;
+  top: 8px;
+  right: 8px;
+}
+
+.host__store--close {
+  cursor: pointer;
+  position: absolute;
+  color: $accent-color-dark;
+  text-decoration: underline;
+  top: 25px;
+  right: 25px;
 }
 
 @media (max-width: 800px) {
@@ -14,15 +32,12 @@
     height: 190px;
   }
 
+  .store__other {
+    width: 110px;
+  }
+
   .store__other-thumbnail {
-    object-fit: cover;
     width: 110px;
     height: 110px;
-  }
-}
-
-@media (max-width: 650px) {
-  .store__image-edit {
-    top: 180px;
   }
 }
