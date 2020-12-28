@@ -122,23 +122,10 @@ export default {
       });
     },
     truncateName(name) {
-      const CUT_OFF = 20;
+      const CUT_OFF = 24;
 
       if (name.length > CUT_OFF) {
-        const words = name.split(" ");
-        const truncatedName = [];
-        let currentLength = 0;
-
-        for (const index in words) {
-          const word = words[index];
-          currentLength += word.length;
-          if (currentLength > CUT_OFF) {
-            truncatedName.push(word);
-            break;
-          }
-          truncatedName.push(word);
-        }
-        return truncatedName.join(" ") + "...";
+        return name.slice(0, CUT_OFF).trim() + "...";
       }
       return name;
     },

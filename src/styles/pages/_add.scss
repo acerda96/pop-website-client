@@ -1,23 +1,18 @@
-.add__image-ctn {
-  width: 120px;
-  height: 120px;
-  border: 1px solid grey;
-  margin-top: 7px;
-}
-
 .add__image-thumbnail {
-  width: 120px;
-  height: 120px;
+  width: 160px;
+  height: 160px;
 }
 
-@media (max-width: 400px) {
-  .add__image-ctn {
-    width: 130px;
-    height: 130px;
-  }
+.add__image {
+  width: 160px;
+}
 
-  .add__image-thumbnail {
-    width: 130px;
-    height: 130px;
-  }
+.add__image-upload {
+  border: 0;
+  position: absolute;
+  overflow: hidden;
+  padding: 0px;
+  white-space: nowrap;
+  width: 95px;
+  right: 0px;
 }

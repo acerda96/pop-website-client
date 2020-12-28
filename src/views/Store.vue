@@ -8,12 +8,12 @@
         class="flex flex-col w-5/6 items-center mt-10  fade-in"
         v-if="!isLoading && !error"
       >
-        <div class="flex justify-between items-center w-full">
-          <div v-if="!isEditingName" class="flex items-center">
-            <h2 class="text-2xl py-3">
+        <div class="flex justify-between items-start w-full">
+          <div v-if="!isEditingName" class="flex items-start">
+            <h2 class="text-2xl">
               {{ store.name }}
             </h2>
-            <div v-if="isAbleToEdit" class="text-accent-medium pl-5">
+            <div v-if="isAbleToEdit" class="text-accent-medium px-5 pt-1">
               {{ storeStatusText }}
             </div>
           </div>
@@ -24,10 +24,11 @@
           >
             <input
               v-model="store.name"
-              class="border border-accent-dark pl-2 w-4/6"
+              class="border border-accent-dark pl-2 w-4/6 mt-4"
             />
           </form>
           <ButtonEdit
+            class="pt-1"
             v-if="isAbleToEdit"
             :document="store"
             :fields="['name']"

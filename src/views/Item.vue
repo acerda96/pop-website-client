@@ -231,7 +231,7 @@ export default {
       items: [],
       store: {},
       error: false,
-      isAbleToEdit: true,
+      isAbleToEdit: false,
       isEditingName: false,
       isEditingDescription: false,
       isEditingPrice: false,

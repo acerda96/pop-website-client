@@ -23,10 +23,28 @@
             />
           </div>
           <div
-            class="flex w-full items-start justify-between xs:flex-col xs:items-center mt-16 xs:mt-0"
+            class="flex w-full items-start justify-between xs:flex-col xs:items-center xs:mt-0"
           >
             <div class="w-full">
-              <div class="w-full flex flex-col xs:px-1">
+              <div>
+                <div class="flex flex-col  items-center">
+                  <div class="add__image relative">
+                    <input
+                      class="pl-2 add__image-upload border-0"
+                      ref="fileInput"
+                      type="file"
+                      @change="pickFile"
+                    />
+                    <div>
+                      <img
+                        class="add__image-thumbnail"
+                        v-bind:src="previewImage"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="w-full flex flex-col xs:px-1 pt-10">
                 <div class="w-full text-xl xxs:text-sm pt-1">Name</div>
                 <input class="pl-2" type="text" name="name" v-model="name" />
               </div>
@@ -56,21 +74,6 @@
                     />
                   </div>
                 </div>
-              </div>
-            </div>
-            <div class="flex flex-col relative items-center ml-5 mt-6">
-              <input
-                class="pl-2 border-0"
-                ref="fileInput"
-                type="file"
-                @input="pickFile"
-              />
-              <div class="add__image-ctn">
-                <img
-                  v-if="previewImage"
-                  class="add__image-thumbnail"
-                  v-bind:src="previewImage"
-                />
               </div>
             </div>
           </div>
