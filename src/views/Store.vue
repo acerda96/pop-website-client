@@ -39,7 +39,59 @@
           />
         </div>
         <hr class="w-full" />
-        <div class="flex flex-col justify-start w-full mb-5">
+        <div class="flex flex-col justify-start items-center w-full mb-5 mt-5">
+          <div class="flex flex-col justify-between w-full">
+            <div class="flex justify-between items-center">
+              <h4 class="text-xl">Location</h4>
+              <ButtonEdit
+                v-if="isAbleToEdit"
+                :document="store"
+                :fields="['addressLine1', 'addressLine2', 'postcode', 'city']"
+                fieldName="isEditingLocation"
+                :isEditing.sync="isEditingLocation"
+                @callback="putStore"
+                @toggleEdit="toggleEdit"
+              />
+            </div>
+            <div v-if="!isEditingLocation">
+              <p v-if="store.addressLine1">{{ store.addressLine1 }},</p>
+              <p v-if="store.addressLine2 && !isEditingLocation">
+                {{ store.addressLine2 }},
+              </p>
+              <p v-if="store.postcode">{{ store.postcode }},</p>
+              <p v-if="store.city">{{ store.city }}</p>
+            </div>
+            <div v-else class="flex flex-col">
+              <input
+                class="border border-accent-dark pl-2 my-1"
+                v-model="store.addressLine1"
+              />
+              <input
+                class="border border-accent-dark pl-2 my-1"
+                v-model="store.addressLine2"
+              />
+              <input
+                class="border border-accent-dark pl-2 my-1"
+                v-model="store.postcode"
+              />
+              <input
+                class="border border-accent-dark pl-2 my-1"
+                v-model="store.city"
+              />
+            </div>
+          </div>
+          <GmapMap
+            v-if="storePosition"
+            :center="storePosition"
+            :zoom="8"
+            map-type-id="terrain"
+            class="single-map mt-5"
+          >
+            <GmapMarker :position="storePosition" :clickable="true" />
+          </GmapMap>
+        </div>
+        <hr class="w-full" />
+        <div class="flex flex-col justify-start w-full mt-3 mb-5">
           <div class="flex justify-between items-center">
             <h4 class="text-xl">Description</h4>
             <ButtonEdit
@@ -60,48 +112,7 @@
           />
         </div>
         <hr class="w-full" />
-        <div class="flex flex-col justify-start w-full mb-5">
-          <div class="flex justify-between items-center">
-            <h4 class="text-xl">Location</h4>
-            <ButtonEdit
-              v-if="isAbleToEdit"
-              :document="store"
-              :fields="['addressLine1', 'addressLine2', 'postcode', 'city']"
-              fieldName="isEditingLocation"
-              :isEditing.sync="isEditingLocation"
-              @callback="putStore"
-              @toggleEdit="toggleEdit"
-            />
-          </div>
-          <div v-if="!isEditingLocation">
-            <p v-if="store.addressLine1">{{ store.addressLine1 }},</p>
-            <p v-if="store.addressLine2 && !isEditingLocation">
-              {{ store.addressLine2 }},
-            </p>
-            <p v-if="store.postcode">{{ store.postcode }},</p>
-            <p v-if="store.city">{{ store.city }}</p>
-          </div>
-          <div v-else class="flex flex-col">
-            <input
-              class="border border-accent-dark pl-2 my-1"
-              v-model="store.addressLine1"
-            />
-            <input
-              class="border border-accent-dark pl-2 my-1"
-              v-model="store.addressLine2"
-            />
-            <input
-              class="border border-accent-dark pl-2 my-1"
-              v-model="store.postcode"
-            />
-            <input
-              class="border border-accent-dark pl-2 my-1"
-              v-model="store.city"
-            />
-          </div>
-        </div>
-        <hr class="w-full" />
-        <div class="flex flex-col justify-start w-full mb-5">
+        <div class="flex flex-col justify-start w-full mb-5 mt-3">
           <div class="flex justify-between">
             <h4 class="text-xl">Dates</h4>
             <button
@@ -150,7 +161,7 @@
           </div>
         </div>
         <hr class="w-full" />
-        <div class="flex flex-col justify-start w-full mb-5">
+        <div class="flex flex-col justify-start w-full mb-5 mt-3">
           <div class="flex justify-between">
             <h4 class="text-xl">Items</h4>
             <button
@@ -227,6 +238,7 @@ export default {
       isEditingDescription: false,
       error: false,
       isAbleToEdit: false,
+      storePosition: null,
     };
   },
   computed: {
@@ -263,14 +275,34 @@ export default {
     },
     async getStore() {
       try {
-        const { data } = await axios.get(
+        const { data: store } = await axios.get(
           `stores/${this.$route.params.storeId}`
         );
-        if (data.status !== "approved" && this.individual._id !== data.userId) {
+        if (
+          store.status !== "approved" &&
+          this.individual._id !== store.userId
+        ) {
           throw Error();
         }
-        this.store = data;
+        this.store = store;
         this.isAbleToEdit = this.individual._id === this.store.userId;
+        const assignStorePosition = (position) =>
+          (this.storePosition = position);
+
+        const addressObj = {
+          address_line_1: store.addressLine1,
+          address_line_2: store.addressLine2,
+          city: store.city,
+          postal_code: store.postcode,
+        };
+        try {
+          this.$geocoder.send(addressObj, async (response) => {
+            const position = response.results[0].geometry.location;
+            assignStorePosition(position);
+          });
+        } catch (err) {
+          console.log("Geocoder error", err);
+        }
       } catch {
         this.error = true;
       }

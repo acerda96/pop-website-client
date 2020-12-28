@@ -42,10 +42,7 @@
                 <h2 class="text-2xl">
                   {{ item.name }}
                 </h2>
-                <div
-                  v-if="isAbleToEdit"
-                  class="text-accent-medium px-5 pt-1 xs:pt-0"
-                >
+                <div v-if="isAbleToEdit" class="text-accent-medium px-5 pt-1">
                   {{ statusText }}
                 </div>
               </div>
@@ -60,7 +57,7 @@
                 />
               </form>
               <ButtonEdit
-                class="pt-1 xs:pt-0"
+                class="pt-1"
                 v-if="isAbleToEdit"
                 :document="item"
                 :fields="['name']"
@@ -71,7 +68,7 @@
               />
             </div>
             <hr class="w-full" />
-            <div class="px-10 w-full mt-3">
+            <div class="px-10 w-full mt-3 mb-5">
               <div class="mb-5">
                 <div class="flex items-center justify-between">
                   <h4 class="text-xl">
@@ -96,7 +93,8 @@
                   class="border border-accent-dark pl-1 w-full"
                 />
               </div>
-              <div class="mb-5">
+              <hr class="w-full" />
+              <div class="mb-5 mt-3">
                 <div class="flex justify-between items-center">
                   <h4 class="text-xl pr-5">Price</h4>
                   <ButtonEdit
@@ -117,7 +115,8 @@
                   />
                 </form>
               </div>
-              <div class="mb-5">
+              <hr class="w-full" />
+              <div class="mb-5 mt-3">
                 <div class="flex justify-between items-center">
                   <h4 class="text-xl pr-5">
                     Initial quantity
@@ -143,6 +142,7 @@
                   />
                 </form>
               </div>
+              <hr class="w-full" />
             </div>
           </div>
           <div

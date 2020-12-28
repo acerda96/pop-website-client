@@ -1,10 +1,15 @@
-.map {
+.browse-map {
   width: 95%;
   height: 350px;
 }
 
+.single-map {
+  width: 100%;
+  height: 200px;
+}
+
 @media (max-width: 320px) {
-  .map {
+  .modal__map {
     height: 260px;
   }
 }

@@ -19,7 +19,7 @@
         "
         :zoom="8"
         map-type-id="terrain"
-        class="map"
+        class="browse-map"
       >
         <GmapMarker
           v-if="currentPosition"
@@ -35,6 +35,9 @@
           />
         </div>
       </GmapMap>
+      <p class="pt-2">
+        Please make sure location services are enabled
+      </p>
       <p class="pt-2">Click a pin to view a store's details</p>
       <div class="flex justify-between w-full px-10 py-5">
         <div class="flex flex-col">
