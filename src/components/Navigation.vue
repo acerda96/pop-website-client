@@ -1,59 +1,39 @@
 <template>
   <div>
-    <nav class="upper-navbar z-10">
-      <MenuIcon class="upper-navbar__menu-icon" @click="toggleNav" />
-      <router-link class="upper-navbar__logo" to="/">POP</router-link>
-      <ul class="upper-navbar__items">
-        <div v-for="link in links" :key="link.name">
-          <li
-            v-if="isLoggedIn == link.requiresLogin || link.alwaysShow"
-            @click="handleLinkClick(link.name)"
-          >
-            <div
-              @click="selectNavItem(link.to)"
-              class="upper-navbar__link uppercase cursor-pointer"
-            >
-              {{ link.title }}
-            </div>
-          </li>
-        </div>
-      </ul>
-    </nav>
-    <nav class="side-navbar z-20" ref="nav" v-click-outside-side-nav="hideNav">
-      <ul>
-        <div v-for="link in links" :key="link.name">
-          <li
-            v-if="isLoggedIn == link.requiresLogin || link.alwaysShow"
-            @click="
-              toggleNav();
-              handleLinkClick(link.name);
-            "
-          >
-            <div
-              @click="selectNavItem(link.to)"
-              class="upper-navbar__link uppercase cursor-pointer text-white"
-            >
-              {{ link.title }}
-            </div>
-          </li>
-        </div>
-      </ul>
-    </nav>
+    <NavigationBar
+      :isLoggedIn="isLoggedIn"
+      :links="links"
+      @toggleNav="toggleNav"
+      @handleLinkClick="handleLinkClick"
+      @selectNavItem="selectNavItem"
+    />
+    <NavigationSideMenu
+      :isLoggedIn="isLoggedIn"
+      :links="links"
+      :isNavOpen="isNavOpen"
+      @setIsNavOpen="setIsNavOpen"
+      @toggleNav="toggleNav"
+      @handleLinkClick="handleLinkClick"
+      @selectNavItem="selectNavItem"
+    />
   </div>
 </template>
 
 <script>
-import MenuIcon from "vue-material-design-icons/Menu.vue";
+import NavigationBar from "@/components/NavigationBar";
+import NavigationSideMenu from "@/components/NavigationSideMenu";
 import { links } from "@/lib/navigationLinks";
 
 export default {
   name: "Navigation",
   components: {
-    MenuIcon,
+    NavigationBar,
+    NavigationSideMenu,
   },
   data() {
     return {
       links: links,
+      isNavOpen: false,
     };
   },
   computed: {
@@ -62,14 +42,11 @@ export default {
     },
   },
   methods: {
-    toggleNav() {
-      const nav = this.$refs.nav.classList;
-
-      nav.contains("active") ? nav.remove("active") : nav.add("active");
+    setIsNavOpen(value) {
+      this.isNavOpen = value;
     },
-    hideNav() {
-      const nav = this.$refs.nav.classList;
-      nav.remove("active");
+    toggleNav() {
+      this.setIsNavOpen(!this.isNavOpen);
     },
     async handleLinkClick(name) {
       if (name === "logout") {
@@ -79,36 +56,6 @@ export default {
     selectNavItem(route) {
       window.scrollTo({ top: 0, behavior: "smooth" });
       this.$router.push(route);
-    },
-  },
-  directives: {
-    "click-outside-side-nav": {
-      bind: function(el, binding, vnode) {
-        window.event = function(event) {
-          try {
-            const isToggleButton =
-              (event.target.className.animVal &&
-                event.target.className.animVal ===
-                  "material-design-icon__svg") ||
-              (event.target.firstChild.textContent &&
-                event.target.firstChild.textContent) == "Menu Icon";
-            const hasClickedOnElement = el == event.target;
-            const isClickedOnChild = el.contains(event.target);
-            const isNavBarOpen = el.classList.contains("active");
-
-            if (
-              !(hasClickedOnElement || isClickedOnChild) &&
-              isNavBarOpen &&
-              !isToggleButton
-            ) {
-              vnode.context[binding.expression](event);
-            }
-          } catch (err) {
-            console.log(err);
-          }
-        };
-        document.body.addEventListener("click", window.event);
-      },
     },
   },
 };
